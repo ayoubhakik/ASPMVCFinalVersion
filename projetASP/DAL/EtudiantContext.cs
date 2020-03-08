@@ -14,6 +14,7 @@ namespace projetASP.DAL
 
         }
         public DbSet<Etudiant> etudiants { get; set; }
+        public DbSet<Departement> departements { get; set; }
         
     }
 }
