@@ -121,7 +121,7 @@
     <Compile Include="App_Start\BundleConfig.cs" />
     <Compile Include="App_Start\FilterConfig.cs" />
     <Compile Include="App_Start\RouteConfig.cs" />
-    <Compile Include="Controllers\EtudiantController.cs" />
+    <Compile Include="Controllers\DepartementController.cs" />
     <Compile Include="Controllers\HomeController.cs" />
     <Compile Include="DAL\EtudiantContext.cs" />
     <Compile Include="Global.asax.cs">
@@ -478,13 +478,6 @@
     <Content Include="Scripts\umd\popper-utils.min.js" />
     <Content Include="Scripts\umd\popper.js" />
     <Content Include="Scripts\umd\popper.min.js" />
-    <Content Include="Web.config" />
-    <Content Include="Web.Debug.config">
-      <DependentUpon>Web.config</DependentUpon>
-    </Content>
-    <Content Include="Web.Release.config">
-      <DependentUpon>Web.config</DependentUpon>
-    </Content>
     <Content Include="Views\Web.config" />
     <Content Include="Views\_ViewStart.cshtml" />
     <Content Include="Views\Shared\Error.cshtml" />
@@ -493,12 +486,6 @@
     <Content Include="Views\Shared\Test.cshtml" />
     <Content Include="Views\Home\Statistiques.cshtml" />
     <Content Include="Views\Home\Home.cshtml" />
-<<<<<<< HEAD
-    <Content Include="Views\Shared\_layoutEtudiant.cshtml" />
-    <Content Include="Views\Etudiant\Index.cshtml" />
-    <Content Include="Views\Etudiant\Modification.cshtml" />
-    <Content Include="Views\Etudiant\Consulter.cshtml" />
-=======
     <Content Include="Scripts\umd\popper.min.js.map" />
     <Content Include="Scripts\umd\popper.js.map" />
     <Content Include="Scripts\umd\popper.js.flow" />
@@ -509,10 +496,19 @@
     <Content Include="Scripts\popper.js.map" />
     <Content Include="Scripts\popper-utils.min.js.map" />
     <Content Include="Scripts\popper-utils.js.map" />
->>>>>>> e9d316d3adfffa07f8949161babb8a26a92b6756
+    <Content Include="Web.config">
+      <SubType>Designer</SubType>
+    </Content>
+    <None Include="Web.Debug.config">
+      <DependentUpon>Web.config</DependentUpon>
+    </None>
+    <None Include="Web.Release.config">
+      <DependentUpon>Web.config</DependentUpon>
+    </None>
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />
+    <Folder Include="Views\Departement\" />
   </ItemGroup>
   <ItemGroup>
     <Content Include="Content\bootstrap.min.css.map" />
