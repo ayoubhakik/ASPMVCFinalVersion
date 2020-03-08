@@ -1,6 +1,5 @@
-﻿<!DOCTYPE html>
+﻿﻿<!DOCTYPE html>
 <html lang="en">
-
 <head>
     <meta charset="utf-8" />
     <link rel="apple-touch-icon" sizes="76x76" href="../../Content/assets/img/apple-icon.png">
@@ -18,7 +17,6 @@
     <!-- CSS Just for demo purpose, don't include it in your project -->
     <link href="../../Content/demo/demo.css" rel="stylesheet" />
 </head>
-
 <body class="light-edition">
     <div class="wrapper ">
         <div class="sidebar" data-color="orange" data-background-color="black" data-image="../contents/img/sidebar-3.jpg">
@@ -27,59 +25,58 @@
 
                 Tip 2: you can also add an image using data-image tag
             -->
-            
+
             <div class="sidebar-wrapper">
                 <ul class="nav">
-                    <li class="nav-item active  ">
-                        <a class="nav-link" href="./dashboard.html">
+                    <li class="@(ViewBag.Current == "home" ? "nav-tem active" : "nav-item")">
+                        <a href='@Url.Action("Index","Home")' class="nav-link">
                             <i class="material-icons">home</i>
                             <p>Home</p>
                         </a>
-                    </li>
 
-                    <li class="nav-item ">
-                        <a class="nav-link" href="">
+                    </li>
+                    <li class="@(ViewBag.Current == "ChargerLesDonnes" ? "nav-item active" : "nav-item")">
+                        <a href='@Url.Action("ChargerLesDonnes","Home")' class="nav-link">
                             <i class="material-icons">content_paste</i>
                             <p>Charger les donnees</p>
                         </a>
                     </li>
                     <li class="nav-item ">
-                        <a class="nav-link" href="./typography.html">
+                        <a href='@Url.Action("Index","Home")' class="nav-link">
                             <i class="material-icons">library_books</i>
                             <p>Importer les notes</p>
                         </a>
                     </li>
                     <li class="nav-item ">
-                        <a class="nav-link" href="./icons.html">
+                        <a href='@Url.Action("Index","Home")' class="nav-link">
                             <i class="material-icons">bubble_chart</i>
                             <p>Attribution des filieres</p>
                         </a>
                     </li>
                     <li class="nav-item ">
-                        <a class="nav-link" href="./icons.html">
+                        <a href='@Url.Action("Index","Home")' class="nav-link">
                             <i class="material-icons">bubble_chart</i>
                             <p>Statistiques</p>
                         </a>
                     </li>
                     <li class="nav-item ">
-                        <a class="nav-link" href="./icons.html">
+                        <a href='@Url.Action("Index","Home")' class="nav-link">
                             <i class="material-icons">list</i>
                             <p>Visualiser</p>
                         </a>
                     </li>
-
                     <li class="nav-item ">
-                        <a class="nav-link" href="./notifications.html">
+                        <a href='@Url.Action("Index","Home")' class="nav-link">
                             <i class="material-icons">notifications</i>
                             <p>Notifications</p>
                         </a>
                     </li>
                     <!-- <li class="nav-item active-pro ">
-        <a class="nav-link" href="./upgrade.html">
-            <i class="material-icons">unarchive</i>
-            <p>Upgrade to PRO</p>
-        </a>
-    </li> -->
+                        <a class="nav-link" href="./upgrade.html">
+                            <i class="material-icons">unarchive</i>
+                            <p>Upgrade to PRO</p>
+                        </a>
+                    </li> -->
                 </ul>
             </div>
         </div>
@@ -88,7 +85,7 @@
             <nav class="navbar navbar-expand-lg navbar-transparent navbar-absolute fixed-top " id="navigation-example">
                 <div class="container-fluid">
                     <div class="navbar-wrapper">
-                        <a class="navbar-brand" href="javascript:void(0)">Home</a>
+                        <a class="navbar-brand" href="javascript:void(0)">@ViewData["title"]</a>
                     </div>
                     <button class="navbar-toggler" type="button" data-toggle="collapse" aria-controls="navigation-index" aria-expanded="false" aria-label="Toggle navigation" data-target="#navigation-example">
                         <span class="sr-only">Toggle navigation</span>
@@ -151,7 +148,6 @@
                     <nav class="float-left"></nav>
                 </div>
             </footer>
-
         </div>
     </div>
     <!--   Core JS Files   -->
@@ -342,5 +338,4 @@
         });
     </script>
 </body>
-
 </html>
