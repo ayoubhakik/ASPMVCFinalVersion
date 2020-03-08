@@ -481,11 +481,11 @@
     <Content Include="Views\Web.config" />
     <Content Include="Views\_ViewStart.cshtml" />
     <Content Include="Views\Shared\Error.cshtml" />
-    <Content Include="Views\Shared\_Layout.cshtml" />
-    <Content Include="Views\Home\Index.cshtml" />
+    <Content Include="Views\Shared\_DepartementLayout.cshtml" />
+    <Content Include="Views\Departement\Index.cshtml" />
     <Content Include="Views\Shared\Test.cshtml" />
-    <Content Include="Views\Home\Statistiques.cshtml" />
-    <Content Include="Views\Home\Home.cshtml" />
+    <Content Include="Views\Departement\Statistiques.cshtml" />
+    <Content Include="Views\Departement\Home.cshtml" />
     <Content Include="Views\Shared\_layoutEtudiant.cshtml" />
     <Content Include="Views\Etudiant\Index.cshtml" />
     <Content Include="Views\Etudiant\Modification.cshtml" />
@@ -503,6 +503,10 @@
     <Content Include="Web.config">
       <SubType>Designer</SubType>
     </Content>
+    <Content Include="Views\Departement\ImporterEtudiants.cshtml" />
+    <Content Include="Views\Departement\Visualiser.cshtml" />
+    <Content Include="Views\Departement\ImporterNotes.cshtml" />
+    <Content Include="Views\Departement\AttributionFiliere.cshtml" />
     <None Include="Web.Debug.config">
       <DependentUpon>Web.config</DependentUpon>
     </None>
@@ -512,7 +516,7 @@
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />
-    <Folder Include="Views\Departement\" />
+    <Folder Include="Views\Home\" />
   </ItemGroup>
   <ItemGroup>
     <Content Include="Content\bootstrap.min.css.map" />
