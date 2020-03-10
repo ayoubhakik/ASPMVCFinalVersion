@@ -131,6 +131,10 @@
     <Compile Include="Migrations\202003080102444_InitialCreate.designer.cs">
       <DependentUpon>202003080102444_InitialCreate.cs</DependentUpon>
     </Compile>
+    <Compile Include="Migrations\202003080128301_InitialCreate1.cs" />
+    <Compile Include="Migrations\202003080128301_InitialCreate1.designer.cs">
+      <DependentUpon>202003080128301_InitialCreate1.cs</DependentUpon>
+    </Compile>
     <Compile Include="Migrations\Configuration.cs" />
     <Compile Include="Models\Departement.cs" />
     <Compile Include="Models\Etudiant.cs" />
@@ -146,6 +150,7 @@
     <Content Include="Content\bootstrap-theme.min.css" />
     <Content Include="Content\bootstrap.css" />
     <Content Include="Content\bootstrap.min.css" />
+    <Content Include="Content\css\Inscription.css" />
     <Content Include="Content\css\material-dashboard.css" />
     <Content Include="Content\css\material-dashboard.min.css" />
     <Content Include="Content\css\partials\dashboard\core\bootstrap\scss\bootstrap-grid.css" />
@@ -173,6 +178,7 @@
     <Content Include="Content\js\core\bootstrap-material-design.min.js" />
     <Content Include="Content\js\core\jquery.min.js" />
     <Content Include="Content\js\core\popper.min.js" />
+    <Content Include="Content\js\Inscription.js" />
     <Content Include="Content\js\material-dashboard.js" />
     <Content Include="Content\js\material-dashboard.min.js" />
     <Content Include="Content\js\plugins\bootstrap-notify.js" />
@@ -379,6 +385,14 @@
     <Content Include="Content\scss\material-dashboard\_tooltip.scss" />
     <Content Include="Content\scss\material-dashboard\_type.scss" />
     <Content Include="Content\scss\material-dashboard\_variables.scss" />
+    <Content Include="Scripts\bootstrap.min.js.map" />
+    <Content Include="Scripts\bootstrap.js.map" />
+    <Content Include="Scripts\bootstrap.bundle.min.js.map" />
+    <Content Include="Scripts\bootstrap.bundle.js.map" />
+    <Content Include="Content\bootstrap-reboot.min.css.map" />
+    <Content Include="Content\bootstrap-reboot.css.map" />
+    <Content Include="Content\bootstrap-grid.min.css.map" />
+    <Content Include="Content\bootstrap-grid.css.map" />
     <Content Include="Scripts\esm\popper-utils.js" />
     <Content Include="Scripts\esm\popper-utils.min.js" />
     <Content Include="Scripts\esm\popper.js" />
@@ -388,14 +402,6 @@
     <Content Include="Scripts\esm\popper.js.map" />
     <Content Include="Scripts\esm\popper-utils.min.js.map" />
     <Content Include="Scripts\esm\popper-utils.js.map" />
-    <Content Include="Scripts\bootstrap.min.js.map" />
-    <Content Include="Scripts\bootstrap.js.map" />
-    <Content Include="Scripts\bootstrap.bundle.min.js.map" />
-    <Content Include="Scripts\bootstrap.bundle.js.map" />
-    <Content Include="Content\bootstrap-reboot.min.css.map" />
-    <Content Include="Content\bootstrap-reboot.css.map" />
-    <Content Include="Content\bootstrap-grid.min.css.map" />
-    <Content Include="Content\bootstrap-grid.css.map" />
     <None Include="Scripts\jquery-3.4.1.intellisense.js" />
     <Content Include="Scripts\jquery-3.4.1.js" />
     <Content Include="Scripts\jquery-3.4.1.min.js" />
@@ -490,6 +496,7 @@
     <Content Include="Views\Etudiant\Index.cshtml" />
     <Content Include="Views\Etudiant\Modification.cshtml" />
     <Content Include="Views\Etudiant\Consulter.cshtml" />
+    <Content Include="Views\Etudiant\Inscription.cshtml" />
     <Content Include="Scripts\umd\popper.min.js.map" />
     <Content Include="Scripts\umd\popper.js.map" />
     <Content Include="Scripts\umd\popper.js.flow" />
@@ -528,15 +535,18 @@
     <Content Include="Scripts\jquery-3.4.1.min.map" />
   </ItemGroup>
   <ItemGroup>
-    <TypeScriptCompile Include="Scripts\index.d.ts" />
-  </ItemGroup>
-  <ItemGroup>
     <Service Include="{4A0DDDB5-7A95-4FBF-97CC-616D07737A77}" />
   </ItemGroup>
   <ItemGroup>
     <EmbeddedResource Include="Migrations\202003080102444_InitialCreate.resx">
       <DependentUpon>202003080102444_InitialCreate.cs</DependentUpon>
     </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\202003080128301_InitialCreate1.resx">
+      <DependentUpon>202003080128301_InitialCreate1.cs</DependentUpon>
+    </EmbeddedResource>
+  </ItemGroup>
+  <ItemGroup>
+    <TypeScriptCompile Include="Scripts\index.d.ts" />
   </ItemGroup>
   <PropertyGroup>
     <VisualStudioVersion Condition="'$(VisualStudioVersion)' == ''">10.0</VisualStudioVersion>

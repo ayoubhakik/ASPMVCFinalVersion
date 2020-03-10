@@ -32,5 +32,11 @@ namespace projetASP.Controllers
             ViewBag.Current = "Deconnecter";
             return View("Index");
         }
+
+        public ActionResult Inscription()
+        {
+
+            return View();
+        }
     }
 }
