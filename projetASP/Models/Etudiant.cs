@@ -37,13 +37,17 @@ namespace projetASP.Models
         public double noteSndYear { get; set; }
         
         public DateTime dateNaiss { get; set; }
+        public string lieuNaiss { get; set; }
 
         public string photo_link { get; set; }
 
-        public string choix { get; set; }  
-        
-        public Boolean validated { get; set; }
-        public Boolean modified { get; set; }
+        public string choix { get; set; }
+
+        public Boolean validated = false;
+        public Boolean Validated { get; set; }
+
+        public Boolean modified = false;
+        public Boolean Modified { get; set; }
 
         [ForeignKey("Filiere")]
         public Nullable<int> idFil { get; set; }
