@@ -8,6 +8,7 @@ node_modules/*
 css/app.css.map
 css/app.min.css
 js/app.min.js
+Web.config
 
 # User-specific files
 *.suo
@@ -252,5 +253,6 @@ _Pvt_Extensions
 
 # JetBrains Rider
 .idea/
-*.sln.iml
-Web.config
+
+*.sln.iml 
+
