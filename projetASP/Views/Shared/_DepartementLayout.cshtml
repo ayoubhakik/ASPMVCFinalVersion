@@ -29,44 +29,44 @@
             <div class="sidebar-wrapper">
                 <ul class="nav">
                     <li class="@(ViewBag.Current == "home" ? "nav-tem active" : "nav-item")">
-                        <a href='@Url.Action("Index","Home")' class="nav-link">
+                        <a href='@Url.Action("Home","Departement")' class="nav-link">
                             <i class="material-icons">home</i>
                             <p>Home</p>
                         </a>
 
                     </li>
-                    <li class="@(ViewBag.Current == "ChargerLesDonnes" ? "nav-item active" : "nav-item")">
-                        <a href='@Url.Action("ChargerLesDonnes","Home")' class="nav-link">
+                    <li class="@(ViewBag.Current == "importerEtudiants" ? "nav-item active" : "nav-item")">
+                        <a href='@Url.Action("ImporterEtudiants","Departement")' class="nav-link">
                             <i class="material-icons">content_paste</i>
                             <p>Charger les donnees</p>
                         </a>
                     </li>
-                    <li class="nav-item ">
-                        <a href='@Url.Action("Index","Home")' class="nav-link">
+                    <li class="@(ViewBag.Current == "importerNotes" ? "nav-item active" : "nav-item")">
+                        <a href='@Url.Action("ImporterNotes","Departement")' class="nav-link">
                             <i class="material-icons">library_books</i>
                             <p>Importer les notes</p>
                         </a>
                     </li>
-                    <li class="nav-item ">
-                        <a href='@Url.Action("Index","Home")' class="nav-link">
+                    <li class="@(ViewBag.Current == "attributionFiliere" ? "nav-item active" : "nav-item")">
+                        <a href='@Url.Action("AttributionFiliere","Departement")' class="nav-link">
                             <i class="material-icons">bubble_chart</i>
                             <p>Attribution des filieres</p>
                         </a>
                     </li>
-                    <li class="nav-item ">
-                        <a href='@Url.Action("Index","Home")' class="nav-link">
+                    <li class="@(ViewBag.Current == "statistiques" ? "nav-item active" : "nav-item")">
+                        <a href='@Url.Action("Statistiques","Departement")' class="nav-link">
                             <i class="material-icons">bubble_chart</i>
                             <p>Statistiques</p>
                         </a>
                     </li>
-                    <li class="nav-item ">
-                        <a href='@Url.Action("Index","Home")' class="nav-link">
+                    <li class="@(ViewBag.Current == "visualiser" ? "nav-item active" : "nav-item")">
+                        <a href='@Url.Action("Visualiser","Departement")' class="nav-link">
                             <i class="material-icons">list</i>
                             <p>Visualiser</p>
                         </a>
                     </li>
-                    <li class="nav-item ">
-                        <a href='@Url.Action("Index","Home")' class="nav-link">
+                    <li class="@(ViewBag.Current == "index" ? "nav-item active" : "nav-item")">
+                        <a href='@Url.Action("Index","Departement")' class="nav-link">
                             <i class="material-icons">notifications</i>
                             <p>Notifications</p>
                         </a>
