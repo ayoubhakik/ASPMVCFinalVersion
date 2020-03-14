@@ -147,13 +147,9 @@
     <Compile Include="Global.asax.cs">
       <DependentUpon>Global.asax</DependentUpon>
     </Compile>
-    <Compile Include="Migrations\202003141218392_InitialCreate.cs" />
-    <Compile Include="Migrations\202003141218392_InitialCreate.designer.cs">
-      <DependentUpon>202003141218392_InitialCreate.cs</DependentUpon>
-    </Compile>
-    <Compile Include="Migrations\202003141225023_InitialCreate1.cs" />
-    <Compile Include="Migrations\202003141225023_InitialCreate1.designer.cs">
-      <DependentUpon>202003141225023_InitialCreate1.cs</DependentUpon>
+    <Compile Include="Migrations\202003141621369_InitialCreate.cs" />
+    <Compile Include="Migrations\202003141621369_InitialCreate.designer.cs">
+      <DependentUpon>202003141621369_InitialCreate.cs</DependentUpon>
     </Compile>
     <Compile Include="Migrations\Configuration.cs" />
     <Compile Include="Models\Departement.cs" />
@@ -531,7 +527,7 @@
       <SubType>Designer</SubType>
     </Content>
     <Content Include="Views\Departement\ImporterEtudiants.cshtml" />
-    <Content Include="ExcelFiles\EtudiantExemple.xlsx"/>
+    <Content Include="ExcelFiles\EtudiantExemple.xlsx" />
     <Content Include="Views\Departement\Visualiser.cshtml" />
     <Content Include="Views\Departement\ImporterNotes.cshtml" />
     <Content Include="Views\Departement\AttributionFiliere.cshtml" />
@@ -544,7 +540,6 @@
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />
-    <Folder Include="ExcelFiles\" />
     <Folder Include="Views\Home\" />
   </ItemGroup>
   <ItemGroup>
@@ -563,11 +558,8 @@
     <TypeScriptCompile Include="Scripts\index.d.ts" />
   </ItemGroup>
   <ItemGroup>
-    <EmbeddedResource Include="Migrations\202003141218392_InitialCreate.resx">
-      <DependentUpon>202003141218392_InitialCreate.cs</DependentUpon>
-    </EmbeddedResource>
-    <EmbeddedResource Include="Migrations\202003141225023_InitialCreate1.resx">
-      <DependentUpon>202003141225023_InitialCreate1.cs</DependentUpon>
+    <EmbeddedResource Include="Migrations\202003141621369_InitialCreate.resx">
+      <DependentUpon>202003141621369_InitialCreate.cs</DependentUpon>
     </EmbeddedResource>
   </ItemGroup>
   <PropertyGroup>

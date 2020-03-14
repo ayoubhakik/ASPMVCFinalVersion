@@ -30,7 +30,7 @@ namespace projetASP.Controllers
         }
 
         [HttpPost]
-        public ActionResult Importer(HttpPostedFileBase excelFile)
+        public ActionResult ImporterEtudiantExcel(HttpPostedFileBase excelFile)
         {
             if (Request != null)
             {
@@ -100,6 +100,48 @@ namespace projetASP.Controllers
             ViewBag.Current = "importerNotes";
             return View();
         }
+
+        [HttpPost]
+        public ActionResult ImporterNoteExcel(HttpPostedFileBase excelFile)
+        {
+            if (Request != null)
+            {
+                EtudiantContext db = new EtudiantContext();
+                HttpPostedFileBase file = Request.Files["excelfile"];
+                if ((file != null) && (file.ContentLength > 0) && !string.IsNullOrEmpty(file.FileName))
+                {
+                    string fileName = file.FileName;
+                    string fileContentType = file.ContentType;
+                    byte[] fileBytes = new byte[file.ContentLength];
+                    var data = file.InputStream.Read(fileBytes, 0, Convert.ToInt32(file.ContentLength));
+                    using (var package = new ExcelPackage(file.InputStream))
+                    {
+                        var currentSheet = package.Workbook.Worksheets;
+                        var workSheet = currentSheet.First();
+                        var noOfCol = workSheet.Dimension.End.Column;
+                        var noOfRow = workSheet.Dimension.End.Row;
+                        Console.WriteLine("before entering ......");
+                        for (int rowIterator = 2; rowIterator <= noOfRow; rowIterator++)
+                        {
+                            Console.WriteLine(" entering ......");
+                            Etudiant e = db.etudiants.Find(workSheet.Cells[rowIterator, 1].Value.ToString());
+                            e.noteFstYear = Convert.ToDouble(workSheet.Cells[rowIterator, 2].Value);
+
+                            e.noteSndYear = Convert.ToDouble(workSheet.Cells[rowIterator, 3].Value);
+
+                           
+
+                            //db.etudiants.Add(e);
+                            Console.WriteLine(" out ......");
+
+                        }
+                        db.SaveChanges();
+                    }
+                }
+            }
+            return View("Index");
+        }
+
         public ActionResult AttributionFiliere()
         {
             ViewBag.Current = "attributionFiliere";
