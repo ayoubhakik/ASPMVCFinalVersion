@@ -160,6 +160,7 @@
     <Compile Include="Models\Etudiant.cs" />
     <Compile Include="Models\Filiere.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
+    <Content Include="Image\kamal.jpg" />
   </ItemGroup>
   <ItemGroup>
     <Content Include="Content\bootstrap-grid.css" />
@@ -204,6 +205,7 @@
     <Content Include="Content\js\plugins\bootstrap-notify.js" />
     <Content Include="Content\js\plugins\chartist.min.js" />
     <Content Include="Content\js\plugins\perfect-scrollbar.jquery.min.js" />
+    <Content Include="Content\Modification.css" />
     <Content Include="favicon.ico" />
     <Content Include="Global.asax" />
     <Content Include="Content\Site.css" />
@@ -417,6 +419,7 @@
     <Content Include="Scripts\esm\popper-utils.min.js" />
     <Content Include="Scripts\esm\popper.js" />
     <Content Include="Scripts\esm\popper.min.js" />
+    <Content Include="Scripts\EtudiantScript.js" />
     <Content Include="Scripts\index.js.flow" />
     <Content Include="Scripts\esm\popper.min.js.map" />
     <Content Include="Scripts\esm\popper.js.map" />
@@ -514,7 +517,6 @@
     <Content Include="Views\Departement\Home.cshtml" />
     <Content Include="Views\Shared\_layoutEtudiant.cshtml" />
     <Content Include="Views\Etudiant\Index.cshtml" />
-    <Content Include="Views\Etudiant\Modification.cshtml" />
     <Content Include="Views\Etudiant\Consulter.cshtml" />
     <Content Include="Views\Etudiant\Inscription.cshtml" />
     <Content Include="Scripts\umd\popper.min.js.map" />
@@ -541,6 +543,8 @@
     <None Include="Web.Release.config">
       <DependentUpon>Web.config</DependentUpon>
     </None>
+
+    <Content Include="Views\Etudiant\Modification.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />

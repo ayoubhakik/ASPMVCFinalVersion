@@ -13,6 +13,11 @@
     <!--     Fonts and icons     -->
     <link rel="stylesheet" type="text/css" href="https://fonts.googleapis.com/css?family=Roboto:300,400,500,700|Roboto+Slab:400,700|Material+Icons" />
     <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/font-awesome/latest/css/font-awesome.min.css">
+    <link href="https://cdn.jotfor.ms/static/formCss.css?3.3.15970" rel="stylesheet" type="text/css" />
+    <link rel="stylesheet" type="text/css" href="https://cdn.jotfor.ms/css/styles/nova.css?3.3.15970">
+    <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.7.0/css/all.css" integrity="sha384-lZN37f5QGtY3VHgisS14W3ExzMWZxybE1SJSEsQp9S+oqd12jhcu+A56Ebc1zFSJ" crossorigin="anonymous">
+   
+
     <!-- CSS Files -->
     <link href="../../Content/css/material-dashboard.css?v=2.1.0" rel="stylesheet" />
     <!-- CSS Just for demo purpose, don't include it in your project -->
@@ -29,7 +34,7 @@
             -->
 
             <div class="sidebar-wrapper">
-                ...................................................................................      
+                ...................................................................................
                 <ul class="nav">
                     <li class="@(ViewBag.Current == "Home" ? "nav-tem active" : "nav-item")">
                         <a href='@Url.Action("Index","Etudiant")' class="nav-link">
@@ -44,7 +49,7 @@
                             <p>Modification</p>
                         </a>
                     </li>
-                    
+
                     <li class="@(ViewBag.Current == "Consulter" ? "nav-item active" : "nav-item")">
                         <a href='@Url.Action("Consulter","Etudiant")' class="nav-link">
                             <i class="material-icons">library_books</i>
@@ -58,7 +63,7 @@
                             <p>se deconnecter </p>
                         </a>
                     </li>
-                
+
                 </ul>
             </div>
         </div>
@@ -320,6 +325,7 @@
 
         });
     </script>
+
 </body>
 
 </html>
