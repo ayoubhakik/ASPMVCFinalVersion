@@ -510,6 +510,7 @@
     <Content Include="Web.config">
       <SubType>Designer</SubType>
     </Content>
+    <Content Include="ExcelFiles\EtudiantExemple.xlsx"/>
     <Content Include="Views\Departement\ImporterEtudiants.cshtml" />
     <Content Include="Views\Departement\Visualiser.cshtml" />
     <Content Include="Views\Departement\ImporterNotes.cshtml" />
