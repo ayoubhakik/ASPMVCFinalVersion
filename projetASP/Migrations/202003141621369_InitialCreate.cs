@@ -24,13 +24,12 @@
                 "dbo.Etudiants",
                 c => new
                     {
-                        id = c.Int(nullable: false, identity: true),
+                        cne = c.String(nullable: false, maxLength: 128),
                         nom = c.String(),
                         prenom = c.String(),
                         password = c.String(),
                         nationalite = c.String(),
                         cin = c.String(),
-                        cne = c.String(),
                         email = c.String(),
                         phone = c.String(),
                         gsm = c.String(),
@@ -43,13 +42,14 @@
                         noteFstYear = c.Double(nullable: false),
                         noteSndYear = c.Double(nullable: false),
                         dateNaiss = c.DateTime(nullable: false),
+                        lieuNaiss = c.String(),
                         photo_link = c.String(),
                         choix = c.String(),
-                        validated = c.Boolean(nullable: false),
-                        modified = c.Boolean(nullable: false),
+                        Validated = c.Boolean(nullable: false),
+                        Modified = c.Boolean(nullable: false),
                         idFil = c.Int(),
                     })
-                .PrimaryKey(t => t.id)
+                .PrimaryKey(t => t.cne)
                 .ForeignKey("dbo.Filieres", t => t.idFil)
                 .Index(t => t.idFil);
             

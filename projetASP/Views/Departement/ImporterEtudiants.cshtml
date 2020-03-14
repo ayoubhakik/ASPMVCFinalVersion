@@ -15,7 +15,7 @@
 
 
     <h2>Excel Import</h2>
-    @using (Html.BeginForm("Importer", "Departement", FormMethod.Post, new { enctype = "multipart/form-data" }))
+    @using (Html.BeginForm("ImporterEtudiantExcel", "Departement", FormMethod.Post, new { enctype = "multipart/form-data" }))
     {
         @Html.Raw(ViewBag.Error)
         <span>
