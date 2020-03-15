@@ -78,5 +78,24 @@ $(".previous").click(function () {
 });
 
 $(".submit").click(function () {
-	return false;
+
+	var pass = document.getElementById("msform").pass.value;
+	var cpass = document.getElementById("msform").cpass.value;
+	var cin = document.getElementById("msform").cin.value;
+	var ccin = document.getElementById("msform").ccin.value;
+	var email = document.getElementById("msform").email.value;
+	var cemail = document.getElementById("msform").cemail.value;
+	if (pass != cpass) {
+		alert("Les deux mots de pass doivent correspondre !")
+		return false;
+	}
+	else if (cin != ccin) {
+		alert("Les deux cin doivent correspondre !")
+		return false;
+	}
+	else if (email != cemail) {
+		alert("Les deux email doivent correspondre !")
+		return false;
+	}
+	else return true;
 })

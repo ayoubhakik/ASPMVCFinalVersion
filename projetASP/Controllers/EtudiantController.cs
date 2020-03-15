@@ -13,6 +13,7 @@ namespace projetASP.Controllers
 {
     public class EtudiantController : Controller
     {
+        EtudiantContext s = new EtudiantContext();
         // GET: Etudiant
         EtudiantContext etudiantContext = new EtudiantContext();
         public ActionResult Index()
@@ -113,16 +114,44 @@ namespace projetASP.Controllers
             return View("Index");
         }
 
+        [HttpGet]
 
         public ActionResult Inscription()
         {
+            ViewBag.prenom = new SelectList(s.etudiants, "id", "prenom");
+            ViewBag.nom = new SelectList(s.etudiants, "id", "nom");
+            ViewBag.lieuNaiss = new SelectList(s.etudiants, "id", "lieuNaiss");
+            ViewBag.nationalite = new SelectList(s.etudiants, "id", "nationalite");
+            ViewBag.ville = new SelectList(s.etudiants, "id", "ville");
+            ViewBag.typeBac = new SelectList(s.etudiants, "id", "typeBac");
+            ViewBag.mentionBac = new SelectList(s.etudiants, "id", "mentionBac");
+            
+
 
             return View();
         }
 
-
-  
-     
-
+        [HttpPost]
+        public ActionResult Inscription(Etudiant student)
+        {
+            if (ModelState.IsValid)
+            {
+                var e = (Etudiant)s.etudiants.Where(x => x.cin == student.cin);
+                if (e == null)
+                {
+                    ViewBag.message = "Les informations que vous avez entrez ne correspondent à aucun étudiant !";
+                    return View();
+                }
+                //update
+                else 
+                {
+                    e.validated = true;
+                    return null;
+                }
+                    
+            }
+            else return View();
+        }
+>>>>>>> Sifane-dev
     }
 }
