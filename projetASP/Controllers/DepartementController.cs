@@ -3,7 +3,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Web;
 using System.Web.Mvc;
-
+using projetASP.Models;
 namespace projetASP.Controllers
 {
     public class DepartementController : Controller
@@ -12,38 +12,74 @@ namespace projetASP.Controllers
         public ActionResult Home()
         {
             ViewBag.Current = "home";
-            return View();
+            if (UserValide.IsValid())
+            {
+                return View();
+            }
+            else
+                return RedirectToAction("Authentification", "User");
         }
         public ActionResult Index()
         {
+
             ViewBag.Current = "index";
-            return View();
+            if (UserValide.IsValid())
+            {
+                return View();
+            }
+            else
+                return RedirectToAction("Authentification", "User");
         }
 
         public ActionResult ImporterEtudiants()
         {
             ViewBag.Current = "importerEtudiants";
-            return View();
+            if (UserValide.IsValid())
+            {
+                return View();
+            }
+            else
+                return RedirectToAction("Authentification", "User");
         }
         public ActionResult ImporterNotes()
         {
             ViewBag.Current = "importerNotes";
-            return View();
+            if (UserValide.IsValid())
+            {
+                return View();
+            }
+            else
+                return RedirectToAction("Authentification", "User");
         }
         public ActionResult AttributionFiliere()
         {
             ViewBag.Current = "attributionFiliere";
-            return View();
+            if (UserValide.IsValid())
+            {
+                return View();
+            }
+            else
+                return RedirectToAction("Authentification", "User");
         }
         public ActionResult Statistiques()
         {
             ViewBag.Current = "statistiques";
-            return View();
+            if (UserValide.IsValid())
+            {
+                return View();
+            }
+            else
+                return RedirectToAction("Authentification", "User");
         }
         public ActionResult Visualiser()
         {
             ViewBag.Current = "visualiser";
-            return View();
+            if (UserValide.IsValid())
+            {
+                return View();
+            }
+            else
+                return RedirectToAction("Authentification", "User");
         }
     }
 }
