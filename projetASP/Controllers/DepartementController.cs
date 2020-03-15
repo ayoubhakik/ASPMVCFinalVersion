@@ -20,7 +20,12 @@ namespace projetASP.Controllers
         public ActionResult Index()
         {
             ViewBag.Current = "index";
-            return View();
+            EtudiantContext db = new EtudiantContext();
+            List<Etudiant> list = db.etudiants.ToList();
+            
+                return View(list);
+
+            
         }
 
         public ActionResult ImporterEtudiants()
@@ -91,7 +96,8 @@ namespace projetASP.Controllers
                     }
                 }
             }
-            return View("Index");
+            return RedirectToAction("Index");
+            //return View("Index");
         }
 
 
@@ -139,7 +145,7 @@ namespace projetASP.Controllers
                     }
                 }
             }
-            return View("Index");
+            return RedirectToAction("Index");
         }
 
         public ActionResult AttributionFiliere()

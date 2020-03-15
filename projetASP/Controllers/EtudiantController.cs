@@ -36,7 +36,7 @@ namespace projetASP.Controllers
              {
                  return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
              }*/
-            Etudiant etudiants = etudiantContext.etudiants.Find(4);
+            Etudiant etudiants = etudiantContext.etudiants.Find("1hh1hh");
 
             if (etudiants == null)
             {
@@ -59,7 +59,7 @@ namespace projetASP.Controllers
              */
             if (ModelState.IsValid)
             {
-                Etudiant etudiants = etudiantContext.etudiants.Find(etudiant.id);
+                Etudiant etudiants = etudiantContext.etudiants.Find(etudiant.cne);
                 
                 if (Request.Files.Count > 0 && Update=="Upload")
                 {
