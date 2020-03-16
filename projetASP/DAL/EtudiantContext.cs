@@ -16,6 +16,13 @@ namespace projetASP.DAL
         public DbSet<Etudiant> etudiants { get; set; }
         public DbSet<Departement> departements { get; set; }
 
-        public DbSet<Filiere> Filieres { get; set; }
+        public System.Data.Entity.DbSet<projetASP.Models.Filiere> Filieres { get; set; }
+        protected override void OnModelCreating(DbModelBuilder modelBuilder)
+        {
+            Database.SetInitializer<EtudiantContext>(null);
+            base.OnModelCreating(modelBuilder);
+        }
     }
+    
+
 }

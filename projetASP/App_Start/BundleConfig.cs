@@ -23,9 +23,8 @@ namespace projetASP
                       "~/Scripts/bootstrap.js"));
 
             bundles.Add(new StyleBundle("~/Content/css").Include(
-                      "~/Content/bootstrap.min.css",
-                      "~/Content/site.css",
-                      "~/Content/css/Inscription.css"));
+                      "~/Content/bootstrap.css",
+                      "~/Content/site.css"));
         }
     }
 }
