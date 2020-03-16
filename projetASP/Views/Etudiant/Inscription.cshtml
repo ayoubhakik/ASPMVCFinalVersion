@@ -10,8 +10,8 @@
 <head>
     <meta name="viewport" content="width=device-width" />
     <title>Inscription</title>
-    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/css/bootstrap.min.css" integrity="sha384-Vkoo8x4CGsO3+Hhxv8T/Q5PaXtkKtu6ug5TOeNV6gBiFeWPGFN9MuhOf23Q9Ifjh" crossorigin="anonymous>
-    @*Styles.Render("~/Content/css")*@
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/css/bootstrap.min.css" integrity="sha384-Vkoo8x4CGsO3+Hhxv8T/Q5PaXtkKtu6ug5TOeNV6gBiFeWPGFN9MuhOf23Q9Ifjh" crossorigin="anonymous">
+
     <link rel="stylesheet" href="https://ajax.googleapis.com/ajax/libs/jqueryui/1.12.1/themes/smoothness/jquery-ui.css">
 
     @Styles.Render("~/Content/css/Inscription.css")
@@ -19,10 +19,10 @@
 </head>
 <body>
     <!-- MultiStep Form -->
-
+    
     <div class="row justify-content-center">
         <div class="col-md-6">
-            @using (Html.BeginForm("Inscription", "EtudiantController", FormMethod.Post, new { id = "msform", name = "msform" }))
+            @using (Html.BeginForm("Inscription", "EtudiantController", FormMethod.Post, new { id = "msform" }))
             {
                 <!-- progressbar -->
                 <ul id="progressbar">
@@ -31,148 +31,103 @@
                     <li>Choix De Filiere</li>
                 </ul>
                 <!-- fieldsets -->
-                <fieldset>
-                    <h2 class="fs-title">Données Personnelles</h2>
-                    <h3 class="fs-subtitle">Post Modern Jukebox</h3>
-                   
-                    @Html.ValidationSummary()
-
-                    @Html.DropDownListFor(x => x.prenom, ViewBag.prenom as SelectList, "Prenom", new { name = "fname", @class="btn btn-dark btn-lg dropdown-toggle" })
-                    @Html.DropDownListFor(x => x.nom, ViewBag.nom as SelectList, "Nom", new { name = "lname", @class="btn btn-dark btn-lg dropdown-toggle m-1" })
-
-                    @Html.PasswordFor(x => x.password, new { placeholder = "Mot de pass", name = "pass" })
-                    @Html.Password("cpass", null, new { placeholder = "Confirmer Mot de pass", name = "cpass" })
-                    @Html.TextBoxFor(x => x.dateNaiss, new {name = "dnaiss", type = "date" })
-
-                    @Html.DropDownListFor(x => x.lieuNaiss, ViewBag.lnaiss as SelectList, "Lieu de naissance", new { name = "lnaiss", @class="btn btn-dark btn-lg dropdown-toggle m-1" })
-
-                    @Html.DropDownListFor(x => x.nationalite, ViewBag.natio as SelectList, "Nationalité", new { name = "nation", @class="btn btn-dark btn-lg dropdown-toggle" })
-
-                    @Html.TextBoxFor(x => x.cin, new { placeholder = "CIN", name = "cin" })
-                    @Html.TextBox("ccin", null, new { placeholder = "Confirmer cin", name = "ccin" })
-                    @Html.TextBoxFor(x => x.cne, new { placeholder = "CNE", name = "cne" })
-                    @Html.TextBoxFor(x => x.phone, new { placeholder = "Tel", name = "tel" })
-                    @Html.TextBoxFor(x => x.gsm, new { placeholder = "GSM", name = "gsm" })
-                    @Html.TextBoxFor(x => x.email, new { placeholder = "Email", name = "email", type="email" })
-                    @Html.TextBox("cemail", null, new { placeholder = "Confirmer Email", name= "cemail", type="email" })
-                    @Html.TextBoxFor(x => x.address, new { placeholder = "Adresse", name = "adresse" })
-
-                    @Html.DropDownListFor(x => x.ville, ViewBag.ville as SelectList, "Ville", new { name = "ville", @class="btn btn-dark btn-lg dropdown-toggle" })<br />
+        <fieldset>
+            <h2 class="fs-title">Données Personnelles</h2>
+            <h3 class="fs-subtitle">Post Modern Jukebox</h3>
+            @*Html.DropDownListFor(x => x.prenom, ViewBag.prenom as SelectList, "Prenom", new { name = "fname" })
+        @Html.DropDownListFor(x => x.nom, ViewBag.e as SelectList, "Nom", new { name = "lname" })*@
 
 
+            @*Html.DropDownListFor(x => x.nom, ViewBag.nom as SelectList, "Nom", new { name = "fname" })
+            @Html.TextBoxFor(x => x.nom, new { placeholder = "Nom", name = "lname" })*@
+            
+            @Html.PasswordFor(x => x.password, new { placeholder = "Mot de pass", name = "pass" })
+            @Html.Password("cpass", null, new { placeholder = "Confirmer Mot de pass" })
+            @Html.TextBoxFor(x => x.dateNaiss, new { placeholder = "Date de naissance", name = "dnaiss", type = "date" })
 
-                    <input type="button" name="next" class="next action-button" value="Next" />
-                </fieldset>
+            @*Html.DropDownListFor(x => x.lieuNaiss, ViewBag.lnaiss as SelectList, "Lieu de naissance", new { name = "lnaiss" })
+        @Html.TextBoxFor(x => x.lieuNaiss, new { placeholder = "Lieu de naissance", name = "lnaiss" }*@
 
-                <fieldset>
-                    <h2 class="fs-title">Baccalauréat</h2>
-                    <h3 class="fs-subtitle">Post Modern Jukebox</h3>
+            @*Html.DropDownListFor(x => x.nationalite, ViewBag.natio as SelectList, "Nationalité", new { name = "nation" })
+        @Html.TextBoxFor(x => x.nationalite, new { placeholder = "Nationalité", name = "nation" })*@
 
-                    @Html.DropDownListFor(x => x.typeBac, ViewBag.typebac as SelectList, "Type de BAC", new { name = "typebac", @class="btn btn-dark btn-lg dropdown-toggle m-1" })
-                        @Html.TextBoxFor(x => x.anneeBac, new { name = "anbac", type = "date" })
-                        @Html.TextBoxFor(x => x.noteBac, new { placeholder = "Note de BAC", name = "notebac" })
-                        @Html.DropDownListFor(x => x.mentionBac, ViewBag.mentionbac as SelectList, "Mention", new { name = "typebac", @class="btn btn-dark btn-lg dropdown-toggle" })<br />
+            @Html.TextBoxFor(x => x.cin, new { placeholder = "CIN", name = "cin" })
+            @Html.TextBox("ccin", null, new { placeholder = "Confirmer cin" })
+            @Html.TextBoxFor(x => x.cne, new { placeholder = "CNE", name = "cne" })
+            @Html.TextBoxFor(x => x.phone, new { placeholder = "Tel", name = "tel" })
+            @Html.TextBoxFor(x => x.gsm, new { placeholder = "GSM", name = "gsm" })
+            @Html.TextBoxFor(x => x.email, new { placeholder = "Email", name = "email" })
+            @Html.TextBox("cemail", null, new { placeholder = "Confirmer Email" })
+            @Html.TextBoxFor(x => x.address, new { placeholder = "Adresse", name = "adresse" })
 
-
-                    <input type="button" name="previous" class="previous action-button-previous" value="Previous" />
-                    <input type="button" name="next" class="next action-button" value="Next" />
-                </fieldset>
-                <fieldset>
-                    <h2 class="fs-title">Notes des deux années du cyle préparatoire</h2>
-                    @Html.TextBoxFor(x => x.noteFstYear, new { placeholder = "1ère Année Cycle prépa(/20)", name = "notefstyear" })
-                    @Html.TextBoxFor(x => x.noteSndYear, new { placeholder = "2ème Année Cycle prépa(/20)", name = "notesndyear" })
-
-                    <h2 class="fs-title">Choix de Filière</h2>
-
-
-                    <table summary="" role="presentation" cellPadding="4" cellSpacing="0" class="form-matrix-table" data-component="matrix">
-                        <tbody>
-                            <tr>
-                                <th style="border:none; width: 500px">
-
-                                </th>
-                                <th scope="col" class="form-matrix-column-headers form-matrix-column_0">
-                                    <label id="label_1_col_0"> 1ere Choix </label>
-                                </th>
-                                <th scope="col" class="form-matrix-column-headers form-matrix-column_1">
-                                    <label id="label_1_col_1"> 2 ème choix </label>
-                                </th>
-                                <th scope="col" class="form-matrix-column-headers form-matrix-column_2">
-                                    <label id="label_1_col_2"> 3 eme Choix </label>
-                                </th>
-                            </tr>
-                            <tr role="group" aria-labelledby="label_1 label_1_row_0">
-                                <th scope="row" style="text-align:left" class="form-matrix-row-headers">
-                                    <label id="label_1_row_0"> Genie Informatique </label>
-                                </th>
-                                <td style="text-align:center" class="form-matrix-values">
-                                    <input id="F1" type="radio" name="choix1" value="F" onClick=desactivefilieres() />
-
-                                </td>
-                                <td style="text-align:center" class="form-matrix-values">
-                                    <input id="F2" type="radio" name="choix2" value="F" onClick=desactivefilieres() />
+            @*Html.DropDownListFor(x => x.ville, ViewBag.ville as SelectList, "Ville", new { name = "ville" })
+        @Html.TextBoxFor(x => x.ville, new { placeholder = "Ville", name = "ville" })*@
 
 
-                                </td>
-                                <td style="text-align:center" class="form-matrix-values">
-                                    <input id="F3" type="radio" name="choix3" value="F" onClick=desactivefilieres()/>
 
-                                </td>
-                            </tr>
-                            <tr role="group" aria-labelledby="label_1 label_1_row_1">
-                                <th scope="row" style="text-align:left" class="form-matrix-row-headers">
-                                    <label id="label_1_row_1"> Genie Telecominication et Réseau </label>
-                                </th>
-                                <td style="text-align:center" class="form-matrix-values">
-                                    <input id="T1" type="radio" name="choix1" value="T" onClick=desactivefilieres() />
+            
+            <input type="button" name="next" class="next action-button" value="Next" />
+        </fieldset>
+        <fieldset>
+            <h2 class="fs-title">Baccalauréat</h2>
+            <h3 class="fs-subtitle">Post Modern Jukebox</h3>
 
-                                </td>
-                                <td style="text-align:center" class="form-matrix-values">
-                                    <input id="T2" type="radio" name="choix2" value="T" onClick=desactivefilieres()/>
-                                </td>
-                                <td style="text-align:center" class="form-matrix-values">
-                                    <input id="T3" type="radio" name="choix3" value="T" onClick=desactivefilieres()/>
-                                </td>
-                            </tr>
-                            <tr role="group" aria-labelledby="label_1 label_1_row_2">
-                                <th scope="row" style="text-align:left" class="form-matrix-row-headers">
-                                    <label id="label_1_row_2"> Genie Indus </label>
-                                </th>
-                                <td style="text-align:center" class="form-matrix-values">
-                                    <input id="D1" type="radio" name="choix1" value="D" onClick=desactivefilieres()/>
-                                </td>
-                                <td style="text-align:center" class="form-matrix-values">
-                                    <input id="D2" type="radio" name="choix2" value="D" onClick=desactivefilieres()/>
-                                </td>
-                                <td style="text-align:center" class="form-matrix-values">
-                                    <input id="D3" type="radio" name="choix3" value="D" onClick=desactivefilieres()/>
+            @*Html.DropDownListFor(x => x.typeBac, ViewBag.typebac as SelectList, "Type de BAC", new { name = "typebac" })
+            @Html.TextBoxFor(x => x.anneeBac, new { placeholder = "Année d'obtention du bac", name = "anbac", type = "date" })
+            @Html.TextBoxFor(x => x.noteBac, new { placeholder = "Note de BAC", name = "notebac" })
+            @Html.DropDownListFor(x => x.mentionBac, ViewBag.mentionbac as SelectList, "Mention", new { name = "typebac" })*@
 
-                                </td>
-                            </tr>
-                            <tr role="group" aria-labelledby="label_1 label_1_row_3">
-                                <th scope="row" style="text-align:left" class="form-matrix-row-headers">
-                                    <label id="label_1_row_3"> Genie Procede et M.C </label>
-                                </th>
-                                <td style="text-align:center" class="form-matrix-values">
-                                    <input id="P1" type="radio" name="choix1" value="P" onClick=desactivefilieres()/>
-                                </td>
-                                <td style="text-align:center" class="form-matrix-values">
-                                    <input id="P2" type="radio" name="choix2" value="P" onClick=desactivefilieres()/>
+            
+            <input type="button" name="previous" class="previous action-button-previous" value="Previous" />
+            <input type="button" name="next" class="next action-button" value="Next" />
+        </fieldset>
+        <fieldset>
+            <h2 class="fs-title">Notes des deux années du cyle préparatoire</h2>
+            @Html.TextBoxFor(x => x.noteFstYear, new { placeholder = "1ère Année Cycle prépa(/20)", name = "notefstyear" })
+            @Html.TextBoxFor(x => x.noteSndYear, new { placeholder = "2ème Année Cycle prépa(/20)", name = "notesndyear" })
 
-                                </td>
-                                <td style="text-align:center" class="form-matrix-values">
-                                    <input id="P3" type="radio" name="choix3" value="P" onClick=desactivefilieres()/>
+            <h2 class="fs-title">Choix de Filière</h2>
 
-                                </td>
-                            </tr>
-                        </tbody>
-                    </table>
 
-                    <input type="button" name="previous" class="previous action-button-previous" value="Previous" />
-                    <input type="submit" name="submit" class="submit action-button" value="Submit" />
-                </fieldset>
+            <table class="table table-striped table-dark">
+                <thead>
+                    <tr>
+                        <th scope="col">#</th>
+                        <th scope="col">First</th>
+                        <th scope="col">Last</th>
+                        <th scope="col">Handle</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <tr>
+                        <th scope="row">1</th>
+                        <td>Mark</td>
+                        <td>Otto</td>
+                        <td>mdo</td>
+                    </tr>
+                    <tr>
+                        <th scope="row">2</th>
+                        <td>Jacob</td>
+                        <td>Thornton</td>
+                        <td>fat</td>
+                    </tr>
+                    <tr>
+                        <th scope="row">3</th>
+                        <td>Larry</td>
+                        <td>the Bird</td>
+                        <td>twitter</td>
+                    </tr>
+                </tbody>
+            </table>
+            <input type="button" name="previous" class="previous action-button-previous" value="Previous" />
+            <input type="submit" name="submit" class="submit action-button" value="Submit" />
+        </fieldset>
             }
-           
+            <!-- link to designify.me code snippets -->
+            <div class="dme_link">
+                <p><a href="http://designify.me/code-snippets-js/" target="_blank">More Code Snippets</a></p>
+            </div>
+            <!-- /.link to designify.me code snippets -->
         </div>
     </div>
     <!-- /.MultiStep Form -->
@@ -180,15 +135,6 @@
     @Scripts.Render("~/bundles/jquery")
     @Scripts.Render("~/bundles/bootstrap")
     @Scripts.Render("~/Content/js/Inscription.js")
-    @Scripts.Render("~/Scripts/EtudiantScript.js")
-
     <script src="https://ajax.googleapis.com/ajax/libs/jqueryui/1.12.1/jquery-ui.min.js"></script>
-    @if(ViewBag.message != null)
-    { <script type="text/javascript">
-        window.onload = function () {
-            alert("@ViewBag.message");
-        };
-    </script>
-    }
 </body>
 </html>
