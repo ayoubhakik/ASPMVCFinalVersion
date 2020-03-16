@@ -152,6 +152,5 @@ namespace projetASP.Controllers
             }
             else return View();
         }
->>>>>>> Sifane-dev
     }
 }
