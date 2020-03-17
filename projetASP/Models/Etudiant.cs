@@ -15,10 +15,8 @@ namespace projetASP.Models
      
 
         [Required]
-        [StringLength(10, MinimumLength =3)]
         public string nom { get; set; }
         [Required]
-        [StringLength(10, MinimumLength = 3)]
         public string prenom { get; set; }
         [Required]
         public string password { get; set; }
@@ -60,16 +58,15 @@ namespace projetASP.Models
         [Required]
         public string lieuNaiss { get; set; }
 
-        [Required]
         public string photo_link { get; set; }
 
         public string choix { get; set; }
 
-        public Boolean validated = false;
-        public Boolean Validated { get; set; }
+        public bool validated = false;
+        public bool Validated { get; set; }
 
-        public Boolean modified = false;
-        public Boolean Modified { get; set; }
+        public bool modified = false;
+        public bool Modified { get; set; }
 
         [ForeignKey("Filiere")]
         public Nullable<int> idFil { get; set; }

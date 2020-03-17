@@ -79,9 +79,9 @@ $(".previous").click(function () {
 
 $(".submit").click(function () {
 
-	var pass = document.getElementById("msform").pass.value;
-	var cpass = document.getElementById("msform").cpass.value;
-	var cin = document.getElementById("msform").cin.value;
+	var pass = document.getElementById("pass").value;
+	var cpass = document.getElementById("cpass").value;
+	var cin = document.getElementById("cin").value;
 	var ccin = document.getElementById("msform").ccin.value;
 	var email = document.getElementById("msform").email.value;
 	var cemail = document.getElementById("msform").cemail.value;
