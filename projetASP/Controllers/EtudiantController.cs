@@ -37,7 +37,7 @@ namespace projetASP.Controllers
              {
                  return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
              }*/
-            Etudiant etudiants = etudiantContext.etudiants.Find("123");
+            Etudiant etudiants = etudiantContext.etudiants.Find("9qdq");
 
             if (etudiants == null)
             {
@@ -50,7 +50,7 @@ namespace projetASP.Controllers
 
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public ActionResult Modification([Bind(Include = "id,nationalite,email,phone,gsm,address,ville,dateNaiss")] Etudiant etudiant,string Update,String choix1,String choix2,String choix3)
+        public ActionResult Modification([Bind(Include = "cne,nationalite,email,phone,gsm,address,ville,dateNaiss")] Etudiant etudiant,string Update,String choix1,String choix2,String choix3)
         {
             ViewBag.Current = "Modification";
 

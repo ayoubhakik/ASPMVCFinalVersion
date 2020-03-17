@@ -25,7 +25,7 @@
                             <th>Email</th>
                             <th>Date de naissance</th>
                             <th>Note 1</th>
-                            <th>Note 2</th>
+                            <th>validated ? </th>
                             </thead>
                             <tbody>
                                 @if (Model == null)
@@ -57,7 +57,14 @@
                                                 @Html.DisplayFor(modelItem => item.noteFstYear)
                                             </th>
                                             <td>
-                                                @Html.DisplayFor(modelItem => item.noteSndYear)
+                                                @if(item.Validated == true)
+                                                {
+                                                <span>true</span>
+                                                }
+                                                else
+                                                {
+                                                <span>false</span>
+                                                }
                                             </td>
 
                                             

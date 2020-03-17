@@ -19,10 +19,14 @@ namespace projetASP.Controllers
         }
         public ActionResult Index()
         {
-            ViewBag.Current = "index";
             EtudiantContext db = new EtudiantContext();
+
+            Etudiant e = db.etudiants.Find("9qdq");
+            e.Validated=true;
+            db.SaveChanges();
+
+            ViewBag.Current = "index";
             List<Etudiant> list = db.etudiants.ToList();
-            
                 return View(list);
 
             

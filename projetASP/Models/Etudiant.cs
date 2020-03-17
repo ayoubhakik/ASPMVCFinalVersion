@@ -14,53 +14,53 @@ namespace projetASP.Models
         public string cne { get; set; }
      
 
-        [Required]
-        [StringLength(10, MinimumLength =3)]
+        //[Required]
+        //[StringLength(10, MinimumLength =3)]
         public string nom { get; set; }
-        [Required]
-        [StringLength(10, MinimumLength = 3)]
+        //[Required]
+        //[StringLength(10, MinimumLength = 3)]
         public string prenom { get; set; }
-        [Required]
+        //[Required]
         public string password { get; set; }
         
-        [Required]
+        //[Required]
         public string nationalite { get; set; }
-        [Required]
+        //[Required]
         public string cin { get; set; }
 
-        [Required]
+        //[Required]
 
         public string email { get; set; }
         
-        [Required]
+        //[Required]
         public string phone { get; set; }
-        [Required]
+        //[Required]
         public string gsm { get; set; }
-        [Required]
+        //[Required]
         public string address { get; set; }
-        [Required]
+        //[Required]
         public string ville { get; set; }
         
-        [Required]
+        //[Required]
         public string typeBac { get; set; }
-        [Required]
+        //[Required]
         public int anneeBac { get; set; }
-        [Required]
+        //[Required]
         public double noteBac { get; set; }
-        [Required]
+        //[Required]
         public string mentionBac { get; set; }
 
-        [Required]
+        //[Required]
         public double noteFstYear { get; set; }
-        [Required]
+        //[Required]
         public double noteSndYear { get; set; }
 
-        [Required]
+        //[Required]
         public DateTime dateNaiss { get; set; }
-        [Required]
+        //[Required]
         public string lieuNaiss { get; set; }
 
-        [Required]
+        //[Required]
         public string photo_link { get; set; }
 
         public string choix { get; set; }
