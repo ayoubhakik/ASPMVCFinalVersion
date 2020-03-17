@@ -31,13 +31,20 @@ namespace projetASP.DAL
         public DbSet<Etudiant> etudiants { get; set; }
         public DbSet<Departement> departements { get; set; }
 
-        public System.Data.Entity.DbSet<projetASP.Models.Filiere> Filieres { get; set; }
-        protected override void OnModelCreating(DbModelBuilder modelBuilder)
+        public DbSet<Filiere> Filieres { get; set; }
+        public override int SaveChanges()
         {
-            Database.SetInitializer<EtudiantContext>(null);
-            base.OnModelCreating(modelBuilder);
+            try
+            {
+                return base.SaveChanges();
+            }
+            catch (DbEntityValidationException ex)
+            {
+                string errorMessages = string.Join("; ", ex.EntityValidationErrors.SelectMany(x => x.ValidationErrors).Select(x => x.ErrorMessage));
+                throw new DbEntityValidationException(errorMessages);
+            }
         }
     }
-    
 
+   
 }

@@ -12,16 +12,17 @@ namespace projetASP.Controllers
 
     public class UserController : Controller
     {
-        
-        public ActionResult Authentification()
+    
+        public ActionResult Authentification(Departement login, string ReturnUrl = "")
         {
             String button = Request["loginBtn"];
+            string message = "";
             if (button == "Login")
             {
                 string userName = Request["userName"];
                 string mdp= Request["mdp"];
-                EtudiantContext dbSet = new EtudiantContext();
-                var userLogin = (from data in dbSet.departements
+                EtudiantContext dbset = new EtudiantContext();
+                var userLogin = (from data in dbset.departements
                                  where data.username == userName && data.password == mdp select data).FirstOrDefault();
                 if (userLogin != null)
                 {
@@ -29,13 +30,17 @@ namespace projetASP.Controllers
                     Session["NomDep"] = userLogin.nom_departement;
                     Session["EmailDep"] = userLogin.email;
                     Session["userId"] = userLogin.id_departement;
-                    return RedirectToAction("Home", "Departement");
+                    return RedirectToAction("Index", "Departement");
                 }
                 else if (userLogin == null)
                 {
+                    message = "Invalid username or password";
+                    ViewBag.Message = message;
                     return View();
                 }
+                
             }
+            
             return View();
         }
         public ActionResult Logout()

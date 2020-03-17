@@ -10,39 +10,57 @@ namespace projetASP.Models
     public class Etudiant
     {
         [Key]
-        [DatabaseGenerated(DatabaseGeneratedOption.Identity)]
-        public int id { get; set; }
+        [Required]
+        public string cne { get; set; }
      
 
-        [Required]
+        //[Required]
+        [StringLength(10, MinimumLength =3)]
         public string nom { get; set; }
-        [Required]
+        //[Required]
+        [StringLength(10, MinimumLength = 3)]
         public string prenom { get; set; }
+        //[Required]
         public string password { get; set; }
-        public string nationalite { get; set; }
-        public string cin { get; set; }
-        public string cne { get; set; }
-        public string email { get; set; }
-
-        public string phone { get; set; }
         
+        //[Required]
+        public string nationalite { get; set; }
+        //[Required]
+        public string cin { get; set; }
+
+        //[Required]
+
+        public string email { get; set; }
+        
+        //[Required]
+        public string phone { get; set; }
+        //[Required]
         public string gsm { get; set; }
+        //[Required]
         public string address { get; set; }
+        //[Required]
         public string ville { get; set; }
-
-
+        
+        //[Required]
         public string typeBac { get; set; }
+        //[Required]
         public int anneeBac { get; set; }
+        //[Required]
         public double noteBac { get; set; }
+        //[Required]
         public string mentionBac { get; set; }
 
-
+        //[Required]
         public double noteFstYear { get; set; }
+        //[Required]
         public double noteSndYear { get; set; }
-        
+
+        //[Required]
         public DateTime dateNaiss { get; set; }
+        //[Required]
         public string lieuNaiss { get; set; }
 
+        //[Required]
         public string photo_link { get; set; }
 
         public string choix { get; set; }

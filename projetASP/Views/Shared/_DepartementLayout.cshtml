@@ -36,8 +36,6 @@
                         </a>
 
                     </li>
-
-
                     <li class="@(ViewBag.Current == "importerEtudiants" ? "nav-item active" : "nav-item")">
                         <a href='@Url.Action("ImporterEtudiants","Departement")' class="nav-link">
                             <i class="material-icons">content_paste</i>
@@ -74,7 +72,7 @@
                             <p>Notifications</p>
                         </a>
                     </li>
-                    <li class="nav-item"+>
+                    <li class="nav-item" +>
                         <a href='@Url.Action("Logout","User")' class="nav-link">
                             <i class="material-icons">notifications</i>
                             <p>Se deconnecter</p>

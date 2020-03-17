@@ -83,9 +83,7 @@ $(".submit").click(function () {
 	var pass = document.getElementById("pass").value;
 	var cpass = document.getElementById("cpass").value;
 	var cin = document.getElementById("cin").value;
-	var ccin = document.getElementById("msform").ccin.value;
-	var email = document.getElementById("msform").email.value;
-	var cemail = document.getElementById("msform").cemail.value;
+	
 	if (pass != cpass) {
 		alert("Les deux mots de pass doivent correspondre !")
 		return false;
