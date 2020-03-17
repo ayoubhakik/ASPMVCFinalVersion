@@ -13,13 +13,14 @@ namespace projetASP.Controllers
 {
     public class EtudiantController : Controller
     {
-        EtudiantContext s = new EtudiantContext();
+
         // GET: Etudiant
         EtudiantContext etudiantContext = new EtudiantContext();
         public ActionResult Index()
         {
+
             ViewBag.Current = "Home";
-         
+
             return View();
         }
 
@@ -43,14 +44,14 @@ namespace projetASP.Controllers
             {
                 return HttpNotFound();
             }
-           
+
             return View(etudiants);
         }
 
 
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public ActionResult Modification([Bind(Include = "cne,nationalite,email,phone,gsm,address,ville,dateNaiss")] Etudiant etudiant,string Update,String choix1,String choix2,String choix3)
+        public ActionResult Modification([Bind(Include = "cne,nationalite,email,phone,gsm,address,ville,dateNaiss")] Etudiant etudiant, string Update, String choix1, String choix2, String choix3)
         {
             ViewBag.Current = "Modification";
 
@@ -60,10 +61,10 @@ namespace projetASP.Controllers
             if (ModelState.IsValid)
             {
                 Etudiant etudiants = etudiantContext.etudiants.Find(etudiant.cne);
-                
-                if (Request.Files.Count > 0 && Update=="Upload")
+
+                if (Request.Files.Count > 0 && Update == "Upload")
                 {
-                   //Recupere le fichier est le sauvegarder dans /image/
+                    //Recupere le fichier est le sauvegarder dans /image/
                     HttpPostedFileBase file = Request.Files[0];
                     string fileName = Path.GetFileNameWithoutExtension(file.FileName);
                     string extension = Path.GetExtension(file.FileName);
@@ -78,7 +79,7 @@ namespace projetASP.Controllers
                 else
                 {
                     //si clicke sur les valider les modification 
-                    etudiants.choix= choix1 + choix2 + choix3;
+                    etudiants.choix = choix1 + choix2 + choix3;
                     etudiants.nationalite = etudiant.nationalite;
                     etudiants.email = etudiant.email;
                     etudiants.phone = etudiant.phone;
@@ -90,17 +91,17 @@ namespace projetASP.Controllers
 
                     etudiantContext.SaveChanges();
                     return View(etudiants);
-                   // return RedirectToAction("Index");
+                    // return RedirectToAction("Index");
                 }
-               
+
             }
-            
+
             return View(etudiant);
         }
 
         //****************************************************************************************************************************
 
-       
+
         public ActionResult Consulter()
         {
             ViewBag.Current = "Consulter";
@@ -117,14 +118,14 @@ namespace projetASP.Controllers
 
         public ActionResult Inscription()
         {
-            ViewBag.prenom = new SelectList(s.etudiants, "cne", "prenom");
-            ViewBag.nom = new SelectList(s.etudiants, "cne", "nom");
-            ViewBag.lieuNaiss = new SelectList(s.etudiants, "cne", "lieuNaiss");
-            ViewBag.nationalite = new SelectList(s.etudiants, "cne", "nationalite");
-            ViewBag.ville = new SelectList(s.etudiants, "cne", "ville");
-            ViewBag.typeBac = new SelectList(s.etudiants, "cne", "typeBac");
-            ViewBag.mentionBac = new SelectList(s.etudiants, "cne", "mentionBac");
-            
+            ViewBag.prenom = new SelectList(etudiantContext.etudiants, "cne", "prenom");
+            ViewBag.nom = new SelectList(etudiantContext.etudiants, "cne", "nom");
+            ViewBag.lieuNaiss = new SelectList(etudiantContext.etudiants, "cne", "lieuNaiss");
+            ViewBag.nationalite = new SelectList(etudiantContext.etudiants, "cne", "nationalite");
+            ViewBag.ville = new SelectList(etudiantContext.etudiants, "cne", "ville");
+            ViewBag.typeBac = new SelectList(etudiantContext.etudiants, "cne", "typeBac");
+            ViewBag.mentionBac = new SelectList(etudiantContext.etudiants, "cne", "mentionBac");
+
 
 
             return View();
@@ -133,18 +134,18 @@ namespace projetASP.Controllers
         [HttpPost]
         public ActionResult Inscription(Etudiant student)
         {
-            ViewBag.prenom = new SelectList(s.etudiants, "cne", "prenom");
-            ViewBag.nom = new SelectList(s.etudiants, "cne", "nom");
-            ViewBag.lieuNaiss = new SelectList(s.etudiants, "cne", "lieuNaiss");
-            ViewBag.nationalite = new SelectList(s.etudiants, "cne", "nationalite");
-            ViewBag.ville = new SelectList(s.etudiants, "cne", "ville");
-            ViewBag.typeBac = new SelectList(s.etudiants, "cne", "typeBac");
-            ViewBag.mentionBac = new SelectList(s.etudiants, "cne", "mentionBac");
+            ViewBag.prenom = new SelectList(etudiantContext.etudiants, "cne", "prenom");
+            ViewBag.nom = new SelectList(etudiantContext.etudiants, "cne", "nom");
+            ViewBag.lieuNaiss = new SelectList(etudiantContext.etudiants, "cne", "lieuNaiss");
+            ViewBag.nationalite = new SelectList(etudiantContext.etudiants, "cne", "nationalite");
+            ViewBag.ville = new SelectList(etudiantContext.etudiants, "cne", "ville");
+            ViewBag.typeBac = new SelectList(etudiantContext.etudiants, "cne", "typeBac");
+            ViewBag.mentionBac = new SelectList(etudiantContext.etudiants, "cne", "mentionBac");
 
             if (ModelState.IsValid)
             {
-                var e = s.etudiants.Where(x => x.cne == student.cne).FirstOrDefault();
-                
+                var e = etudiantContext.etudiants.Where(x => x.cne == student.cne).FirstOrDefault();
+
                 if (e == null)
                 {
                     ViewBag.message = "Les informations que vous avez entrez ne correspondent à aucun étudiant !";
@@ -159,20 +160,18 @@ namespace projetASP.Controllers
                         return View();
                     }
                     else
-                    {           
-                        s.Database.Log = x => System.Diagnostics.Debug.WriteLine(x);
+                    {
+                        etudiantContext.Database.Log = x => System.Diagnostics.Debug.WriteLine(x);
 
-                        e.validated = false;   
+                        e.validated = false;
                         e.cin = "7";
-                        s.SaveChanges();
+                        etudiantContext.SaveChanges();
                         return View();
                     }
                 }
-                    
+
             }
             else return View();
         }
     }
-
-
 }

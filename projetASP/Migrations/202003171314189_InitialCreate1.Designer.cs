@@ -7,23 +7,13 @@ namespace projetASP.Migrations
     using System.Resources;
     
     [GeneratedCode("EntityFramework.Migrations", "6.4.0")]
-<<<<<<< HEAD:projetASP/Migrations/202003161403137_InitialCreate1.Designer.cs
     public sealed partial class InitialCreate1 : IMigrationMetadata
     {
         private readonly ResourceManager Resources = new ResourceManager(typeof(InitialCreate1));
         
         string IMigrationMetadata.Id
         {
-            get { return "202003161403137_InitialCreate1"; }
-=======
-    public sealed partial class InitialCreate : IMigrationMetadata
-    {
-        private readonly ResourceManager Resources = new ResourceManager(typeof(InitialCreate));
-        
-        string IMigrationMetadata.Id
-        {
-            get { return "202003171310270_InitialCreate"; }
->>>>>>> kamal-dev:projetASP/Migrations/202003171310270_InitialCreate.Designer.cs
+            get { return "202003171314189_InitialCreate1"; }
         }
         
         string IMigrationMetadata.Source

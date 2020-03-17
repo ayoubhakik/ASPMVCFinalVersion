@@ -12,15 +12,14 @@ namespace projetASP.Models
         [Key]
         [Required]
         public string cne { get; set; }
-     
+
+
 
 
         //[Required]
-        //[StringLength(10, MinimumLength =3)]
 
-       
         public string nom { get; set; }
-
+        //[Required]
 
         public string prenom { get; set; }
         //[Required]
@@ -31,7 +30,11 @@ namespace projetASP.Models
         //[Required]
         public string cin { get; set; }
 
-        //[Required]
+        
+
+
+       // [Required]
+
 
         public string email { get; set; }
         
@@ -49,6 +52,8 @@ namespace projetASP.Models
         //[Required]
         public int anneeBac { get; set; }
         //[Required]
+     
+
         public double noteBac { get; set; }
         //[Required]
         public string mentionBac { get; set; }
@@ -64,6 +69,8 @@ namespace projetASP.Models
         public string lieuNaiss { get; set; }
 
         //[Required]
+
+
         public string photo_link { get; set; }
 
         public string choix { get; set; }
