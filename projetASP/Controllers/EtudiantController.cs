@@ -58,6 +58,7 @@ namespace projetASP.Controllers
              
 
              */
+
             if (ModelState.IsValid)
             {
                 Etudiant etudiants = etudiantContext.etudiants.Find(etudiant.cne);
@@ -152,6 +153,6 @@ namespace projetASP.Controllers
             }
             else return View();
         }
->>>>>>> Sifane-dev
+//>>>>>>> Sifane-dev
     }
 }
