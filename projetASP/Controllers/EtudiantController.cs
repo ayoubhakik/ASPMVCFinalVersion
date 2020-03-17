@@ -37,7 +37,7 @@ namespace projetASP.Controllers
              {
                  return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
              }*/
-            Etudiant etudiants = etudiantContext.etudiants.Find("1hh1hh");
+            Etudiant etudiants = etudiantContext.etudiants.Find("123");
 
             if (etudiants == null)
             {
