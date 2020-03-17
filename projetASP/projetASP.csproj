@@ -142,16 +142,26 @@
     <Compile Include="App_Start\RouteConfig.cs" />
     <Compile Include="Controllers\EtudiantController.cs" />
     <Compile Include="Controllers\DepartementController.cs" />
-    <Compile Include="Controllers\HomeController.cs" />
     <Compile Include="DAL\EtudiantContext.cs" />
     <Compile Include="Global.asax.cs">
       <DependentUpon>Global.asax</DependentUpon>
     </Compile>
-    <Compile Include="Migrations\202003141621369_InitialCreate.cs" />
-    <Compile Include="Migrations\202003141621369_InitialCreate.designer.cs">
-      <DependentUpon>202003141621369_InitialCreate.cs</DependentUpon>
+    <Compile Include="Migrations\202003171310270_InitialCreate.cs" />
+    <Compile Include="Migrations\202003171310270_InitialCreate.designer.cs">
+      <DependentUpon>202003171310270_InitialCreate.cs</DependentUpon>
     </Compile>
-    
+    <Compile Include="Migrations\202003171314189_InitialCreate1.cs" />
+    <Compile Include="Migrations\202003171314189_InitialCreate1.designer.cs">
+      <DependentUpon>202003171314189_InitialCreate1.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Migrations\202003171316368_InitialCreate11.cs" />
+    <Compile Include="Migrations\202003171316368_InitialCreate11.designer.cs">
+      <DependentUpon>202003171316368_InitialCreate11.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Migrations\202003171400269_InitialCreate3.cs" />
+    <Compile Include="Migrations\202003171400269_InitialCreate3.designer.cs">
+      <DependentUpon>202003171400269_InitialCreate3.cs</DependentUpon>
+    </Compile>
     <Compile Include="Migrations\Configuration.cs" />
     <Compile Include="Models\Departement.cs" />
     <Compile Include="Models\Etudiant.cs" />
@@ -527,7 +537,7 @@
     <Content Include="Web.config">
       <SubType>Designer</SubType>
     </Content>
-    <Content Include="ExcelFiles\EtudiantExemple.xlsx"/>
+    <Content Include="ExcelFiles\EtudiantExemple.xlsx" />
     <Content Include="Views\Departement\ImporterEtudiants.cshtml" />
     <Content Include="ExcelFiles\EtudiantExemple.xlsx" />
     <Content Include="Views\Departement\Visualiser.cshtml" />
@@ -558,11 +568,19 @@
   </ItemGroup>
   <ItemGroup>
     <TypeScriptCompile Include="Scripts\index.d.ts" />
-    
   </ItemGroup>
   <ItemGroup>
-    <EmbeddedResource Include="Migrations\202003141621369_InitialCreate.resx">
-      <DependentUpon>202003141621369_InitialCreate.cs</DependentUpon>
+    <EmbeddedResource Include="Migrations\202003171310270_InitialCreate.resx">
+      <DependentUpon>202003171310270_InitialCreate.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\202003171314189_InitialCreate1.resx">
+      <DependentUpon>202003171314189_InitialCreate1.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\202003171316368_InitialCreate11.resx">
+      <DependentUpon>202003171316368_InitialCreate11.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\202003171400269_InitialCreate3.resx">
+      <DependentUpon>202003171400269_InitialCreate3.cs</DependentUpon>
     </EmbeddedResource>
   </ItemGroup>
   <PropertyGroup>

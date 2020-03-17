@@ -18,9 +18,10 @@ namespace projetASP.Controllers
         EtudiantContext etudiantContext = new EtudiantContext();
         public ActionResult Index()
         {
+            var e = etudiantContext.etudiants.ToList();
             ViewBag.Current = "Home";
          
-            return View();
+            return View(e);
         }
 
 
@@ -37,7 +38,7 @@ namespace projetASP.Controllers
              {
                  return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
              }*/
-            Etudiant etudiants = etudiantContext.etudiants.Find("1hh1hh");
+            Etudiant etudiants = etudiantContext.etudiants.Find("9qdq");
 
             if (etudiants == null)
             {
@@ -50,7 +51,7 @@ namespace projetASP.Controllers
 
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public ActionResult Modification([Bind(Include = "id,nationalite,email,phone,gsm,address,ville,dateNaiss")] Etudiant etudiant,string Update,String choix1,String choix2,String choix3)
+        public ActionResult Modification([Bind(Include = "cne,nationalite,email,phone,gsm,address,ville,dateNaiss")] Etudiant etudiant,string Update,String choix1,String choix2,String choix3)
         {
             ViewBag.Current = "Modification";
 
@@ -118,13 +119,13 @@ namespace projetASP.Controllers
 
         public ActionResult Inscription()
         {
-            ViewBag.prenom = new SelectList(s.etudiants, "id", "prenom");
-            ViewBag.nom = new SelectList(s.etudiants, "id", "nom");
-            ViewBag.lieuNaiss = new SelectList(s.etudiants, "id", "lieuNaiss");
-            ViewBag.nationalite = new SelectList(s.etudiants, "id", "nationalite");
-            ViewBag.ville = new SelectList(s.etudiants, "id", "ville");
-            ViewBag.typeBac = new SelectList(s.etudiants, "id", "typeBac");
-            ViewBag.mentionBac = new SelectList(s.etudiants, "id", "mentionBac");
+            ViewBag.prenom = new SelectList(s.etudiants, "cne", "prenom");
+            ViewBag.nom = new SelectList(s.etudiants, "cne", "nom");
+            ViewBag.lieuNaiss = new SelectList(s.etudiants, "cne", "lieuNaiss");
+            ViewBag.nationalite = new SelectList(s.etudiants, "cne", "nationalite");
+            ViewBag.ville = new SelectList(s.etudiants, "cne", "ville");
+            ViewBag.typeBac = new SelectList(s.etudiants, "cne", "typeBac");
+            ViewBag.mentionBac = new SelectList(s.etudiants, "cne", "mentionBac");
             
 
 
@@ -152,6 +153,6 @@ namespace projetASP.Controllers
             }
             else return View();
         }
->>>>>>> Sifane-dev
+
     }
 }

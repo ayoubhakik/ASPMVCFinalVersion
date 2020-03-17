@@ -34,7 +34,7 @@
                                                 Modification des Informations Personelles
                                             </h2>
                                             <div id="subHeader_5" class="form-subHeader">
-                                                Welcome @Model.nom @Model.prenom   @ViewBag.choix   
+                                                Welcome @Model.nom @Model.prenom   @ViewBag.choix
                                             </div>
                                         </div>
                                         <span class="fas fa-edit" onclick="$('#Edit').toggle()"></span>
@@ -87,7 +87,7 @@
                                 <label class="form-label form-label-top form-label-auto" id="label_15" for="input_15"> Date de Naissance </label>
                                 <div id="cid_17" class="form-input-wide">
 
-                                    @Html.EditorFor(model => model.dateNaiss , new { htmlAttributes = new { @class = "form-control" }})
+                                    @Html.EditorFor(model => model.dateNaiss, new { htmlAttributes = new { @class = "form-control" } })
                                     @Html.ValidationMessageFor(model => model.dateNaiss, "", new { @class = "text-danger" })
                                 </div>
                             </li>
@@ -154,96 +154,103 @@
 
                                 </div>
                             </li>
-                            <li class="form-line" data-type="control_matrix" id="id_1">
-                                <label class="form-label form-label-top" id="label_1" for="input_1"> Choix de Filiere </label>
-                                <div id="cid_1" class="form-input-wide">
-                                    <table summary="" role="presentation" cellPadding="4" cellSpacing="0" class="form-matrix-table" data-component="matrix">
-                                        <tbody>
-                                            <tr>
-                                                <th style="border:none; width: 500px">
-
-                                                </th>
-                                                <th scope="col" class="form-matrix-column-headers form-matrix-column_0">
-                                                    <label id="label_1_col_0"> 1ere Choix </label>
-                                                </th>
-                                                <th scope="col" class="form-matrix-column-headers form-matrix-column_1">
-                                                    <label id="label_1_col_1"> 2 ème choix </label>
-                                                </th>
-                                                <th scope="col" class="form-matrix-column-headers form-matrix-column_2">
-                                                    <label id="label_1_col_2"> 3 eme Choix </label>
-                                                </th>
-                                            </tr>
-                                            <tr role="group" aria-labelledby="label_1 label_1_row_0">
-                                                <th scope="row" style="text-align:left" class="form-matrix-row-headers">
-                                                    <label id="label_1_row_0"> Genie Informatique </label>
-                                                </th>
-                                                <td style="text-align:center" class="form-matrix-values">
-                                                    <input id="F1" type="radio" name="choix1" value="F" onClick=desactivefilieres() @(Model.choix.Substring(0, 1) == "F" ? "Checked" : "") />
-
-                                                </td>
-                                                <td style="text-align:center" class="form-matrix-values">
-                                                    <input id="F2" type="radio" name="choix2" value="F" onClick=desactivefilieres() @(Model.choix.Substring(1, 1) == "F" ? "Checked" : "")/>
+                            @{
+                                if (Model.choix != null)
+                                {
 
 
-                                                </td>
-                                                <td style="text-align:center" class="form-matrix-values">
-                                                    <input id="F3" type="radio" name="choix3" value="F" onClick=desactivefilieres() @(Model.choix.Substring(2, 1) == "F" ? "Checked" : "")/>
 
-                                                </td>
-                                            </tr>
-                                            <tr role="group" aria-labelledby="label_1 label_1_row_1">
-                                                <th scope="row" style="text-align:left" class="form-matrix-row-headers">
-                                                    <label id="label_1_row_1"> Genie Telecominication et Réseau </label>
-                                                </th>
-                                                <td style="text-align:center" class="form-matrix-values">
-                                                    <input id="T1" type="radio" name="choix1" value="T" onClick=desactivefilieres() @(Model.choix.Substring(0, 1) == "T" ? "Checked" : "")/>
+                                    <li class="form-line" data-type="control_matrix" id="id_1">
+                                        <label class="form-label form-label-top" id="label_1" for="input_1"> Choix de Filiere </label>
+                                        <div id="cid_1" class="form-input-wide">
+                                            <table summary="" role="presentation" cellPadding="4" cellSpacing="0" class="form-matrix-table" data-component="matrix">
+                                                <tbody>
+                                                    <tr>
+                                                        <th style="border:none; width: 500px">
 
-                                                </td>
-                                                <td style="text-align:center" class="form-matrix-values">
-                                                    <input id="T2" type="radio" name="choix2" value="T" onClick=desactivefilieres() @(Model.choix.Substring(1, 1) == "T" ? "Checked" : "")/>
-                                                </td>
-                                                <td style="text-align:center" class="form-matrix-values">
-                                                    <input id="T3" type="radio" name="choix3" value="T" onClick=desactivefilieres() @(Model.choix.Substring(2, 1) == "T" ? "Checked" : "")>
-                                                </td>
-                                            </tr>
-                                            <tr role="group" aria-labelledby="label_1 label_1_row_2">
-                                                <th scope="row" style="text-align:left" class="form-matrix-row-headers">
-                                                    <label id="label_1_row_2"> Genie Indus </label>
-                                                </th>
-                                                <td style="text-align:center" class="form-matrix-values">
-                                                    <input id="D1" type="radio" name="choix1" value="D" onClick=desactivefilieres() @(Model.choix.Substring(0, 1) == "D" ? "Checked" : "") />
-                                                </td>
-                                                <td style="text-align:center" class="form-matrix-values">
-                                                    <input id="D2" type="radio" name="choix2" value="D" onClick=desactivefilieres() @(Model.choix.Substring(1, 1) == "D" ? "Checked" : "") />
-                                                </td>
-                                                <td style="text-align:center" class="form-matrix-values">
-                                                    <input id="D3" type="radio" name="choix3" value="D" onClick=desactivefilieres() @(Model.choix.Substring(2, 1) == "D" ? "Checked" : "") />
+                                                        </th>
+                                                        <th scope="col" class="form-matrix-column-headers form-matrix-column_0">
+                                                            <label id="label_1_col_0"> 1ere Choix </label>
+                                                        </th>
+                                                        <th scope="col" class="form-matrix-column-headers form-matrix-column_1">
+                                                            <label id="label_1_col_1"> 2 ème choix </label>
+                                                        </th>
+                                                        <th scope="col" class="form-matrix-column-headers form-matrix-column_2">
+                                                            <label id="label_1_col_2"> 3 eme Choix </label>
+                                                        </th>
+                                                    </tr>
+                                                    <tr role="group" aria-labelledby="label_1 label_1_row_0">
+                                                        <th scope="row" style="text-align:left" class="form-matrix-row-headers">
+                                                            <label id="label_1_row_0"> Genie Informatique </label>
+                                                        </th>
+                                                        <td style="text-align:center" class="form-matrix-values">
+                                                            <input id="F1" type="radio" name="choix1" value="F" onClick=desactivefilieres() @(Model.choix.Substring(0, 1) == "F" ? "Checked" : "") />
 
-                                                </td>
-                                            </tr>
-                                            <tr role="group" aria-labelledby="label_1 label_1_row_3">
-                                                <th scope="row" style="text-align:left" class="form-matrix-row-headers">
-                                                    <label id="label_1_row_3"> Genie Procede et M.C </label>
-                                                </th>
-                                                <td style="text-align:center" class="form-matrix-values">
-                                                    <input id="P1" type="radio" name="choix1" value="P" onClick=desactivefilieres() @(Model.choix.Substring(0, 1) == "P" ? "Checked" : "") />
-                                                </td>
-                                                <td style="text-align:center" class="form-matrix-values">
-                                                    <input id="P2" type="radio" name="choix2" value="P" onClick=desactivefilieres() @(Model.choix.Substring(1, 1) == "P" ? "Checked" : "") />
-
-                                                </td>
-                                                <td style="text-align:center" class="form-matrix-values">
-                                                    <input id="P3" type="radio" name="choix3" value="P" onClick=desactivefilieres() @(Model.choix.Substring(2, 1) == "P" ? "Checked" : "") />
-
-                                                </td>
-                                            </tr>
-                                        </tbody>
-                                    </table>
-                                </div>
-                              
-                            </li>
+                                                        </td>
+                                                        <td style="text-align:center" class="form-matrix-values">
+                                                            <input id="F2" type="radio" name="choix2" value="F" onClick=desactivefilieres() @(Model.choix.Substring(1, 1) == "F" ? "Checked" : "") />
 
 
+                                                        </td>
+                                                        <td style="text-align:center" class="form-matrix-values">
+                                                            <input id="F3" type="radio" name="choix3" value="F" onClick=desactivefilieres() @(Model.choix.Substring(2, 1) == "F" ? "Checked" : "") />
+
+                                                        </td>
+                                                    </tr>
+                                                    <tr role="group" aria-labelledby="label_1 label_1_row_1">
+                                                        <th scope="row" style="text-align:left" class="form-matrix-row-headers">
+                                                            <label id="label_1_row_1"> Genie Telecominication et Réseau </label>
+                                                        </th>
+                                                        <td style="text-align:center" class="form-matrix-values">
+                                                            <input id="T1" type="radio" name="choix1" value="T" onClick=desactivefilieres() @(Model.choix.Substring(0, 1) == "T" ? "Checked" : "") />
+
+                                                        </td>
+                                                        <td style="text-align:center" class="form-matrix-values">
+                                                            <input id="T2" type="radio" name="choix2" value="T" onClick=desactivefilieres() @(Model.choix.Substring(1, 1) == "T" ? "Checked" : "") />
+                                                        </td>
+                                                        <td style="text-align:center" class="form-matrix-values">
+                                                            <input id="T3" type="radio" name="choix3" value="T" onClick=desactivefilieres() @(Model.choix.Substring(2, 1) == "T" ? "Checked" : "")>
+                                                        </td>
+                                                    </tr>
+                                                    <tr role="group" aria-labelledby="label_1 label_1_row_2">
+                                                        <th scope="row" style="text-align:left" class="form-matrix-row-headers">
+                                                            <label id="label_1_row_2"> Genie Indus </label>
+                                                        </th>
+                                                        <td style="text-align:center" class="form-matrix-values">
+                                                            <input id="D1" type="radio" name="choix1" value="D" onClick=desactivefilieres() @(Model.choix.Substring(0, 1) == "D" ? "Checked" : "") />
+                                                        </td>
+                                                        <td style="text-align:center" class="form-matrix-values">
+                                                            <input id="D2" type="radio" name="choix2" value="D" onClick=desactivefilieres() @(Model.choix.Substring(1, 1) == "D" ? "Checked" : "") />
+                                                        </td>
+                                                        <td style="text-align:center" class="form-matrix-values">
+                                                            <input id="D3" type="radio" name="choix3" value="D" onClick=desactivefilieres() @(Model.choix.Substring(2, 1) == "D" ? "Checked" : "") />
+
+                                                        </td>
+                                                    </tr>
+                                                    <tr role="group" aria-labelledby="label_1 label_1_row_3">
+                                                        <th scope="row" style="text-align:left" class="form-matrix-row-headers">
+                                                            <label id="label_1_row_3"> Genie Procede et M.C </label>
+                                                        </th>
+                                                        <td style="text-align:center" class="form-matrix-values">
+                                                            <input id="P1" type="radio" name="choix1" value="P" onClick=desactivefilieres() @(Model.choix.Substring(0, 1) == "P" ? "Checked" : "") />
+                                                        </td>
+                                                        <td style="text-align:center" class="form-matrix-values">
+                                                            <input id="P2" type="radio" name="choix2" value="P" onClick=desactivefilieres() @(Model.choix.Substring(1, 1) == "P" ? "Checked" : "") />
+
+                                                        </td>
+                                                        <td style="text-align:center" class="form-matrix-values">
+                                                            <input id="P3" type="radio" name="choix3" value="P" onClick=desactivefilieres() @(Model.choix.Substring(2, 1) == "P" ? "Checked" : "") />
+
+                                                        </td>
+                                                    </tr>
+                                                </tbody>
+                                            </table>
+                                        </div>
+
+                                    </li>
+
+                                }
+                            }
 
                             <li class="form-line" data-type="control_button" id="id_2">
                                 <div id="cid_2" class="form-input-wide">
