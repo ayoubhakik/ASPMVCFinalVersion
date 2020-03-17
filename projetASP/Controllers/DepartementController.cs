@@ -1,4 +1,5 @@
-﻿using OfficeOpenXml;
+﻿//using OfficeOpenXml;
+using OfficeOpenXml;
 using projetASP.DAL;
 using projetASP.Models;
 using System;
@@ -27,7 +28,14 @@ namespace projetASP.Controllers
 
             ViewBag.Current = "index";
             List<Etudiant> list = db.etudiants.ToList();
+
+            if (UserValide.IsValid())
+            {
                 return View(list);
+            }
+            else
+                return RedirectToAction("Authentification", "User");
+ 
 
             
         }
@@ -35,7 +43,12 @@ namespace projetASP.Controllers
         public ActionResult ImporterEtudiants()
         {
             ViewBag.Current = "importerEtudiants";
-            return View();
+            if (UserValide.IsValid())
+            {
+                return View();
+            }
+            else
+                return RedirectToAction("Authentification", "User");
         }
 
         [HttpPost]
@@ -43,6 +56,7 @@ namespace projetASP.Controllers
         {
             if (Request != null)
             {
+
                 EtudiantContext db = new EtudiantContext();
                 HttpPostedFileBase file = Request.Files["excelfile"];
                 if ((file != null) && (file.ContentLength > 0) && !string.IsNullOrEmpty(file.FileName))
@@ -108,7 +122,12 @@ namespace projetASP.Controllers
         public ActionResult ImporterNotes()
         {
             ViewBag.Current = "importerNotes";
-            return View();
+            if (UserValide.IsValid())
+            {
+                return View();
+            }
+            else
+                return RedirectToAction("Authentification", "User");
         }
 
         [HttpPost]
@@ -155,17 +174,32 @@ namespace projetASP.Controllers
         public ActionResult AttributionFiliere()
         {
             ViewBag.Current = "attributionFiliere";
-            return View();
+            if (UserValide.IsValid())
+            {
+                return View();
+            }
+            else
+                return RedirectToAction("Authentification", "User");
         }
         public ActionResult Statistiques()
         {
             ViewBag.Current = "statistiques";
-            return View();
+            if (UserValide.IsValid())
+            {
+                return View();
+            }
+            else
+                return RedirectToAction("Authentification", "User");
         }
         public ActionResult Visualiser()
         {
             ViewBag.Current = "visualiser";
-            return View();
+            if (UserValide.IsValid())
+            {
+                return View();
+            }
+            else
+                return RedirectToAction("Authentification", "User");
         }
     }
 }

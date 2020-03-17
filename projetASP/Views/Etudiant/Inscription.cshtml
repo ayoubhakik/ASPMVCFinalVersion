@@ -10,7 +10,11 @@
 <head>
     <meta name="viewport" content="width=device-width" />
     <title>Inscription</title>
+<<<<<<< HEAD
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/css/bootstrap.min.css" integrity="sha384-Vkoo8x4CGsO3+Hhxv8T/Q5PaXtkKtu6ug5TOeNV6gBiFeWPGFN9MuhOf23Q9Ifjh" crossorigin="anonymous"/>
+=======
     <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/css/bootstrap.min.css" integrity="sha384-Vkoo8x4CGsO3+Hhxv8T/Q5PaXtkKtu6ug5TOeNV6gBiFeWPGFN9MuhOf23Q9Ifjh" crossorigin="anonymous>
+>>>>>>> asmae-dev
     @*Styles.Render("~/Content/css")*@
     <link rel="stylesheet" href="https://ajax.googleapis.com/ajax/libs/jqueryui/1.12.1/themes/smoothness/jquery-ui.css">
 
@@ -22,7 +26,11 @@
 
     <div class="row justify-content-center">
         <div class="col-md-6">
+<<<<<<< HEAD
+            @using (Html.BeginForm("Inscription", "Etudiant", FormMethod.Post, new { id = "msform", name = "msform" }))
+=======
             @using (Html.BeginForm("Inscription", "EtudiantController", FormMethod.Post, new { id = "msform", name = "msform" }))
+>>>>>>> asmae-dev
             {
                 <!-- progressbar -->
                 <ul id="progressbar">
@@ -40,7 +48,11 @@
                     @Html.DropDownListFor(x => x.prenom, ViewBag.prenom as SelectList, "Prenom", new { name = "fname", @class="btn btn-dark btn-lg dropdown-toggle" })
                     @Html.DropDownListFor(x => x.nom, ViewBag.nom as SelectList, "Nom", new { name = "lname", @class="btn btn-dark btn-lg dropdown-toggle m-1" })
 
+<<<<<<< HEAD
+                    @Html.PasswordFor(x => x.password, new { placeholder = "Mot de pass", name = "pass", id = "pass"})
+=======
                     @Html.PasswordFor(x => x.password, new { placeholder = "Mot de pass", name = "pass" })
+>>>>>>> asmae-dev
                     @Html.Password("cpass", null, new { placeholder = "Confirmer Mot de pass", name = "cpass" })
                     @Html.TextBoxFor(x => x.dateNaiss, new {name = "dnaiss", type = "date" })
 
@@ -53,8 +65,13 @@
                     @Html.TextBoxFor(x => x.cne, new { placeholder = "CNE", name = "cne" })
                     @Html.TextBoxFor(x => x.phone, new { placeholder = "Tel", name = "tel" })
                     @Html.TextBoxFor(x => x.gsm, new { placeholder = "GSM", name = "gsm" })
+<<<<<<< HEAD
+                    @Html.TextBoxFor(x => x.email, new { placeholder = "Email", name = "email" })
+                    @Html.TextBox("cemail", null, new { placeholder = "Confirmer Email", name= "cemail" })
+=======
                     @Html.TextBoxFor(x => x.email, new { placeholder = "Email", name = "email", type="email" })
                     @Html.TextBox("cemail", null, new { placeholder = "Confirmer Email", name= "cemail", type="email" })
+>>>>>>> asmae-dev
                     @Html.TextBoxFor(x => x.address, new { placeholder = "Adresse", name = "adresse" })
 
                     @Html.DropDownListFor(x => x.ville, ViewBag.ville as SelectList, "Ville", new { name = "ville", @class="btn btn-dark btn-lg dropdown-toggle" })<br />
@@ -69,7 +86,11 @@
                     <h3 class="fs-subtitle">Post Modern Jukebox</h3>
 
                     @Html.DropDownListFor(x => x.typeBac, ViewBag.typebac as SelectList, "Type de BAC", new { name = "typebac", @class="btn btn-dark btn-lg dropdown-toggle m-1" })
+<<<<<<< HEAD
+                        @Html.TextBoxFor(x => x.anneeBac, new { name = "anbac" })
+=======
                         @Html.TextBoxFor(x => x.anneeBac, new { name = "anbac", type = "date" })
+>>>>>>> asmae-dev
                         @Html.TextBoxFor(x => x.noteBac, new { placeholder = "Note de BAC", name = "notebac" })
                         @Html.DropDownListFor(x => x.mentionBac, ViewBag.mentionbac as SelectList, "Mention", new { name = "typebac", @class="btn btn-dark btn-lg dropdown-toggle" })<br />
 

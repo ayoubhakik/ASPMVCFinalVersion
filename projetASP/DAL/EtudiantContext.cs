@@ -3,6 +3,7 @@ using System;
 using System.Collections.Generic;
 using System.Data.Entity;
 using System.Data.Entity.Validation;
+
 using System.Linq;
 using System.Web;
 
@@ -14,10 +15,6 @@ namespace projetASP.DAL
         {
 
         }
-        public DbSet<Etudiant> etudiants { get; set; }
-        public DbSet<Departement> departements { get; set; }
-
-        public DbSet<Filiere> Filieres { get; set; }
 
         public override int SaveChanges()
         {
@@ -31,5 +28,12 @@ namespace projetASP.DAL
                 throw new DbEntityValidationException(errorMessages);
             }
         }
+
+        public DbSet<Etudiant> etudiants { get; set; }
+        public DbSet<Departement> departements { get; set; }
+
+        public DbSet<Filiere> Filieres { get; set; }
+
     }
+   
 }

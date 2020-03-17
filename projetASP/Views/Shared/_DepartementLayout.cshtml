@@ -28,6 +28,7 @@
 
             <div class="sidebar-wrapper">
                 <ul class="nav">
+                    <li style="color:aliceblue"> Bienvenue @Session["userName"]</li>
                     <li class="@(ViewBag.Current == "home" ? "nav-tem active" : "nav-item")">
                         <a href='@Url.Action("Home","Departement")' class="nav-link">
                             <i class="material-icons">home</i>
@@ -71,12 +72,18 @@
                             <p>Notifications</p>
                         </a>
                     </li>
-                    <!-- <li class="nav-item active-pro ">
-                        <a class="nav-link" href="./upgrade.html">
-                            <i class="material-icons">unarchive</i>
-                            <p>Upgrade to PRO</p>
+                    <li class="nav-item" +>
+                        <a href='@Url.Action("Logout","User")' class="nav-link">
+                            <i class="material-icons">notifications</i>
+                            <p>Se deconnecter</p>
                         </a>
-                    </li> -->
+                    </li>
+                    <!-- <li class="nav-item active-pro ">
+        <a class="nav-link" href="./upgrade.html">
+            <i class="material-icons">unarchive</i>
+            <p>Upgrade to PRO</p>
+        </a>
+    </li> -->
                 </ul>
             </div>
         </div>

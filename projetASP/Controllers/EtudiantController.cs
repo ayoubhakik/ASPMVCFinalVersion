@@ -1,4 +1,4 @@
-﻿using projetASP.DAL;
+﻿﻿using projetASP.DAL;
 using projetASP.Models;
 using System;
 using System.Collections.Generic;
@@ -56,7 +56,6 @@ namespace projetASP.Controllers
 
             /*Update name of buttom if user click in Upload l image seule va etre modifie 
              
-
              */
             if (ModelState.IsValid)
             {
@@ -118,13 +117,13 @@ namespace projetASP.Controllers
 
         public ActionResult Inscription()
         {
-            ViewBag.prenom = new SelectList(s.etudiants, "id", "prenom");
-            ViewBag.nom = new SelectList(s.etudiants, "id", "nom");
-            ViewBag.lieuNaiss = new SelectList(s.etudiants, "id", "lieuNaiss");
-            ViewBag.nationalite = new SelectList(s.etudiants, "id", "nationalite");
-            ViewBag.ville = new SelectList(s.etudiants, "id", "ville");
-            ViewBag.typeBac = new SelectList(s.etudiants, "id", "typeBac");
-            ViewBag.mentionBac = new SelectList(s.etudiants, "id", "mentionBac");
+            ViewBag.prenom = new SelectList(s.etudiants, "cne", "prenom");
+            ViewBag.nom = new SelectList(s.etudiants, "cne", "nom");
+            ViewBag.lieuNaiss = new SelectList(s.etudiants, "cne", "lieuNaiss");
+            ViewBag.nationalite = new SelectList(s.etudiants, "cne", "nationalite");
+            ViewBag.ville = new SelectList(s.etudiants, "cne", "ville");
+            ViewBag.typeBac = new SelectList(s.etudiants, "cne", "typeBac");
+            ViewBag.mentionBac = new SelectList(s.etudiants, "cne", "mentionBac");
             
 
 
@@ -134,23 +133,46 @@ namespace projetASP.Controllers
         [HttpPost]
         public ActionResult Inscription(Etudiant student)
         {
+            ViewBag.prenom = new SelectList(s.etudiants, "cne", "prenom");
+            ViewBag.nom = new SelectList(s.etudiants, "cne", "nom");
+            ViewBag.lieuNaiss = new SelectList(s.etudiants, "cne", "lieuNaiss");
+            ViewBag.nationalite = new SelectList(s.etudiants, "cne", "nationalite");
+            ViewBag.ville = new SelectList(s.etudiants, "cne", "ville");
+            ViewBag.typeBac = new SelectList(s.etudiants, "cne", "typeBac");
+            ViewBag.mentionBac = new SelectList(s.etudiants, "cne", "mentionBac");
+
             if (ModelState.IsValid)
             {
-                var e = (Etudiant)s.etudiants.Where(x => x.cin == student.cin);
+                var e = s.etudiants.Where(x => x.cne == student.cne).FirstOrDefault();
+                
                 if (e == null)
                 {
                     ViewBag.message = "Les informations que vous avez entrez ne correspondent à aucun étudiant !";
                     return View();
                 }
                 //update
-                else 
+                else
                 {
-                    e.validated = true;
-                    return null;
+                    if (!student.password.Equals(e.password))
+                    {
+                        ViewBag.message = "Mot de pass incorrect !";
+                        return View();
+                    }
+                    else
+                    {           
+                        s.Database.Log = x => System.Diagnostics.Debug.WriteLine(x);
+
+                        e.validated = false;   
+                        e.cin = "7";
+                        s.SaveChanges();
+                        return View();
+                    }
                 }
                     
             }
             else return View();
         }
     }
+
+
 }
