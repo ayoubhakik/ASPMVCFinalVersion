@@ -13,11 +13,12 @@ namespace projetASP.Controllers
 {
     public class EtudiantController : Controller
     {
-        EtudiantContext s = new EtudiantContext();
+     
         // GET: Etudiant
         EtudiantContext etudiantContext = new EtudiantContext();
         public ActionResult Index()
         {
+          
             ViewBag.Current = "Home";
          
             return View();
@@ -37,7 +38,7 @@ namespace projetASP.Controllers
              {
                  return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
              }*/
-            Etudiant etudiants = etudiantContext.etudiants.Find("1hh1hh");
+            Etudiant etudiants = etudiantContext.etudiants.Find("9qdq");
 
             if (etudiants == null)
             {
@@ -50,7 +51,7 @@ namespace projetASP.Controllers
 
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public ActionResult Modification([Bind(Include = "id,nationalite,email,phone,gsm,address,ville,dateNaiss")] Etudiant etudiant,string Update,String choix1,String choix2,String choix3)
+        public ActionResult Modification([Bind(Include = "cne,nationalite,email,phone,gsm,address,ville,dateNaiss")] Etudiant etudiant,string Update,String choix1,String choix2,String choix3)
         {
             ViewBag.Current = "Modification";
 
@@ -117,13 +118,13 @@ namespace projetASP.Controllers
 
         public ActionResult Inscription()
         {
-            ViewBag.prenom = new SelectList(s.etudiants, "cne", "prenom");
-            ViewBag.nom = new SelectList(s.etudiants, "cne", "nom");
-            ViewBag.lieuNaiss = new SelectList(s.etudiants, "cne", "lieuNaiss");
-            ViewBag.nationalite = new SelectList(s.etudiants, "cne", "nationalite");
-            ViewBag.ville = new SelectList(s.etudiants, "cne", "ville");
-            ViewBag.typeBac = new SelectList(s.etudiants, "cne", "typeBac");
-            ViewBag.mentionBac = new SelectList(s.etudiants, "cne", "mentionBac");
+            ViewBag.prenom = new SelectList(etudiantContext.etudiants, "cne", "prenom");
+            ViewBag.nom = new SelectList(etudiantContext.etudiants, "cne", "nom");
+            ViewBag.lieuNaiss = new SelectList(etudiantContext.etudiants, "cne", "lieuNaiss");
+            ViewBag.nationalite = new SelectList(etudiantContext.etudiants, "cne", "nationalite");
+            ViewBag.ville = new SelectList(etudiantContext.etudiants, "cne", "ville");
+            ViewBag.typeBac = new SelectList(etudiantContext.etudiants, "cne", "typeBac");
+            ViewBag.mentionBac = new SelectList(etudiantContext.etudiants, "cne", "mentionBac");
             
 
 
@@ -133,17 +134,17 @@ namespace projetASP.Controllers
         [HttpPost]
         public ActionResult Inscription(Etudiant student)
         {
-            ViewBag.prenom = new SelectList(s.etudiants, "cne", "prenom");
-            ViewBag.nom = new SelectList(s.etudiants, "cne", "nom");
-            ViewBag.lieuNaiss = new SelectList(s.etudiants, "cne", "lieuNaiss");
-            ViewBag.nationalite = new SelectList(s.etudiants, "cne", "nationalite");
-            ViewBag.ville = new SelectList(s.etudiants, "cne", "ville");
-            ViewBag.typeBac = new SelectList(s.etudiants, "cne", "typeBac");
-            ViewBag.mentionBac = new SelectList(s.etudiants, "cne", "mentionBac");
+            ViewBag.prenom = new SelectList(etudiantContext.etudiants, "cne", "prenom");
+            ViewBag.nom = new SelectList(etudiantContext.etudiants, "cne", "nom");
+            ViewBag.lieuNaiss = new SelectList(etudiantContext.etudiants, "cne", "lieuNaiss");
+            ViewBag.nationalite = new SelectList(etudiantContext.etudiants, "cne", "nationalite");
+            ViewBag.ville = new SelectList(etudiantContext.etudiants, "cne", "ville");
+            ViewBag.typeBac = new SelectList(etudiantContext.etudiants, "cne", "typeBac");
+            ViewBag.mentionBac = new SelectList(etudiantContext.etudiants, "cne", "mentionBac");
 
             if (ModelState.IsValid)
             {
-                var e = s.etudiants.Where(x => x.cne == student.cne).FirstOrDefault();
+                var e = etudiantContext.etudiants.Where(x => x.cne == student.cne).FirstOrDefault();
                 
                 if (e == null)
                 {
@@ -159,12 +160,12 @@ namespace projetASP.Controllers
                         return View();
                     }
                     else
-                    {           
-                        s.Database.Log = x => System.Diagnostics.Debug.WriteLine(x);
+                    {
+                        etudiantContext.Database.Log = x => System.Diagnostics.Debug.WriteLine(x);
 
                         e.validated = false;   
                         e.cin = "7";
-                        s.SaveChanges();
+                        etudiantContext.SaveChanges();
                         return View();
                     }
                 }
@@ -173,4 +174,5 @@ namespace projetASP.Controllers
             else return View();
         }
    }
+
 }
