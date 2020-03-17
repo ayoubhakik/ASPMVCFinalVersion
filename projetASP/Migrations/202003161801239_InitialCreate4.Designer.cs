@@ -7,13 +7,13 @@ namespace projetASP.Migrations
     using System.Resources;
     
     [GeneratedCode("EntityFramework.Migrations", "6.4.0")]
-    public sealed partial class InitialCreate2 : IMigrationMetadata
+    public sealed partial class InitialCreate4 : IMigrationMetadata
     {
-        private readonly ResourceManager Resources = new ResourceManager(typeof(InitialCreate2));
+        private readonly ResourceManager Resources = new ResourceManager(typeof(InitialCreate4));
         
         string IMigrationMetadata.Id
         {
-            get { return "202003111804320_InitialCreate2"; }
+            get { return "202003161801239_InitialCreate4"; }
         }
         
         string IMigrationMetadata.Source

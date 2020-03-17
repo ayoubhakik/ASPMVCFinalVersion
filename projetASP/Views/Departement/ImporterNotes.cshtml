@@ -6,3 +6,15 @@
 
 <h2>ImporterNotes</h2>
 
+@using (Html.BeginForm("ImporterNoteExcel", "Departement", FormMethod.Post, new { enctype = "multipart/form-data" }))
+{
+    @Html.Raw(ViewBag.Error)
+    <span>
+        Excel File
+    </span>
+    <input type="file" name="excelfile" />
+    <br />
+    <input type="submit" value="import" />
+
+}
+
