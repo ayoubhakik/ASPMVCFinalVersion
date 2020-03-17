@@ -166,7 +166,7 @@ namespace projetASP.Controllers
                         e.validated = false;   
                         e.cin = "7";
                         s.SaveChanges();
-                        return View();
+                        return null;
                     }
                 }
                     
