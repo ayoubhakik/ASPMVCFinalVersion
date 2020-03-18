@@ -148,23 +148,15 @@
     <Compile Include="App_Start\RouteConfig.cs" />
     <Compile Include="Controllers\EtudiantController.cs" />
     <Compile Include="Controllers\DepartementController.cs" />
-
     <Compile Include="Controllers\UserController.cs" />
     <Compile Include="DAL\EtudiantContext.cs" />
     <Compile Include="Global.asax.cs">
       <DependentUpon>Global.asax</DependentUpon>
     </Compile>
-    
-
-    <Compile Include="Migrations\202003161339363_InitialCreate1.cs" />
-    <Compile Include="Migrations\202003161339363_InitialCreate1.designer.cs">
-      <DependentUpon>202003161339363_InitialCreate1.cs</DependentUpon>
+    <Compile Include="Migrations\202003181518443_InitialCreate.cs" />
+    <Compile Include="Migrations\202003181518443_InitialCreate.designer.cs">
+      <DependentUpon>202003181518443_InitialCreate.cs</DependentUpon>
     </Compile>
-    <Compile Include="Migrations\202003171329029_InitialCreate2.cs" />
-    <Compile Include="Migrations\202003171329029_InitialCreate2.designer.cs">
-      <DependentUpon>202003171329029_InitialCreate2.cs</DependentUpon>
-    </Compile>
-
     <Compile Include="Migrations\Configuration.cs" />
     <Compile Include="Models\Departement.cs" />
     <Compile Include="Models\Etudiant.cs" />
@@ -581,9 +573,7 @@
     <Content Include="Web.config">
       <SubType>Designer</SubType>
     </Content>
-    <Content Include="ExcelFiles\EtudiantExemple.xlsx" />
     <Content Include="Views\Departement\ImporterEtudiants.cshtml" />
-    <Content Include="ExcelFiles\EtudiantExemple.xlsx" />
     <Content Include="Views\Departement\Visualiser.cshtml" />
     <Content Include="Views\Departement\ImporterNotes.cshtml" />
     <Content Include="Views\Departement\AttributionFiliere.cshtml" />
@@ -599,6 +589,7 @@
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />
+    <Folder Include="ExcelFiles\" />
     <Folder Include="Views\Home\" />
   </ItemGroup>
   <ItemGroup>
@@ -617,23 +608,8 @@
     <TypeScriptCompile Include="Scripts\index.d.ts" />
   </ItemGroup>
   <ItemGroup>
-    <EmbeddedResource Include="Migrations\202003171128300_InitialCreate.resx">
-      <DependentUpon>202003171128300_InitialCreate.cs</DependentUpon>
-    </EmbeddedResource>
-    <EmbeddedResource Include="Migrations\202003171312332_InitialCreate1.resx">
-      <DependentUpon>202003171312332_InitialCreate1.cs</DependentUpon>
-    </EmbeddedResource>
-    <EmbeddedResource Include="Migrations\202003171634359_InitialCreate2.resx">
-      <DependentUpon>202003171634359_InitialCreate2.cs</DependentUpon>
-    </EmbeddedResource>
-    <EmbeddedResource Include="Migrations\202003171635585_InitialCreate3.resx">
-      <DependentUpon>202003171635585_InitialCreate3.cs</DependentUpon>
-    </EmbeddedResource>
-    <EmbeddedResource Include="Migrations\202003161339363_InitialCreate1.resx">
-      <DependentUpon>202003161339363_InitialCreate1.cs</DependentUpon>
-    </EmbeddedResource>
-    <EmbeddedResource Include="Migrations\202003171329029_InitialCreate2.resx">
-      <DependentUpon>202003171329029_InitialCreate2.cs</DependentUpon>
+    <EmbeddedResource Include="Migrations\202003181518443_InitialCreate.resx">
+      <DependentUpon>202003181518443_InitialCreate.cs</DependentUpon>
     </EmbeddedResource>
   </ItemGroup>
   <PropertyGroup>

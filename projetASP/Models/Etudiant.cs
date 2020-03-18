@@ -50,7 +50,7 @@ namespace projetASP.Models
         //[Required]
         public string typeBac { get; set; }
         //[Required]
-        public int anneeBac { get; set; }
+        public DateTime anneeBac { get; set; }
         //[Required]
      
 

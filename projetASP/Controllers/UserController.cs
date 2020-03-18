@@ -15,33 +15,41 @@ namespace projetASP.Controllers
     
         public ActionResult Authentification(Departement login, string ReturnUrl = "")
         {
-            String button = Request["loginBtn"];
-            string message = "";
-            if (button == "Login")
+            if (UserValide.IsValid())
             {
-                string userName = Request["userName"];
-                string mdp= Request["mdp"];
-                EtudiantContext dbset = new EtudiantContext();
-                var userLogin = (from data in dbset.departements
-                                 where data.username == userName && data.password == mdp select data).FirstOrDefault();
-                if (userLogin != null)
+                String button = Request["loginBtn"];
+                string message = "";
+                if (button == "Login")
                 {
-                    Session["userName"] =userLogin.username;
-                    Session["NomDep"] = userLogin.nom_departement;
-                    Session["EmailDep"] = userLogin.email;
-                    Session["userId"] = userLogin.id_departement;
-                    return RedirectToAction("Index", "Departement");
+                    string userName = Request["userName"];
+                    string mdp = Request["mdp"];
+                    EtudiantContext dbset = new EtudiantContext();
+                    var userLogin = (from data in dbset.departements
+                                     where data.username == userName && data.password == mdp
+                                     select data).FirstOrDefault();
+                    if (userLogin != null)
+                    {
+                        Session["userName"] = userLogin.username;
+                        Session["NomDep"] = userLogin.nom_departement;
+                        Session["EmailDep"] = userLogin.email;
+                        Session["userId"] = userLogin.id_departement;
+                        return RedirectToAction("Index", "Departement");
+                    }
+                    else if (userLogin == null)
+                    {
+                        message = "Invalid username or password";
+                        ViewBag.Message = message;
+                        return View();
+                    }
+
                 }
-                else if (userLogin == null)
-                {
-                    message = "Invalid username or password";
-                    ViewBag.Message = message;
-                    return View();
-                }
-                
+
+                return View();
             }
-            
-            return View();
+            else
+                return RedirectToAction("Index", "Departement");
+
+           
         }
         public ActionResult Logout()
         {

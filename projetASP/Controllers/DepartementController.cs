@@ -99,7 +99,7 @@ namespace projetASP.Controllers
 
 
                             e.typeBac = workSheet.Cells[rowIterator, 11].Value.ToString();
-                            e.anneeBac = Convert.ToInt32(workSheet.Cells[rowIterator, 12].Value); 
+                            e.anneeBac = Convert.ToDateTime(workSheet.Cells[rowIterator, 12].Value); 
                             e.noteBac = Convert.ToDouble(workSheet.Cells[rowIterator, 13].Value);
                             e.mentionBac = workSheet.Cells[rowIterator, 14].Value.ToString();
 
