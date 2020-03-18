@@ -159,14 +159,12 @@ namespace projetASP.Controllers
                         ViewBag.message = "Mot de pass incorrect !";
                         return View();
                     }
-                    else
-                    {
-                        etudiantContext.Database.Log = x => System.Diagnostics.Debug.WriteLine(x);
 
-                        e.validated = false;
-                        e.cin = "7";
+                    else
+                    {           
+                        e.validated = true;                          
                         etudiantContext.SaveChanges();
-                        return View();
+                        return null;
                     }
                 }
 
