@@ -120,12 +120,22 @@ namespace projetASP.Controllers
         {
             ViewBag.prenom = new SelectList(s.etudiants, "cne", "prenom");
             ViewBag.nom = new SelectList(s.etudiants, "cne", "nom");
-            ViewBag.lieuNaiss = new SelectList(s.etudiants, "cne", "lieuNaiss");
-            ViewBag.nationalite = new SelectList(s.etudiants, "cne", "nationalite");
-            ViewBag.ville = new SelectList(s.etudiants, "cne", "ville");
-            ViewBag.typeBac = new SelectList(s.etudiants, "cne", "typeBac");
-            ViewBag.mentionBac = new SelectList(s.etudiants, "cne", "mentionBac");
-            
+           
+            ViewBag.typeBac = new List<SelectListItem>
+            {
+                new SelectListItem {Text="Sciences Physiques et Chimiques", Value="1" },
+                new SelectListItem {Text="Sciences Maths A", Value="2" },
+                new SelectListItem {Text="Sciences Maths B", Value="3" },
+                new SelectListItem {Text="Sciences et Technologies Electriques", Value="4" },
+                new SelectListItem {Text="Sciences et Technologies Mécaniques", Value="5" }
+            };
+            ViewBag.mentionBac = new List<SelectListItem>
+            {
+                new SelectListItem {Text="Passable", Value="1" },
+                new SelectListItem {Text="Assez bien", Value="2" },
+                new SelectListItem {Text="Bien", Value="3" },
+                new SelectListItem {Text="Très bien", Value="4" },
+            };
 
 
             return View();
@@ -136,11 +146,22 @@ namespace projetASP.Controllers
         {
             ViewBag.prenom = new SelectList(s.etudiants, "cne", "prenom");
             ViewBag.nom = new SelectList(s.etudiants, "cne", "nom");
-            ViewBag.lieuNaiss = new SelectList(s.etudiants, "cne", "lieuNaiss");
-            ViewBag.nationalite = new SelectList(s.etudiants, "cne", "nationalite");
-            ViewBag.ville = new SelectList(s.etudiants, "cne", "ville");
-            ViewBag.typeBac = new SelectList(s.etudiants, "cne", "typeBac");
-            ViewBag.mentionBac = new SelectList(s.etudiants, "cne", "mentionBac");
+            
+            ViewBag.typeBac = new List<SelectListItem>
+            {
+                new SelectListItem {Text="Sciences Physiques et Chimiques", Value="1" },
+                new SelectListItem {Text="Sciences Maths A", Value="2" },
+                new SelectListItem {Text="Sciences Maths B", Value="3" },
+                new SelectListItem {Text="Sciences et Technologies Electriques", Value="4" },
+                new SelectListItem {Text="Sciences et Technologies Mécaniques", Value="5" }
+            };
+            ViewBag.mentionBac = new List<SelectListItem>
+            {
+                new SelectListItem {Text="Passable", Value="1" },
+                new SelectListItem {Text="Assez bien", Value="2" },
+                new SelectListItem {Text="Bien", Value="3" },
+                new SelectListItem {Text="Très bien", Value="4" },
+            };
 
             if (ModelState.IsValid)
             {

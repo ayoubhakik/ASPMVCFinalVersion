@@ -31,38 +31,38 @@
                     <li>Choix De Filiere</li>
                 </ul>
                 <!-- fieldsets -->
-                <fieldset>
-                    <h2 class="fs-title">Données Personnelles</h2>
-                    <h3 class="fs-subtitle">Post Modern Jukebox</h3>
-                   
-                    @Html.ValidationSummary()
+        <fieldset>
+            <h2 class="fs-title">Données Personnelles</h2>
+            <h3 class="fs-subtitle">Post Modern Jukebox</h3>
 
-                    @Html.DropDownListFor(x => x.prenom, ViewBag.prenom as SelectList, "Prenom", new { name = "fname", @class="btn btn-dark btn-lg dropdown-toggle" })
-                    @Html.DropDownListFor(x => x.nom, ViewBag.nom as SelectList, "Nom", new { name = "lname", @class="btn btn-dark btn-lg dropdown-toggle m-1" })
+            @Html.ValidationSummary()
 
-                    @Html.PasswordFor(x => x.password, new { placeholder = "Mot de pass", name = "pass", id = "pass"})
-                    @Html.Password("cpass", null, new { placeholder = "Confirmer Mot de pass", name = "cpass" })
-                    @Html.TextBoxFor(x => x.dateNaiss, new {name = "dnaiss", type = "date" })
+            @Html.DropDownListFor(x => x.prenom, ViewBag.prenom as SelectList, "Prenom", new { name = "fname", @class = "btn btn-dark btn-lg dropdown-toggle" })
+            @Html.DropDownListFor(x => x.nom, ViewBag.nom as SelectList, "Nom", new { name = "lname", @class = "btn btn-dark btn-lg dropdown-toggle m-1" })
 
-                    @Html.DropDownListFor(x => x.lieuNaiss, ViewBag.lnaiss as SelectList, "Lieu de naissance", new { name = "lnaiss", @class="btn btn-dark btn-lg dropdown-toggle m-1" })
+            @Html.PasswordFor(x => x.password, new { placeholder = "Mot de pass", name = "pass", id = "pass" })
+            @Html.Password("cpass", null, new { placeholder = "Confirmer Mot de pass", name = "cpass" })
+            @Html.TextBoxFor(x => x.dateNaiss, new { name = "dnaiss", type = "date" })
 
-                    @Html.DropDownListFor(x => x.nationalite, ViewBag.natio as SelectList, "Nationalité", new { name = "nation", @class="btn btn-dark btn-lg dropdown-toggle" })
+            @Html.TextBoxFor(x => x.lieuNaiss, new { placeholder = "Lieu de naissance", name = "lnaiss" })
 
-                    @Html.TextBoxFor(x => x.cin, new { placeholder = "CIN", name = "cin" })
-                    @Html.TextBox("ccin", null, new { placeholder = "Confirmer cin", name = "ccin" })
-                    @Html.TextBoxFor(x => x.cne, new { placeholder = "CNE", name = "cne" })
-                    @Html.TextBoxFor(x => x.phone, new { placeholder = "Tel", name = "tel" })
-                    @Html.TextBoxFor(x => x.gsm, new { placeholder = "GSM", name = "gsm" })
-                    @Html.TextBoxFor(x => x.email, new { placeholder = "Email", name = "email" })
-                    @Html.TextBox("cemail", null, new { placeholder = "Confirmer Email", name= "cemail" })
-                    @Html.TextBoxFor(x => x.address, new { placeholder = "Adresse", name = "adresse" })
+            @Html.TextBoxFor(x => x.nationalite, new { placeholder = "Nationalité", name = "nation" })
 
-                    @Html.DropDownListFor(x => x.ville, ViewBag.ville as SelectList, "Ville", new { name = "ville", @class="btn btn-dark btn-lg dropdown-toggle" })<br />
+            @Html.TextBoxFor(x => x.cin, new { placeholder = "CIN", name = "cin" })
+            @Html.TextBox("ccin", null, new { placeholder = "Confirmer cin", name = "ccin" })
+            @Html.TextBoxFor(x => x.cne, new { placeholder = "CNE", name = "cne" })
+            @Html.TextBoxFor(x => x.phone, new { placeholder = "Tel", name = "tel" })
+            @Html.TextBoxFor(x => x.gsm, new { placeholder = "GSM", name = "gsm" })
+            @Html.TextBoxFor(x => x.email, new { placeholder = "Email", name = "email" })
+            @Html.TextBox("cemail", null, new { placeholder = "Confirmer Email", name = "cemail" })
+            @Html.TextBoxFor(x => x.address, new { placeholder = "Adresse", name = "adresse" })
+
+            @Html.TextBoxFor(x => x.ville, new { placeholder = "Ville", name = "ville" })
 
 
 
-                    <input type="button" name="next" class="next action-button" value="Next" />
-                </fieldset>
+            <input type="button" name="next" class="next action-button" value="Next" />
+        </fieldset>
 
                 <fieldset>
                     <h2 class="fs-title">Baccalauréat</h2>
