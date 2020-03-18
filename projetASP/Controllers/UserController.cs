@@ -12,42 +12,52 @@ namespace projetASP.Controllers
 
     public class UserController : Controller
     {
-    
-        public ActionResult Authentification(Departement login, string ReturnUrl = "")
+        [HttpGet]
+        public ActionResult Authentification()
         {
             if (UserValide.IsValid())
             {
-                String button = Request["loginBtn"];
-                string message = "";
-                if (button == "Login")
-                {
-                    string userName = Request["userName"];
-                    string mdp = Request["mdp"];
-                    EtudiantContext dbset = new EtudiantContext();
-                    var userLogin = (from data in dbset.departements
-                                     where data.username == userName && data.password == mdp
-                                     select data).FirstOrDefault();
-                    if (userLogin != null)
-                    {
-                        Session["userName"] = userLogin.username;
-                        Session["NomDep"] = userLogin.nom_departement;
-                        Session["EmailDep"] = userLogin.email;
-                        Session["userId"] = userLogin.id_departement;
-                        return RedirectToAction("Index", "Departement");
-                    }
-                    else if (userLogin == null)
-                    {
-                        message = "Invalid username or password";
-                        ViewBag.Message = message;
-                        return View();
-                    }
 
-                }
-
-                return View();
+                return RedirectToAction("Index", "Departement");
             }
             else
-                return RedirectToAction("Index", "Departement");
+                return View();
+
+        }
+
+        [HttpPost]
+        public ActionResult Authentification(Departement login, string ReturnUrl = "")
+        {
+            String button = Request["loginBtn"];
+            string message = "";
+            if (button == "Login")
+            {
+                string userName = Request["userName"];
+                string mdp = Request["mdp"];
+                EtudiantContext dbset = new EtudiantContext();
+                var userLogin = (from data in dbset.departements
+                                 where data.username == userName && data.password == mdp
+                                 select data).FirstOrDefault();
+                if (userLogin != null)
+                {
+                    Session["userName"] = userLogin.username;
+                    Session["NomDep"] = userLogin.nom_departement;
+                    Session["EmailDep"] = userLogin.email;
+                    Session["userId"] = userLogin.id_departement;
+                    return RedirectToAction("Index", "Departement");
+                }
+                else if (userLogin == null)
+                {
+                    message = "Invalid username or password";
+                    ViewBag.Message = message;
+                    return View();
+                }
+
+            }
+
+            return View();
+
+            
 
            
         }
