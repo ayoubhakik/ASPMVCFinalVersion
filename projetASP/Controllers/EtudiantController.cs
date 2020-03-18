@@ -161,10 +161,7 @@ namespace projetASP.Controllers
                     }
                     else
                     {           
-                        s.Database.Log = x => System.Diagnostics.Debug.WriteLine(x);
-
-                        e.validated = false;   
-                        e.cin = "7";
+                        e.validated = true;                          
                         s.SaveChanges();
                         return null;
                     }
