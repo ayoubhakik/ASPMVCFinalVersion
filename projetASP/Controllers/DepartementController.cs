@@ -194,7 +194,9 @@ namespace projetASP.Controllers
             ViewBag.Current = "visualiser";
             if (UserValide.IsValid())
             {
-                return View();
+                EtudiantContext db = new EtudiantContext();
+                
+                return View(db.etudiants.ToList());
             }
             else
                 return RedirectToAction("Authentification", "User");
