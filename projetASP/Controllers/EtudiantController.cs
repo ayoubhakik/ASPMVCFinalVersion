@@ -145,10 +145,9 @@ namespace projetASP.Controllers
         [HttpPost]
         public ActionResult Inscription(Etudiant student)
         {
-
             ViewBag.prenom = new SelectList(etudiantContext.etudiants, "cne", "prenom");
             ViewBag.nom = new SelectList(etudiantContext.etudiants, "cne", "nom");
-            
+
             ViewBag.typeBac = new List<SelectListItem>
             {
                 new SelectListItem {Text="Sciences Physiques et Chimiques", Value="1" },
@@ -171,23 +170,40 @@ namespace projetASP.Controllers
 
                 if (e == null)
                 {
-                    ViewBag.message = "Les informations que vous avez entrez ne correspondent à aucun étudiant !";
+                    ViewBag.message = "Les informations que vous avez entrez ne correspondent a aucun etudiant !";
                     return View();
                 }
                 //update
                 else
                 {
-                    if (!student.password.Equals(e.password))
+                    if (student.cin.Equals(e.cin, StringComparison.InvariantCultureIgnoreCase) && student.nom.Equals(e.nom, StringComparison.OrdinalIgnoreCase) && student.prenom.Equals(e.prenom, StringComparison.OrdinalIgnoreCase))
                     {
-                        ViewBag.message = "Mot de pass incorrect !";
-                        return View();
+                        e.validated = true;
+                        e.password = student.password;
+                        e.dateNaiss = student.dateNaiss;
+                        e.lieuNaiss = student.lieuNaiss;
+                        e.phone = student.phone;
+                        e.gsm = student.gsm;
+                        e.email = student.email;
+                        e.address = student.address;
+                        e.nationalite = student.nationalite;
+                        e.ville = student.ville;
+                        e.typeBac = student.typeBac;
+                        e.anneeBac = student.anneeBac;
+                        e.noteBac = student.noteBac;
+                        e.mentionBac = student.mentionBac;
+                        e.noteFstYear = student.noteFstYear;
+                        e.noteSndYear = student.noteSndYear;
+                        e.choix = student.choix;
+                        etudiantContext.SaveChanges();
+                        return Content(e.validated.ToString());
                     }
 
                     else
-                    {           
-                        e.validated = true;                          
-                        etudiantContext.SaveChanges();
-                        return null;
+                    {
+
+                        ViewBag.message = "CIN, CNE, Nom ou Prenom incorrect !";
+                        return View();
                     }
                 }
 
