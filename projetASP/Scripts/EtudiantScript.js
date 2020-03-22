@@ -1,6 +1,4 @@
-
-﻿function desactivefilieres() {
-
+function desactivefilieres() {
     if (document.getElementById('F1').checked == true) {
         document.getElementById('F2').checked = false;
         document.getElementById('F2').checked = false;
@@ -94,4 +92,9 @@
 
     }
 
+}
+function tester() {
+    if (document.getElementById("ImageFile").files.length == 0) {
+        alert("Selectioner Un Fichier "); 
+    }
 }

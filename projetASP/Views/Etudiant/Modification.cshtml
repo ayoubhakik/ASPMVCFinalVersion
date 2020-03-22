@@ -34,14 +34,17 @@
                                                 Modification des Informations Personelles
                                             </h2>
                                             <div id="subHeader_5" class="form-subHeader">
-                                                Welcome @Model.nom @Model.prenom   @ViewBag.choix
+                                                Welcome @Model.nom @Model.prenom   @ViewBag.choix  @ViewBag.exte
                                             </div>
                                         </div>
                                         <span class="fas fa-edit" onclick="$('#Edit').toggle()"></span>
                                         <p id="Edit">
-                                            <input type="file" name="ImageFile" />
-                                            <input type="submit" class="btn btn-warning" name="Update" value="Upload" />
+                                            <input type="file"  name="ImageFile" />
+                                                <input type="submit" class="btn btn-warning" name="Update" value="Upload" />
                                         </p>
+                                       <label class="text-danger">
+                                           @ViewBag.err
+                                       </label>
                                     </div>
                                 </div>
                             </li>
@@ -96,7 +99,9 @@
                                 <label class="form-label form-label-top form-label-auto" id="label_18" for="input_18"> Lieu de Naissance </label>
                                 <div id="cid_18" class="form-input-wide">
 
-                                    <input type="text" data-component="calculation" data-defaultvalue="0" class="form-control" name="q18_lieuDe18" value="0" size="20" />
+                                    @Html.EditorFor(model => model.lieuNaiss, new { htmlAttributes = new { @class = "form-control" } })
+                                    @Html.ValidationMessageFor(model => model.lieuNaiss, "", new { @class = "text-danger" })
+
                                 </div>
                             </li>
 
