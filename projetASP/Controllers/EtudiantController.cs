@@ -119,9 +119,7 @@ namespace projetASP.Controllers
         public ActionResult Inscription()
         {
 
-            ViewBag.prenom = new SelectList(etudiantContext.etudiants, "cne", "prenom");
-            ViewBag.nom = new SelectList(etudiantContext.etudiants, "cne", "nom");
-           
+            
             ViewBag.typeBac = new List<SelectListItem>
             {
                 new SelectListItem {Text="Sciences Physiques et Chimiques", Value="1" },
@@ -145,9 +143,7 @@ namespace projetASP.Controllers
         [HttpPost]
         public ActionResult Inscription(Etudiant student)
         {
-            ViewBag.prenom = new SelectList(etudiantContext.etudiants, "cne", "prenom");
-            ViewBag.nom = new SelectList(etudiantContext.etudiants, "cne", "nom");
-
+           
             ViewBag.typeBac = new List<SelectListItem>
             {
                 new SelectListItem {Text="Sciences Physiques et Chimiques", Value="1" },
@@ -192,11 +188,9 @@ namespace projetASP.Controllers
                         e.anneeBac = student.anneeBac;
                         e.noteBac = student.noteBac;
                         e.mentionBac = student.mentionBac;
-                        e.noteFstYear = student.noteFstYear;
-                        e.noteSndYear = student.noteSndYear;
                         e.choix = student.choix;
                         etudiantContext.SaveChanges();
-                        return Content(e.validated.ToString());
+                        return RedirectToAction("Authentification","User");
                     }
 
                     else
