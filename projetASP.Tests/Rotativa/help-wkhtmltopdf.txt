@@ -371,4 +371,3 @@ Table Of Content:
 Contact:
   If you experience bugs or want to request new features please visit 
   <https://github.com/wkhtmltopdf/wkhtmltopdf/issues>
-

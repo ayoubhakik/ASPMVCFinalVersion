@@ -2,7 +2,7 @@
 @{
     /**/
 
-    ViewBag.Title = "Statistiques";
+    //ViewBag.Title = "Statistiques";
     Layout = "~/Views/Shared/_DepartementLayout.cshtml";
 }
 
@@ -13,15 +13,11 @@
             <div class="col-xl-12 col-lg-12">
                 <div class="card card-chart">
                     <div class="card-header card-header-warning">
-                        <div class="ct-chart" id="websiteViewsChart"></div>
-                    </div>
-                    <div class="card-body">
-                        <h4 class="card-title">Statistique des filieres</h4>
-                        <p class="card-category">Last update</p>
+                        <img src="@Url.Action("Chart")"/>
                     </div>
                     <div class="card-footer">
                         <div class="stats">
-                            <i class="material-icons">access_time</i> text here inshallah
+                            <i class="material-icons">access_time</i> 
                         </div>
                     </div>
                 </div>
@@ -36,11 +32,11 @@
                             <i class="material-icons">store</i>
                         </div>
                         <p class="card-category">Industrie</p>
-                        <h3 class="card-title">45</h3>
+                        <h3 class="card-title">@ViewBag.indus</h3>
                     </div>
                     <div class="card-footer">
                         <div class="stats">
-                            <i class="material-icons"></i>54%
+                            <i class="material-icons"></i>(@ViewBag.indusP)%
                         </div>
                     </div>
                 </div>
@@ -52,11 +48,11 @@
                             <i class="material-icons">store</i>
                         </div>
                         <p class="card-category">procede</p>
-                        <h3 class="card-title">45</h3>
+                        <h3 class="card-title">@ViewBag.gpmc</h3>
                     </div>
                     <div class="card-footer">
                         <div class="stats">
-                            <i class="material-icons"></i>54%
+                            <i class="material-icons"></i>(@ViewBag.gpmcP)%
                         </div>
                     </div>
                 </div>
@@ -68,11 +64,11 @@
                             <i class="material-icons">store</i>
                         </div>
                         <p class="card-category">Informatique</p>
-                        <h3 class="card-title">75</h3>
+                        <h3 class="card-title">@ViewBag.info</h3>
                     </div>
                     <div class="card-footer">
                         <div class="stats">
-                            <i class="material-icons"></i> 12%
+                            <i class="material-icons"></i> (@ViewBag.infoP)%
                         </div>
                     </div>
                 </div>
@@ -84,11 +80,11 @@
                             <i class="material-icons">store</i>
                         </div>
                         <p class="card-category">Telecome</p>
-                        <h3 class="card-title">45</h3>
+                        <h3 class="card-title">@ViewBag.gtr</h3>
                     </div>
                     <div class="card-footer">
                         <div class="stats">
-                            <i class="material-icons"></i> 32%
+                            <i class="material-icons"></i> (@ViewBag.gtrP)%
                         </div>
                     </div>
                 </div>
@@ -100,11 +96,11 @@
                             <i class="material-icons">list</i>
                         </div>
                         <p class="card-category">Pas encore</p>
-                        <h3 class="card-title">30</h3>
+                        <h3 class="card-title">@ViewBag.nbrReste</h3>
                     </div>
                     <div class="card-footer">
                         <div class="stats">
-                            <i class="material-icons"></i>100%
+                            <i class="material-icons"></i>(@ViewBag.nbrResteP)%
 
                         </div>
                     </div>
@@ -117,11 +113,11 @@
                             <i class="material-icons">list</i>
                         </div>
                         <p class="card-category">Nombre Totale</p>
-                        <h3 class="card-title">340</h3>
+                        <h3 class="card-title">@ViewBag.nbrTotal</h3>
                     </div>
                     <div class="card-footer">
                         <div class="stats">
-                            <i class="material-icons"></i>30%
+                            <i class="material-icons"></i>(@ViewBag.nbrTotalP)%
                         </div>
                     </div>
                 </div>

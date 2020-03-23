@@ -28,6 +28,7 @@
 
             <div class="sidebar-wrapper">
                 <ul class="nav">
+
                     <li style="color:aliceblue"> Bienvenue @Session["userName"]</li>
                     <li class="@(ViewBag.Current == "home" ? "nav-tem active" : "nav-item")">
                         <a href='@Url.Action("Home","Departement")' class="nav-link">
@@ -36,10 +37,23 @@
                         </a>
 
                     </li>
+
+                    <li class="@(ViewBag.Current == "index" ? "nav-item active" : "nav-item")">
+                        <a href='@Url.Action("Index","Departement")' class="nav-link">
+                            <i class="material-icons">notifications</i>
+                            <p>Tous les etudiants</p>
+                        </a>
+                    </li>
+                    <li class="@(ViewBag.Current == "visualiser" ? "nav-item active" : "nav-item")">
+                        <a href='@Url.Action("Visualiser","Departement")' class="nav-link">
+                            <i class="material-icons">list</i>
+                            <p>Visualiser les photos</p>
+                        </a>
+                    </li>
                     <li class="@(ViewBag.Current == "importerEtudiants" ? "nav-item active" : "nav-item")">
                         <a href='@Url.Action("ImporterEtudiants","Departement")' class="nav-link">
                             <i class="material-icons">content_paste</i>
-                            <p>Charger les donnees</p>
+                            <p>Importer les Etudiants</p>
                         </a>
                     </li>
                     <li class="@(ViewBag.Current == "importerNotes" ? "nav-item active" : "nav-item")">
@@ -60,18 +74,9 @@
                             <p>Statistiques</p>
                         </a>
                     </li>
-                    <li class="@(ViewBag.Current == "visualiser" ? "nav-item active" : "nav-item")">
-                        <a href='@Url.Action("Visualiser","Departement")' class="nav-link">
-                            <i class="material-icons">list</i>
-                            <p>Visualiser</p>
-                        </a>
-                    </li>
-                    <li class="@(ViewBag.Current == "index" ? "nav-item active" : "nav-item")">
-                        <a href='@Url.Action("Index","Departement")' class="nav-link">
-                            <i class="material-icons">notifications</i>
-                            <p>Notifications</p>
-                        </a>
-                    </li>
+
+
+
                     <li class="nav-item" +>
                         <a href='@Url.Action("Logout","User")' class="nav-link">
                             <i class="material-icons">notifications</i>
