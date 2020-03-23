@@ -18,13 +18,24 @@ namespace projetASP.Controllers
         EtudiantContext etudiantContext = new EtudiantContext();
         public ActionResult Index()
         {
-
             ViewBag.Current = "Home";
+            if (UserValide.IsValid())
+            {
+                EtudiantContext db = new EtudiantContext();
 
-            return View();
+
+                
+
+                return View();
+            }
+
+
+            else
+                return RedirectToAction("Authentification1", "User");
+
+
+
         }
-
-
 
 
 
@@ -38,16 +49,24 @@ namespace projetASP.Controllers
              {
                  return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
              }*/
-            Etudiant etudiants = etudiantContext.etudiants.Find("9qdq");
-
-            if (etudiants == null)
+            if (UserValide.IsValid())
             {
-                return HttpNotFound();
+                Etudiant etudiants = etudiantContext.etudiants.Find(@Session["userId"]);
+           
+                if (etudiants == null)
+                {
+                    return HttpNotFound();
+                }
+
+                return View(etudiants);
             }
 
-            return View(etudiants);
+            else
+            {
+                return RedirectToAction("Authentification1", "User");
+            }
         }
-
+    
 
         [HttpPost]
         [ValidateAntiForgeryToken]
@@ -58,60 +77,85 @@ namespace projetASP.Controllers
             /*Update name of buttom if user click in Upload l image seule va etre modifie 
              
              */
-            if (ModelState.IsValid)
+            if (UserValide.IsValid())
             {
-                Etudiant etudiants = etudiantContext.etudiants.Find(etudiant.cne);
-
-                if (Request.Files.Count > 0 && Update == "Upload")
+                if (ModelState.IsValid)
                 {
-                    //Recupere le fichier est le sauvegarder dans /image/
-                    HttpPostedFileBase file = Request.Files[0];
-                    string fileName = Path.GetFileNameWithoutExtension(file.FileName);
-                    string extension = Path.GetExtension(file.FileName);
-                    fileName = DateTime.Now.ToString("yymmssfff") + extension;
-                    etudiants.photo_link = fileName;
-                    fileName = Path.Combine(Server.MapPath("~/Image/"), fileName);
-                    file.SaveAs(fileName);
+                    Etudiant etudiants = etudiantContext.etudiants.Find(etudiant.cne);
 
-                    etudiantContext.SaveChanges();
-                    return View(etudiants);
+                    if (Request.Files.Count > 0 && Update == "Upload")
+                    {
+                        //Recupere le fichier est le sauvegarder dans /image/
+                        HttpPostedFileBase file = Request.Files[0];
+                        string fileName = Path.GetFileNameWithoutExtension(file.FileName);
+                        string extension = Path.GetExtension(file.FileName);
+                        fileName = DateTime.Now.ToString("yymmssfff") + extension;
+                        etudiants.photo_link = fileName;
+                        fileName = Path.Combine(Server.MapPath("~/Image/"), fileName);
+                        file.SaveAs(fileName);
+
+                        etudiantContext.SaveChanges();
+                        return View(etudiants);
+                    }
+                    else
+                    {
+                        //si clicke sur les valider les modification 
+                        etudiants.choix = choix1 + choix2 + choix3;
+                        etudiants.nationalite = etudiant.nationalite;
+                        etudiants.email = etudiant.email;
+                        etudiants.phone = etudiant.phone;
+                        etudiants.address = etudiant.address;
+                        etudiants.gsm = etudiant.gsm;
+                        etudiants.address = etudiant.address;
+                        etudiants.ville = etudiant.ville;
+                        etudiants.dateNaiss = etudiant.dateNaiss;
+
+                        etudiantContext.SaveChanges();
+                        return View(etudiants);
+                        // return RedirectToAction("Index");
+                    }
+
                 }
-                else
-                {
-                    //si clicke sur les valider les modification 
-                    etudiants.choix = choix1 + choix2 + choix3;
-                    etudiants.nationalite = etudiant.nationalite;
-                    etudiants.email = etudiant.email;
-                    etudiants.phone = etudiant.phone;
-                    etudiants.address = etudiant.address;
-                    etudiants.gsm = etudiant.gsm;
-                    etudiants.address = etudiant.address;
-                    etudiants.ville = etudiant.ville;
-                    etudiants.dateNaiss = etudiant.dateNaiss;
 
-                    etudiantContext.SaveChanges();
-                    return View(etudiants);
-                    // return RedirectToAction("Index");
-                }
-
+                return View(etudiant);
             }
-
-            return View(etudiant);
+            else
+            {
+                return RedirectToAction("Authentification1", "User");
+            }
         }
 
         //****************************************************************************************************************************
 
 
+
+            
+
         public ActionResult Consulter()
         {
             ViewBag.Current = "Consulter";
-            return View();
+            if (UserValide.IsValid())
+            {
+
+                return View();
+            }
+            else
+            {
+                return RedirectToAction("Authentification1", "User");
+            }
         }
 
         public ActionResult Deconnecter()
         {
-            ViewBag.Current = "Deconnecter";
-            return View("Index");
+            Session["userId"] = null;
+            Session["cin"] = null;
+            Session["nom"] = null;
+            Session["prenom"] = null;
+            Session["role"] = null;
+            Session.Abandon();
+            return RedirectToAction("Authentification1", "User");
+           
+
         }
 
         [HttpGet]
@@ -119,7 +163,9 @@ namespace projetASP.Controllers
         public ActionResult Inscription()
         {
 
-            
+            ViewBag.prenom = new SelectList(etudiantContext.etudiants, "cne", "prenom");
+            ViewBag.nom = new SelectList(etudiantContext.etudiants, "cne", "nom");
+           
             ViewBag.typeBac = new List<SelectListItem>
             {
                 new SelectListItem {Text="Sciences Physiques et Chimiques", Value="1" },
@@ -140,9 +186,13 @@ namespace projetASP.Controllers
             return View();
         }
 
+
         [HttpPost]
         public ActionResult Inscription(Etudiant student)
         {
+
+            ViewBag.prenom = new SelectList(etudiantContext.etudiants, "cne", "prenom");
+            ViewBag.nom = new SelectList(etudiantContext.etudiants, "cne", "nom");
            
             ViewBag.typeBac = new List<SelectListItem>
             {
@@ -166,12 +216,14 @@ namespace projetASP.Controllers
 
                 if (e == null)
                 {
-                    ViewBag.message = "Les informations que vous avez entrez ne correspondent a aucun etudiant !";
+
+                    ViewBag.message = "Les informations que vous avez entrez ne correspondent à aucun étudiant !";
                     return View();
                 }
                 //update
                 else
                 {
+
                     if (student.cin.Equals(e.cin, StringComparison.InvariantCultureIgnoreCase) && student.nom.Equals(e.nom, StringComparison.OrdinalIgnoreCase) && student.prenom.Equals(e.prenom, StringComparison.OrdinalIgnoreCase))
                     {
                         e.validated = true;
@@ -190,7 +242,7 @@ namespace projetASP.Controllers
                         e.mentionBac = student.mentionBac;
                         e.choix = student.choix;
                         etudiantContext.SaveChanges();
-                        return RedirectToAction("Authentification","User");
+                        return RedirectToAction("Authentification", "User");
                     }
 
                     else
@@ -198,9 +250,23 @@ namespace projetASP.Controllers
 
                         ViewBag.message = "CIN, CNE, Nom ou Prenom incorrect !";
                         return View();
-                    }
-                }
 
+                        if (!student.password.Equals(e.password))
+                        {
+                            ViewBag.message = "Mot de pass incorrect !";
+                            return View();
+                        }
+
+                        else
+                        {
+                            e.validated = true;
+                            etudiantContext.SaveChanges();
+                            return null;
+
+                        }
+                    }
+
+                }
             }
             else return View();
         }
