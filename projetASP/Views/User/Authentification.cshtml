@@ -90,14 +90,15 @@
                         <p style="color:blue" ;> <strong class="font-weight-bold">LOGIN </strong> </p>
                     </button>
                     <Br />
-                    <div>
-                        @using (Html.BeginForm("Authentification1", "Etudiant", FormMethod.Post, new { @class = "login100-form validate-form" }))
-                        {
-                            <button type="button" class="btn btn-primary btn-lg btn-block" value="login" style="color:blue">
-                                <p style="color:blue" ;> <strong class="font-weight-bold">LOGIN AS STUDENT </strong> </p>
-                            </button>
-                        }
-                    </div>
+                     
+                        <div>
+             @using (Html.BeginForm("Authentification1", "Etudiant", FormMethod.Post, new { @class = "login100-form validate-form" }))
+             {
+                 <button type="button" class="btn btn-primary btn-lg btn-block" value="login" style="color:blue">
+                     <p style="color:blue" ;> <strong class="font-weight-bold">LOGIN AS STUDENT </strong> </p>
+                 </button>
+             }
+         </div>
 
 
 
