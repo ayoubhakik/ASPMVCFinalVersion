@@ -1,6 +1,7 @@
 ﻿﻿using projetASP.DAL;
 using projetASP.Models;
 using Rotativa;
+
 using System;
 using System.Collections.Generic;
 using System.Data.Entity;
@@ -9,6 +10,12 @@ using System.Linq;
 using System.Net;
 using System.Web;
 using System.Web.Mvc;
+using System.Net.Mail;
+using System.Text;
+using System.Web.Configuration;
+using System.Web.Helpers;
+using System.Web.UI;
+
 
 namespace projetASP.Controllers
 {
@@ -17,18 +24,16 @@ namespace projetASP.Controllers
 
         // GET: Etudiant
         EtudiantContext etudiantContext = new EtudiantContext();
-        private string[] ImageEx = new string[] {".png", ".jpg", ".jpeg", ".jfif",".svg" };
-        
+
+        private string[] ImageEx = new string[] { ".png", ".jpg", ".jpeg", ".jfif", ".svg" };
+
         public ActionResult Index()
         {
-
             ViewBag.Current = "Home";
+
 
             return View();
         }
-
-
-
 
 
         //--------------------------------------------------------------------------------------------------------------------------
@@ -41,7 +46,9 @@ namespace projetASP.Controllers
              {
                  return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
              }*/
+
             Etudiant etudiants = etudiantContext.etudiants.Find("9qdq");
+
 
             if (etudiants == null)
             {
@@ -57,7 +64,7 @@ namespace projetASP.Controllers
         public ActionResult Modification([Bind(Include = "cne,nationalite,email,phone,gsm,address,ville,dateNaiss")] Etudiant etudiant, string Update, String choix1, String choix2, String choix3)
         {
             ViewBag.Current = "Modification";
-            
+
             /*Update name of buttom if user click in Upload l image seule va etre modifie 
              
              */
@@ -72,7 +79,7 @@ namespace projetASP.Controllers
                     string fileName = Path.GetFileNameWithoutExtension(file.FileName);
                     string extension = Path.GetExtension(file.FileName);
                     ViewBag.exte = extension;
-                    if (fileName != "" && ImageEx.Contains(extension)==true)
+                    if (fileName != "" && ImageEx.Contains(extension) == true)
                     {
                         fileName = etudiants.nom + DateTime.Now.ToString("yymmssfff") + extension;
                         etudiants.photo_link = fileName;
@@ -81,7 +88,7 @@ namespace projetASP.Controllers
                         etudiants.Modified = true;
                         etudiantContext.SaveChanges();
                         return View(etudiants);
-                      
+
 
                     }
                     else
@@ -91,14 +98,8 @@ namespace projetASP.Controllers
 
                     }
 
-
-
                 }
-                else if(Request.Files.Count == 0 && Update == "Upload")
-                {
-                    ViewBag.err = "Select";
-                    return View(etudiants);
-                }
+
                 else
                 {
                     //si clicke sur les valider les modification 
@@ -115,54 +116,65 @@ namespace projetASP.Controllers
 
                     etudiantContext.SaveChanges();
                     return View(etudiants);
-                 
+
                 }
 
             }
-
             return View(etudiant);
         }
-
-        //pour Imprimer le pdf
-        
-        public ActionResult PrintConsultation()
-        {
-            Etudiant etudiants = etudiantContext.etudiants.Find("9qdq");
-            var q = new ViewAsPdf("RecuEtudiant",etudiants);
-            return q ;
-        }
-
-        public ActionResult Consulter()
-        {
-            ViewBag.Current = "Consulter";
-            Etudiant etudiants = etudiantContext.etudiants.Find("9qdq");
-
-            if (etudiants == null)
-            {
-                return HttpNotFound();
-            }
-                return View(etudiants);  
-        }
-
         //****************************************************************************************************************************
 
 
 
 
-        public ActionResult Deconnecter()
+        public ActionResult Consulter()
         {
-            ViewBag.Current = "Deconnecter";
-            return View("Index");
+            ViewBag.Current = "Consulter";
+            Etudiant etudiants = etudiantContext.etudiants.Find("9qdq");
+            if (UserValide.IsValid())
+            {
+
+                return View(etudiants);
+            }
+            else
+            {
+                return RedirectToAction("Authentification1", "User");
+            }
         }
 
+        public ActionResult Deconnecter()
+        {
+            Session["userId"] = null;
+            Session["cin"] = null;
+            Session["nom"] = null;
+            Session["prenom"] = null;
+            Session["role"] = null;
+            Session.Abandon();
+            return RedirectToAction("Authentification1", "User");
+
+        }
+
+        //pour Imprimer le pdf
+
+        public ActionResult PrintConsultation()
+        {
+            Etudiant etudiants = etudiantContext.etudiants.Find("9qdq");
+            var q = new ViewAsPdf("RecuEtudiant", etudiants);
+            return q;
+        }
+
+
+
         [HttpGet]
+
+
 
         public ActionResult Inscription()
         {
 
             ViewBag.prenom = new SelectList(etudiantContext.etudiants, "cne", "prenom");
             ViewBag.nom = new SelectList(etudiantContext.etudiants, "cne", "nom");
-           
+
             ViewBag.typeBac = new List<SelectListItem>
             {
                 new SelectListItem {Text="Sciences Physiques et Chimiques", Value="1" },
@@ -189,7 +201,6 @@ namespace projetASP.Controllers
 
             ViewBag.prenom = new SelectList(etudiantContext.etudiants, "cne", "prenom");
             ViewBag.nom = new SelectList(etudiantContext.etudiants, "cne", "nom");
-            
             ViewBag.typeBac = new List<SelectListItem>
             {
                 new SelectListItem {Text="Sciences Physiques et Chimiques", Value="1" },
@@ -215,7 +226,7 @@ namespace projetASP.Controllers
                     ViewBag.message = "Les informations que vous avez entrez ne correspondent à aucun étudiant !";
                     return View();
                 }
-                //update
+
                 else
                 {
                     if (!student.password.Equals(e.password))
@@ -225,15 +236,61 @@ namespace projetASP.Controllers
                     }
 
                     else
-                    {           
-                        e.validated = true;                          
+                    {
+                        e.validated = true;
                         etudiantContext.SaveChanges();
                         return null;
                     }
                 }
-
             }
             else return View();
+        }
+    
+
+        public ActionResult SendEmailToUser()
+        {
+            bool Result = false;
+            Etudiant etudiants = etudiantContext.etudiants.Find("125");
+            string email = etudiants.email;
+            string subject = "Modification";
+            ViewBag.nom = etudiants.nom;
+            ViewBag.prenom = etudiants.prenom;
+            Result = SendEmail(email, subject, "<p> Hi"+" "+ @ViewBag.nom+" "+ @ViewBag.prenom +",<br/>some modifications had been done <br />Verify your account </p>");
+            if (Result == true)
+            {
+                Json(Result, JsonRequestBehavior.AllowGet);
+                return RedirectToAction("Modification");
+            }
+            return View();
+        }
+       public bool SendEmail(String toEmail,string subject,string EmailBody)
+        {
+            try
+            {
+                String senderEmail = WebConfigurationManager.AppSettings["senderEmail"];
+                String senderPassword = WebConfigurationManager.AppSettings["senderPassword"];
+               /* WebMail.SmtpServer = "smtp.gmail.com";
+                WebMail.SmtpPort = 587;
+                WebMail.SmtpUseDefaultCredentials = true;
+                WebMail.UserName = sendereEmail;
+                WebMail.Password = senderPassword;
+                WebMail.Send(to: toEmail, subject: subject, body: EmailBody, isBodyHtml: true);*/
+                SmtpClient client = new SmtpClient("smtp.gmail.com", 587);
+                client.EnableSsl = true;
+                client.Timeout = 100000;
+                client.DeliveryMethod = SmtpDeliveryMethod.Network;
+                client.UseDefaultCredentials = false;
+                client.Credentials = new NetworkCredential(senderEmail,senderPassword);
+                MailMessage Message = new MailMessage(senderEmail, toEmail, subject, EmailBody);
+                Message.IsBodyHtml = true;
+                Message.BodyEncoding = UTF8Encoding.UTF8;
+                client.Send(Message);
+                return true;
+            }
+            catch (Exception ex)
+            {
+                return false;
+            }
         }
     }
 }

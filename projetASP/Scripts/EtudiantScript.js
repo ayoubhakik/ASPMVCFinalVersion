@@ -93,8 +93,4 @@ function desactivefilieres() {
     }
 
 }
-function tester() {
-    if (document.getElementById("ImageFile").files.length == 0) {
-        alert("Selectioner Un Fichier "); 
-    }
-}
+

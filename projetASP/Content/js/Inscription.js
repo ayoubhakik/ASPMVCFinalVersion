@@ -3,7 +3,6 @@
 var current_fs, next_fs, previous_fs; //fieldsets
 var left, opacity, scale; //fieldset properties which we will animate
 var animating; //flag to prevent quick multi-click glitches
-
 $(".next").click(function () {
 	if (animating) return false;
 	animating = true;
@@ -77,24 +76,5 @@ $(".previous").click(function () {
 	});
 });
 
-$(".submit").click(function () {
-	return false;
 
-	var pass = document.getElementById("pass").value;
-	var cpass = document.getElementById("cpass").value;
-	var cin = document.getElementById("cin").value;
-	
-	if (pass != cpass) {
-		alert("Les deux mots de pass doivent correspondre !")
-		return false;
-	}
-	else if (cin != ccin) {
-		alert("Les deux cin doivent correspondre !")
-		return false;
-	}
-	else if (email != cemail) {
-		alert("Les deux email doivent correspondre !")
-		return false;
-	}
-	else return true;
-})
+
