@@ -20,55 +20,64 @@
                         <table class="table table-hover">
                             <thead class="text-warning">
                             <th>Cne</th>
+                            <th>Cin</th>
                             <th>Nom</th>
                             <th>Prenom</th>
-                            <th>Email</th>
-                            <th>Date de naissance</th>
+                            <th>Choix</th>
                             <th>Note 1</th>
-                            <th>validated ? </th>
+                            <th>Note 2</th>
+                            <th>Note generale</th>
+
+                            <th>valide ?</th>
                             </thead>
                             <tbody>
                                 @if (Model == null)
                                 {
-                                    
+
                                 }
                                 else
                                 {
 
                                     foreach (var item in Model)
                                     {
-                                        <tr>
-                                            <th>
-                                                @Html.DisplayFor(modelItem => item.cne)
-                                            </th>
-                                            <td>
-                                                @Html.DisplayFor(modelItem => item.nom)
-                                            </td>
-                                            <td>
-                                                @Html.DisplayFor(modelItem => item.prenom)
-                                            </td>
-                                            <th>
-                                                @Html.DisplayFor(modelItem => item.email)
-                                            </th>
-                                            <td>
-                                                @Html.DisplayFor(modelItem => item.dateNaiss)
-                                            </td>
-                                            <th>
-                                                @Html.DisplayFor(modelItem => item.noteFstYear)
-                                            </th>
-                                            <td>
-                                                @if(item.Validated == true)
-                                                {
-                                                <span>true</span>
-                                                }
-                                                else
-                                                {
-                                                <span>false</span>
-                                                }
-                                            </td>
+                                <tr>
+                                    <th>
+                                        @Html.DisplayFor(modelItem => item.cne)
+                                    </th>
+                                    <th>
+                                        @Html.DisplayFor(modelItem => item.cin)
+                                    </th>
+                                    <td>
+                                        @Html.DisplayFor(modelItem => item.nom)
+                                    </td>
+                                    <td>
+                                        @Html.DisplayFor(modelItem => item.prenom)
+                                    </td>
+                                    <th>
+                                        @Html.DisplayFor(modelItem => item.choix)
+                                    </th>
+                                    <td>
+                                        @Html.DisplayFor(modelItem => item.noteFstYear)
+                                    </td>
+                                    <th>
+                                        @Html.DisplayFor(modelItem => item.noteSndYear)
+                                    </th>
+                                    <th>
+                                        (@((item.noteSndYear+item.noteFstYear)/2))
+                                    </th>
+                                    <td>
+                                        @if (item.Validated == true)
+                                        {
+                                            <span>Oui</span>
+                                        }
+                                        else
+                                        {
+                                            <span>Non</span>
+                                        }
+                                    </td>
 
-                                            
-                                        </tr>
+
+                                </tr>
                                     }
 
                                 }
