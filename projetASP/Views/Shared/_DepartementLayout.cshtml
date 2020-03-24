@@ -16,43 +16,53 @@
     <link href="../../Content/css/material-dashboard.css?v=2.1.0" rel="stylesheet" />
     <!-- CSS Just for demo purpose, don't include it in your project -->
     <link href="../../Content/demo/demo.css" rel="stylesheet" />
+    <style>
+        .nomColored {
+            background-color:gray;
+        }
+    </style>
 </head>
 <body class="light-edition">
     <div class="wrapper ">
         <div class="sidebar" data-color="orange" data-background-color="black" data-image="../contents/img/sidebar-3.jpg">
             <!--
                 Tip 1: You can change the color of the sidebar using: data-color="purple | azure | green | orange | danger"
-
+                
                 Tip 2: you can also add an image using data-image tag
             -->
 
             <div class="sidebar-wrapper">
                 <ul class="nav">
 
-                    <li style="color:aliceblue"> Bienvenue @Session["userName"]</li>
-                    <li class="@(ViewBag.Current == "home" ? "nav-tem active" : "nav-item")">
-                        <a href='@Url.Action("Home","Departement")' class="nav-link">
-                            <i class="material-icons">home</i>
-                            <p>Home</p>
-                        </a>
 
+                    <li class="nomColored">
+                        <a href='@Url.Action("Index","Departement")' class="nav-link">
+                            <i class="material-icons">
+                                account_box
+                            </i>
+                            <p>Bienvenue @Session["userName"]</p>
+                        </a>
                     </li>
 
                     <li class="@(ViewBag.Current == "index" ? "nav-item active" : "nav-item")">
                         <a href='@Url.Action("Index","Departement")' class="nav-link">
-                            <i class="material-icons">notifications</i>
+                            <i class="material-icons">
+                                supervised_user_circle
+                            </i>
                             <p>Tous les etudiants</p>
                         </a>
                     </li>
                     <li class="@(ViewBag.Current == "visualiser" ? "nav-item active" : "nav-item")">
                         <a href='@Url.Action("Visualiser","Departement")' class="nav-link">
-                            <i class="material-icons">list</i>
+                            <i class="material-icons">
+                                theaters
+                            </i>
                             <p>Visualiser les photos</p>
                         </a>
                     </li>
                     <li class="@(ViewBag.Current == "importerEtudiants" ? "nav-item active" : "nav-item")">
                         <a href='@Url.Action("ImporterEtudiants","Departement")' class="nav-link">
-                            <i class="material-icons">content_paste</i>
+                            <i class="material-icons">view_module</i>
                             <p>Importer les Etudiants</p>
                         </a>
                     </li>
@@ -64,22 +74,28 @@
                     </li>
                     <li class="@(ViewBag.Current == "attributionFiliere" ? "nav-item active" : "nav-item")">
                         <a href='@Url.Action("AttributionFiliere","Departement")' class="nav-link">
-                            <i class="material-icons">bubble_chart</i>
+                            <i class="material-icons">touch_app</i>
                             <p>Attribution des filieres</p>
                         </a>
                     </li>
                     <li class="@(ViewBag.Current == "statistiques" ? "nav-item active" : "nav-item")">
                         <a href='@Url.Action("Statistiques","Departement")' class="nav-link">
-                            <i class="material-icons">bubble_chart</i>
+                            <i class="material-icons">timeline</i>
                             <p>Statistiques</p>
                         </a>
                     </li>
 
 
+                    <li class="@(ViewBag.Current == "Setting" ? "nav-tem active" : "nav-item")">
+                        <a href='@Url.Action("Setting","Departement")' class="nav-link">
+                            <i class="material-icons">settings</i>
+                            <p>Setting</p>
+                        </a>
 
+                    </li>
                     <li class="nav-item" +>
                         <a href='@Url.Action("Logout","User")' class="nav-link">
-                            <i class="material-icons">notifications</i>
+                            <i class="material-icons">rowing</i>
                             <p>Se deconnecter</p>
                         </a>
                     </li>

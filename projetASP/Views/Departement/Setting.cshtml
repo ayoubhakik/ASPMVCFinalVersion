@@ -2,7 +2,6 @@
 @{
     Layout = "~/Views/Shared/_DepartementLayout.cshtml";
 }
-
 <style type="text/css">
     .form-style-7 {
         max-width: 400px;
@@ -123,52 +122,52 @@
                 background: #6B9FFF;
                 color: #fff;
             }
-
-    .excep {
-        padding-left: -10px;
-    }
-
-    .excelfile {
-        width: 340px;
+    .excep{
+        padding-left:-10px;
     }
 </style>
 
+
 <br />
 <br />
-<br />
-<br />
-@using (Html.BeginForm("ImporterNoteExcel", "Departement", FormMethod.Post, new { @class = "form-style-7", enctype = "multipart/form-data" }))
+@using (Html.BeginForm("Setting", "Departement", FormMethod.Post, new { @class = "form-style-7", enctype = "multipart/form-data" }))
 {
-    <h3>
-        <center>
-            <i class="material-icons">library_books</i>
-            Importer les Notes
-        </center>
-
-    </h3>
+<h2>
+    <center>
+        <i class="material-icons">settings</i>
+        Setting
+    </center>
+    
+</h2>
     <br /><br />
-
+    
     <ul>
         <li class="excep">
             <p color="gray">
 
-                <span color="black">   La departement doit charger un fichier EXCEL (cne, note1,note2) qui contient les notes des etudiants, noter bien que cette tache ne peut pas etre effectue sans le chargement des etudiant : :</span><br />
+                <span color="black">   La partie configuration est obligatoire pour bien notifier les etudiants et aussi pour automatiser les processus d'atribution des filieres :</span><br />
                 <br />
 
-                1-  Choisir le fichier.<br />
+                1-  La date de notifiation ou la departement va Choisir une date pour notifier les etudiants qu ont pas valide leurs comptes pour choisir des filieres.<br />
                 <br />
-                2-  Cliquer sur importer pour charger les donnees dans la Database.<br />
+                2-  La date d'attribution des filieres ou la departement va Choisir une date choisir une date pour l'attribution des filiere.<br />
 
             </p>
         </li>
         <li>
-            <input class="excelfile" type="file" name="excelfile" placeholder="File.xls" />
-            <br />
+            <label for="name">Date Notification </label>
+            <input type="date" name="name" maxlength="100" placeholder="Date here">
+            <span>par ex (07/10/2020 apres cette date chaque etudiant va recevoir un email pour valider son compte) </span>
+        </li>
+        <li>
+            <label for="email">Date d'attribution des filieres</label>
+            <input type="date" name="email" maxlength="100" placeholder="Date here">
+            <span>apres cette date chaque etudiant va avoir la filiere qu'il merite</span>
         </li>
 
+
         <li>
-            <br />
-            <input type="submit" class="btn btn-default" value="Importer" />
+            <input type="submit" value="Confirmer">
         </li>
     </ul>
 }
@@ -180,4 +179,3 @@
         h.style.height = (h.scrollHeight) + "px";
     }
 </script>
-

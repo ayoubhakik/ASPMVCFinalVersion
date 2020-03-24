@@ -476,7 +476,6 @@
     <Content Include="Content\vendor\bootstrap\css\bootstrap.css.map" />
     <Content Include="Content\vendor\bootstrap\css\bootstrap.min.css.map" />
     <Content Include="App_Browsers\qt.browser" />
-
     <Content Include="ExcelFiles\EtudiantExemple.xlsx" />
     <None Include="Scripts\jquery-3.4.1.intellisense.js" />
     <Content Include="Scripts\jquery-3.4.1.js" />
@@ -591,6 +590,7 @@
     <Content Include="Views\Shared\_UserLayout.cshtml" />
     <Content Include="Views\Etudiant\RecuEtudiant.cshtml" />
     <Content Include="Views\User\Authentification1.cshtml" />
+    <Content Include="Views\Departement\Setting.cshtml" />
     <None Include="Web.Debug.config">
       <DependentUpon>Web.config</DependentUpon>
     </None>

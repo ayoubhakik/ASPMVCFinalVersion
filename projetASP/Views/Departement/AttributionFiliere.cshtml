@@ -4,10 +4,21 @@
     Layout = "~/Views/Shared/_DepartementLayout.cshtml";
 }
 
-<h2>AttributionFiliere</h2>
-<p>une fois la departement clique sur cette button, chaque etudiant va avoir la filiere qui il merite</p><div class="btn btn-danger"><a href='@Url.Action("Attribution","Departement")'>Attribuer</a></div>
 <br />
 <br />
+<br />
+<br />
+<br />
+<br />
+<h2>
+    <center>
+        <i class="material-icons">touch_app</i>
+        Attribution des Filiere
+    </center>
+    <br />
+</h2>
+<center><p>Une fois la departement clique sur cette button, chaque etudiant va avoir la filiere qui il merite.<br /> Notons bien que apres avoir attribuer les filieres aucun etudiant peut s'authentifier</p><br /><div class="btn btn-danger"><a color="black" href='@Url.Action("Attribution","Departement")'>Attribuer</a></div></center>
+
 <div class="content">
     <div class="container-fluid">
         <div class="row">
@@ -57,7 +68,7 @@
                                                 <th>
                                                     @((item.noteSndYear + item.noteFstYear) / 2)
                                                 </th>
-                                               
+
 
                                             </tr>
                                         }
@@ -125,7 +136,7 @@
                                                 <th>
                                                     @((item.noteSndYear + item.noteFstYear) / 2)
                                                 </th>
-                                                
+
 
                                             </tr>
                                         }
@@ -148,7 +159,7 @@
         <div class="row">
             <div class="col-lg-12 col-md-12">
                 <div class="card">
-                    <div class="card-header card-header-primary">
+                    <div class="card-header card-header-info">
                         <h4 class="card-title">Indus</h4>
                     </div>
                     <div class="card-body table-responsive">
@@ -192,7 +203,7 @@
                                                 <th>
                                                     @((item.noteSndYear + item.noteFstYear) / 2)
                                                 </th>
-                                                
+
 
                                             </tr>
                                         }
@@ -215,7 +226,7 @@
         <div class="row">
             <div class="col-lg-12 col-md-12">
                 <div class="card">
-                    <div class="card-header card-header-primary">
+                    <div class="card-header card-header-rose">
                         <h4 class="card-title">GPMC</h4>
                     </div>
                     <div class="card-body table-responsive">
@@ -259,7 +270,7 @@
                                                 <th>
                                                     @((item.noteSndYear + item.noteFstYear) / 2)
                                                 </th>
-                                                
+
 
                                             </tr>
                                         }

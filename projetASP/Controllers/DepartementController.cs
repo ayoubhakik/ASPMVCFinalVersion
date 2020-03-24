@@ -14,9 +14,9 @@ namespace projetASP.Controllers
     public class DepartementController : Controller
     {
         // GET: Departement
-        public ActionResult Home()
+        public ActionResult Setting()
         {
-            ViewBag.Current = "home";
+            ViewBag.Current = "Setting";
             return View();
         }
         public ActionResult Index()
@@ -58,7 +58,7 @@ namespace projetASP.Controllers
 
                 EtudiantContext db = new EtudiantContext();
                 HttpPostedFileBase file = Request.Files["excelfile"];
-                if ((file != null) && (file.ContentLength > 0) && !string.IsNullOrEmpty(file.FileName))
+                if ((file != null) && (file.ContentLength > 0) && !string.IsNullOrEmpty(file.FileName) && (file.FileName.EndsWith("xls")|| file.FileName.EndsWith("xlsx")) )
                 {
                     string fileName = file.FileName;
                     string fileContentType = file.ContentType;
@@ -137,7 +137,7 @@ namespace projetASP.Controllers
             {
                 EtudiantContext db = new EtudiantContext();
                 HttpPostedFileBase file = Request.Files["excelfile"];
-                if ((file != null) && (file.ContentLength > 0) && !string.IsNullOrEmpty(file.FileName))
+                if ((file != null) && (file.ContentLength > 0) && !string.IsNullOrEmpty(file.FileName) && (file.FileName.EndsWith("xls") || file.FileName.EndsWith("xlsx")))
                 {
                     string fileName = file.FileName;
                     string fileContentType = file.ContentType;
