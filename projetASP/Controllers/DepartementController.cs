@@ -215,10 +215,11 @@ namespace projetASP.Controllers
                         //parse to a table of chars
                         char[] choice = list[i].choix.ToCharArray();
                         //verify the frst case which is if we have F=info
-
                         Boolean choosen = false;
+
                         for (int j=0;j<3;j++)
                         {
+
                             if (choice[j]=='F')
                             {
                                 if (indexInfo < maxInfo)
@@ -235,7 +236,7 @@ namespace projetASP.Controllers
                                     list[i].idFil = 2;
                                     choosen = true;
 
-                                    indexGtr++; ; break;
+                                    indexGtr++;  break;
                                 }
                             }
                             if (choice[j] == 'D')
@@ -245,7 +246,7 @@ namespace projetASP.Controllers
                                     list[i].idFil = 3;
                                     choosen = true;
 
-                                    indexIndus++; ; break;
+                                    indexIndus++;  break;
                                 }
 
                             }
@@ -255,16 +256,21 @@ namespace projetASP.Controllers
                                 {
                                     list[i].idFil = 4;
                                     choosen = true;
-
                                     indexGpmc++;break;
                                 }
                             }
+                            if (choosen)
+                            {
+                                j = 3;
+                            }
+                            if (!choosen && j==2 )
+                            {
+                                list[i].idFil = 4;
+                                choosen = true;
+                                indexGpmc++; break;
+                            }
                         }
-                        if (!choosen)
-                        {
-                            list[i].idFil = 4;
-                            indexGpmc++;
-                        }
+                        
 
 
 
