@@ -6,10 +6,10 @@ using System.Web;
 
 namespace projetASP.Models
 {
-    public class Config
+    public class Settings
     {
         [Key]
-        public int id_Config { get; set; }
+        public int idSettings { get; set; }
 
         [DisplayFormat(ApplyFormatInEditMode = true, DataFormatString = "{0:dd/MM/yyyy}")]
         public DateTime Delai { get; set; }
@@ -17,6 +17,8 @@ namespace projetASP.Models
         public Boolean importEtudiant { get; set; }
 
         public Boolean importNote { get; set; }
+
+        public Boolean Attributted { get; set; }
 
         [DisplayFormat(ApplyFormatInEditMode = true, DataFormatString = "{0:dd/MM/yyyy}")]
         public DateTime DatedeRappel { get; set; }

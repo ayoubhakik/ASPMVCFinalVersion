@@ -24,7 +24,6 @@ namespace projetASP.Controllers
 
         // GET: Etudiant
         EtudiantContext etudiantContext = new EtudiantContext();
-
         private string[] ImageEx = new string[] { ".png", ".jpg", ".jpeg", ".jfif", ".svg" };
 
         public ActionResult Index()
