@@ -160,7 +160,12 @@
     <Compile Include="Migrations\202003181518443_InitialCreate.designer.cs">
       <DependentUpon>202003181518443_InitialCreate.cs</DependentUpon>
     </Compile>
+    <Compile Include="Migrations\202003241751336_IntialCreate.cs" />
+    <Compile Include="Migrations\202003241751336_IntialCreate.designer.cs">
+      <DependentUpon>202003241751336_IntialCreate.cs</DependentUpon>
+    </Compile>
     <Compile Include="Migrations\Configuration.cs" />
+    <Compile Include="Models\Config.cs" />
     <Compile Include="Models\Departement.cs" />
     <Compile Include="Models\Etudiant.cs" />
     <Compile Include="Models\Filiere.cs" />
@@ -476,7 +481,6 @@
     <Content Include="Content\vendor\bootstrap\css\bootstrap.css.map" />
     <Content Include="Content\vendor\bootstrap\css\bootstrap.min.css.map" />
     <Content Include="App_Browsers\qt.browser" />
-
     <Content Include="ExcelFiles\EtudiantExemple.xlsx" />
     <None Include="Scripts\jquery-3.4.1.intellisense.js" />
     <Content Include="Scripts\jquery-3.4.1.js" />
@@ -623,6 +627,9 @@
   <ItemGroup>
     <EmbeddedResource Include="Migrations\202003181518443_InitialCreate.resx">
       <DependentUpon>202003181518443_InitialCreate.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\202003241751336_IntialCreate.resx">
+      <DependentUpon>202003241751336_IntialCreate.cs</DependentUpon>
     </EmbeddedResource>
   </ItemGroup>
   <PropertyGroup>

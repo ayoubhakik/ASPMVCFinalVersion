@@ -31,7 +31,7 @@ namespace projetASP.DAL
 
         public DbSet<Etudiant> etudiants { get; set; }
         public DbSet<Departement> departements { get; set; }
-
+        public DbSet<Config> Configs { get; set; }
         public DbSet<Filiere> Filieres { get; set; }
 
     }

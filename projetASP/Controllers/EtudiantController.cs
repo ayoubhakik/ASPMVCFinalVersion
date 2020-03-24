@@ -31,8 +31,16 @@ namespace projetASP.Controllers
         {
             ViewBag.Current = "Home";
 
+            if (UserValide.IsValid())
+            {
 
-            return View();
+                return View();
+            }
+            else
+            {
+                return RedirectToAction("Authentification1", "User");
+            }
+           
         }
 
 
@@ -47,15 +55,20 @@ namespace projetASP.Controllers
                  return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
              }*/
 
-            Etudiant etudiants = etudiantContext.etudiants.Find("9qdq");
+            Etudiant etudiants = etudiantContext.etudiants.Find(Session["userId"]);
 
 
-            if (etudiants == null)
+           
+            if (UserValide.IsValid())
             {
-                return HttpNotFound();
-            }
 
-            return View(etudiants);
+                return View(etudiants);
+            }
+            else
+            {
+                return RedirectToAction("Authentification1", "User");
+            }
+            
         }
 
 
@@ -68,10 +81,9 @@ namespace projetASP.Controllers
             /*Update name of buttom if user click in Upload l image seule va etre modifie 
              
              */
+            Etudiant etudiants = etudiantContext.etudiants.Find(etudiant.cne);
             if (ModelState.IsValid)
             {
-                Etudiant etudiants = etudiantContext.etudiants.Find(etudiant.cne);
-
                 if (Request.Files.Count > 0 && Update == "Upload")
                 {
                     //Recupere le fichier est le sauvegarder dans /image/
@@ -120,7 +132,7 @@ namespace projetASP.Controllers
                 }
 
             }
-            return View(etudiant);
+            return View(etudiants);
         }
         //****************************************************************************************************************************
 
@@ -130,7 +142,7 @@ namespace projetASP.Controllers
         public ActionResult Consulter()
         {
             ViewBag.Current = "Consulter";
-            Etudiant etudiants = etudiantContext.etudiants.Find("9qdq");
+            Etudiant etudiants = etudiantContext.etudiants.Find(Session["userId"]);
             if (UserValide.IsValid())
             {
 
@@ -158,7 +170,7 @@ namespace projetASP.Controllers
 
         public ActionResult PrintConsultation()
         {
-            Etudiant etudiants = etudiantContext.etudiants.Find("9qdq");
+            Etudiant etudiants = etudiantContext.etudiants.Find(Session["userId"]);
             var q = new ViewAsPdf("RecuEtudiant", etudiants);
             return q;
         }

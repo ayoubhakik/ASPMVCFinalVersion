@@ -90,8 +90,10 @@
                                     <label class="form-label form-label-top form-label-auto" id="label_15" for="input_15"> Date de Naissance </label>
                                     <div id="cid_17" class="form-input-wide">
 
-                                        @Html.EditorFor(model => model.dateNaiss, new { htmlAttributes = new { @class = "form-control" } })
+                                        @Html.EditorFor(model => model.dateNaiss, new { htmlAttributes = new { @class = "form-control", datetime_picker = true } })
                                         @Html.ValidationMessageFor(model => model.dateNaiss, "", new { @class = "text-danger" })
+                                        <label class="form-sub-label" for="input_7" id="sublabel_input_7" style="min-height:13px" aria-hidden="false"> yyyy/mm/dd </label>
+
                                     </div>
                                 </li>
 
@@ -116,7 +118,7 @@
                                 <li class="form-line" data-type="control_calculation" id="id_19">
                                     <label class="form-label form-label-top form-label-auto" id="label_19" for="input_19"> Phone number </label>
                                     <div class="form-input-wide">
-                                        @Html.EditorFor(model => model.phone, new { htmlAttributes = new { @class = "form-control", type = "number" } })
+                                        @Html.EditorFor(model => model.phone, new { htmlAttributes = new { @class = "form-control", type = "number",}})
                                         @Html.ValidationMessageFor(model => model.phone, "", new { @class = "text-danger" })
                                     </div>
                                 </li>
@@ -132,7 +134,7 @@
                                     <label class="form-label form-label-top form-label-auto" id="label_7" for="input_7"> Email </label>
                                     <div class="form-input-wide">
 
-                                        @Html.EditorFor(model => model.email, new { htmlAttributes = new { @class = "form-control" } })
+                                        @Html.EditorFor(model => model.email, new { htmlAttributes = new { @class = "form-control",type="email"}})
                                         @Html.ValidationMessageFor(model => model.email, "", new { @class = "text-danger" })
                                         <label class="form-sub-label" for="input_7" id="sublabel_input_7" style="min-height:13px" aria-hidden="false"> example@example.com </label>
 
@@ -142,7 +144,7 @@
                                     <label class="form-label form-label-top form-label-auto" id="label_7" for="input_7"> Adress </label>
                                     <div class="form-input-wide">
 
-                                        @Html.EditorFor(model => model.address, new { htmlAttributes = new { @class = "form-control" } })
+                                        @Html.EditorFor(model => model.address, new { htmlAttributes = new { @class = "form-control",}})
                                         @Html.ValidationMessageFor(model => model.address, "", new { @class = "text-danger" })
                                         <label class="form-sub-label" for="input_7" id="sublabel_input_7" style="min-height:13px" aria-hidden="false"> Street Adresse  </label>
 
@@ -189,16 +191,16 @@
                                                                 <label id="label_1_row_0"> Genie Informatique </label>
                                                             </th>
                                                             <td style="text-align:center" class="form-matrix-values">
-                                                                <input id="F1" type="radio" name="choix1" value="F" onClick=desactivefilieres() @(Model.choix.Substring(0, 1) == "F" ? "Checked" : "") />
+                                                                <input id="F1" type="radio" name="choix1" value="F" onClick=desactivefilieres() @(Model.choix.Substring(0, 1) == "F" ? "Checked" : "") required/>
 
                                                             </td>
                                                             <td style="text-align:center" class="form-matrix-values">
-                                                                <input id="F2" type="radio" name="choix2" value="F" onClick=desactivefilieres() @(Model.choix.Substring(1, 1) == "F" ? "Checked" : "") />
+                                                                <input id="F2" type="radio" name="choix2" value="F" onClick=desactivefilieres() @(Model.choix.Substring(1, 1) == "F" ? "Checked" : "") required/>
 
 
                                                             </td>
                                                             <td style="text-align:center" class="form-matrix-values">
-                                                                <input id="F3" type="radio" name="choix3" value="F" onClick=desactivefilieres() @(Model.choix.Substring(2, 1) == "F" ? "Checked" : "") />
+                                                                <input id="F3" type="radio" name="choix3" value="F" onClick=desactivefilieres() @(Model.choix.Substring(2, 1) == "F" ? "Checked" : "") required/>
 
                                                             </td>
                                                         </tr>
@@ -207,14 +209,14 @@
                                                                 <label id="label_1_row_1"> Genie Telecominication et Réseau </label>
                                                             </th>
                                                             <td style="text-align:center" class="form-matrix-values">
-                                                                <input id="T1" type="radio" name="choix1" value="T" onClick=desactivefilieres() @(Model.choix.Substring(0, 1) == "T" ? "Checked" : "") />
+                                                                <input id="T1" type="radio" name="choix1" value="T" onClick=desactivefilieres() @(Model.choix.Substring(0, 1) == "T" ? "Checked" : "") required/>
 
                                                             </td>
                                                             <td style="text-align:center" class="form-matrix-values">
-                                                                <input id="T2" type="radio" name="choix2" value="T" onClick=desactivefilieres() @(Model.choix.Substring(1, 1) == "T" ? "Checked" : "") />
+                                                                <input id="T2" type="radio" name="choix2" value="T" onClick=desactivefilieres() @(Model.choix.Substring(1, 1) == "T" ? "Checked" : "") required/>
                                                             </td>
                                                             <td style="text-align:center" class="form-matrix-values">
-                                                                <input id="T3" type="radio" name="choix3" value="T" onClick=desactivefilieres() @(Model.choix.Substring(2, 1) == "T" ? "Checked" : "")>
+                                                                <input id="T3" type="radio" name="choix3" value="T" onClick=desactivefilieres() @(Model.choix.Substring(2, 1) == "T" ? "Checked" : "") required/>
                                                             </td>
                                                         </tr>
                                                         <tr role="group" aria-labelledby="label_1 label_1_row_2">
@@ -222,13 +224,13 @@
                                                                 <label id="label_1_row_2"> Genie Indus </label>
                                                             </th>
                                                             <td style="text-align:center" class="form-matrix-values">
-                                                                <input id="D1" type="radio" name="choix1" value="D" onClick=desactivefilieres() @(Model.choix.Substring(0, 1) == "D" ? "Checked" : "") />
+                                                                <input id="D1" type="radio" name="choix1" value="D" onClick=desactivefilieres() @(Model.choix.Substring(0, 1) == "D" ? "Checked" : "") required />
                                                             </td>
                                                             <td style="text-align:center" class="form-matrix-values">
-                                                                <input id="D2" type="radio" name="choix2" value="D" onClick=desactivefilieres() @(Model.choix.Substring(1, 1) == "D" ? "Checked" : "") />
+                                                                <input id="D2" type="radio" name="choix2" value="D" onClick=desactivefilieres() @(Model.choix.Substring(1, 1) == "D" ? "Checked" : "") required/>
                                                             </td>
                                                             <td style="text-align:center" class="form-matrix-values">
-                                                                <input id="D3" type="radio" name="choix3" value="D" onClick=desactivefilieres() @(Model.choix.Substring(2, 1) == "D" ? "Checked" : "") />
+                                                                <input id="D3" type="radio" name="choix3" value="D" onClick=desactivefilieres() @(Model.choix.Substring(2, 1) == "D" ? "Checked" : "") required/>
 
                                                             </td>
                                                         </tr>
@@ -237,14 +239,14 @@
                                                                 <label id="label_1_row_3"> Genie Procede et M.C </label>
                                                             </th>
                                                             <td style="text-align:center" class="form-matrix-values">
-                                                                <input id="P1" type="radio" name="choix1" value="P" onClick=desactivefilieres() @(Model.choix.Substring(0, 1) == "P" ? "Checked" : "") />
+                                                                <input id="P1" type="radio" name="choix1" value="P" onClick=desactivefilieres() @(Model.choix.Substring(0, 1) == "P" ? "Checked" : "") required />
                                                             </td>
                                                             <td style="text-align:center" class="form-matrix-values">
-                                                                <input id="P2" type="radio" name="choix2" value="P" onClick=desactivefilieres() @(Model.choix.Substring(1, 1) == "P" ? "Checked" : "") />
+                                                                <input id="P2" type="radio" name="choix2" value="P" onClick=desactivefilieres() @(Model.choix.Substring(1, 1) == "P" ? "Checked" : "") required/>
 
                                                             </td>
                                                             <td style="text-align:center" class="form-matrix-values">
-                                                                <input id="P3" type="radio" name="choix3" value="P" onClick=desactivefilieres() @(Model.choix.Substring(2, 1) == "P" ? "Checked" : "") />
+                                                                <input id="P3" type="radio" name="choix3" value="P" onClick=desactivefilieres() @(Model.choix.Substring(2, 1) == "P" ? "Checked" : "") required/>
 
                                                             </td>
                                                         </tr>
