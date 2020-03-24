@@ -160,10 +160,15 @@
     <Compile Include="Migrations\202003181518443_InitialCreate.designer.cs">
       <DependentUpon>202003181518443_InitialCreate.cs</DependentUpon>
     </Compile>
+    <Compile Include="Migrations\202003241928044_IntialCreate1.cs" />
+    <Compile Include="Migrations\202003241928044_IntialCreate1.designer.cs">
+      <DependentUpon>202003241928044_IntialCreate1.cs</DependentUpon>
+    </Compile>
     <Compile Include="Migrations\Configuration.cs" />
     <Compile Include="Models\Departement.cs" />
     <Compile Include="Models\Etudiant.cs" />
     <Compile Include="Models\Filiere.cs" />
+    <Compile Include="Models\Settings.cs" />
     <Compile Include="Models\UserValide.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Content Include="Content\css\main2.css" />
@@ -623,6 +628,9 @@
   <ItemGroup>
     <EmbeddedResource Include="Migrations\202003181518443_InitialCreate.resx">
       <DependentUpon>202003181518443_InitialCreate.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\202003241928044_IntialCreate1.resx">
+      <DependentUpon>202003241928044_IntialCreate1.cs</DependentUpon>
     </EmbeddedResource>
   </ItemGroup>
   <PropertyGroup>

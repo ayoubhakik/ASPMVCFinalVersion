@@ -64,6 +64,7 @@ namespace projetASP.Models
         public double noteSndYear { get; set; }
 
         //[Required]
+        [DisplayFormat(ApplyFormatInEditMode = true, DataFormatString = "{0:dd/MM/yyyy}")]
         public DateTime dateNaiss { get; set; }
         //[Required]
         public string lieuNaiss { get; set; }
