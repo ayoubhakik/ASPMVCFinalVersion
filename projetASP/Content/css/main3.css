@@ -205,7 +205,7 @@ iframe {
     font-family: Montserrat-Regular;
     font-size: 13px;
     line-height: 1.4;
-    color: #555555;
+    color:#B49082;
 }
 
 .txt2 {
@@ -291,9 +291,6 @@ iframe {
 .wrapper {
     width: 100vw;
     height: 100vh;
-    display: -webkit-box;
-    display: -webkit-flex;
-    display: -ms-flexbox;
     display: flex;
     -webkit-box-orient: vertical;
     -webkit-box-direction: normal;
@@ -321,7 +318,7 @@ iframe {
         position: absolute;
         width: 350px;
         height: 350px;
-        background: #204773;
+        background: #061323;
         background-size: cover;
         z-index: 1;
         border-radius: 50%;
@@ -332,13 +329,12 @@ iframe {
 .hero {
     position: relative;
     width: 100%;
-    height: 900px;
-    -webkit-box-sizing: border-box;
-    box-sizing: border-box;
+    height: 800px;
+    background: rgb(50, 50, 50);
     padding: 0;
     margin: 0;
-    background: #204773;
-    background: linear-gradient(to right, #205993, #367ac8, #204773);
+    background: #061323;
+    background: linear-gradient(to right, #11273F, #061323, #204773);
     background-size: cover;
 }
 
@@ -360,16 +356,16 @@ ul {
 }
 
 .justdoit {
-    fill: rgb(182,156,121);
+    fill: #B49082;
 }
 
 #seconds {
-    stroke: rgb(182,156,121);
+    stroke: #B49082;
 }
 
 .time, .day {
     text-align: center;
-    color: rgb(182,156,121);
+    color: #B49082;
     font-size: 2rem;
     text-shadow: 0px 0px 15px black;
     opacity: .7;
@@ -380,12 +376,12 @@ ul {
     margin: 15px 0 0 0;
     font-weight: bold;
     font-size: 1.2rem;
-    color: rgb(182,156,121);
+    color: #B49082;
     font-family: 'Jura', sans-serif;
 }
 
 .week-active {
-    color: rgb(52,40,27);
+    color: white;
 }
 
 .time {
@@ -519,7 +515,7 @@ input.input100 {
     top: -1px;
     left: -1px;
     pointer-events: none;
-    border: 1px solid #ff8811;
+    border: 1px solid #061323;
     border-radius: 10px;
     visibility: hidden;
     opacity: 0;
@@ -633,7 +629,7 @@ input.input100 {
     display: flex;
     flex-wrap: wrap;
     justify-content: center;
-    background: #ff8811;
+    background: linear-gradient(to right, #11273F, #061323, #204773);
     border-radius: 10px;
 }
 
@@ -651,7 +647,6 @@ input.input100 {
     border-radius: 10px;
     font-family: Montserrat-Bold;
     font-size: 12px;
-    color: #204773;
     line-height: 1.2;
     text-transform: uppercase;
     letter-spacing: 1px;
@@ -660,7 +655,10 @@ input.input100 {
     -moz-transition: all 0.4s;
     transition: all 0.4s;
 }
-
+.login {
+    color: #B49082;
+    font-size:24px;
+}
     .login100-form-btn:hover {
         background: #002626;
     }

@@ -176,6 +176,7 @@
     <Content Include="Content\img\books.jpg" />
     <Content Include="Content\img\glisser.png" />
     <Content Include="Content\js\main.js" />
+    <Content Include="Content\js\main1.js" />
     <Content Include="Content\vendor\animate\animate.css" />
     <Content Include="Content\vendor\animsition\css\animsition.css" />
     <Content Include="Content\vendor\animsition\css\animsition.min.css" />
