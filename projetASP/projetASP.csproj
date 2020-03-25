@@ -167,10 +167,12 @@
     <Compile Include="Models\Settings.cs" />
     <Compile Include="Models\UserValide.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
-    <Content Include="Content\css\main2.css" />
+    <Content Include="Content\css\main3.css" />
     <Content Include="Content\css\util.css" />
     <Content Include="Content\img\books.jpg" />
+    <Content Include="Content\img\glisser.png" />
     <Content Include="Content\js\main.js" />
+    <Content Include="Content\js\main1.js" />
     <Content Include="Content\vendor\animate\animate.css" />
     <Content Include="Content\vendor\animsition\css\animsition.css" />
     <Content Include="Content\vendor\animsition\css\animsition.min.css" />
@@ -560,7 +562,6 @@
     <Content Include="Scripts\umd\popper-utils.min.js" />
     <Content Include="Scripts\umd\popper.js" />
     <Content Include="Scripts\umd\popper.min.js" />
-    <Content Include="Views\Web.config" />
     <Content Include="Views\_ViewStart.cshtml" />
     <Content Include="Views\Shared\Error.cshtml" />
     <Content Include="Views\Shared\_DepartementLayout.cshtml" />
@@ -592,6 +593,7 @@
     <Content Include="Views\Etudiant\RecuEtudiant.cshtml" />
     <Content Include="Views\User\Authentification1.cshtml" />
     <Content Include="Views\Departement\Setting.cshtml" />
+    <Content Include="Views\Web.config" />
     <None Include="Web.Debug.config">
       <DependentUpon>Web.config</DependentUpon>
     </None>
