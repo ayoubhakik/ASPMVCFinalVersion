@@ -194,17 +194,80 @@ namespace projetASP.Controllers
                 EtudiantContext db = new EtudiantContext();
                 //return a  list sorted in a desendent way
                 List<Etudiant> list = db.etudiants.OrderByDescending(e => (e.noteFstYear + e.noteSndYear) / 2).ToList();
+                ////////partie statistique
+                int info = 0, indus = 0, gtr = 0, gpmc = 0;
+
+                //variable pour les nombre totale et le reste qui n'a pas choisi les filieres
+                int nbrTotal = list.Count, nbrReste = 0;
+
+                for (int i = 0; i < nbrTotal; i++)
+                {
+                    if (list[i].choix == null)//&& !redoubler
+                    {
+                        //un etudiant avec null dans choix alors on va l'es ajouter dans le reste
+                        nbrReste++;
+                    }
+                    //sinon on va traiter les choix comme ca
+                    else
+                    {
+                        char[] chiffr = (list[i].choix).ToCharArray();
+
+                        if (chiffr[0] == 'F')
+                        {
+                            info++;
+                        }
+                        if (chiffr[0] == 'P')
+                        {
+                            gpmc++;
+                        }
+                        if (chiffr[0] == 'T')
+                        {
+                            gtr++;
+                        }
+                        if (chiffr[0] == 'D')
+                        {
+                            indus++;
+                        }
+                    }
+
+                }
+
+                ViewBag.info = info;
+                ViewBag.gtr = gtr;
+                ViewBag.gpmc = gpmc;
+                ViewBag.indus = indus;
+
+
+
 
                 //the maximum number for each class will be the total/4
                 int indexInfo = 0;
                 int indexGtr = 0;
                 int indexIndus = 0;
                 int indexGpmc = 0;
-                //the max numbers
+                //the max numbers]
                 int maxInfo = list.Count / 4;
-                int maxGtr= list.Count / 4;
+                int maxGtr = list.Count / 4;
                 int maxIndus = list.Count / 4;
-                int maxGpmc = list.Count/4 + (list.Count%4);
+                int maxGpmc = list.Count / 4;
+
+                if (info>=indus && info >= gtr && info >= gpmc)
+                {
+                    maxInfo+= +(list.Count % 4);
+                }
+                if (indus >= info && indus >= gtr && indus >= gpmc)
+                {
+                     maxIndus += (list.Count % 4);
+                }
+                if (gpmc >= indus && gpmc >= gtr && gpmc >= indus)
+                {
+                     maxGpmc  += (list.Count % 4); 
+                }
+                else
+                {
+                     maxGtr += (list.Count % 4); 
+                }
+
 
 
                 for (int i=0;i<list.Count;i++)

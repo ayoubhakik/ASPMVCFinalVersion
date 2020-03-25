@@ -81,6 +81,8 @@ namespace projetASP.Models
 
         public bool modified = false;
         public bool Modified { get; set; }
+        public bool redoubler = false;
+        public bool Redoubler { get; set; }
 
         [ForeignKey("Filiere")]
         public Nullable<int> idFil { get; set; }

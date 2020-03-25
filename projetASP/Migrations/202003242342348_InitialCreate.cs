@@ -47,6 +47,7 @@
                         choix = c.String(),
                         Validated = c.Boolean(nullable: false),
                         Modified = c.Boolean(nullable: false),
+                        Redoubler = c.Boolean(nullable: false),
                         idFil = c.Int(),
                     })
                 .PrimaryKey(t => t.cne)
@@ -62,12 +63,26 @@
                     })
                 .PrimaryKey(t => t.idFil);
             
+            CreateTable(
+                "dbo.Settings",
+                c => new
+                    {
+                        idSettings = c.Int(nullable: false, identity: true),
+                        Delai = c.DateTime(nullable: false),
+                        importEtudiant = c.Boolean(nullable: false),
+                        importNote = c.Boolean(nullable: false),
+                        Attributted = c.Boolean(nullable: false),
+                        DatedeRappel = c.DateTime(nullable: false),
+                    })
+                .PrimaryKey(t => t.idSettings);
+            
         }
         
         public override void Down()
         {
             DropForeignKey("dbo.Etudiants", "idFil", "dbo.Filieres");
             DropIndex("dbo.Etudiants", new[] { "idFil" });
+            DropTable("dbo.Settings");
             DropTable("dbo.Filieres");
             DropTable("dbo.Etudiants");
             DropTable("dbo.Departements");
