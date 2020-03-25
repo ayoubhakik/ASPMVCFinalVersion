@@ -16,8 +16,18 @@ namespace projetASP.Controllers
         // GET: Departement
         public ActionResult Setting()
         {
-            ViewBag.Current = "Setting";
-            return View();
+            if (UserValide.IsValid())
+            {
+                EtudiantContext db = new EtudiantContext();
+
+
+                ViewBag.Current = "Setting";
+
+                return View();
+            }
+            else
+                return RedirectToAction("Authentification", "User");
+            
         }
         public ActionResult Index()
         {
