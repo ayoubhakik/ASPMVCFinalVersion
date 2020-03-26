@@ -24,7 +24,7 @@
                     <li>Mot de pass</li>
                     <li>Choix De Filiere</li>
                 </ul>
-                <!-- fieldsets -->
+
         <fieldset>
             <h2 class="fs-title">Données Personnelles</h2>
             <h3 class="fs-subtitle">Post Modern Jukebox</h3>
@@ -174,9 +174,16 @@
         $(".submit").click(function () {
             var pass = document.getElementById("pass").value;
             var cpass = document.getElementById("cpass").value;
-
             if (pass != cpass) {
                 alert("Les deux mots de pass doivent correspondre !");
+                return false;
+            }
+            else if (cin != ccin) {
+                alert("Les deux cin doivent correspondre !");
+                return false;
+            }
+            else if (email != cemail) {
+                alert("Les deux email doivent correspondre !");
                 return false;
             }
             else

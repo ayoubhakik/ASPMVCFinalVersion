@@ -260,10 +260,28 @@ namespace projetASP.Controllers
                     e.lieuNaiss = student.lieuNaiss;
                     e.choix = choix1 + choix2 + choix3;
                     etudiantContext.SaveChanges();
-                    return RedirectToAction("Authentification","User");
+                    return RedirectToAction("Authentification", "User");
                 }
-                
             }
+
+
+            /*else
+            {
+                if (!student.password.Equals(e.password))
+                {
+                    ViewBag.message = "Mot de pass incorrect !";
+                    return View();
+                }
+
+                else
+                {
+                    e.validated = true;
+                    etudiantContext.SaveChanges();
+                    return null;
+                }
+            }
+
+        }*/
             else return View();
         }
     
@@ -308,7 +326,7 @@ namespace projetASP.Controllers
                 client.Send(Message);
                 return true;
             }
-            catch (Exception ex)
+            catch (Exception e)
             {
                 return false;
             }

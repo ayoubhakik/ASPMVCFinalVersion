@@ -61,8 +61,15 @@ namespace projetASP.Models
         public string mentionBac { get; set; }
 
         public double noteFstYear { get; set; }
-
+        
         public double noteSndYear { get; set; }
+
+       /* //[Required]
+        [DisplayFormat(ApplyFormatInEditMode = true, DataFormatString = "{0:dd/MM/yyyy}")]
+        public DateTime dateNaiss { get; set; }
+        //[Required]
+        public string lieuNaiss { get; set; }*/
+
 
         [DisplayFormat(ApplyFormatInEditMode = true, DataFormatString = "{0:dd/MM/yyyy}")]
         public Nullable<DateTime> dateNaiss { get; set; }

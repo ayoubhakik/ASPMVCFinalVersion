@@ -128,14 +128,15 @@ namespace projetASP.Controllers
         }
 
         // GET: Departement
+
         [HttpPost]
-        public ActionResult Setting(DateTime dateNotification,DateTime dateAttribution)
+        public ActionResult Setting(DateTime dateNotification, DateTime dateAttribution)
         {
             if (UserValide.IsValid())
             {
                 EtudiantContext db = new EtudiantContext();
 
-                if (dateNotification!=null)
+                if (dateNotification != null)
                 {
                     db.settings.FirstOrDefault().DatedeRappel = dateNotification;
                 }
@@ -151,9 +152,10 @@ namespace projetASP.Controllers
             }
             else
                 return RedirectToAction("Authentification", "User");
-            
-        }
 
+
+
+        }
         public ActionResult Index()
         {
             
@@ -233,7 +235,11 @@ namespace projetASP.Controllers
 
 
                             e.typeBac = workSheet.Cells[rowIterator, 11].Value.ToString();*/
+
                             //e.anneeBac = Convert.ToDateTime(DateTime.Now);
+
+                            //e.anneeBac = Convert.ToDateTime(DateTime.Now);
+
                             e.dateNaiss = Convert.ToDateTime(DateTime.Now);
                             /*
                             e.noteBac = Convert.ToDouble(workSheet.Cells[rowIterator, 13].Value);
@@ -348,6 +354,7 @@ namespace projetASP.Controllers
                 EtudiantContext db = new EtudiantContext();
                 //return a  list sorted in a desendent way
                 List<Etudiant> list = db.etudiants.OrderByDescending(e => (e.noteFstYear + e.noteSndYear) / 2).ToList();
+
                 ////////partie statistique
                 int info = 0, indus = 0, gtr = 0, gpmc = 0;
 
@@ -394,11 +401,13 @@ namespace projetASP.Controllers
 
 
 
+
                 //the maximum number for each class will be the total/4
                 int indexInfo = 0;
                 int indexGtr = 0;
                 int indexIndus = 0;
                 int indexGpmc = 0;
+
                 //the max numbers]
                 int maxInfo = (list.Count-nbrRedoublant) / 4;
                 int maxGtr = (list.Count - nbrRedoublant) / 4;
@@ -423,11 +432,22 @@ namespace projetASP.Controllers
                 }
 
 
+                /*the max numbers
+                int maxInfo = list.Count / 4;
+                int maxGtr= list.Count / 4;
+                int maxIndus = list.Count / 4;
+                int maxGpmc = list.Count/4 + (list.Count%4);
+                */
+
 
                 for (int i=0;i<list.Count;i++)
                 {
                     //verification de l'etudiant si deja a choisi une filiere sinon on va lui attribuer la derniere filiere (gpmc->indus->gtr->info)
+
                     if (list[i].choix != null && !list[i].Redoubler )
+
+                    if (list[i].choix != null)
+
                     {
                         //parse to a table of chars
                         char[] choice = list[i].choix.ToCharArray();
@@ -498,6 +518,7 @@ namespace projetASP.Controllers
                 }
 
                 //list =list.OrderBy(e => (e.noteFstYear+e.noteSndYear)/2);
+
                 db.settings.First().Attributted = true;
 
                 db.SaveChanges();
@@ -524,6 +545,7 @@ namespace projetASP.Controllers
 
                 for (int i=0;i<nbrTotal;i++)
                 {
+
                     if (list[i].Redoubler)
                     {
                         if (list[i].choix == null)
@@ -557,6 +579,35 @@ namespace projetASP.Controllers
                         }
 
                     }
+
+                    if (list[i].choix==null)
+                    {
+                        //un etudiant avec null dans choix alors on va l'es ajouter dans le reste
+                        nbrReste++;
+                    }
+                    //sinon on va traiter les choix comme ca
+                    else
+                    {
+                        char[] chiffr = (list[i].choix).ToCharArray();
+
+                        if (chiffr[0] == 'F')
+                        {
+                            info++;
+                        }
+                        if (chiffr[0] == 'P')
+                        {
+                            gpmc++;
+                        }
+                        if (chiffr[0] == 'T')
+                        {
+                            gtr++;
+                        }
+                        if (chiffr[0] == 'D')
+                        {
+                            indus++;
+                        }
+                    }
+                   
 
                 }
                 ViewBag.nbrTotal = nbrTotal;
@@ -643,7 +694,10 @@ namespace projetASP.Controllers
 
             string[] vx = { "info", "indus", "gtr", "gpmc" };
             double[] vy ={infoP, indusP, gtrP, gpmcP };
+
             System.Web.Helpers.Chart chart=new System.Web.Helpers.Chart(width:900,height:400, theme: ChartTheme.Blue);
+
+          
             chart.AddSeries(chartType: "Column", xValue: vx, yValues: vy);
             chart.Write("png");
             return null;

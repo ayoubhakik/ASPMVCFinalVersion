@@ -36,10 +36,13 @@
     <link rel="stylesheet" type="text/css" href="~/Content/css/main3.css">
     <!--===============================================================================================-->
 </head>
-<body style="background-color: #666666;">
+<body >
 
     <div class="limiter">
-        <div class="container-login100">
+        <div class="container-login100" style="background: linear-gradient(-225deg,  #061323 0%,#B49082  100%);
+background: linear-gradient(to top,#B49082 0%, #204773 100%);
+background-attachment: fixed;
+  background-repeat: no-repeat;">
             <div class="wrap-login100">
 
                 @using (Html.BeginForm("Authentification1", "User", FormMethod.Post, new { @class = "login100-form validate-form" }))
@@ -97,9 +100,19 @@
                     </div>
 
                 }
+                <section id="slideshow">
+                    <div class="entire-content">
+                        <div class="content-carrousel">
+                            <figure class="shadow"><img src="~/Content/img/gpmc.jpg"  /></figure>
+                            <figure class="shadow"><img src="~/Content/img/gtr.jpg"  /></figure>
+                            <figure class="shadow"><img src="~/Content/img/indus.jpg"  /></figure>
 
-                <div class="login100-more" style="background-image: url('../Content/img/books.jpg');">
-                </div>
+                            <figure class="shadow"><img src="~/Content/img/info.jpg" /></figure>
+                            
+                        </div>
+                    </div>
+                </section>
+            </div>
             </div>
         </div>
     </div>

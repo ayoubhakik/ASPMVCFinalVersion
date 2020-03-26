@@ -17,25 +17,27 @@
     <!-- CSS Just for demo purpose, don't include it in your project -->
     <link href="../../Content/demo/demo.css" rel="stylesheet" />
     <style>
-        .nomColored {
-            background-color:gray;
-        }
+
         .nav-link{
             color:white;
+            background-color:white;
         }
     </style>
 </head>
 <body class="light-edition">
     <div class="wrapper ">
-        <div class="sidebar" data-color="orange" style="background:linear-gradient(to right, #11273F, #061323, #204773);" >
+
+        <div class="sidebar"   style="background:linear-gradient(to bottom, #11273F, #061323, #204773); " >
             <!--
                 Tip 1: You can change the color of the sidebar using: data-color="purple | azure | green | orange | danger"
                 
                 Tip 2: you can also add an image using data-image tag
             -->
 
+
             <div class="sidebar-wrapper" style="color:white">
                 <ul class="nav">
+
 
 
                     <li class="nomColored">
@@ -87,6 +89,7 @@
                             <p>Statistiques</p>
                         </a>
                     </li>
+
                     <li class="@(ViewBag.Current == "Corbeille" ? "nav-tem active" : "nav-item")">
                         <a href='@Url.Action("Corbeille","Departement")' class="nav-link">
                             <i class="material-icons">delete</i>
