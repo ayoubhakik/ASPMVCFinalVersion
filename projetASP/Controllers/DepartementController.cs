@@ -164,9 +164,9 @@ namespace projetASP.Controllers
                     EtudiantContext db = new EtudiantContext();
                     db.etudiants.Find(id).Redoubler = true;
                     db.SaveChanges();
-                    ViewBag.Current = "Corbeille";
+                    ViewBag.Current = "Index";
 
-                    return RedirectToAction("Corbeille");
+                    return RedirectToAction("Index");
                 }
                 else return RedirectToAction("Authentification", "User");
 
@@ -259,6 +259,13 @@ namespace projetASP.Controllers
             ViewBag.Current = "importerEtudiants";
             if (UserValide.IsValid())
             {
+
+                EtudiantContext db = new EtudiantContext();
+                if (db.settings.FirstOrDefault().importEtudiant)
+                {
+                    return View();
+                }
+                ViewBag.err = true;
                 return View();
             }
             else
@@ -605,9 +612,9 @@ namespace projetASP.Controllers
 
                 for (int i=0;i<nbrTotal;i++)
                 {
-                    if (list[i].Redoubler)
+                    if (!list[i].Redoubler)
                     {
-                        if (list[i].choix == null)
+                        if (!list[i].Validated)
                         {
 
                             //un etudiant avec null dans choix alors on va l'es ajouter dans le reste
@@ -647,12 +654,12 @@ namespace projetASP.Controllers
                 ViewBag.gpmc = gpmc;
                 ViewBag.indus = indus;
                 //les pourcentages
-                ViewBag.nbrTotalP =  Convert.ToDouble(nbrTotal)/ Convert.ToDouble(nbrTotal) * 100;
-                ViewBag.nbrResteP = Convert.ToDouble(nbrReste) / Convert.ToDouble(nbrTotal) * 100;
-                ViewBag.infoP = Convert.ToDouble(info)/ Convert.ToDouble(nbrTotal) * 100;
-                ViewBag.gtrP = Convert.ToDouble(gtr)/ Convert.ToDouble(nbrTotal) * 100;
-                ViewBag.gpmcP = Convert.ToDouble(gpmc) / Convert.ToDouble(nbrTotal) * 100;
-                ViewBag.indusP = Convert.ToDouble(indus) / Convert.ToDouble(nbrTotal) * 100;
+                ViewBag.nbrTotalP = Convert.ToInt32( Convert.ToDouble(nbrTotal)/ Convert.ToDouble(nbrTotal) * 100);
+                ViewBag.nbrResteP = Convert.ToInt32(Convert.ToDouble(nbrReste) / Convert.ToDouble(nbrTotal) * 100);
+                ViewBag.infoP = Convert.ToInt32(Convert.ToDouble(info)/ Convert.ToDouble(nbrTotal) * 100);
+                ViewBag.gtrP = Convert.ToInt32(Convert.ToDouble(gtr)/ Convert.ToDouble(nbrTotal) * 100);
+                ViewBag.gpmcP = Convert.ToInt32(Convert.ToDouble(gpmc) / Convert.ToDouble(nbrTotal) * 100);
+                ViewBag.indusP = Convert.ToInt32(Convert.ToDouble(indus) / Convert.ToDouble(nbrTotal) * 100);
                 return View();
             }
             else

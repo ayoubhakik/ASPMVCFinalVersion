@@ -260,7 +260,7 @@ namespace projetASP.Controllers
                     e.lieuNaiss = student.lieuNaiss;
                     e.choix = choix1 + choix2 + choix3;
                     etudiantContext.SaveChanges();
-                    return RedirectToAction("Authentification","User");
+                    return RedirectToAction("Authentification1","User");
                 }
                 
             }
