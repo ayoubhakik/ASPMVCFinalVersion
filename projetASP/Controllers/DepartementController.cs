@@ -38,6 +38,8 @@ namespace projetASP.Controllers
             
 
         }
+        /*
+         * on a pas les emails des etudiants non valide
         public ActionResult EnvoyerNotification()
         {
             if (UserValide.IsValid())
@@ -61,7 +63,7 @@ namespace projetASP.Controllers
             else
                 return RedirectToAction("Authentification", "User");
         }
-
+        */
         public bool SendEmail(String toEmail, string subject, string EmailBody)
         {
             try
