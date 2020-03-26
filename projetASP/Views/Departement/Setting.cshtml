@@ -122,8 +122,9 @@
                 background: #6B9FFF;
                 color: #fff;
             }
-    .excep{
-        padding-left:-10px;
+
+    .excep {
+        padding-left: -10px;
     }
 </style>
 
@@ -132,15 +133,15 @@
 <br />
 @using (Html.BeginForm("Setting", "Departement", FormMethod.Post, new { @class = "form-style-7", enctype = "multipart/form-data" }))
 {
-<h2>
-    <center>
-        <i class="material-icons">settings</i>
-        Setting
-    </center>
-    
-</h2>
+    <h2>
+        <center>
+            <i class="material-icons">settings</i>
+            Setting
+        </center>
+
+    </h2>
     <br /><br />
-    
+
     <ul>
         <li class="excep">
             <p color="gray">
@@ -171,7 +172,14 @@
         </li>
     </ul>
 }
-
+@using (Html.BeginForm("DeleteAllStudents", "Departement", FormMethod.Post, new { enctype = "multipart/form-data" }))
+{
+    <input type="submit" value="Clear Database">
+}
+@using (Html.BeginForm("DeleteImportedStudents", "Departement", FormMethod.Post, new { enctype = "multipart/form-data" }))
+{
+    <input type="submit" value="Supprimer les Etudiants">
+}
 <script type="text/javascript">
     //auto expand textarea
     function adjust_textarea(h) {

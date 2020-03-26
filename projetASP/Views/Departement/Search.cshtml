@@ -1,0 +1,92 @@
+﻿
+@{
+    Layout = "~/Views/Shared/_DepartementLayout.cshtml";
+}
+<div class="content">
+    <div class="container-fluid">
+        <div class="row">
+            <div class="col-lg-12 col-md-12">
+                <div class="card">
+                    <div class="card-header card-header-success">
+                        <h2 class="card-title">Resultat de Recherche</h2>
+                    </div>
+                    <div class="card-body table-responsive">
+
+
+
+                        <table class="table table-hover">
+                            @if (ViewBag.error)
+                            {
+                                <tr><center>Etudiant not found</center></tr>
+                            }
+                            else
+                            {
+                                <thead class="text-warning">
+                                <th>Cne</th>
+                                <th>Cin</th>
+                                <th>Nom</th>
+                                <th>Prenom</th>
+                                <th>Choix</th>
+                                <th>Note premiere annee</th>
+                                <th>Note deuxieme annee</th>
+                                <th>Note generale</th>
+
+                                <th>valide ?</th>
+                                </thead>
+                                <tbody>
+
+                                    <tr>
+                                        <th>
+                                            @Model.cne
+                                        </th>
+                                        <th>
+                                            @Model.cin
+                                        </th>
+                                        <td>
+                                            @Model.nom
+                                        </td>
+                                        <td>
+                                            @Model.prenom
+                                        </td>
+                                        <th>
+                                            @Model.choix
+                                        </th>
+                                        <td>
+                                            @Model.noteFstYear
+                                        </td>
+                                        <th>
+                                            @Model.noteSndYear
+                                        </th>
+                                        <th>
+                                            @((Model.noteFstYear + Model.noteFstYear) / 2)
+                                        </th>
+                                        <td>
+                                            @if (@Model.Validated)
+                                            {
+                                            <span>Oui</span>
+                                            }
+                                            else
+                                            {
+                                            <span>Non</span>
+                                            }
+
+                                        </td>
+
+
+                                    </tr>
+                                    
+
+                                </tbody>
+                            }
+                            </table>
+                    </div>
+                </div>
+            </div>
+
+
+
+        </div>
+    </div>
+</div>
+
+

@@ -42,44 +42,48 @@
 
                                     foreach (var item in Model)
                                     {
-                                <tr>
-                                    <th>
-                                        @Html.DisplayFor(modelItem => item.cne)
-                                    </th>
-                                    <th>
-                                        @Html.DisplayFor(modelItem => item.cin)
-                                    </th>
-                                    <td>
-                                        @Html.DisplayFor(modelItem => item.nom)
-                                    </td>
-                                    <td>
-                                        @Html.DisplayFor(modelItem => item.prenom)
-                                    </td>
-                                    <th>
-                                        @Html.DisplayFor(modelItem => item.choix)
-                                    </th>
-                                    <td>
-                                        @Html.DisplayFor(modelItem => item.noteFstYear)
-                                    </td>
-                                    <th>
-                                        @Html.DisplayFor(modelItem => item.noteSndYear)
-                                    </th>
-                                    <th>
-                                        @((item.noteSndYear+item.noteFstYear)/2)
-                                    </th>
-                                    <td>
-                                        @if (item.Validated == true)
-                                        {
-                                            <span>Oui</span>
-                                        }
-                                        else
-                                        {
-                                            <span>Non</span>
-                                        }
-                                    </td>
+                                        if (!item.Redoubler) { 
+                                            <tr>
+                                                <th>
+                                                    @Html.DisplayFor(modelItem => item.cne)
+                                                </th>
+                                                <th>
+                                                    @Html.DisplayFor(modelItem => item.cin)
+                                                </th>
+                                                <td>
+                                                    @Html.DisplayFor(modelItem => item.nom)
+                                                </td>
+                                                <td>
+                                                    @Html.DisplayFor(modelItem => item.prenom)
+                                                </td>
+                                                <th>
+                                                    @Html.DisplayFor(modelItem => item.choix)
+                                                </th>
+                                                <td>
+                                                    @Html.DisplayFor(modelItem => item.noteFstYear)
+                                                </td>
+                                                <th>
+                                                    @Html.DisplayFor(modelItem => item.noteSndYear)
+                                                </th>
+                                                <th>
+                                                    @((item.noteSndYear + item.noteFstYear) / 2)
+                                                </th>
+                                                <td>
+                                                    @if (item.Validated == true)
+                                                    {
+                                                        <span>Oui</span>
+                                                    }
+                                                    else
+                                                    {
+                                                        <span>Non </span>
+                                                    }
+                                                    @Html.ActionLink("  Supprimer", "SupprimerEtudiant", new { id = item.cne })
+
+                                                </td>
 
 
-                                </tr>
+                                            </tr>
+                                        }
                                     }
 
                                 }

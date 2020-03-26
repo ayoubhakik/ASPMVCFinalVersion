@@ -13,6 +13,97 @@ namespace projetASP.Controllers
 {
     public class DepartementController : Controller
     {
+
+        public ActionResult DeleteAllStudents()
+        {
+            if (UserValide.IsValid())
+            {
+                    EtudiantContext db = new EtudiantContext();
+                    for (int i = 0; i < db.etudiants.ToList().Count; i++)
+                    {
+                            db.etudiants.Remove(db.etudiants.ToList()[i]);
+                    }
+                    db.SaveChanges();
+                    return RedirectToAction("Index");
+            }
+            else
+                return RedirectToAction("Authentification", "User");
+        }
+
+        public ActionResult Search(string cne)
+        {
+            if (UserValide.IsValid())
+            {
+                EtudiantContext db = new EtudiantContext();
+                Etudiant e = db.etudiants.Find(cne);
+                ViewBag.error = false;
+                if (e==null)
+                {
+                    ViewBag.error =true;
+                    return View();
+                }
+                return View(e);
+            }
+            else
+                return RedirectToAction("Authentification", "User");
+        }
+        //suppression des etudiants importes mais pas les redoublants
+        public ActionResult DeleteImportedStudents()
+        {
+            if (UserValide.IsValid())
+            {
+                EtudiantContext db = new EtudiantContext();
+                for (int i=0;i<db.etudiants.ToList().Count;i++)
+                {
+                    if (db.etudiants.ToList()[i].Redoubler == false)
+                    {
+                        db.etudiants.Remove(db.etudiants.ToList()[i]);
+                    }
+                }
+                db.SaveChanges();
+                
+                return RedirectToAction("Index");
+            }
+            else
+                return RedirectToAction("Authentification", "User");
+
+        }
+
+        //suppression des etudiants (placer les etudiants redoublants dans la corbeille)
+        public ActionResult SupprimerEtudiant(string id)
+        {
+            if (UserValide.IsValid())
+            {
+                if (id!=null)
+                {
+                    EtudiantContext db = new EtudiantContext();
+                    db.etudiants.Find(id).Redoubler = true;
+                    db.SaveChanges();
+                    ViewBag.Current = "Corbeille";
+
+                    return RedirectToAction("Corbeille");
+                }
+                else return RedirectToAction("Authentification", "User");
+
+            }
+            else
+                return RedirectToAction("Authentification", "User");
+        }
+        public ActionResult Corbeille()
+        {
+            if (UserValide.IsValid())
+            {
+                EtudiantContext db = new EtudiantContext();
+
+
+                ViewBag.Current = "Corbeille";
+
+                return View(db.etudiants.ToList());
+            }
+            else
+                return RedirectToAction("Authentification", "User");
+
+        }
         // GET: Departement
         public ActionResult Setting()
         {
@@ -29,6 +120,7 @@ namespace projetASP.Controllers
                 return RedirectToAction("Authentification", "User");
             
         }
+
         public ActionResult Index()
         {
             
@@ -208,14 +300,14 @@ namespace projetASP.Controllers
                 int info = 0, indus = 0, gtr = 0, gpmc = 0;
 
                 //variable pour les nombre totale et le reste qui n'a pas choisi les filieres
-                int nbrTotal = list.Count, nbrReste = 0;
+                int nbrTotal = list.Count, nbrRedoublant = 0;
 
                 for (int i = 0; i < nbrTotal; i++)
                 {
-                    if (list[i].choix == null)//&& !redoubler
+                    if (list[i].Redoubler)
                     {
                         //un etudiant avec null dans choix alors on va l'es ajouter dans le reste
-                        nbrReste++;
+                        nbrRedoublant++;
                     }
                     //sinon on va traiter les choix comme ca
                     else
@@ -256,26 +348,26 @@ namespace projetASP.Controllers
                 int indexIndus = 0;
                 int indexGpmc = 0;
                 //the max numbers]
-                int maxInfo = list.Count / 4;
-                int maxGtr = list.Count / 4;
-                int maxIndus = list.Count / 4;
-                int maxGpmc = list.Count / 4;
+                int maxInfo = (list.Count-nbrRedoublant) / 4;
+                int maxGtr = (list.Count - nbrRedoublant) / 4;
+                int maxIndus = (list.Count - nbrRedoublant) / 4;
+                int maxGpmc = (list.Count - nbrRedoublant) / 4;
 
                 if (info>=indus && info >= gtr && info >= gpmc)
                 {
-                    maxInfo+= +(list.Count % 4);
+                    maxInfo+= +((list.Count - nbrRedoublant) % 4);
                 }
                 if (indus >= info && indus >= gtr && indus >= gpmc)
                 {
-                     maxIndus += (list.Count % 4);
+                     maxIndus += ((list.Count - nbrRedoublant) % 4);
                 }
                 if (gpmc >= indus && gpmc >= gtr && gpmc >= indus)
                 {
-                     maxGpmc  += (list.Count % 4); 
+                     maxGpmc  += ((list.Count - nbrRedoublant) % 4); 
                 }
                 else
                 {
-                     maxGtr += (list.Count % 4); 
+                     maxGtr += ((list.Count - nbrRedoublant) % 4); 
                 }
 
 
@@ -283,7 +375,7 @@ namespace projetASP.Controllers
                 for (int i=0;i<list.Count;i++)
                 {
                     //verification de l'etudiant si deja a choisi une filiere sinon on va lui attribuer la derniere filiere (gpmc->indus->gtr->info)
-                    if (list[i].choix != null)
+                    if (list[i].choix != null && !list[i].Redoubler )
                     {
                         //parse to a table of chars
                         char[] choice = list[i].choix.ToCharArray();
@@ -378,34 +470,40 @@ namespace projetASP.Controllers
 
                 for (int i=0;i<nbrTotal;i++)
                 {
-                    if (list[i].choix==null)
+                    if (list[i].Redoubler)
                     {
-                        //un etudiant avec null dans choix alors on va l'es ajouter dans le reste
-                        nbrReste++;
-                    }
-                    //sinon on va traiter les choix comme ca
-                    else
-                    {
-                        char[] chiffr = (list[i].choix).ToCharArray();
+                        if (list[i].choix == null)
+                        {
 
-                        if (chiffr[0] == 'F')
-                        {
-                            info++;
+                            //un etudiant avec null dans choix alors on va l'es ajouter dans le reste
+                            nbrReste++;
                         }
-                        if (chiffr[0] == 'P')
+                        //sinon on va traiter les choix comme ca
+                        else
                         {
-                            gpmc++;
+
+                            char[] chiffr = (list[i].choix).ToCharArray();
+
+                            if (chiffr[0] == 'F')
+                            {
+                                info++;
+                            }
+                            if (chiffr[0] == 'P')
+                            {
+                                gpmc++;
+                            }
+                            if (chiffr[0] == 'T')
+                            {
+                                gtr++;
+                            }
+                            if (chiffr[0] == 'D')
+                            {
+                                indus++;
+                            }
                         }
-                        if (chiffr[0] == 'T')
-                        {
-                            gtr++;
-                        }
-                        if (chiffr[0] == 'D')
-                        {
-                            indus++;
-                        }
+
                     }
-                   
+
                 }
                 ViewBag.nbrTotal = nbrTotal;
                 ViewBag.nbrReste = nbrReste;
