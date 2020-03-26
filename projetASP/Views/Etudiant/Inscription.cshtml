@@ -36,6 +36,7 @@
             @Html.ValidationMessageFor(x => x.cin)
             @Html.TextBoxFor(x => x.cne, new { placeholder = "CNE" })
             @Html.ValidationMessageFor(x => x.cne)
+            @Html.LabelFor(x => x.dateNaiss,"Date de naissance")
             @Html.TextBoxFor(x => x.dateNaiss, new { type = "date" })
             @Html.ValidationMessageFor(x => x.dateNaiss)
             @Html.TextBoxFor(x => x.lieuNaiss, new { placeholder = "Lieu de naissance" })
