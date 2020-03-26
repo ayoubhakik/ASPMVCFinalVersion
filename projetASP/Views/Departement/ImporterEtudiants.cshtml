@@ -167,6 +167,10 @@
         </li>
 
         <li>
+            @if (ViewBag.errI != null)
+            {
+                <span color="red">Probleme dans le fichier, verifier l'extension.</span>
+            }
             <br />
             <input type="submit" class="btn btn-default" value="Importer" />
         </li>

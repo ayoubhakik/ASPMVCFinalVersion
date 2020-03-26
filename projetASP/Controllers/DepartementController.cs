@@ -11,9 +11,9 @@ using System.Web.Mvc;
 
 namespace projetASP.Controllers
 {
+    
     public class DepartementController : Controller
     {
-
         public ActionResult DeleteAllStudents()
         {
             if (UserValide.IsValid())
@@ -60,6 +60,11 @@ namespace projetASP.Controllers
                         db.etudiants.Remove(db.etudiants.ToList()[i]);
                     }
                 }
+
+                db.settings.First().Attributted = false;
+                db.settings.First().importEtudiant = false;
+                db.settings.First().importNote = false;
+
                 db.SaveChanges();
                 
                 return RedirectToAction("Index");
@@ -104,17 +109,45 @@ namespace projetASP.Controllers
                 return RedirectToAction("Authentification", "User");
 
         }
-        // GET: Departement
+
         public ActionResult Setting()
         {
             if (UserValide.IsValid())
             {
                 EtudiantContext db = new EtudiantContext();
 
-
+                
+                db.SaveChanges();
                 ViewBag.Current = "Setting";
 
-                return View();
+                return View("Setting");
+            }
+            else
+                return RedirectToAction("Authentification", "User");
+
+        }
+
+        // GET: Departement
+        [HttpPost]
+        public ActionResult Setting(DateTime dateNotification,DateTime dateAttribution)
+        {
+            if (UserValide.IsValid())
+            {
+                EtudiantContext db = new EtudiantContext();
+
+                if (dateNotification!=null)
+                {
+                    db.settings.FirstOrDefault().DatedeRappel = dateNotification;
+                }
+                if (dateAttribution != null)
+                {
+                    db.settings.FirstOrDefault().Delai = dateNotification;
+                }
+
+                db.SaveChanges();
+                ViewBag.Current = "Setting";
+
+                return View("Setting");
             }
             else
                 return RedirectToAction("Authentification", "User");
@@ -212,8 +245,14 @@ namespace projetASP.Controllers
                             Console.WriteLine(" out ......");
 
                         }
+                        db.settings.First().importEtudiant = true;
                         db.SaveChanges();
                     }
+                }
+                else
+                {
+                    ViewBag.errI = true;
+                    return View("ImporterEtudiants");
                 }
             }
             return RedirectToAction("Index");
@@ -226,6 +265,12 @@ namespace projetASP.Controllers
             ViewBag.Current = "importerNotes";
             if (UserValide.IsValid())
             {
+                EtudiantContext db = new EtudiantContext();
+                if (db.settings.FirstOrDefault().importEtudiant)
+                {
+                    return View();
+                }
+                ViewBag.err = true;
                 return View();
             }
             else
@@ -266,8 +311,15 @@ namespace projetASP.Controllers
                             Console.WriteLine(" out ......");
 
                         }
-                        db.SaveChanges();
+                        db.settings.First().importNote = true;
+           
+                       db.SaveChanges();
                     }
+                }
+                else
+                {
+                    ViewBag.errI = true;
+                    return View("ImporterNotes");
                 }
             }
             return RedirectToAction("Index");
@@ -446,6 +498,8 @@ namespace projetASP.Controllers
                 }
 
                 //list =list.OrderBy(e => (e.noteFstYear+e.noteSndYear)/2);
+                db.settings.First().Attributted = true;
+
                 db.SaveChanges();
                 return RedirectToAction("AttributionFiliere");
             }
