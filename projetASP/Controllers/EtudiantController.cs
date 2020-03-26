@@ -237,6 +237,11 @@ namespace projetASP.Controllers
                     ViewBag.message = "Les informations que vous avez entrez ne correspondent à aucun étudiant !";
                     return View();
                 }
+                else if (e.Validated == true)
+                {
+                    ViewBag.message = "Cet étudiant est déjà inscrit.";
+                    return View();
+                }
                 else
                 {
                     e.Validated = true;
