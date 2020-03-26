@@ -47,6 +47,30 @@
 
             //  You can use the DbSet<T>.AddOrUpdate() helper extension method
             //  to avoid creating duplicate seed data.
+            context.Filieres.Add(new Models.Filiere
+            {
+                nomFil = "informatique"
+            });
+            context.Filieres.Add(new Models.Filiere
+            {
+                nomFil = "Indus"
+            });
+            context.Filieres.Add(new Models.Filiere
+            {
+                nomFil = "gtr"
+            });
+            context.Filieres.Add(new Models.Filiere
+            {
+                nomFil = "gpmc"
+            });
+            context.departements.Add(new Models.Departement
+            {
+                password = "root",
+                username = "root",
+                nom_departement = "Testeur de projet"
+            }
+                );
+            context.SaveChanges();
         }
     }
 }

@@ -157,8 +157,20 @@
       <DependentUpon>Global.asax</DependentUpon>
     </Compile>
     <Compile Include="Migrations\202003260507382_InitialCreate.cs" />
-    <Compile Include="Migrations\202003260507382_InitialCreate.designer.cs">
-      <DependentUpon>202003260507382_InitialCreate.cs</DependentUpon>
+  <Compile Include="Migrations\202003260507382_InitialCreate.designer.cs">
+    <DependentUpon>202003260507382_InitialCreate.cs</DependentUpon>
+  </Compile>
+    <Compile Include="Migrations\202003260044224_InitialCreate.cs" />
+    <Compile Include="Migrations\202003260044224_InitialCreate.designer.cs">
+      <DependentUpon>202003260044224_InitialCreate.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Migrations\202003260119465_InitialCreate1.cs" />
+    <Compile Include="Migrations\202003260119465_InitialCreate1.designer.cs">
+      <DependentUpon>202003260119465_InitialCreate1.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Migrations\202003260145387_InitialCreate2.cs" />
+    <Compile Include="Migrations\202003260145387_InitialCreate2.designer.cs">
+      <DependentUpon>202003260145387_InitialCreate2.cs</DependentUpon>
     </Compile>
     <Compile Include="Migrations\Configuration.cs" />
     <Compile Include="Models\Departement.cs" />
@@ -627,7 +639,16 @@
   </ItemGroup>
   <ItemGroup>
     <EmbeddedResource Include="Migrations\202003260507382_InitialCreate.resx">
-      <DependentUpon>202003260507382_InitialCreate.cs</DependentUpon>
+  <DependentUpon>202003260507382_InitialCreate.cs</DependentUpon>
+</EmbeddedResource>
+    <EmbeddedResource Include="Migrations\202003260044224_InitialCreate.resx">
+      <DependentUpon>202003260044224_InitialCreate.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\202003260119465_InitialCreate1.resx">
+      <DependentUpon>202003260119465_InitialCreate1.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\202003260145387_InitialCreate2.resx">
+      <DependentUpon>202003260145387_InitialCreate2.cs</DependentUpon>
     </EmbeddedResource>
   </ItemGroup>
   <PropertyGroup>
