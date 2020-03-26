@@ -1,7 +1,171 @@
-﻿
+﻿@model projetASP.Models.Etudiant
 @{
-    ViewBag.Title = "Consulter";
+
+    Layout = "~/Views/Shared/_LayoutEtudiant.cshtml";
 }
+
+
+<div class="content">
+    <div class="container-fluid">
+        <div class="row">
+            <div class="col-md-8 " style="margin:auto;">
+
+
+                <div class="card">
+                        <div role="main" class="form-all">
+
+                            <ul class="form-section page-section">
+
+                                <li id="cid_5" class="form-input-wide" data-type="control_head">
+                                    <div style="display:table;width:100%">
+                                        <div class="form-header-group hasImage header-default" data-imagealign="Left">
+                                            <div class="header-logo">
+
+                                                <img src="~/Image/@Model.photo_link" alt="" width="200" class="header-logo-left" />
+                                            </div>
+                                            <div class="header-text httal htvam">
+                                                <h2 id="header_5" class="form-header text-center" data-component="header">
+                                                    Consultation des Informations Personelles
+                                                </h2>
+                                                <div id="subHeader_5" class="form-subHeader text-center">
+                                                    <h3>
+                                                        @Model.nom @Model.prenom 
+                                                    </h3>
+                                                </div>
+                                            </div>
+                                            @Html.ActionLink("Imprimer", "PrintConsultation")
+                                        </div>
+                                    </div>
+                                </li>
+
+
+                                <li class="form-line" data-type="control_fullname" id="id_3">
+                                    <label class="form-label form-label-top form-label-auto" id="label_3" for="first_3"> Name </label>
+                                    <div id="cid_3" class="form-input-wide">
+                                        <div data-wrapper-react="true">
+                                            <span class="form-sub-label-container " style="vertical-align:top" data-input-type="first">
+                                                @Html.Label(@Model.nom, new { htmlAttributes = new { @class = "form-control" } })
+
+
+                                                <label class="form-sub-label" for="first_3" id="sublabel_3_first" style="min-height:13px" aria-hidden="false"> First Name </label>
+                                            </span>
+                                            <span class="form-sub-label-container " style="vertical-align:top" data-input-type="last">
+                                                @Html.Label(@Model.prenom, new { htmlAttributes = new { @class = "form-control" } })
+                                                <label class="form-sub-label" for="last_3" id="sublabel_3_last" style="min-height:13px" aria-hidden="false"> Last Name </label>
+                                            </span>
+                                        </div>
+                                    </div>
+                                </li>
+
+                                <li class="form-line" data-type="control_calculation" id="id_12">
+                                    <label class="form-label form-label-top form-label-auto" id="label_12" for="input_12"> CIN (Carte d'identite Nationale) </label>
+                                    <div id="cid_12" class="form-input-wide">
+                                        @Html.Label(@Model.cin, new { htmlAttributes = new { @class = "form-control" } })
+
+                                    </div>
+                                </li>
+
+                                <li class="form-line" data-type="control_calculation" id="id_15">
+                                    <label class="form-label form-label-top form-label-auto" id="label_15" for="input_15"> CNE(Code Nationale d'Etudiant) </label>
+                                    <div id="cid_15" class="form-input-wide">
+                                        @Html.Label(@Model.cne, new { htmlAttributes = new { @class = "form-control"} })
+                                    </div>
+                                </li>
+
+                                <li class="form-line" data-type="control_calculation" id="id_15">
+
+                                    <label class="form-label form-label-top form-label-auto" id="label_15" for="input_15"> Date de Naissance </label>
+                                    <div id="cid_17" class="form-input-wide">
+
+                                        @Html.Label(@Model.dateNaiss.ToString("dd/MM/yyyy"))
+                                    </div>
+                                </li>
+
+                                <li class="form-line" data-type="control_calculation" id="id_18">
+                                    <label class="form-label form-label-top form-label-auto" id="label_18" for="input_18"> Lieu de Naissance </label>
+                                    <div id="cid_18" class="form-input-wide">
+
+                                        @Html.Label(@Model.cin, new { htmlAttributes = new { @class = "form-control" } })
+
+                                    </div>
+                                </li>
+
+                                <li class="form-line" data-type="control_calculation" id="id_19">
+                                    <label class="form-label form-label-top form-label-auto" id="label_19" for="input_19"> Nationalité </label>
+                                    <div id="cid_19" class="form-input-wide">
+                                        @Html.Label(@Model.cin, new { htmlAttributes = new { @class = "form-control" } })
+                                    </div>
+                                </li>
+
+                                <li class="form-line" data-type="control_calculation" id="id_19">
+                                    <label class="form-label form-label-top form-label-auto" id="label_19" for="input_19"> Phone number </label>
+                                    <div class="form-input-wide">
+                                        @Html.Label(@Model.phone, new { htmlAttributes = new { @class = "form-control", type = "number" } })
+                                    </div>
+                                </li>
+                                <li class="form-line" data-type="control_calculation">
+                                    <label class="form-label form-label-top form-label-auto" for="input_19"> Phone number </label>
+                                    <div class="form-input-wide">
+                                        @Html.Label(@Model.gsm, new { htmlAttributes = new { @class = "form-control", type = "number" } })
+                                    </div>
+                                </li>
+
+                                <li class="form-line" data-type="control_email" id="id_7">
+                                    <label class="form-label form-label-top form-label-auto" id="label_7" for="input_7"> Email </label>
+                                    <div class="form-input-wide">
+
+                                        @Html.Label(@Model.email, new { htmlAttributes = new { @class = "form-control" } })
+                                        <label class="form-sub-label" for="input_7" id="sublabel_input_7" style="min-height:13px" aria-hidden="false"> example@example.com </label>
+
+                                    </div>
+                                </li>
+                                <li class="form-line" data-type="control_email" id="id_7">
+                                    <label class="form-label form-label-top form-label-auto" id="label_7" for="input_7"> Adress </label>
+                                    <div class="form-input-wide">
+
+                                        @Html.Label(@Model.address, new { htmlAttributes = new { @class = "form-control" } })
+                                        <label class="form-sub-label" for="input_7" id="sublabel_input_7" style="min-height:13px" aria-hidden="false"> Street Adresse  </label>
+
+                                    </div>
+                                </li>
+
+                                <li class="form-line" data-type="control_email" id="id_7">
+
+                                    <div class="form-input-wide">
+
+                                        @Html.Label(@Model.ville, new { htmlAttributes = new { @class = "form-control" } })
+                                        <label class="form-sub-label" for="input_7" id="sublabel_input_7" style="min-height:13px" aria-hidden="false"> City </label>
+
+                                    </div>
+                                </li>
+                                <li class="form-line" data-type="control_email" id="id_7">
+                                    <label class="form-label form-label-top form-label-auto" id="label_7" for="input_7"> Votre Choix </label>
+                                  
+                                    <div>
+
+                                           
+                                    <p  class="form-label form-label-top form-label-auto"> 1: Génié  @(Model.choix.Substring(0, 1) == "F" ? "Informatique" : "") @(Model.choix.Substring(0, 1) == "D" ? "Industriel" : "")   @(Model.choix.Substring(0, 1) == "P" ? "Procede" : "")     @(Model.choix.Substring(0, 1) == "T" ? "Reseau" : "")</p>    
+                                    <p class="form-label form-label-top form-label-auto">  2: Génié  @(Model.choix.Substring(1, 1) == "F" ? "Informatique" : "") @(Model.choix.Substring(1, 1) == "D" ? "Industriel" : "")   @(Model.choix.Substring(1, 1) == "P" ? "Procede" : "")     @(Model.choix.Substring(1, 1) == "T" ? "Reseau" : "")</p>    
+                                    <p class="form-label form-label-top form-label-auto">  3: Génié  @(Model.choix.Substring(2, 1) == "F" ? "Informatique" : "") @(Model.choix.Substring(2, 1) == "D" ? "Industriel" : "")   @(Model.choix.Substring(2, 1) == "P" ? "Procede" : "")     @(Model.choix.Substring(2, 1) == "T" ? "Reseau" : "")</p>  
+
+                                            
+                                    </div>
+                                </li>
+
+                            
+                            </ul>
+
+
+                        </div>
+
+                   
+
+
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
 
 
 

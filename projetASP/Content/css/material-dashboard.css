@@ -14417,7 +14417,7 @@ h6,
 .footer-big h4 a,
 .media .media-heading,
 .media .media-heading a {
-  color: #3C4858;
+  white
   text-decoration: none;
 }
 
@@ -14460,7 +14460,7 @@ h2.title {
 }
 
 .text-gray {
-  color: #999999 !important;
+  color: white !important;
 }
 
 .nav-tabs {
@@ -15304,7 +15304,7 @@ fieldset[disabled] .form-group.is-focused .togglebutton label {
 .sidebar .nav li .dropdown-menu a {
   margin: 10px 15px 0;
   border-radius: 3px;
-  color: #3C4858;
+  color: white;
   padding-left: 10px;
   padding-right: 10px;
   text-transform: capitalize;

@@ -55,11 +55,7 @@ namespace projetASP.Controllers
                 }
 
             }
-
             return View();
-
-
-
 
         }
         public ActionResult Logout()
@@ -71,6 +67,10 @@ namespace projetASP.Controllers
 
             return RedirectToAction("Authentification", "User");
         }
+
+    
+
+
     
     [HttpGet]
     public ActionResult Authentification1()
@@ -85,26 +85,26 @@ namespace projetASP.Controllers
 
     }
 
-    [HttpPost]
-    public ActionResult Authentification1(Etudiant login, string ReturnUrl = "")
-    {
-        String button = Request["loginBtn"];
-        string message = "";
-        if (button == "Login")
+        [HttpPost]
+        public ActionResult Authentification1(Etudiant login, string ReturnUrl = "")
         {
-            string cne = Request["cne"];
+            String button = Request["loginBtn"];
+            string message = "";
+            if (button == "Login")
+            {
+                string cne = Request["cne"];
                 string cin = Request["cin"];
                 string mdp = Request["mdp"];
-            EtudiantContext dbset = new EtudiantContext();
-            var userLogin = (from data in dbset.etudiants
-                             where data.cne == cne && data.password == mdp && data.cin==cin
-                             select data).FirstOrDefault();
-            if (userLogin != null)
-            {
-                Session["cin"] = userLogin.cin;
-                Session["userId"] = userLogin.cne;
-                Session["nom"] = userLogin.nom;
-                Session["prenom"] = userLogin.prenom;
+                EtudiantContext dbset = new EtudiantContext();
+                var userLogin = (from data in dbset.etudiants
+                                 where data.cne == cne && data.password == mdp && data.cin == cin && data.Validated == true
+                                 select data).FirstOrDefault();
+                if (userLogin != null)
+                {
+                    Session["cin"] = userLogin.cin;
+                    Session["userId"] = userLogin.cne;
+                    Session["nom"] = userLogin.nom;
+                    Session["prenom"] = userLogin.prenom;
                     /* Session["nationalite"] = userLogin.nationalite;
                      Session["email"] = userLogin.email;
                      Session["phone"] = userLogin.phone;
@@ -123,23 +123,20 @@ namespace projetASP.Controllers
                      Session["choix"] = userLogin.choix;*/
                     Session["role"] = "Etudiant";
                     return RedirectToAction("Index", "Etudiant");
-            }
-            else if (userLogin == null)
-            {
+                }
+                else if (userLogin == null)
+                {
 
-                message = "Invalid cin or cne or password";
-                ViewBag.Message = message;
-                return View();
+                    message = "Invalid cin or cne or password";
+                    ViewBag.Message = message;
+                    return View();
+                }
+
             }
+        return View();
 
         }
 
-        return View();
-
-
-
-
     }
    
-}
 }

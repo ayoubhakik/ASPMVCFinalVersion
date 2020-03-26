@@ -1,0 +1,181 @@
+﻿
+@{
+    Layout = "~/Views/Shared/_DepartementLayout.cshtml";
+}
+<style type="text/css">
+    .form-style-7 {
+        max-width: 400px;
+        margin: 50px auto;
+        background: #fff;
+        border-radius: 2px;
+        padding: 20px;
+        font-family: Georgia, "Times New Roman", Times, serif;
+    }
+
+        .form-style-7 h1 {
+            display: block;
+            text-align: center;
+            padding: 0;
+            margin: 0px 0px 20px 0px;
+            color: #5C5C5C;
+            font-size: x-large;
+        }
+
+        .form-style-7 ul {
+            list-style: none;
+            padding: 0;
+            margin: 0;
+        }
+
+        .form-style-7 li {
+            display: block;
+            padding: 9px;
+            border: 1px solid #DDDDDD;
+            margin-bottom: 30px;
+            border-radius: 3px;
+        }
+
+            .form-style-7 li:last-child {
+                border: none;
+                margin-bottom: 0px;
+                text-align: center;
+            }
+
+            .form-style-7 li > label {
+                display: block;
+                float: left;
+                margin-top: -19px;
+                background: #FFFFFF;
+                height: 34px;
+                padding: 2px 5px 2px 5px;
+                color: #B9B9B9;
+                font-size: 14px;
+                overflow: hidden;
+                font-family: Arial, Helvetica, sans-serif;
+            }
+
+        .form-style-7 input[type="text"],
+        .form-style-7 input[type="date"],
+        .form-style-7 input[type="datetime"],
+        .form-style-7 input[type="email"],
+        .form-style-7 input[type="number"],
+        .form-style-7 input[type="search"],
+        .form-style-7 input[type="time"],
+        .form-style-7 input[type="url"],
+        .form-style-7 input[type="password"],
+        .form-style-7 textarea,
+        .form-style-7 select {
+            box-sizing: border-box;
+            -webkit-box-sizing: border-box;
+            -moz-box-sizing: border-box;
+            width: 100%;
+            display: block;
+            outline: none;
+            border: none;
+            height: 25px;
+            line-height: 25px;
+            font-size: 16px;
+            padding: 0;
+            font-family: Georgia, "Times New Roman", Times, serif;
+        }
+
+            .form-style-7 input[type="text"]:focus,
+            .form-style-7 input[type="date"]:focus,
+            .form-style-7 input[type="datetime"]:focus,
+            .form-style-7 input[type="email"]:focus,
+            .form-style-7 input[type="number"]:focus,
+            .form-style-7 input[type="search"]:focus,
+            .form-style-7 input[type="time"]:focus,
+            .form-style-7 input[type="url"]:focus,
+            .form-style-7 input[type="password"]:focus,
+            .form-style-7 textarea:focus,
+            .form-style-7 select:focus {
+            }
+
+        .form-style-7 li > span {
+            background: #F3F3F3;
+            display: block;
+            padding: 3px;
+            margin: 0 -9px -9px -9px;
+            text-align: center;
+            color: #C0C0C0;
+            font-family: Arial, Helvetica, sans-serif;
+            font-size: 11px;
+        }
+
+        .form-style-7 textarea {
+            resize: none;
+        }
+
+        .form-style-7 input[type="submit"],
+        .form-style-7 input[type="button"] {
+            background: #2471FF;
+            border: none;
+            padding: 10px 20px 10px 20px;
+            border-bottom: 3px solid #5994FF;
+            border-radius: 3px;
+            color: #D2E2FF;
+        }
+
+            .form-style-7 input[type="submit"]:hover,
+            .form-style-7 input[type="button"]:hover {
+                background: #6B9FFF;
+                color: #fff;
+            }
+    .excep{
+        padding-left:-10px;
+    }
+</style>
+
+
+<br />
+<br />
+@using (Html.BeginForm("Setting", "Departement", FormMethod.Post, new { @class = "form-style-7", enctype = "multipart/form-data" }))
+{
+<h2>
+    <center>
+        <i class="material-icons">settings</i>
+        Setting
+    </center>
+    
+</h2>
+    <br /><br />
+    
+    <ul>
+        <li class="excep">
+            <p color="gray">
+
+                <span color="black">   La partie configuration est obligatoire pour bien notifier les etudiants et aussi pour automatiser les processus d'atribution des filieres :</span><br />
+                <br />
+
+                1-  La date de notifiation ou la departement va Choisir une date pour notifier les etudiants qu ont pas valide leurs comptes pour choisir des filieres.<br />
+                <br />
+                2-  La date d'attribution des filieres ou la departement va Choisir une date choisir une date pour l'attribution des filiere.<br />
+
+            </p>
+        </li>
+        <li>
+            <label for="name">Date Notification </label>
+            <input type="date" name="name" maxlength="100" placeholder="Date here">
+            <span>par ex (07/10/2020 apres cette date chaque etudiant va recevoir un email pour valider son compte) </span>
+        </li>
+        <li>
+            <label for="email">Date d'attribution des filieres</label>
+            <input type="date" name="email" maxlength="100" placeholder="Date here">
+            <span>apres cette date chaque etudiant va avoir la filiere qu'il merite</span>
+        </li>
+
+
+        <li>
+            <input type="submit" value="Confirmer">
+        </li>
+    </ul>
+}
+
+<script type="text/javascript">
+    //auto expand textarea
+    function adjust_textarea(h) {
+        h.style.height = "20px";
+        h.style.height = (h.scrollHeight) + "px";
+    }
+</script>

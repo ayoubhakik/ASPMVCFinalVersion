@@ -80,6 +80,9 @@
       <HintPath>..\packages\Newtonsoft.Json.12.0.3\lib\net45\Newtonsoft.Json.dll</HintPath>
     </Reference>
     <Reference Include="PresentationCore" />
+    <Reference Include="Rotativa, Version=1.0.0.0, Culture=neutral, processorArchitecture=MSIL">
+      <HintPath>..\packages\Rotativa.1.7.3\lib\net461\Rotativa.dll</HintPath>
+    </Reference>
     <Reference Include="System" />
     <Reference Include="System.Data" />
     <Reference Include="System.Drawing" />
@@ -157,16 +160,27 @@
     <Compile Include="Migrations\202003181518443_InitialCreate.designer.cs">
       <DependentUpon>202003181518443_InitialCreate.cs</DependentUpon>
     </Compile>
+    <Compile Include="Migrations\202003241928044_IntialCreate1.cs" />
+    <Compile Include="Migrations\202003241928044_IntialCreate1.designer.cs">
+      <DependentUpon>202003241928044_IntialCreate1.cs</DependentUpon>
+    </Compile>
     <Compile Include="Migrations\Configuration.cs" />
     <Compile Include="Models\Departement.cs" />
     <Compile Include="Models\Etudiant.cs" />
     <Compile Include="Models\Filiere.cs" />
+    <Compile Include="Models\Settings.cs" />
     <Compile Include="Models\UserValide.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
-    <Content Include="Content\css\main2.css" />
+    <Content Include="Content\css\main3.css" />
     <Content Include="Content\css\util.css" />
     <Content Include="Content\img\books.jpg" />
+    <Content Include="Content\img\glisser.png" />
+    <Content Include="Content\img\gpmc.jpg" />
+    <Content Include="Content\img\gtr.jpg" />
+    <Content Include="Content\img\indus.jpg" />
+    <Content Include="Content\img\info.jpg" />
     <Content Include="Content\js\main.js" />
+    <Content Include="Content\js\main1.js" />
     <Content Include="Content\vendor\animate\animate.css" />
     <Content Include="Content\vendor\animsition\css\animsition.css" />
     <Content Include="Content\vendor\animsition\css\animsition.min.css" />
@@ -246,6 +260,10 @@
     <Content Include="favicon.ico" />
     <Content Include="Global.asax" />
     <Content Include="Content\Site.css" />
+    <Content Include="Rotativa\help-wkhtmltoimage.txt" />
+    <Content Include="Rotativa\help-wkhtmltopdf.txt" />
+    <Content Include="Rotativa\wkhtmltoimage.exe" />
+    <Content Include="Rotativa\wkhtmltopdf.exe" />
     <Content Include="Scripts\bootstrap.bundle.js" />
     <Content Include="Scripts\bootstrap.bundle.min.js" />
     <Content Include="Scripts\bootstrap.js" />
@@ -468,6 +486,8 @@
     <Content Include="Content\vendor\bootstrap\css\bootstrap-reboot.min.css.map" />
     <Content Include="Content\vendor\bootstrap\css\bootstrap.css.map" />
     <Content Include="Content\vendor\bootstrap\css\bootstrap.min.css.map" />
+    <Content Include="App_Browsers\qt.browser" />
+    <Content Include="ExcelFiles\EtudiantExemple.xlsx" />
     <None Include="Scripts\jquery-3.4.1.intellisense.js" />
     <Content Include="Scripts\jquery-3.4.1.js" />
     <Content Include="Scripts\jquery-3.4.1.min.js" />
@@ -550,7 +570,6 @@
     <Content Include="Scripts\umd\popper-utils.min.js" />
     <Content Include="Scripts\umd\popper.js" />
     <Content Include="Scripts\umd\popper.min.js" />
-    <Content Include="Views\Web.config" />
     <Content Include="Views\_ViewStart.cshtml" />
     <Content Include="Views\Shared\Error.cshtml" />
     <Content Include="Views\Shared\_DepartementLayout.cshtml" />
@@ -579,7 +598,10 @@
     <Content Include="Views\Departement\AttributionFiliere.cshtml" />
     <Content Include="Views\User\Authentification.cshtml" />
     <Content Include="Views\Shared\_UserLayout.cshtml" />
+    <Content Include="Views\Etudiant\RecuEtudiant.cshtml" />
     <Content Include="Views\User\Authentification1.cshtml" />
+    <Content Include="Views\Departement\Setting.cshtml" />
+    <Content Include="Views\Web.config" />
     <None Include="Web.Debug.config">
       <DependentUpon>Web.config</DependentUpon>
     </None>
@@ -590,7 +612,6 @@
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />
-    <Folder Include="ExcelFiles\" />
     <Folder Include="Views\Home\" />
   </ItemGroup>
   <ItemGroup>
@@ -613,6 +634,9 @@
   <ItemGroup>
     <EmbeddedResource Include="Migrations\202003181518443_InitialCreate.resx">
       <DependentUpon>202003181518443_InitialCreate.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\202003241928044_IntialCreate1.resx">
+      <DependentUpon>202003241928044_IntialCreate1.cs</DependentUpon>
     </EmbeddedResource>
   </ItemGroup>
   <PropertyGroup>

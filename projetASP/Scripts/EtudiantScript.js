@@ -1,6 +1,4 @@
-
-﻿function desactivefilieres() {
-
+function desactivefilieres() {
     if (document.getElementById('F1').checked == true) {
         document.getElementById('F2').checked = false;
         document.getElementById('F2').checked = false;
@@ -95,3 +93,4 @@
     }
 
 }
+
