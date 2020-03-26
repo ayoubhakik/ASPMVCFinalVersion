@@ -4302,6 +4302,7 @@ tbody.collapse.show {
   border-color: transparent;
 }
 
+
 .nav-tabs .nav-link.active,
 .nav-tabs .nav-item.show .nav-link {
   color: #495057;
@@ -14417,7 +14418,7 @@ h6,
 .footer-big h4 a,
 .media .media-heading,
 .media .media-heading a {
-  color: #3C4858;
+  color: white;
   text-decoration: none;
 }
 
@@ -15109,7 +15110,7 @@ fieldset[disabled] .form-group.is-focused .togglebutton label {
 
 .footer .footer-brand:hover,
 .footer .footer-brand:focus {
-  color: #3C4858;
+  color: white;
 }
 
 .footer .copyright {
@@ -15250,7 +15251,7 @@ fieldset[disabled] .form-group.is-focused .togglebutton label {
 .sidebar .nav li .dropdown-menu a:focus,
 .sidebar .nav li.active>[data-toggle="collapse"] {
   background-color: rgba(200, 200, 200, 0.2);
-  color: #3C4858;
+  color: white;
   box-shadow: none;
 }
 
@@ -15304,7 +15305,7 @@ fieldset[disabled] .form-group.is-focused .togglebutton label {
 .sidebar .nav li .dropdown-menu a {
   margin: 10px 15px 0;
   border-radius: 3px;
-  color: #3C4858;
+  color: white;
   padding-left: 10px;
   padding-right: 10px;
   text-transform: capitalize;
@@ -15366,7 +15367,7 @@ fieldset[disabled] .form-group.is-focused .togglebutton label {
   padding: 5px 0px;
   display: inline-block;
   font-size: 18px;
-  color: #3C4858;
+  color: white;
   white-space: nowrap;
   font-weight: 400;
   line-height: 30px;
@@ -15390,38 +15391,36 @@ fieldset[disabled] .form-group.is-focused .togglebutton label {
   height: 60px;
 }
 
-.sidebar[data-background-color="black"] .nav .nav-item .nav-link {
+
+
+.sidebar .nav .nav-item i {
+  color: rgb(255, 255, 255);
+}
+
+.sidebar .nav .nav-item.active [data-toggle="collapse"],
+.sidebar .nav .nav-item:hover [data-toggle="collapse"] {
   color: #fff;
 }
 
-.sidebar[data-background-color="black"] .nav .nav-item i {
-  color: rgba(255, 255, 255, 0.8);
+.sidebar .nav .nav-item.active [data-toggle="collapse"] i,
+.sidebar .nav .nav-item:hover [data-toggle="collapse"] i {
+  color: rgb(255, 255, 255);
 }
 
-.sidebar[data-background-color="black"] .nav .nav-item.active [data-toggle="collapse"],
-.sidebar[data-background-color="black"] .nav .nav-item:hover [data-toggle="collapse"] {
+.sidebar .user a {
   color: #fff;
 }
 
-.sidebar[data-background-color="black"] .nav .nav-item.active [data-toggle="collapse"] i,
-.sidebar[data-background-color="black"] .nav .nav-item:hover [data-toggle="collapse"] i {
-  color: rgba(255, 255, 255, 0.8);
-}
-
-.sidebar[data-background-color="black"] .user a {
+.sidebar .simple-text {
   color: #fff;
 }
 
-.sidebar[data-background-color="black"] .simple-text {
-  color: #fff;
-}
-
-.sidebar[data-background-color="black"] .sidebar-background:after {
+.sidebar .sidebar-background:after {
   background: #000;
   opacity: .8;
 }
 
-.sidebar[data-background-color="black"] .nav li .dropdown-menu .dropdown-item {
+.sidebar .nav li .dropdown-menu .dropdown-item {
   color: #fff;
 }
 
@@ -15461,7 +15460,7 @@ fieldset[disabled] .form-group.is-focused .togglebutton label {
 }
 
 .sidebar[data-color="white"] .nav .nav-item.active>a:not([data-toggle="collapse"]) {
-  color: #3C4858;
+  color: white;
   opacity: 1;
   box-shadow: 0 4px 20px 0px rgba(0, 0, 0, 0.14), 0 7px 10px -5px rgba(60, 72, 88, 0.4);
 }
@@ -16568,7 +16567,7 @@ fieldset[disabled] .form-group.is-focused .togglebutton label {
   display: inline-block;
   margin-bottom: 0;
   font-size: 1em;
-  color: #3C4858;
+  color: white;
   padding-top: 0px;
 }
 
@@ -16879,7 +16878,7 @@ thead.thead-inverse th,
 
 body {
   background-color: #eee;
-  color: #3C4858;
+  color: wh
   font-weight: 300;
 }
 
@@ -17434,7 +17433,7 @@ label {
 }
 
 .card .author a {
-  color: #3C4858;
+  color: white;
   text-decoration: none;
 }
 
@@ -17533,7 +17532,7 @@ label {
 .card .card-header.card-header-icon .card-title,
 .card .card-header.card-header-text .card-title {
   margin-top: 15px;
-  color: #3C4858;
+  color: white;
 }
 
 .card .card-header.card-header-icon h4,
@@ -18474,7 +18473,7 @@ Copyright (c) 2015 Daniel Eden
   }
 
   .navbar-collapse .navbar-nav .nav-item .nav-link {
-    color: #3C4858;
+    color: white;
     margin: 5px 15px;
   }
 
