@@ -10,9 +10,9 @@
 html {
     height: 100%;
     /*background: #6441A5;*/ /* fallback for old browsers */
-    background: rgb(248,54,0); /* fallback for old browsers */
+    background: rgb(189,189,189); /* fallback for old browsers */
     /*background: -webkit-linear-gradient(to left, #6441A5, #2a0845);*/ /* Chrome 10-25, Safari 5.1-6 */
-    background: linear-gradient(90deg, rgba(248,54,0,1) 0%, rgba(249,212,35,1) 100%); /* Chrome 10-25, Safari 5.1-6 */
+    background: rgb(189,189,189); /* Chrome 10-25, Safari 5.1-6 */
 }
 
 body {
@@ -62,7 +62,7 @@ body {
             -moz-box-shadow: none !important;
             -webkit-box-shadow: none !important;
             box-shadow: none !important;
-            border: 1px solid black;
+            border: 1px solid rgb(24,54,89);
             outline-width: 0;
             transition: All 0.5s ease-in;
             -webkit-transition: All 0.5s ease-in;
@@ -73,7 +73,7 @@ body {
     /*buttons*/
     #msform .action-button {
         width: 100px;
-        background: black;
+        background: rgb(24,54,89);
         font-weight: bold;
         color: white;
         border: 0 none;
@@ -84,7 +84,7 @@ body {
     }
 
         #msform .action-button:hover, #msform .action-button:focus {
-            box-shadow: 0 0 0 2px white, 0 0 0 3px black;
+            box-shadow: 0 0 0 2px white, 0 0 0 3px rgb(24,54,89);
         }
 
     #msform .action-button-previous {
@@ -173,7 +173,7 @@ body {
         /*marking active/completed steps green*/
         /*The number of the step and the connector before it = green*/
         #progressbar li.active:before, #progressbar li.active:after {
-            background: black;
+            background: rgb(24,54,89);
             color: white;
         }
 
@@ -187,7 +187,7 @@ body {
     .dme_link a {
         background: #FFF;
         font-weight: bold;
-        color: black;
+        color: rgb(24,54,89);
         border: 0 none;
         border-radius: 25px;
         cursor: pointer;

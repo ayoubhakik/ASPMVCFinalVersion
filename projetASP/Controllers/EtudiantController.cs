@@ -230,29 +230,34 @@ namespace projetASP.Controllers
 
             if (ModelState.IsValid)
             {
-                var e = etudiantContext.etudiants.Where(x => x.cne == student.cne).FirstOrDefault();
+                var e = etudiantContext.etudiants.Where(x => x.cne == student.cne && x.nom == student.nom && x.prenom == student.prenom).FirstOrDefault();
 
                 if (e == null)
                 {
                     ViewBag.message = "Les informations que vous avez entrez ne correspondent à aucun étudiant !";
                     return View();
                 }
-
                 else
                 {
-                    if (!student.password.Equals(e.password))
-                    {
-                        ViewBag.message = "Mot de pass incorrect !";
-                        return View();
-                    }
-
-                    else
-                    {
-                        e.validated = true;
-                        etudiantContext.SaveChanges();
-                        return null;
-                    }
+                    e.Validated = true;
+                    e.password = student.password;
+                    e.nationalite = student.nationalite;
+                    e.email = student.email;
+                    e.phone = student.phone;
+                    e.gsm = student.gsm;
+                    e.address = student.address;
+                    e.ville = student.ville;
+                    e.typeBac = student.typeBac;
+                    e.anneeBac = student.anneeBac;
+                    e.noteBac = student.noteBac;
+                    e.mentionBac = student.mentionBac;
+                    e.dateNaiss = student.dateNaiss;
+                    e.lieuNaiss = student.lieuNaiss;
+                    e.choix = student.choix;
+                    etudiantContext.SaveChanges();
+                    return RedirectToAction("Authentification","User");
                 }
+                
             }
             else return View();
         }

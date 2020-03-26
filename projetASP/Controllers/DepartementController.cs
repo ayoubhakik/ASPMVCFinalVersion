@@ -200,7 +200,7 @@ namespace projetASP.Controllers
 
 
                             e.typeBac = workSheet.Cells[rowIterator, 11].Value.ToString();*/
-                            e.anneeBac = Convert.ToDateTime(DateTime.Now);
+                            //e.anneeBac = Convert.ToDateTime(DateTime.Now);
                             e.dateNaiss = Convert.ToDateTime(DateTime.Now);
                             /*
                             e.noteBac = Convert.ToDouble(workSheet.Cells[rowIterator, 13].Value);
