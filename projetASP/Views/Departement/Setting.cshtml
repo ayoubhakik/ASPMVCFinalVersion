@@ -174,10 +174,13 @@
 }
 @using (Html.BeginForm("DeleteAllStudents", "Departement", FormMethod.Post, new { enctype = "multipart/form-data" }))
 {
+    <h3>Pour supprimer tous les etudiants </h3>
+
     <input type="submit" value="Clear Database">
 }
 @using (Html.BeginForm("DeleteImportedStudents", "Departement", FormMethod.Post, new { enctype = "multipart/form-data" }))
 {
+    <h3>Pour supprimer les etudiants non redoublants</h3>
     <input type="submit" value="Supprimer les Etudiants">
 }
 <script type="text/javascript">
