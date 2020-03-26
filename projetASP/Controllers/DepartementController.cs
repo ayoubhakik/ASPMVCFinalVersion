@@ -418,7 +418,7 @@ namespace projetASP.Controllers
 
             string[] vx = { "info", "indus", "gtr", "gpmc" };
             double[] vy ={infoP, indusP, gtrP, gpmcP };
-            System.Web.Helpers.Chart chart=new System.Web.Helpers.Chart(width:1000,height:600, theme: ChartTheme.Vanilla);
+            System.Web.Helpers.Chart chart=new System.Web.Helpers.Chart(width:900,height:400, theme: ChartTheme.Blue);
             chart.AddSeries(chartType: "Column", xValue: vx, yValues: vy);
             chart.Write("png");
             return null;
