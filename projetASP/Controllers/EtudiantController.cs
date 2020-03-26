@@ -207,7 +207,7 @@ namespace projetASP.Controllers
         }
 
         [HttpPost]
-        public ActionResult Inscription(Etudiant student)
+        public ActionResult Inscription(Etudiant student, string choix1, string choix2, string choix3)
         {
 
             ViewBag.prenom = new SelectList(etudiantContext.etudiants, "cne", "prenom");
@@ -253,7 +253,7 @@ namespace projetASP.Controllers
                     e.mentionBac = student.mentionBac;
                     e.dateNaiss = student.dateNaiss;
                     e.lieuNaiss = student.lieuNaiss;
-                    e.choix = student.choix;
+                    e.choix = choix1 + choix2 + choix3;
                     etudiantContext.SaveChanges();
                     return RedirectToAction("Authentification","User");
                 }
