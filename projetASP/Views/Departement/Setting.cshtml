@@ -1,5 +1,7 @@
 ﻿
 @{
+    /**/
+
     Layout = "~/Views/Shared/_DepartementLayout.cshtml";
 }
 <style type="text/css">
@@ -182,6 +184,11 @@
 {
     <h3>Pour supprimer les etudiants non redoublants</h3>
     <input type="submit" value="Supprimer les Etudiants">
+}
+@using (Html.BeginForm("EnvoyerNotification", "Departement", FormMethod.Post, new { enctype = "multipart/form-data" }))
+{
+<h3>Envoiyer des emails pour informer  les etudiants pour valider leurs comptes</h3>
+<input type="submit" value="Notifier les Etudiants">
 }
 <script type="text/javascript">
     //auto expand textarea

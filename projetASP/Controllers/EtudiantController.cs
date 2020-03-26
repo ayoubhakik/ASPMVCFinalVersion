@@ -266,7 +266,7 @@ namespace projetASP.Controllers
         public ActionResult SendEmailToUser()
         {
             bool Result = false;
-            Etudiant etudiants = etudiantContext.etudiants.Find("125");
+            Etudiant etudiants = etudiantContext.etudiants.Find(ViewBag.cne);
             string email = etudiants.email;
             string subject = "Modification";
             ViewBag.nom = etudiants.nom;
