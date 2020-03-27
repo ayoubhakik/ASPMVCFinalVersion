@@ -157,8 +157,11 @@
       <DependentUpon>Global.asax</DependentUpon>
     </Compile>
     <Compile Include="Migrations\202003270031345_InitialCreate.cs" />
-    <Compile Include="Migrations\202003270031345_InitialCreate.designer.cs">
+    <Compile Include="Migrations\202003270031345_InitialCreate.designer.cs"/>
       <DependentUpon>202003270031345_InitialCreate.cs</DependentUpon>
+    <Compile Include="Migrations\202003270253166_InitialCreate.cs" />
+    <Compile Include="Migrations\202003270253166_InitialCreate.designer.cs">
+      <DependentUpon>202003270253166_InitialCreate.cs</DependentUpon>
     </Compile>
     <Compile Include="Migrations\Configuration.cs" />
     <Compile Include="Models\Departement.cs" />
@@ -713,8 +716,10 @@
     <TypeScriptCompile Include="Scripts\index.d.ts" />
   </ItemGroup>
   <ItemGroup>
-    <EmbeddedResource Include="Migrations\202003270031345_InitialCreate.resx">
+    <EmbeddedResource Include="Migrations\202003270031345_InitialCreate.resx"/>
       <DependentUpon>202003270031345_InitialCreate.cs</DependentUpon>
+    <EmbeddedResource Include="Migrations\202003270253166_InitialCreate.resx">
+      <DependentUpon>202003270253166_InitialCreate.cs</DependentUpon>
     </EmbeddedResource>
   </ItemGroup>
   <PropertyGroup>
