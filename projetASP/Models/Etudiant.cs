@@ -79,7 +79,8 @@ namespace projetASP.Models
 
         public string photo_link { get; set; }
 
-        public string choix { get; set; }
+        public string choix = "FDT";
+
 
         public bool validated = false;
         public bool Validated { get; set; }

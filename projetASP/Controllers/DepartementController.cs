@@ -25,12 +25,19 @@ namespace projetASP.Controllers
                 EtudiantContext db = new EtudiantContext();
                 for (int i = 0; i < db.etudiants.ToList().Count; i++)
                 {
-
+                    if (db.etudiants.ToList()[i].email!=null)
+                    {
                         string body = "<h1>Bonjour mr/mme " + db.etudiants.ToList()[i].nom + " " + db.etudiants.ToList()[i].prenom + "</h1>" +
-                            "<p>Apres avoir faire l'attribution des filieres, on vient de vous informer que votre filiere est :"+db.Filieres.Find(db.etudiants.ToList()[i].idFil).nomFil +"</p><br/>" +
-                            "<a href='le lien ici'>Cliquer ici!</a>" +
-                            "";
+                                                    "<p>Apres avoir faire l'attribution des filieres, on vient de vous informer que votre filiere est :" + db.Filieres.Find(db.etudiants.ToList()[i].idFil).nomFil + "</p><br/>" +
+                                                    "<a href='le lien ici'>Cliquer ici!</a>" +
+                                                    "";
                         Boolean Result = SendEmail(db.etudiants.ToList()[i].email, "Information a propos la filiere attribuer ", body);
+                        if (Result == true)
+                        {
+                            Json(Result, JsonRequestBehavior.AllowGet);
+                        }
+                    }
+                        
 
                     
                 }
@@ -103,6 +110,9 @@ namespace projetASP.Controllers
                     {
                             db.etudiants.Remove(db.etudiants.ToList()[i]);
                     }
+                    db.settings.First().Attributted = false;
+                    db.settings.First().importEtudiant = false;
+                    db.settings.First().importNote = false;
                     db.SaveChanges();
                     return RedirectToAction("Index");
             }
@@ -263,7 +273,7 @@ namespace projetASP.Controllers
             {
 
                 EtudiantContext db = new EtudiantContext();
-                if (db.settings.FirstOrDefault().importEtudiant)
+                if (!db.settings.FirstOrDefault().importEtudiant)
                 {
                     return View();
                 }
@@ -426,7 +436,11 @@ namespace projetASP.Controllers
                 EtudiantContext db = new EtudiantContext();
                 List<Etudiant> list = db.etudiants.OrderByDescending(e => (e.noteFstYear + e.noteSndYear) / 2).ToList();
                 //list =list.OrderBy(e => (e.noteFstYear+e.noteSndYear)/2);
-
+                if (db.settings.FirstOrDefault().importNote)
+                {
+                    return View(list);
+                }
+                ViewBag.err = true;
                 return View(list);
             }
             else
@@ -485,10 +499,6 @@ namespace projetASP.Controllers
                 ViewBag.gpmc = gpmc;
                 ViewBag.indus = indus;
 
-
-
-
-
                 //the maximum number for each class will be the total/4
                 int indexInfo = 0;
                 int indexGtr = 0;
@@ -532,9 +542,6 @@ namespace projetASP.Controllers
                     //verification de l'etudiant si deja a choisi une filiere sinon on va lui attribuer la derniere filiere (gpmc->indus->gtr->info)
 
                     if (list[i].choix != null && !list[i].Redoubler )
-
-                    if (list[i].choix != null)
-
                     {
                         //parse to a table of chars
                         char[] choice = list[i].choix.ToCharArray();
@@ -667,33 +674,7 @@ namespace projetASP.Controllers
 
                     }
 
-                    if (list[i].choix==null)
-                    {
-                        //un etudiant avec null dans choix alors on va l'es ajouter dans le reste
-                        nbrReste++;
-                    }
-                    //sinon on va traiter les choix comme ca
-                    else
-                    {
-                        char[] chiffr = (list[i].choix).ToCharArray();
-
-                        if (chiffr[0] == 'F')
-                        {
-                            info++;
-                        }
-                        if (chiffr[0] == 'P')
-                        {
-                            gpmc++;
-                        }
-                        if (chiffr[0] == 'T')
-                        {
-                            gtr++;
-                        }
-                        if (chiffr[0] == 'D')
-                        {
-                            indus++;
-                        }
-                    }
+                    
                    
 
                 }
@@ -704,12 +685,12 @@ namespace projetASP.Controllers
                 ViewBag.gpmc = gpmc;
                 ViewBag.indus = indus;
                 //les pourcentages
-                ViewBag.nbrTotalP = Convert.ToInt32( Convert.ToDouble(nbrTotal)/ Convert.ToDouble(nbrTotal) * 100);
-                ViewBag.nbrResteP = Convert.ToInt32(Convert.ToDouble(nbrReste) / Convert.ToDouble(nbrTotal) * 100);
-                ViewBag.infoP = Convert.ToInt32(Convert.ToDouble(info)/ Convert.ToDouble(nbrTotal) * 100);
-                ViewBag.gtrP = Convert.ToInt32(Convert.ToDouble(gtr)/ Convert.ToDouble(nbrTotal) * 100);
-                ViewBag.gpmcP = Convert.ToInt32(Convert.ToDouble(gpmc) / Convert.ToDouble(nbrTotal) * 100);
-                ViewBag.indusP = Convert.ToInt32(Convert.ToDouble(indus) / Convert.ToDouble(nbrTotal) * 100);
+                ViewBag.nbrTotalP =  Convert.ToDouble(nbrTotal)/ Convert.ToDouble(nbrTotal) * 100;
+                ViewBag.nbrResteP = Convert.ToDouble(nbrReste) / Convert.ToDouble(nbrTotal) * 100;
+                ViewBag.infoP = Convert.ToDouble(info)/ Convert.ToDouble(nbrTotal) * 100;
+                ViewBag.gtrP = Convert.ToDouble(gtr)/ Convert.ToDouble(nbrTotal) * 100;
+                ViewBag.gpmcP = Convert.ToDouble(gpmc) / Convert.ToDouble(nbrTotal) * 100;
+                ViewBag.indusP =Convert.ToDouble(indus) / Convert.ToDouble(nbrTotal) * 100;
                 return View();
             }
             else
