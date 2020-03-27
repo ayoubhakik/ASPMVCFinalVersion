@@ -260,11 +260,9 @@ namespace projetASP.Controllers
                     e.lieuNaiss = student.lieuNaiss;
                     e.choix = choix1 + choix2 + choix3;
                     etudiantContext.SaveChanges();
-                    return RedirectToAction("Authentification", "User");
+                    return RedirectToAction("Authentification1", "User");
                 }
             }
-
-
             /*else
             {
                 if (!student.password.Equals(e.password))
@@ -326,7 +324,7 @@ namespace projetASP.Controllers
                 client.Send(Message);
                 return true;
             }
-            catch (Exception e)
+            catch (Exception ex)
             {
                 return false;
             }

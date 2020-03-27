@@ -5,7 +5,11 @@ using projetASP.Models;
 using System;
 using System.Collections.Generic;
 using System.Linq;
+using System.Net;
+using System.Net.Mail;
+using System.Text;
 using System.Web;
+using System.Web.Configuration;
 using System.Web.Helpers;
 using System.Web.Mvc;
 
@@ -14,6 +18,82 @@ namespace projetASP.Controllers
     
     public class DepartementController : Controller
     {
+        public void EnvoyerLesFilieres()
+        {
+            if (UserValide.IsValid())
+            {
+                EtudiantContext db = new EtudiantContext();
+                for (int i = 0; i < db.etudiants.ToList().Count; i++)
+                {
+
+                        string body = "<h1>Bonjour mr/mme " + db.etudiants.ToList()[i].nom + " " + db.etudiants.ToList()[i].prenom + "</h1>" +
+                            "<p>Apres avoir faire l'attribution des filieres, on vient de vous informer que votre filiere est :"+db.Filieres.Find(db.etudiants.ToList()[i].idFil).nomFil +"</p><br/>" +
+                            "<a href='le lien ici'>Cliquer ici!</a>" +
+                            "";
+                        Boolean Result = SendEmail(db.etudiants.ToList()[i].email, "Information a propos la filiere attribuer ", body);
+
+                    
+                }
+            }
+            
+
+        }
+        /*
+         * on a pas les emails des etudiants non valide
+        public ActionResult EnvoyerNotification()
+        {
+            if (UserValide.IsValid())
+            {
+                EtudiantContext db = new EtudiantContext();
+                for (int i = 0; i < db.etudiants.ToList().Count; i++)
+                {
+                    //envoi d'un email pour lesles etudiants qu ont pas fait la validation des comptes
+                    if (!db.etudiants.ToList()[i].Validated)
+                    {
+                        string body = "<h1>Bonjour mr/mme "+ db.etudiants.ToList()[i].nom+" "+db.etudiants.ToList()[i].prenom+"</h1>" +
+                            "<p>essayer de valider votre compte pour choisir une filiere</p><br/>" +
+                            "<a href='le lien ici'>Cliquer ici!</a>" +
+                            "";
+                        Boolean Result = SendEmail(db.etudiants.ToList()[i].email, "Notification pour la Validation ", body);
+                        
+                    }
+                }
+                return RedirectToAction("Index");
+            }
+            else
+                return RedirectToAction("Authentification", "User");
+        }
+        */
+        public bool SendEmail(String toEmail, string subject, string EmailBody)
+        {
+            try
+            {
+                String senderEmail = WebConfigurationManager.AppSettings["senderEmail"];
+                String senderPassword = WebConfigurationManager.AppSettings["senderPassword"];
+                /* WebMail.SmtpServer = "smtp.gmail.com";
+                 WebMail.SmtpPort = 587;
+                 WebMail.SmtpUseDefaultCredentials = true;
+                 WebMail.UserName = sendereEmail;
+                 WebMail.Password = senderPassword;
+                 WebMail.Send(to: toEmail, subject: subject, body: EmailBody, isBodyHtml: true);*/
+                SmtpClient client = new SmtpClient("smtp.gmail.com", 587);
+                client.EnableSsl = true;
+                client.Timeout = 100000;
+                client.DeliveryMethod = SmtpDeliveryMethod.Network;
+                client.UseDefaultCredentials = false;
+                client.Credentials = new NetworkCredential(senderEmail, senderPassword);
+                MailMessage Message = new MailMessage(senderEmail, toEmail, subject, EmailBody);
+                Message.IsBodyHtml = true;
+                Message.BodyEncoding = UTF8Encoding.UTF8;
+                client.Send(Message);
+                return true;
+            }
+            catch (Exception ex)
+            {
+                return false;
+            }
+        }
+
         public ActionResult DeleteAllStudents()
         {
             if (UserValide.IsValid())
@@ -84,9 +164,9 @@ namespace projetASP.Controllers
                     EtudiantContext db = new EtudiantContext();
                     db.etudiants.Find(id).Redoubler = true;
                     db.SaveChanges();
-                    ViewBag.Current = "Corbeille";
+                    ViewBag.Current = "Index";
 
-                    return RedirectToAction("Corbeille");
+                    return RedirectToAction("Index");
                 }
                 else return RedirectToAction("Authentification", "User");
 
@@ -181,6 +261,13 @@ namespace projetASP.Controllers
             ViewBag.Current = "importerEtudiants";
             if (UserValide.IsValid())
             {
+
+                EtudiantContext db = new EtudiantContext();
+                if (db.settings.FirstOrDefault().importEtudiant)
+                {
+                    return View();
+                }
+                ViewBag.err = true;
                 return View();
             }
             else
@@ -520,7 +607,8 @@ namespace projetASP.Controllers
                 //list =list.OrderBy(e => (e.noteFstYear+e.noteSndYear)/2);
 
                 db.settings.First().Attributted = true;
-
+                //envoi d'un msg qui contient la filiere attribuer pour tous chaque etudiants 
+                EnvoyerLesFilieres();
                 db.SaveChanges();
                 return RedirectToAction("AttributionFiliere");
             }
@@ -545,10 +633,9 @@ namespace projetASP.Controllers
 
                 for (int i=0;i<nbrTotal;i++)
                 {
-
-                    if (list[i].Redoubler)
+                    if (!list[i].Redoubler)
                     {
-                        if (list[i].choix == null)
+                        if (!list[i].Validated)
                         {
 
                             //un etudiant avec null dans choix alors on va l'es ajouter dans le reste
@@ -617,12 +704,12 @@ namespace projetASP.Controllers
                 ViewBag.gpmc = gpmc;
                 ViewBag.indus = indus;
                 //les pourcentages
-                ViewBag.nbrTotalP =  Convert.ToDouble(nbrTotal)/ Convert.ToDouble(nbrTotal) * 100;
-                ViewBag.nbrResteP = Convert.ToDouble(nbrReste) / Convert.ToDouble(nbrTotal) * 100;
-                ViewBag.infoP = Convert.ToDouble(info)/ Convert.ToDouble(nbrTotal) * 100;
-                ViewBag.gtrP = Convert.ToDouble(gtr)/ Convert.ToDouble(nbrTotal) * 100;
-                ViewBag.gpmcP = Convert.ToDouble(gpmc) / Convert.ToDouble(nbrTotal) * 100;
-                ViewBag.indusP = Convert.ToDouble(indus) / Convert.ToDouble(nbrTotal) * 100;
+                ViewBag.nbrTotalP = Convert.ToInt32( Convert.ToDouble(nbrTotal)/ Convert.ToDouble(nbrTotal) * 100);
+                ViewBag.nbrResteP = Convert.ToInt32(Convert.ToDouble(nbrReste) / Convert.ToDouble(nbrTotal) * 100);
+                ViewBag.infoP = Convert.ToInt32(Convert.ToDouble(info)/ Convert.ToDouble(nbrTotal) * 100);
+                ViewBag.gtrP = Convert.ToInt32(Convert.ToDouble(gtr)/ Convert.ToDouble(nbrTotal) * 100);
+                ViewBag.gpmcP = Convert.ToInt32(Convert.ToDouble(gpmc) / Convert.ToDouble(nbrTotal) * 100);
+                ViewBag.indusP = Convert.ToInt32(Convert.ToDouble(indus) / Convert.ToDouble(nbrTotal) * 100);
                 return View();
             }
             else
