@@ -27,10 +27,10 @@ namespace projetASP.Controllers
                 {
                     if (db.etudiants.ToList()[i].email!=null)
                     {
-                        string body = "<h1>Bonjour mr/mme " + db.etudiants.ToList()[i].nom + " " + db.etudiants.ToList()[i].prenom + "</h1>" +
-                                                    "<p>Apres avoir faire l'attribution des filieres, on vient de vous informer que votre filiere est :" + db.Filieres.Find(db.etudiants.ToList()[i].idFil).nomFil + "</p><br/>" +
-                                                    "<a href='le lien ici'>Cliquer ici!</a>" +
-                                                    "";
+                        string body = "<div border='2px black solid'><h1 color='red'>Bonjour Mr/Mme " + db.etudiants.ToList()[i].nom + " " + db.etudiants.ToList()[i].prenom + "</h1>" +
+                                                    "<p>Apres avoir faire l'attribution des filieres, on vient de vous informer que votre filiere est : " + db.Filieres.Find(db.etudiants.ToList()[i].idFil).nomFil + "</p><br/>" +
+                                                    "<button color='blue'><a href='localhost:localhost:52252/User/Authentification1'>Cliquer ici!</a></button>" +
+                                                    "</div>";
                         Boolean Result = SendEmail(db.etudiants.ToList()[i].email, "Information a propos la filiere attribuer ", body);
                         if (Result == true)
                         {
