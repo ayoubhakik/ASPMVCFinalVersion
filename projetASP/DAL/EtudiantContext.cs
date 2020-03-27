@@ -24,9 +24,11 @@ namespace projetASP.DAL
             }
             catch (DbEntityValidationException ex)
             {
-                string errorMessages = string.Join("; ", ex.EntityValidationErrors.SelectMany(x => x.ValidationErrors).Select(x => x.ErrorMessage));
-                throw new DbEntityValidationException(errorMessages);
+                var firstErrorMessage = ex.EntityValidationErrors.First().ValidationErrors.First()
+                  .ErrorMessage;
+                return 0;
             }
+            
         }
         public DbSet<Etudiant> etudiants { get; set; }
         public DbSet<Departement> departements { get; set; }

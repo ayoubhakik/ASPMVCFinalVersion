@@ -78,11 +78,13 @@ namespace projetASP.Controllers
             ViewBag.Current = "Modification";
 
             /*Update name of buttom if user click in Upload l image seule va etre modifie 
-             
+             pour la modification j ai supprime if(Model.isValide) car il test tous les champ mais
+             nous on dois seulement modifie des champs unique 
+             en outre ja geree tous les exception dans etudiantContext  des  dans Etudiant context 
+
              */
             Etudiant etudiants = etudiantContext.etudiants.Find(etudiant.cne);
-            if (ModelState.IsValid)
-            {
+           
                 if (Request.Files.Count > 0 && Update == "Upload")
                 {
                     //Recupere le fichier est le sauvegarder dans /image/
@@ -92,6 +94,7 @@ namespace projetASP.Controllers
                     ViewBag.exte = extension;
                     if (fileName != "" && ImageEx.Contains(extension) == true)
                     {
+                        ViewBag.err = "";
                         fileName = etudiants.nom + DateTime.Now.ToString("yymmssfff") + extension;
                         etudiants.photo_link = fileName;
                         fileName = Path.Combine(Server.MapPath("~/Image/"), fileName);
@@ -99,8 +102,6 @@ namespace projetASP.Controllers
                         etudiants.Modified = true;
                         etudiantContext.SaveChanges();
                         return View(etudiants);
-
-
                     }
                     else
                     {
@@ -113,6 +114,7 @@ namespace projetASP.Controllers
 
                 else
                 {
+
                     //si clicke sur les valider les modification 
                     etudiants.Modified = true;
                     etudiants.choix = choix1 + choix2 + choix3;
@@ -131,8 +133,7 @@ namespace projetASP.Controllers
                 }
 
             }
-            return View(etudiants);
-        }
+         
         //****************************************************************************************************************************
 
 
