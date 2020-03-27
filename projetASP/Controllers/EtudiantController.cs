@@ -54,12 +54,12 @@ namespace projetASP.Controllers
                  return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
              }*/
 
-            Etudiant etudiants = etudiantContext.etudiants.Find(Session["userId"]);
 
 
            
             if (UserValide.IsValid())
             {
+                Etudiant etudiants = etudiantContext.etudiants.Find(Session["userId"]);
 
                 return View(etudiants);
             }
@@ -78,13 +78,13 @@ namespace projetASP.Controllers
             ViewBag.Current = "Modification";
 
             /*Update name of buttom if user click in Upload l image seule va etre modifie 
-             pour la modification j ai supprime if(Model.isValide) car il test tous les champ mais
-             nous on dois seulement modifie des champs unique 
-             en outre ja geree tous les exception dans etudiantContext  des  dans Etudiant context 
-
+             
              */
-            Etudiant etudiants = etudiantContext.etudiants.Find(etudiant.cne);
-           
+            if (ModelState.IsValid)
+
+            {
+                Etudiant etudiants = etudiantContext.etudiants.Find(etudiant.cne);
+
                 if (Request.Files.Count > 0 && Update == "Upload")
                 {
                     //Recupere le fichier est le sauvegarder dans /image/
@@ -94,7 +94,6 @@ namespace projetASP.Controllers
                     ViewBag.exte = extension;
                     if (fileName != "" && ImageEx.Contains(extension) == true)
                     {
-                        ViewBag.err = "";
                         fileName = etudiants.nom + DateTime.Now.ToString("yymmssfff") + extension;
                         etudiants.photo_link = fileName;
                         fileName = Path.Combine(Server.MapPath("~/Image/"), fileName);
@@ -102,6 +101,8 @@ namespace projetASP.Controllers
                         etudiants.Modified = true;
                         etudiantContext.SaveChanges();
                         return View(etudiants);
+
+
                     }
                     else
                     {
@@ -114,6 +115,7 @@ namespace projetASP.Controllers
 
                 else
                 {
+                    ViewBag.err = null;
 
                     //si clicke sur les valider les modification 
                     etudiants.Modified = true;
@@ -133,7 +135,8 @@ namespace projetASP.Controllers
                 }
 
             }
-         
+            return RedirectToAction("Authentification1", "User");
+        }
         //****************************************************************************************************************************
 
 
@@ -142,9 +145,9 @@ namespace projetASP.Controllers
         public ActionResult Consulter()
         {
             ViewBag.Current = "Consulter";
-            Etudiant etudiants = etudiantContext.etudiants.Find(Session["userId"]);
             if (UserValide.IsValid())
             {
+                Etudiant etudiants = etudiantContext.etudiants.Find(Session["userId"]);
 
                 return View(etudiants);
             }
