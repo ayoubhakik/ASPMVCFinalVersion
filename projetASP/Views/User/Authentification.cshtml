@@ -5,10 +5,6 @@
     ViewBag.Title = "Authentification";
     Layout = "~/Views/Shared/_UserLayout.cshtml";
 }
-<style>
-    
-
-</style>
 
 
 <!DOCTYPE html>
@@ -22,9 +18,9 @@
     <!--===============================================================================================-->
     <link rel="stylesheet" type="text/css" href="~/Content/vendor/bootstrap/css/bootstrap.min.css">
     <!--===============================================================================================-->
-    <link rel="stylesheet" type="text/css" href="~/Content/fonts1/font-awesome-4.7.0/css/font-awesome.min.css">
+    <link rel="stylesheet" type="text/css" href="~/Content/fonts/font-awesome-4.7.0/css/font-awesome.min.css">
     <!--===============================================================================================-->
-    <link rel="stylesheet" type="text/css" href="~/Content/fonts1/Linearicons-Free-v1.0.0/icon-font.min.css">
+    <link rel="stylesheet" type="text/css" href="~/Content/fonts/Linearicons-Free-v1.0.0/icon-font.min.css">
     <!--===============================================================================================-->
     <link rel="stylesheet" type="text/css" href="~/Content/vendor/animate/animate.css">
     <!--===============================================================================================-->
@@ -39,12 +35,10 @@
     <link rel="stylesheet" type="text/css" href="~/Content/css/util.css">
     <link rel="stylesheet" type="text/css" href="~/Content/css/main3.css">
     <link rel="stylesheet" href="css/libs.min.css">
-
-
-    </head>
+    <link href="https://fonts.googleapis.com/css?family=Jura" rel="stylesheet">
     <!--===============================================================================================-->
-
-<body style="background-color: #666666;">
+</head>
+<body style="background-color: #ffffff;">
     <div class="hero">
         <div class="page">
             <div class="wrapper">
@@ -89,13 +83,13 @@
                 </div>
             </div>
         </div>
-          <div class="button" >
-      <a href="#2" data-js-hook="link">
-        <i id="icon" class="fa fa-chevron-down"></i>
-      </a>
-  </div>
+        <div class="button">
+            <a href="#2" data-js-hook="link">
+                <i id="icon" class="fa fa-chevron-down"></i>
+            </a>
+        </div>
     </div>
-    <div class="content-wrapper" id="2">
+    <div class="content-wrapper" id="2" style="height:85%;">
         <div class="limiter">
             <div class="container-login100">
                 <div class="wrap-login100">
@@ -110,9 +104,9 @@
                                 <strong>@ViewBag.Message!</strong>
                             </div>
                         }
-                        <h1 class="login100-form-title p-b-29" style="color:#B49082;font-size:25px;">
+                        <span class="login100-form-title p-b-43" style="color:#B49082;font-family:'Franklin Gothic Medium', 'Arial Narrow', Arial, sans-serif">
                             <strong class="font-weight-bold"> ESPACE DEPARTEMENT </strong>
-                        </h1>
+                        </span>
 
 
                         <div class="wrap-input100 validate-input" data-validate="Valid Username is required">
@@ -142,26 +136,30 @@
                         </div>
 
 
+
+
+
                         <div class="container-login100-form-btn">
                             <button class="btn-lg btn-block" name="loginBtn" value="Login">
                                 <p class="login" style="font-family:'Franklin Gothic Medium', 'Arial Narrow', Arial, sans-serif">Login</p>
                             </button>
-                            </div>
+
+                        </div>
+
                         <Br />
                         <div class="container-login100-form-btn1">
                             <a class="btn-lg btn-block " href="~/User/Authentification1"><p class="login1" style="font-family:'Franklin Gothic Medium', 'Arial Narrow', Arial, sans-serif;text-align:center">Login as student</p></a>
                         </div>
 
-                    }
+                            }
 
-                        <Br />
-                        <a href="~/User/Authentification1" class="gotostudent col-lg-4 col-md-3">Login as student</a>
 
-                    }
 
                     <div class="login100-more" style="background-image: url('../Content/img/info.png');">
                     </div>
                 </div>
+
+            </div>
         </div>
     </div>
 
