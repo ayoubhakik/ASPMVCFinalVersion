@@ -75,7 +75,6 @@
                                 <li class="form-line" data-type="control_calculation" id="id_15">
                                     <label class="form-label form-label-top form-label-auto" id="label_15" for="input_15"> Date de Naissance </label>
                                     <div id="cid_17" class="form-input-wide">
-                                        @Model.dateNaiss
                                         @Html.EditorFor(model => model.dateNaiss, new { htmlAttributes = new { @class = "form-control", datetime_picker = true } })
                                         @Html.ValidationMessageFor(model => model.dateNaiss, "", new { @class = "text-danger" })
                                         <label class="form-sub-label" for="input_7" id="sublabel_input_7" style="min-height:13px" aria-hidden="false"> yyyy/mm/dd </label>
