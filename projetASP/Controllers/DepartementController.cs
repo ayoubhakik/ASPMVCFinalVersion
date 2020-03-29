@@ -615,8 +615,9 @@ namespace projetASP.Controllers
 
                 db.settings.First().Attributted = true;
                 //envoi d'un msg qui contient la filiere attribuer pour tous chaque etudiants 
-                EnvoyerLesFilieres();
                 db.SaveChanges();
+                EnvoyerLesFilieres();
+
                 return RedirectToAction("AttributionFiliere");
             }
             else
@@ -640,6 +641,7 @@ namespace projetASP.Controllers
 
                 for (int i=0;i<nbrTotal;i++)
                 {
+
                     if (!list[i].Redoubler)
                     {
                         if (!list[i].Validated)
@@ -729,24 +731,28 @@ namespace projetASP.Controllers
                 //sinon on va traiter les choix comme ca
                 else
                 {
-                    char[] chiffr = (list[i].choix).ToCharArray();
+                    if (list[i].Validated)
+                    {
+                        char[] chiffr = (list[i].choix).ToCharArray();
 
-                    if (chiffr[0] == 'F')
-                    {
-                        info++;
+                        if (chiffr[0] == 'F')
+                        {
+                            info++;
+                        }
+                        if (chiffr[0] == 'P')
+                        {
+                            gpmc++;
+                        }
+                        if (chiffr[0] == 'T')
+                        {
+                            gtr++;
+                        }
+                        if (chiffr[0] == 'D')
+                        {
+                            indus++;
+                        }
                     }
-                    if (chiffr[0] == 'P')
-                    {
-                        gpmc++;
-                    }
-                    if (chiffr[0] == 'T')
-                    {
-                        gtr++;
-                    }
-                    if (chiffr[0] == 'D')
-                    {
-                        indus++;
-                    }
+                    
                 }
 
             }
