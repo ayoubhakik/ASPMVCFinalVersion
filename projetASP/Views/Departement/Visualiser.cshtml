@@ -5,27 +5,25 @@
 }
 
 <style>
-    .imageTire {
-       
-        margin: 10px;
-        padding: 10px;
-        
-    }
-    .table{
-        display:inline-block;
-        width:220px;
+
+    table{
+        /*display:inline-block;*/
+        width:100%;
         margin:3px;
         border:none;
-        border-collapse:collapse;
           }
- td{
-     padding:0;
- }
-    img {
+    tr {
+        display: inline-block;
+        margin:1px;
+    }
+
+
+
+    /*img {
         height: 180px;
         width: 180px;
         border: none;
-    }
+    }*/
     tr td img {
         
         border-radius: 10px;
@@ -44,8 +42,7 @@
         font-size:17px;
         font-family:sans-serif;
         font-weight:bold;
-        margin-right:20px;
-
+        margin-left:30px;
     }
     tr td:hover img {
         box-shadow: 15px 15px 25px #061323;
@@ -65,46 +62,54 @@
         <div class="row">
             <div class="col-lg-12 col-md-12">
                 <div class="card">
-=              <div class="card-header" style="background:linear-gradient(to bottom, #11273F, #061323, #204773);;color:white">
+              <div class="card-header" style="background:linear-gradient(to bottom, #11273F, #061323, #204773);color:white">
                         <h4 class="card-title"></h4>
+                         
                             <h2>Les photo de tous les etudiants</h2>
-                        
+                       </div>
+              <div class="card-body">
 
-                    </div>
-                    <div class="card-body table-responsive">
+                  @if (Model == null)
+                  {
+                  <span style="color:black">no data founded</span>
+                  }
+                  else
+                  {
+                      <table class="tableau">
+                          @foreach (var item in Model)
+                          {
 
-              
-                                    <table class="table">
+                              if (@item.photo_link == null)
+                              {
+                                  <tr class="imageTire">
+                                      <td>
+                                          <img src="~/Content/img/login.png" alt="Photo" />
+                                          <br />
+                                          <span class="text"> @Html.DisplayFor(modelItem => item.nom)   @Html.DisplayFor(modelItem => item.prenom)</span>
+                                      </td>
+                                  </tr>
+                                 
 
-                                        @if (@item.photo_link == null)
-                                        {
-                                        <tr class="imageTire">
-                                            <td>
-                                                <img src="~/Content/img/login.png" alt="Photo"  />
-                                            </td>
+                              }
+                              else
+                              {
+                                  <tr class="imageTire">
+                                      <td>
+                                          <img src="~/Image/@item.photo_link" alt="Photo" />
+                                          <br />
+                                          <span class="text">  @Html.DisplayFor(modelItem => item.nom)   @Html.DisplayFor(modelItem => item.prenom)</span>
+                                      </td>
 
-                                        </tr>
+                                  </tr>
+                              }
+                             
 
-                                        }
-                                        else
-                                        {
-                                        <tr class="imageTire">
-                                            <td>
-                                                <img src="~/Image/@item.photo_link" alt="Photo"/>
-                                            </td>
+                          }
+                      </table>
+                          }
 
-                                        </tr>
-                                        }
-                                        <tr class="imageTire">
-                                            <td style="text-align:center">
-                                                <span class="text">  @Html.DisplayFor(modelItem => item.nom)   @Html.DisplayFor(modelItem => item.prenom)</span>
-                                            </td>
-                                        </tr>
-                                    </table>
-                                    }
-                                   
-                                }
-                    </div>
+                      
+                  </div>
                 </div>
             </div>
 
@@ -113,5 +118,5 @@
         </div>
     </div>
 </div>
-
+<div class="container-fluid" style="text-align:center;background-color:rgba(0,0,0,1);">Copyright © 2020 ENSA. All Rights Reserved.</div>
 

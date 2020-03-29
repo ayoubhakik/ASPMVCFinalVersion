@@ -1,8 +1,8 @@
 ﻿<?xml version="1.0" encoding="utf-8"?>
 <Project ToolsVersion="15.0" DefaultTargets="Build" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+  <Import Project="..\packages\EntityFramework.6.4.0\build\EntityFramework.props" Condition="Exists('..\packages\EntityFramework.6.4.0\build\EntityFramework.props')" />
   <Import Project="$(MSBuildExtensionsPath32)\Microsoft\VisualStudio\v$(VisualStudioVersion)\TypeScript\Microsoft.TypeScript.Default.props" Condition="Exists('$(MSBuildExtensionsPath32)\Microsoft\VisualStudio\v$(VisualStudioVersion)\TypeScript\Microsoft.TypeScript.Default.props')" />
   <Import Project="..\packages\Microsoft.CodeDom.Providers.DotNetCompilerPlatform.2.0.1\build\net46\Microsoft.CodeDom.Providers.DotNetCompilerPlatform.props" Condition="Exists('..\packages\Microsoft.CodeDom.Providers.DotNetCompilerPlatform.2.0.1\build\net46\Microsoft.CodeDom.Providers.DotNetCompilerPlatform.props')" />
-  <Import Project="..\packages\EntityFramework.6.4.0\build\EntityFramework.props" Condition="Exists('..\packages\EntityFramework.6.4.0\build\EntityFramework.props')" />
   <Import Project="$(MSBuildExtensionsPath)\$(MSBuildToolsVersion)\Microsoft.Common.props" Condition="Exists('$(MSBuildExtensionsPath)\$(MSBuildToolsVersion)\Microsoft.Common.props')" />
   <PropertyGroup>
     <Configuration Condition=" '$(Configuration)' == '' ">Debug</Configuration>
@@ -167,20 +167,38 @@
     <Compile Include="Models\Settings.cs" />
     <Compile Include="Models\UserValide.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
+    <Content Include="Content\css\importation.css" />
+    <Content Include="Content\css\Recu.css" />
+    <Content Include="Content\img\ensa.jpg" />
+    <Content Include="Content\img\images.png" />
+    <Content Include="Content\img\index.jpg" />
     <Content Include="Content\css\main3.css" />
+    <Content Include="Content\css\Modification.css" />
+    <Content Include="Content\css\StyleSheet1.css" />
     <Content Include="Content\css\util.css" />
     <Content Include="Content\img\books.jpg" />
+    <Content Include="Content\img\dark.jpg" />
+    <Content Include="Content\img\fond.jpg" />
+    <Content Include="Content\img\fond1.jpg" />
+    <Content Include="Content\img\fond2.jpg" />
     <Content Include="Content\img\glisser.png" />
+    <Content Include="Content\img\industriel.jpg" />
+    <Content Include="Content\img\informatique.jpg" />
     <Content Include="Content\img\login.png" />
+    <Content Include="Content\img\unnamed.jpg" />
+    <Content Include="Content\img\procedes.jpg" />
+    <Content Include="Content\img\reseau.jpg" />
+    <Content Include="Content\img\uca.jpg" />
+    <Content Include="Content\js\carousel.js" />
     <Content Include="Content\js\main.js" />
     <Content Include="Content\js\main1.js" />
-    <Content Include="Content\fonts1\font-awesome-4.7.0\css\font-awesome.css" />
-    <Content Include="Content\fonts1\font-awesome-4.7.0\css\font-awesome.min.css" />
-    <Content Include="Content\fonts1\font-awesome-4.7.0\fonts\fontawesome-webfont.svg" />
-    <Content Include="Content\fonts1\font-awesome-4.7.0\HELP-US-OUT.txt" />
-    <Content Include="Content\fonts1\Linearicons-Free-v1.0.0\icon-font.min.css" />
-    <Content Include="Content\fonts1\Linearicons-Free-v1.0.0\WebFont\Linearicons-Free.svg" />
-    <Content Include="Content\fonts1\montserrat\OFL.txt" />
+    <Content Include="Content\fonts\font-awesome-4.7.0\css\font-awesome.css" />
+    <Content Include="Content\fonts\font-awesome-4.7.0\css\font-awesome.min.css" />
+    <Content Include="Content\fonts\font-awesome-4.7.0\fonts\fontawesome-webfont.svg" />
+    <Content Include="Content\fonts\font-awesome-4.7.0\HELP-US-OUT.txt" />
+    <Content Include="Content\fonts\Linearicons-Free-v1.0.0\icon-font.min.css" />
+    <Content Include="Content\fonts\Linearicons-Free-v1.0.0\WebFont\Linearicons-Free.svg" />
+    <Content Include="Content\fonts\montserrat\OFL.txt" />
     <Content Include="Content\img\gpmc.jpg" />
     <Content Include="Content\img\gtr.jpg" />
     <Content Include="Content\img\indus.jpg" />
@@ -217,6 +235,7 @@
     <Content Include="Content\vendor\select2\select2.js" />
     <Content Include="Content\vendor\select2\select2.min.css" />
     <Content Include="Content\vendor\select2\select2.min.js" />
+    <Content Include="Image\glisser.png" />
     <Content Include="Image\kamal.jpg" />
   </ItemGroup>
   <ItemGroup>
@@ -494,79 +513,79 @@
     <Content Include="Content\vendor\bootstrap\css\bootstrap.min.css.map" />
     <Content Include="App_Browsers\qt.browser" />
     <Content Include="ExcelFiles\EtudiantExemple.xlsx" />
-    <Content Include="Content\fonts1\font-awesome-4.7.0\fonts\fontawesome-webfont.eot" />
-    <Content Include="Content\fonts1\font-awesome-4.7.0\fonts\fontawesome-webfont.ttf" />
-    <Content Include="Content\fonts1\font-awesome-4.7.0\fonts\fontawesome-webfont.woff" />
-    <Content Include="Content\fonts1\font-awesome-4.7.0\fonts\fontawesome-webfont.woff2" />
-    <Content Include="Content\fonts1\font-awesome-4.7.0\fonts\FontAwesome.otf" />
-    <Content Include="Content\fonts1\font-awesome-4.7.0\less\animated.less" />
-    <Content Include="Content\fonts1\font-awesome-4.7.0\less\bordered-pulled.less" />
-    <Content Include="Content\fonts1\font-awesome-4.7.0\less\core.less" />
-    <Content Include="Content\fonts1\font-awesome-4.7.0\less\fixed-width.less" />
-    <Content Include="Content\fonts1\font-awesome-4.7.0\less\font-awesome.less" />
-    <Content Include="Content\fonts1\font-awesome-4.7.0\less\icons.less" />
-    <Content Include="Content\fonts1\font-awesome-4.7.0\less\larger.less" />
-    <Content Include="Content\fonts1\font-awesome-4.7.0\less\list.less" />
-    <Content Include="Content\fonts1\font-awesome-4.7.0\less\mixins.less" />
-    <Content Include="Content\fonts1\font-awesome-4.7.0\less\path.less" />
-    <Content Include="Content\fonts1\font-awesome-4.7.0\less\rotated-flipped.less" />
-    <Content Include="Content\fonts1\font-awesome-4.7.0\less\screen-reader.less" />
-    <Content Include="Content\fonts1\font-awesome-4.7.0\less\stacked.less" />
-    <Content Include="Content\fonts1\font-awesome-4.7.0\less\variables.less" />
-    <Content Include="Content\fonts1\font-awesome-4.7.0\scss\font-awesome.scss" />
-    <Content Include="Content\fonts1\font-awesome-4.7.0\scss\_animated.scss" />
-    <Content Include="Content\fonts1\font-awesome-4.7.0\scss\_bordered-pulled.scss" />
-    <Content Include="Content\fonts1\font-awesome-4.7.0\scss\_core.scss" />
-    <Content Include="Content\fonts1\font-awesome-4.7.0\scss\_fixed-width.scss" />
-    <Content Include="Content\fonts1\font-awesome-4.7.0\scss\_icons.scss" />
-    <Content Include="Content\fonts1\font-awesome-4.7.0\scss\_larger.scss" />
-    <Content Include="Content\fonts1\font-awesome-4.7.0\scss\_list.scss" />
-    <Content Include="Content\fonts1\font-awesome-4.7.0\scss\_mixins.scss" />
-    <Content Include="Content\fonts1\font-awesome-4.7.0\scss\_path.scss" />
-    <Content Include="Content\fonts1\font-awesome-4.7.0\scss\_rotated-flipped.scss" />
-    <Content Include="Content\fonts1\font-awesome-4.7.0\scss\_screen-reader.scss" />
-    <Content Include="Content\fonts1\font-awesome-4.7.0\scss\_stacked.scss" />
-    <Content Include="Content\fonts1\font-awesome-4.7.0\scss\_variables.scss" />
-    <Content Include="Content\fonts1\Linearicons-Free-v1.0.0\WebFont\Linearicons-Free.eot" />
-    <Content Include="Content\fonts1\Linearicons-Free-v1.0.0\WebFont\Linearicons-Free.ttf" />
-    <Content Include="Content\fonts1\Linearicons-Free-v1.0.0\WebFont\Linearicons-Free.woff" />
-    <Content Include="Content\fonts1\Linearicons-Free-v1.0.0\WebFont\Linearicons-Free.woff2" />
-    <Content Include="Content\fonts1\montserrat\Montserrat-Black.ttf" />
-    <Content Include="Content\fonts1\montserrat\Montserrat-BlackItalic.ttf" />
-    <Content Include="Content\fonts1\montserrat\Montserrat-Bold.ttf" />
-    <Content Include="Content\fonts1\montserrat\Montserrat-BoldItalic.ttf" />
-    <Content Include="Content\fonts1\montserrat\Montserrat-ExtraBold.ttf" />
-    <Content Include="Content\fonts1\montserrat\Montserrat-ExtraBoldItalic.ttf" />
-    <Content Include="Content\fonts1\montserrat\Montserrat-ExtraLight.ttf" />
-    <Content Include="Content\fonts1\montserrat\Montserrat-ExtraLightItalic.ttf" />
-    <Content Include="Content\fonts1\montserrat\Montserrat-Italic.ttf" />
-    <Content Include="Content\fonts1\montserrat\Montserrat-Light.ttf" />
-    <Content Include="Content\fonts1\montserrat\Montserrat-LightItalic.ttf" />
-    <Content Include="Content\fonts1\montserrat\Montserrat-Medium.ttf" />
-    <Content Include="Content\fonts1\montserrat\Montserrat-MediumItalic.ttf" />
-    <Content Include="Content\fonts1\montserrat\Montserrat-Regular.ttf" />
-    <Content Include="Content\fonts1\montserrat\Montserrat-SemiBold.ttf" />
-    <Content Include="Content\fonts1\montserrat\Montserrat-SemiBoldItalic.ttf" />
-    <Content Include="Content\fonts1\montserrat\Montserrat-Thin.ttf" />
-    <Content Include="Content\fonts1\montserrat\Montserrat-ThinItalic.ttf" />
-    <Content Include="Content\fonts1\poppins\Poppins-Black.ttf" />
-    <Content Include="Content\fonts1\poppins\Poppins-BlackItalic.ttf" />
-    <Content Include="Content\fonts1\poppins\Poppins-Bold.ttf" />
-    <Content Include="Content\fonts1\poppins\Poppins-BoldItalic.ttf" />
-    <Content Include="Content\fonts1\poppins\Poppins-ExtraBold.ttf" />
-    <Content Include="Content\fonts1\poppins\Poppins-ExtraBoldItalic.ttf" />
-    <Content Include="Content\fonts1\poppins\Poppins-ExtraLight.ttf" />
-    <Content Include="Content\fonts1\poppins\Poppins-ExtraLightItalic.ttf" />
-    <Content Include="Content\fonts1\poppins\Poppins-Italic.ttf" />
-    <Content Include="Content\fonts1\poppins\Poppins-Light.ttf" />
-    <Content Include="Content\fonts1\poppins\Poppins-LightItalic.ttf" />
-    <Content Include="Content\fonts1\poppins\Poppins-Medium.ttf" />
-    <Content Include="Content\fonts1\poppins\Poppins-MediumItalic.ttf" />
-    <Content Include="Content\fonts1\poppins\Poppins-Regular.ttf" />
-    <Content Include="Content\fonts1\poppins\Poppins-SemiBold.ttf" />
-    <Content Include="Content\fonts1\poppins\Poppins-SemiBoldItalic.ttf" />
-    <Content Include="Content\fonts1\poppins\Poppins-Thin.ttf" />
-    <Content Include="Content\fonts1\poppins\Poppins-ThinItalic.ttf" />
+    <Content Include="Content\fonts\font-awesome-4.7.0\fonts\fontawesome-webfont.eot" />
+    <Content Include="Content\fonts\font-awesome-4.7.0\fonts\fontawesome-webfont.ttf" />
+    <Content Include="Content\fonts\font-awesome-4.7.0\fonts\fontawesome-webfont.woff" />
+    <Content Include="Content\fonts\font-awesome-4.7.0\fonts\fontawesome-webfont.woff2" />
+    <Content Include="Content\fonts\font-awesome-4.7.0\fonts\FontAwesome.otf" />
+    <Content Include="Content\fonts\font-awesome-4.7.0\less\animated.less" />
+    <Content Include="Content\fonts\font-awesome-4.7.0\less\bordered-pulled.less" />
+    <Content Include="Content\fonts\font-awesome-4.7.0\less\core.less" />
+    <Content Include="Content\fonts\font-awesome-4.7.0\less\fixed-width.less" />
+    <Content Include="Content\fonts\font-awesome-4.7.0\less\font-awesome.less" />
+    <Content Include="Content\fonts\font-awesome-4.7.0\less\icons.less" />
+    <Content Include="Content\fonts\font-awesome-4.7.0\less\larger.less" />
+    <Content Include="Content\fonts\font-awesome-4.7.0\less\list.less" />
+    <Content Include="Content\fonts\font-awesome-4.7.0\less\mixins.less" />
+    <Content Include="Content\fonts\font-awesome-4.7.0\less\path.less" />
+    <Content Include="Content\fonts\font-awesome-4.7.0\less\rotated-flipped.less" />
+    <Content Include="Content\fonts\font-awesome-4.7.0\less\screen-reader.less" />
+    <Content Include="Content\fonts\font-awesome-4.7.0\less\stacked.less" />
+    <Content Include="Content\fonts\font-awesome-4.7.0\less\variables.less" />
+    <Content Include="Content\fonts\font-awesome-4.7.0\scss\font-awesome.scss" />
+    <Content Include="Content\fonts\font-awesome-4.7.0\scss\_animated.scss" />
+    <Content Include="Content\fonts\font-awesome-4.7.0\scss\_bordered-pulled.scss" />
+    <Content Include="Content\fonts\font-awesome-4.7.0\scss\_core.scss" />
+    <Content Include="Content\fonts\font-awesome-4.7.0\scss\_fixed-width.scss" />
+    <Content Include="Content\fonts\font-awesome-4.7.0\scss\_icons.scss" />
+    <Content Include="Content\fonts\font-awesome-4.7.0\scss\_larger.scss" />
+    <Content Include="Content\fonts\font-awesome-4.7.0\scss\_list.scss" />
+    <Content Include="Content\fonts\font-awesome-4.7.0\scss\_mixins.scss" />
+    <Content Include="Content\fonts\font-awesome-4.7.0\scss\_path.scss" />
+    <Content Include="Content\fonts\font-awesome-4.7.0\scss\_rotated-flipped.scss" />
+    <Content Include="Content\fonts\font-awesome-4.7.0\scss\_screen-reader.scss" />
+    <Content Include="Content\fonts\font-awesome-4.7.0\scss\_stacked.scss" />
+    <Content Include="Content\fonts\font-awesome-4.7.0\scss\_variables.scss" />
+    <Content Include="Content\fonts\Linearicons-Free-v1.0.0\WebFont\Linearicons-Free.eot" />
+    <Content Include="Content\fonts\Linearicons-Free-v1.0.0\WebFont\Linearicons-Free.ttf" />
+    <Content Include="Content\fonts\Linearicons-Free-v1.0.0\WebFont\Linearicons-Free.woff" />
+    <Content Include="Content\fonts\Linearicons-Free-v1.0.0\WebFont\Linearicons-Free.woff2" />
+    <Content Include="Content\fonts\montserrat\Montserrat-Black.ttf" />
+    <Content Include="Content\fonts\montserrat\Montserrat-BlackItalic.ttf" />
+    <Content Include="Content\fonts\montserrat\Montserrat-Bold.ttf" />
+    <Content Include="Content\fonts\montserrat\Montserrat-BoldItalic.ttf" />
+    <Content Include="Content\fonts\montserrat\Montserrat-ExtraBold.ttf" />
+    <Content Include="Content\fonts\montserrat\Montserrat-ExtraBoldItalic.ttf" />
+    <Content Include="Content\fonts\montserrat\Montserrat-ExtraLight.ttf" />
+    <Content Include="Content\fonts\montserrat\Montserrat-ExtraLightItalic.ttf" />
+    <Content Include="Content\fonts\montserrat\Montserrat-Italic.ttf" />
+    <Content Include="Content\fonts\montserrat\Montserrat-Light.ttf" />
+    <Content Include="Content\fonts\montserrat\Montserrat-LightItalic.ttf" />
+    <Content Include="Content\fonts\montserrat\Montserrat-Medium.ttf" />
+    <Content Include="Content\fonts\montserrat\Montserrat-MediumItalic.ttf" />
+    <Content Include="Content\fonts\montserrat\Montserrat-Regular.ttf" />
+    <Content Include="Content\fonts\montserrat\Montserrat-SemiBold.ttf" />
+    <Content Include="Content\fonts\montserrat\Montserrat-SemiBoldItalic.ttf" />
+    <Content Include="Content\fonts\montserrat\Montserrat-Thin.ttf" />
+    <Content Include="Content\fonts\montserrat\Montserrat-ThinItalic.ttf" />
+    <Content Include="Content\fonts\poppins\Poppins-Black.ttf" />
+    <Content Include="Content\fonts\poppins\Poppins-BlackItalic.ttf" />
+    <Content Include="Content\fonts\poppins\Poppins-Bold.ttf" />
+    <Content Include="Content\fonts\poppins\Poppins-BoldItalic.ttf" />
+    <Content Include="Content\fonts\poppins\Poppins-ExtraBold.ttf" />
+    <Content Include="Content\fonts\poppins\Poppins-ExtraBoldItalic.ttf" />
+    <Content Include="Content\fonts\poppins\Poppins-ExtraLight.ttf" />
+    <Content Include="Content\fonts\poppins\Poppins-ExtraLightItalic.ttf" />
+    <Content Include="Content\fonts\poppins\Poppins-Italic.ttf" />
+    <Content Include="Content\fonts\poppins\Poppins-Light.ttf" />
+    <Content Include="Content\fonts\poppins\Poppins-LightItalic.ttf" />
+    <Content Include="Content\fonts\poppins\Poppins-Medium.ttf" />
+    <Content Include="Content\fonts\poppins\Poppins-MediumItalic.ttf" />
+    <Content Include="Content\fonts\poppins\Poppins-Regular.ttf" />
+    <Content Include="Content\fonts\poppins\Poppins-SemiBold.ttf" />
+    <Content Include="Content\fonts\poppins\Poppins-SemiBoldItalic.ttf" />
+    <Content Include="Content\fonts\poppins\Poppins-Thin.ttf" />
+    <Content Include="Content\fonts\poppins\Poppins-ThinItalic.ttf" />
     <None Include="Scripts\jquery-3.4.1.intellisense.js" />
     <Content Include="Scripts\jquery-3.4.1.js" />
     <Content Include="Scripts\jquery-3.4.1.min.js" />
@@ -683,6 +702,7 @@
     <Content Include="Views\Web.config" />
     <Content Include="Views\Departement\Corbeille.cshtml" />
     <Content Include="Views\Departement\Search.cshtml" />
+    <Content Include="Views\Shared\_FooterLayout.cshtml" />
     <None Include="Web.Debug.config">
       <DependentUpon>Web.config</DependentUpon>
     </None>
@@ -769,9 +789,9 @@
     <PropertyGroup>
       <ErrorText>This project references NuGet package(s) that are missing on this computer. Use NuGet Package Restore to download them.  For more information, see http://go.microsoft.com/fwlink/?LinkID=322105. The missing file is {0}.</ErrorText>
     </PropertyGroup>
+    <Error Condition="!Exists('..\packages\Microsoft.CodeDom.Providers.DotNetCompilerPlatform.2.0.1\build\net46\Microsoft.CodeDom.Providers.DotNetCompilerPlatform.props')" Text="$([System.String]::Format('$(ErrorText)', '..\packages\Microsoft.CodeDom.Providers.DotNetCompilerPlatform.2.0.1\build\net46\Microsoft.CodeDom.Providers.DotNetCompilerPlatform.props'))" />
     <Error Condition="!Exists('..\packages\EntityFramework.6.4.0\build\EntityFramework.props')" Text="$([System.String]::Format('$(ErrorText)', '..\packages\EntityFramework.6.4.0\build\EntityFramework.props'))" />
     <Error Condition="!Exists('..\packages\EntityFramework.6.4.0\build\EntityFramework.targets')" Text="$([System.String]::Format('$(ErrorText)', '..\packages\EntityFramework.6.4.0\build\EntityFramework.targets'))" />
-    <Error Condition="!Exists('..\packages\Microsoft.CodeDom.Providers.DotNetCompilerPlatform.2.0.1\build\net46\Microsoft.CodeDom.Providers.DotNetCompilerPlatform.props')" Text="$([System.String]::Format('$(ErrorText)', '..\packages\Microsoft.CodeDom.Providers.DotNetCompilerPlatform.2.0.1\build\net46\Microsoft.CodeDom.Providers.DotNetCompilerPlatform.props'))" />
   </Target>
   <Import Project="..\packages\EntityFramework.6.4.0\build\EntityFramework.targets" Condition="Exists('..\packages\EntityFramework.6.4.0\build\EntityFramework.targets')" />
   <!-- To modify your build process, add your task inside one of the targets below and uncomment it.
