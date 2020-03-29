@@ -1,4 +1,4 @@
-@model projetASP.Models.Etudiant
+﻿@model projetASP.Models.Etudiant
 @{
                 /**/
 
@@ -44,11 +44,11 @@
                                                 <div class="header-logo">
                                                     @if (@Model.photo_link != null)
                                                     {
-                                                        <img src="~/Image/@Model.photo_link" alt="" width="200" class="header-logo-left" />
+                                                        <img src="~/Image/@Model.photo_link" alt="" width="200" height="200" class="header-logo-left" />
                                                     }
                                                     else
                                                     {
-                                                        <img src="~/Content/img/login.png" alt="" width="200" class="header-logo-left" />
+                                                        <img src="~/Content/img/login.png" alt="" width="200" ,height="200" class="header-logo-left" />
                                                     }
 
                                                 </div>
@@ -56,7 +56,7 @@
                                                 <a class="fas fa-edit" href="#Edit" style="color:white"></a>
                                                 <div id="Edit" class="Ed">
                                                     <input type="file" name="ImageFile" style="color:white;" />
-                                                    <input type="submit" class="btn btn-warning" name="Update" value="Modifier" id="mod" />
+                                                    <input type="submit" class="btn btn-warning" name="Update" value="Upload" id="mod" />
 
                                                 </div>
                                                 <label class="text-danger">

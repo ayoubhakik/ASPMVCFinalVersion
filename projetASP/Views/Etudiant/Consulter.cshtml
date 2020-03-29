@@ -27,11 +27,11 @@
                                         <div class="header-logo">
                                             @if (@Model.photo_link != null)
                                             {
-                                                <img src="~/Image/@Model.photo_link" alt="" width="200" class="header-logo-left" />
+                                                <img src="~/Image/@Model.photo_link" alt="" width="200" height="200" class="header-logo-left" />
                                             }
                                             else
                                             {
-                                                <img src="~/Content/img/login.png" alt="" width="200" class="header-logo-left" />
+                                                <img src="~/Content/img/login.png" alt="" width="200" height="200" class="header-logo-left" />
                                             }
                                         </div>
 
@@ -91,7 +91,7 @@
                                 <label class="form-label form-label-top form-label-auto" id="label_18" for="input_18"> Lieu de Naissance </label>
                                 <div id="cid_18" class="form-input-wide">
 
-                                    @Html.Label(@Model.cin, new { htmlAttributes = new { @class = "form-control" } })
+                                    @Html.Label(@Model.lieuNaiss, new { htmlAttributes = new { @class = "form-control" } })
 
                                 </div>
                             </li>
@@ -99,7 +99,7 @@
                             <li class="form-line" data-type="control_calculation" id="id_19">
                                 <label class="form-label form-label-top form-label-auto" id="label_19" for="input_19"> Nationalité </label>
                                 <div id="cid_19" class="form-input-wide">
-                                    @Html.Label(@Model.cin, new { htmlAttributes = new { @class = "form-control" } })
+                                    @Html.Label(@Model.nationalite, new { htmlAttributes = new { @class = "form-control" } })
                                 </div>
                             </li>
 

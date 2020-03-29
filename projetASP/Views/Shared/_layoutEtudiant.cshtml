@@ -17,8 +17,9 @@
         .active {
             background-color: #B49082;
         }
-        
-        
+        .sidebar .nav li a, .sidebar .nav li .dropdown-menu {
+            color: white !important;
+        }
     </style>
     <link rel="stylesheet" type="text/css" href="https://fonts.googleapis.com/css?family=Roboto:300,400,500,700|Roboto+Slab:400,700|Material+Icons" />
     <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/font-awesome/latest/css/font-awesome.min.css">
@@ -44,10 +45,12 @@
             <div class="sidebar-wrapper">
 
                 <ul class="nav">
-                    <li><a href='@Url.Action("Index","Etudiant")' class="nav-link">
-                       <i class="material-icons" >account_box</i>
-                          <p>Bienvenue @Session["nom"] @Session["prenom"]</p>
-</a></li>
+                    <li>
+                        <a href='@Url.Action("Index","Etudiant")' class="nav-link">
+                            <i class="material-icons">account_box</i>
+                            <p>Bienvenue @Session["nom"] @Session["prenom"]</p>
+                        </a>
+                    </li>
                     <li class="@(ViewBag.Current == "Home" ? "nav-tem active" : "nav-item")">
                         <a href='@Url.Action("Index","Etudiant")' class="nav-link">
                             <i class="material-icons">home</i>
@@ -83,7 +86,7 @@
             <!-- Navbar -->
             <nav class="navbar navbar-expand-lg navbar-transparent navbar-absolute fixed-top " id="navigation-example">
                 <div class="container-fluid">
-                    
+
                     <button class="navbar-toggler" type="button" data-toggle="collapse" aria-controls="navigation-index" aria-expanded="false" aria-label="Toggle navigation" data-target="#navigation-example">
                         <span class="sr-only">Toggle navigation</span>
                         <span class="navbar-toggler-icon icon-bar"></span>
@@ -100,13 +103,13 @@
                                 </button>
                             </div>
                         </form>
-                        
+
                     </div>
                 </div>
             </nav>
             <!-- End Navbar -->
             @RenderBody()
-           
+
 
 
         </div>
@@ -254,7 +257,7 @@
             // Javascript method's body can be found in assets/js/demos.js
             md.initDashboardPageCharts();
         });
-       
+
 
     </script>
 

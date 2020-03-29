@@ -73,7 +73,7 @@ namespace projetASP.Controllers
 
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public ActionResult Modification([Bind(Include = "cne,nationalite,email,phone,gsm,address,ville,dateNaiss")] Etudiant etudiant, string Update, String choix1, String choix2, String choix3)
+        public ActionResult Modification([Bind(Include = "cne,nationalite,email,phone,gsm,address,ville,dateNaiss,lieuNaiss")] Etudiant etudiant, string Update, String choix1, String choix2, String choix3)
         {
             ViewBag.Current = "Modification";
 
@@ -126,9 +126,9 @@ namespace projetASP.Controllers
                 etudiants.address = etudiant.address;
                 etudiants.ville = etudiant.ville;
                 etudiants.dateNaiss = etudiant.dateNaiss;
-
+                etudiants.lieuNaiss = etudiant.lieuNaiss;
                 etudiantContext.SaveChanges();
-                return View(etudiants);
+                return RedirectToAction("SendEmailToUser");
 
             }
         }
@@ -293,12 +293,13 @@ namespace projetASP.Controllers
         public ActionResult SendEmailToUser()
         {
             bool Result = false;
-            Etudiant etudiants = etudiantContext.etudiants.Find("125");
+            Etudiant etudiants = etudiantContext.etudiants.Find(Session["userId"]);
             string email = etudiants.email;
             string subject = "Modification";
             ViewBag.nom = etudiants.nom;
             ViewBag.prenom = etudiants.prenom;
-            Result = SendEmail(email, subject, "<p> Hi"+" "+ @ViewBag.nom+" "+ @ViewBag.prenom +",<br/>some modifications had been done <br />Verify your account </p>");
+            Result = SendEmail(email, subject, "<p> Hello"+" "+ @ViewBag.nom+" "+ @ViewBag.prenom +",<br/>some modifications had been done <br />Verify your account </p>" +
+                "<button color='blue'><a href='localhost:localhost:52252/User/Authentification1'>Cliquer ici!</a></button>");
             if (Result == true)
             {
                 Json(Result, JsonRequestBehavior.AllowGet);

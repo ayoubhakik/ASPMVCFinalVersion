@@ -30,7 +30,7 @@ namespace projetASP.Models
         public string nationalite { get; set; }
 
         [Required(ErrorMessage = "Le CIN est obligatoire.")]
-        [StringLength(8, ErrorMessage = "Le CNE doit contenir 8 caractères. ")]
+        [StringLength(8, ErrorMessage = "Le CIN doit contenir 8 caractères. ")]
         [RegularExpression("^[a-zA-Z0-9]*$", ErrorMessage = "Le CIN ne peut contenir que des lettres et des chiffres.")]
         public string cin { get; set; }
 
@@ -45,10 +45,10 @@ namespace projetASP.Models
         [RegularExpression("^[0-9]*$", ErrorMessage = "Le numéro tel portable ne peut contenir que des chiffres.")]
         public string gsm { get; set; }
 
-        [RegularExpression("^[a-zA-Z0-9 ]*$", ErrorMessage = "L'adresse ne peut contenir que des lettres et des chiffres.")]
+        [RegularExpression("^[a-zA-Z0-9, ]*$", ErrorMessage = "L'adresse ne peut contenir que des lettres et des chiffres.")]
         public string address { get; set; }
 
-        [RegularExpression("^[a-zA-Z]*$", ErrorMessage = "La ville ne peut contenir que des lettres.")]
+        [RegularExpression("^[a-zA-Z ]*$", ErrorMessage = "La ville ne peut contenir que des lettres.")]
         public string ville { get; set; }
         
         public string typeBac { get; set; }
@@ -74,7 +74,7 @@ namespace projetASP.Models
         [DisplayFormat(ApplyFormatInEditMode = true, DataFormatString = "{0:dd/MM/yyyy}")]
         public Nullable<DateTime> dateNaiss { get; set; }
 
-        [RegularExpression("^[a-zA-Z]*$", ErrorMessage = "Le lieu de naissance ne peut contenir que des lettres.")]
+        [RegularExpression("^[a-zA-Z ]*$", ErrorMessage = "Le lieu de naissance ne peut contenir que des lettres.")]
         public string lieuNaiss { get; set; }
 
         public string photo_link { get; set; }
