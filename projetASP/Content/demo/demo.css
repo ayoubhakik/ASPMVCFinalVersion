@@ -124,3 +124,41 @@
 .bd-docs.dark-edition {
   background-color: #fff;
 }
+/*footer*/
+.footer-top-layout {
+    background: #1c1c1c none repeat scroll 0 0;
+    color: #ffffff;
+    padding: 40px 0;
+}
+
+.OurBlog {
+    margin-bottom: 32px;
+    text-align: center;
+}
+
+.footer-top-layout h4 {
+    color: #ffffff;
+    font-size: 18px;
+    margin-bottom: 21px;
+}
+
+.OurBlog > p {
+    color: #888888;
+}
+
+.post-blog-date::after {
+    background: #ffffff none repeat scroll 0 0;
+    bottom: 0;
+    content: "";
+    height: 4px;
+    left: 0;
+    margin: auto;
+    position: absolute;
+    right: 0;
+    width: 50px;
+}
+
+.post-blog-date {
+    padding-bottom: 25px;
+    position: relative;
+}

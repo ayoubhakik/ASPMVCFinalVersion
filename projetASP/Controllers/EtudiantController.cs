@@ -30,7 +30,7 @@ namespace projetASP.Controllers
         {
             ViewBag.Current = "Home";
 
-            if (UserValide.IsValid())
+            if (UserValide.IsValid() && UserValide.IsStudent())
             {
 
                 return View();
@@ -54,12 +54,12 @@ namespace projetASP.Controllers
                  return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
              }*/
 
-            Etudiant etudiants = etudiantContext.etudiants.Find(Session["userId"]);
 
 
            
-            if (UserValide.IsValid())
+            if (UserValide.IsValid() && UserValide.IsStudent())
             {
+                Etudiant etudiants = etudiantContext.etudiants.Find(Session["userId"]);
 
                 return View(etudiants);
             }
@@ -73,67 +73,65 @@ namespace projetASP.Controllers
 
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public ActionResult Modification([Bind(Include = "cne,nationalite,email,phone,gsm,address,ville,dateNaiss")] Etudiant etudiant, string Update, String choix1, String choix2, String choix3)
+        public ActionResult Modification([Bind(Include = "cne,nationalite,email,phone,gsm,address,ville,dateNaiss,lieuNaiss")] Etudiant etudiant, string Update, String choix1, String choix2, String choix3)
         {
             ViewBag.Current = "Modification";
 
             /*Update name of buttom if user click in Upload l image seule va etre modifie 
-             pour la modification j ai supprime if(Model.isValide) car il test tous les champ mais
-             nous on dois seulement modifie des champs unique 
-             en outre ja geree tous les exception dans etudiantContext  des  dans Etudiant context 
-
+             
              */
-            Etudiant etudiants = etudiantContext.etudiants.Find(etudiant.cne);
-           
-                if (Request.Files.Count > 0 && Update == "Upload")
-                {
-                    //Recupere le fichier est le sauvegarder dans /image/
-                    HttpPostedFileBase file = Request.Files[0];
-                    string fileName = Path.GetFileNameWithoutExtension(file.FileName);
-                    string extension = Path.GetExtension(file.FileName);
-                    ViewBag.exte = extension;
-                    if (fileName != "" && ImageEx.Contains(extension) == true)
-                    {
-                        ViewBag.err = "";
-                        fileName = etudiants.nom + DateTime.Now.ToString("yymmssfff") + extension;
-                        etudiants.photo_link = fileName;
-                        fileName = Path.Combine(Server.MapPath("~/Image/"), fileName);
-                        file.SaveAs(fileName);
-                        etudiants.Modified = true;
-                        etudiantContext.SaveChanges();
-                        return View(etudiants);
-                    }
-                    else
-                    {
-                        ViewBag.err = " vous devez selectionner une image";
-                        return View(etudiants);
+      
+                Etudiant etudiants = etudiantContext.etudiants.Find(etudiant.cne);
 
-                    }
+            if (Request.Files.Count > 0 && Update == "Upload")
+            {
+                //Recupere le fichier est le sauvegarder dans /image/
+                HttpPostedFileBase file = Request.Files[0];
+                string fileName = Path.GetFileNameWithoutExtension(file.FileName);
+                string extension = Path.GetExtension(file.FileName);
+                ViewBag.exte = extension;
+                if (fileName != "" && ImageEx.Contains(extension) == true)
+                {
+                    fileName = etudiants.nom + DateTime.Now.ToString("yymmssfff") + extension;
+                    etudiants.photo_link = fileName;
+                    fileName = Path.Combine(Server.MapPath("~/Image/"), fileName);
+                    file.SaveAs(fileName);
+                    etudiants.Modified = true;
+                    etudiantContext.SaveChanges();
+                    return View(etudiants);
+
 
                 }
-
                 else
                 {
-
-                    //si clicke sur les valider les modification 
-                    etudiants.Modified = true;
-                    etudiants.choix = choix1 + choix2 + choix3;
-                    etudiants.nationalite = etudiant.nationalite;
-                    etudiants.email = etudiant.email;
-                    etudiants.phone = etudiant.phone;
-                    etudiants.address = etudiant.address;
-                    etudiants.gsm = etudiant.gsm;
-                    etudiants.address = etudiant.address;
-                    etudiants.ville = etudiant.ville;
-                    etudiants.dateNaiss = etudiant.dateNaiss;
-
-                    etudiantContext.SaveChanges();
+                    ViewBag.err = " vous devez selectionner une image";
                     return View(etudiants);
 
                 }
 
             }
-         
+
+            else
+            {
+                ViewBag.err = null;
+
+                //si clicke sur les valider les modification 
+                etudiants.Modified = true;
+                etudiants.choix = choix1 + choix2 + choix3;
+                etudiants.nationalite = etudiant.nationalite;
+                etudiants.email = etudiant.email;
+                etudiants.phone = etudiant.phone;
+                etudiants.address = etudiant.address;
+                etudiants.gsm = etudiant.gsm;
+                etudiants.address = etudiant.address;
+                etudiants.ville = etudiant.ville;
+                etudiants.dateNaiss = etudiant.dateNaiss;
+                etudiants.lieuNaiss = etudiant.lieuNaiss;
+                etudiantContext.SaveChanges();
+                return RedirectToAction("SendEmailToUser");
+
+            }
+        }
         //****************************************************************************************************************************
 
 
@@ -142,9 +140,9 @@ namespace projetASP.Controllers
         public ActionResult Consulter()
         {
             ViewBag.Current = "Consulter";
-            Etudiant etudiants = etudiantContext.etudiants.Find(Session["userId"]);
-            if (UserValide.IsValid())
+            if (UserValide.IsValid() && UserValide.IsStudent())
             {
+                Etudiant etudiants = etudiantContext.etudiants.Find(Session["userId"]);
 
                 return View(etudiants);
             }
@@ -172,7 +170,14 @@ namespace projetASP.Controllers
         {
             Etudiant etudiants = etudiantContext.etudiants.Find(Session["userId"]);
             var q = new ViewAsPdf("RecuEtudiant", etudiants);
-            return q;
+            if (UserValide.IsValid() && UserValide.IsStudent())
+            {
+                return q;
+            }
+            else
+            {
+                return RedirectToAction("Authentification1", "User");
+            }
         }
 
 
@@ -288,12 +293,13 @@ namespace projetASP.Controllers
         public ActionResult SendEmailToUser()
         {
             bool Result = false;
-            Etudiant etudiants = etudiantContext.etudiants.Find("125");
+            Etudiant etudiants = etudiantContext.etudiants.Find(Session["userId"]);
             string email = etudiants.email;
             string subject = "Modification";
             ViewBag.nom = etudiants.nom;
             ViewBag.prenom = etudiants.prenom;
-            Result = SendEmail(email, subject, "<p> Hi"+" "+ @ViewBag.nom+" "+ @ViewBag.prenom +",<br/>some modifications had been done <br />Verify your account </p>");
+            Result = SendEmail(email, subject, "<p> Hello"+" "+ @ViewBag.nom+" "+ @ViewBag.prenom +",<br/>some modifications had been done <br />Verify your account </p>" +
+                "<button color='blue'><a href='localhost:localhost:52252/User/Authentification1'>Cliquer ici!</a></button>");
             if (Result == true)
             {
                 Json(Result, JsonRequestBehavior.AllowGet);

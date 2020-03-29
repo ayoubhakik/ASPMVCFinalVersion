@@ -44,6 +44,7 @@ namespace projetASP.Controllers
                     Session["NomDep"] = userLogin.nom_departement;
                     Session["EmailDep"] = userLogin.email;
                     Session["userId"] = userLogin.id_departement;
+                    Session["role"] = "Departement";
                     return RedirectToAction("Index", "Departement");
                 }
                 else if (userLogin == null)

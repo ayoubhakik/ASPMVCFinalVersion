@@ -2,8 +2,10 @@
 
 
 @{
-    ViewBag.Title = "Authentification";
-    Layout = "~/Views/Shared/_UserLayout.cshtml";
+                /**/
+
+                ViewBag.Title = "Authentification";
+                Layout = "~/Views/Shared/_UserLayout.cshtml";
 }
 
 
@@ -34,15 +36,17 @@
     <!--===============================================================================================-->
     <link rel="stylesheet" type="text/css" href="~/Content/css/util.css">
     <link rel="stylesheet" type="text/css" href="~/Content/css/main3.css">
+    <link rel="stylesheet" type="text/css" href="~/Content/css/StyleSheet1.css">
     <!--===============================================================================================-->
 </head>
-<body >
+<body>
 
     <div class="limiter">
-        <div class="container-login100" style="background: linear-gradient(-225deg,  #061323 0%,#B49082  100%);
-background: linear-gradient(to top,#B49082 0%, #204773 100%);
+        <div class="container-login100" style="background: linear-gradient(-225deg,  #4682B4 0%,#B49082  100%,transparent 0%);
+background: linear-gradient(to top,#B49082 0%, #4682B4 100%);
 background-attachment: fixed;
-  background-repeat: no-repeat;">
+  background-repeat: no-repeat;
+  ">
             <div class="wrap-login100">
 
                 @using (Html.BeginForm("Authentification1", "User", FormMethod.Post, new { @class = "login100-form validate-form" }))
@@ -55,66 +59,69 @@ background-attachment: fixed;
                             <strong>@ViewBag.Message!</strong>
                         </div>
                     }
-                    <span class="login100-form-title p-b-43">
-                        Login to continue
+                    <span class="login100-form-title p-b-43" style="font-weight:bold;color:white;">
+                        AUTHENTIFICATION
                     </span>
 
 
                     <div class="wrap-input100 validate-input" data-validate="Valid cne is required">
-                        @Html.TextBox("cne", null, new { @class = "input100" })
-                        <span class="focus-input100"></span>
-                        <span class="label-input100">CNE</span>
+                        <input type="text" name="cne" placeholder="CNE" style="color:#11273F;" />
                     </div>
                     <div class="wrap-input100 validate-input" data-validate="Valid cin is required">
-                        @Html.TextBox("cin", null, new { @class = "input100" })
-                        <span class="focus-input100"></span>
-                        <span class="label-input100">CIN</span>
+                        <input type="text" name="cin" placeholder="CIN" />
                     </div>
 
                     <div class="wrap-input100 validate-input" data-validate="Password is required">
-                        @Html.Password("mdp", null, new { @class = "input100" })
-                        <span class="focus-input100"></span>
-                        <span class="label-input100">Password</span>
+                        <input type="password" name="mdp" placeholder="Mot de passe" />
                     </div>
 
                     <div class="flex-sb-m w-full p-t-3 p-b-32">
                         <div class="contact100-form-checkbox">
 
-                            <input class="input-checkbox100" id="ckb1" type="checkbox">
+                            <input class="input-checkbox100" id="chkb1" type="checkbox">
                             @Html.Label("ckb1", "Remember me", new { @class = "label-checkbox100", @value = "ckb1" })
 
                         </div>
 
                         <div>
-                            <a href="#" class="txt1">
-                                Forgot Password?
+                            <a href="#" class="text1">
+                                Oublié mot de passe?
                             </a>
                         </div>
+
                     </div>
 
 
+
                     <div class="container-login100-form-btn">
-                        <button class="login100-form-btn" name="loginBtn" value="Login">
-                            Login
+                        <button class="login100-form-btn" name="loginBtn" value="Login" style="color:#B49082; font-size: 20px;
+    line-height: 1.2;font-weight:bold;">
+                            Se connecter
                         </button>
+                    </div>
+                    <div>
+                        <button type="button" onclick="window.location='/User/Authentification'" class="fb-btn">Authentifiez autant que <span>Département</span></button>
+                    </div>
+                    <div class="foot-lnk" style="text-align:center;">
+                        <p class="text--center">N'est pas encore inscrit? <a href="/Etudiant/Inscription">Inscrivez-vous</a></p>
                     </div>
 
                 }
                 <section id="slideshow">
                     <div class="entire-content">
                         <div class="content-carrousel">
-                            <figure class="shadow"><img src="~/Content/img/gpmc.jpg"  /></figure>
-                            <figure class="shadow"><img src="~/Content/img/gtr.jpg"  /></figure>
-                            <figure class="shadow"><img src="~/Content/img/indus.jpg"  /></figure>
+                            <figure class="shadow"><img src="~/Content/img/gpmc.jpg" /></figure>
+                            <figure class="shadow"><img src="~/Content/img/gtr.jpg" /></figure>
+                            <figure class="shadow"><img src="~/Content/img/indus.jpg" /></figure>
 
                             <figure class="shadow"><img src="~/Content/img/info.jpg" /></figure>
-                            
+
                         </div>
                     </div>
                 </section>
             </div>
-            </div>
         </div>
+    </div>
     </div>
 
 
