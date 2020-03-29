@@ -1,0 +1,154 @@
+
+@{
+    /**/
+
+    /**/
+
+    Layout = "~/Views/Shared/_DepartementLayout.cshtml";
+}
+@Styles.Render("../Content/css/importation.css");
+<style type="text/css">
+ 
+    .form {
+        background: linear-gradient(to bottom, #514A9D, #24C6DC);
+        max-width: 700px;
+        margin: 50px auto;
+        border-radius: 50px;
+        height:800px;
+        padding:80px;
+        font-family: Georgia, "Times New Roman", Times, serif;
+        color: black;
+    }
+    .vider{
+        margin-top:50px;
+    }
+    .button-vider{
+        background-color:transparent !important;
+        border:none !important;
+        cursor:pointer;
+        margin-left:150px;
+        display:inline-block;
+
+    }
+    
+    .popppup {
+        color: white;
+        padding: 0 !important;
+        width: 545px;
+        margin-bottom: 150px !important;
+        margin: 0px;
+    }
+        .popppup label {
+            font-weight: bold;
+            color: #061323;
+        }
+        .popppup input[type="date"] {
+            background: rgba(0,0,0,0.3) !important;
+            color:white;
+            padding-left:10px;
+            border-radius:10px;
+            font-style:oblique;
+            font-weight:normal !important;
+        } 
+        .popppup span{
+            font-size:11px;
+            color:black;
+            font-style:italic;
+        }
+        .popppup input[type="submit"] {
+            background: linear-gradient(to bottom, #11273F, #061323, #204773);
+            width:150px;
+            cursor:pointer;
+            border-color:none !important;
+            color: white;
+            padding-left: 10px;
+            border-radius: 10px;
+            margin-top:20px;
+           
+        } 
+</style>
+<br />
+<br />
+<div class="form">
+    @using (Html.BeginForm("Setting", "Departement", FormMethod.Post, new { @class = "form-style-7", enctype = "multipart/form-data" }))
+    {
+        <h2 style="color:white !important">
+            <center>
+                <i class="material-icons">settings</i>
+                Paramètres
+            </center>
+
+        </h2>
+        <br /><br />
+
+        <ul>
+            <li>
+                <div class="text">
+                    <span id="text-description">
+                        La partie configuration est obligatoire pour bien notifier les etudiants et aussi pour automatiser les processus d'atribution des filieres :<br />
+                        <br />
+
+                        1-  La date de notifiation ou la departement va Choisir une date pour notifier les etudiants qu ont pas valide leurs comptes pour choisir des filieres.<br />
+                        <br />
+                        2-  La date d'attribution des filieres ou la departement va Choisir une date choisir une date pour l'attribution des filiere.<br />
+                    </span>
+                </div>
+            </li>
+        </ul>
+        <br />
+        <a class="button" href="#popup">Modifier</a>
+        <div class="popup" id="popup" >
+            <div class="popup-inner" style="background-color:rgba(255,255,255,0.6)!important">
+                <div class="popup__import  ">
+                    <div class="popppup">
+                        <div>
+                            <label for="name">Date Notification : </label>
+                            <input type="date" name="dateNotification" maxlength="100" placeholder="Entrer la date" />
+                            <span>par ex (07/10/2020 apres cette date chaque etudiant va recevoir un email pour valider son compte) </span>
+                        </div>
+                        <div>
+                            <label for="email">Date d'attribution des filieres :</label>
+                            <input type="date" name="dateAttribution" maxlength="100" placeholder="Entrer la date" />
+                            <span>apres cette date chaque etudiant va avoir la filiere qu'il merite</span>
+                        </div>
+
+
+                        <div>
+                            <input type="submit" value="Confirmer" style="float:right">
+                        </div>
+                    </div>
+                    <a class="popup__close" href="#">X</a>
+                </div>
+            </div>
+        </div>
+    }
+    @using (Html.BeginForm("DeleteAllStudents", "Departement", FormMethod.Post, new { enctype = "multipart/form-data" }))
+    {
+        <div class="vider">
+
+            <span id="text-description" style="margin-left:30px;font-size:15px;">
+                Pour supprimer tous les etudiants :
+            </span>
+            <button value="Vider la base de donnée" class="button-vider" style="margin-left:230px;"><i class="material-icons" style="color:#061323">delete</i></button>
+        </div>
+    }
+    @using (Html.BeginForm("DeleteImportedStudents", "Departement", FormMethod.Post, new { enctype = "multipart/form-data" }))
+    {
+        <div>
+            <span id="text-description" style="margin-left:30px;  font-size:15px;">
+                Pour supprimer les etudiants non redoublants :
+            </span>
+            <button value="Supprimer les Etudiants" class="button-vider"><i class="material-icons" style="color:#061323;">delete</i></button>
+            
+        </div>
+            }
+       
+            </div>
+<div class="container-fluid" style="text-align:center;background-color:rgba(0,0,0,1);">Copyright © 2020 ENSA. All Rights Reserved.</div>
+<script type="text/javascript">
+    //auto expand textarea
+    function adjust_textarea(h) {
+        h.style.height = "20px";
+        h.style.height = (h.scrollHeight) + "px";
+    }
+</script>
