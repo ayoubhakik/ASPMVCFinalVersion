@@ -30,7 +30,7 @@ namespace projetASP.Controllers
         {
             ViewBag.Current = "Home";
 
-            if (UserValide.IsValid())
+            if (UserValide.IsValid() && UserValide.IsStudent())
             {
 
                 return View();
@@ -57,7 +57,7 @@ namespace projetASP.Controllers
 
 
            
-            if (UserValide.IsValid())
+            if (UserValide.IsValid() && UserValide.IsStudent())
             {
                 Etudiant etudiants = etudiantContext.etudiants.Find(Session["userId"]);
 
@@ -140,7 +140,7 @@ namespace projetASP.Controllers
         public ActionResult Consulter()
         {
             ViewBag.Current = "Consulter";
-            if (UserValide.IsValid())
+            if (UserValide.IsValid() && UserValide.IsStudent())
             {
                 Etudiant etudiants = etudiantContext.etudiants.Find(Session["userId"]);
 
@@ -170,7 +170,7 @@ namespace projetASP.Controllers
         {
             Etudiant etudiants = etudiantContext.etudiants.Find(Session["userId"]);
             var q = new ViewAsPdf("RecuEtudiant", etudiants);
-            if (UserValide.IsValid())
+            if (UserValide.IsValid() && UserValide.IsStudent())
             {
                 return q;
             }

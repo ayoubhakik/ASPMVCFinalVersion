@@ -18,9 +18,11 @@ namespace projetASP.Controllers
     
     public class DepartementController : Controller
     {
+        
         public void EnvoyerLesFilieres()
         {
-            if (UserValide.IsValid())
+            
+            if (UserValide.IsValid() && UserValide.IsAdmin())
             {
                 EtudiantContext db = new EtudiantContext();
                 for (int i = 0; i < db.etudiants.ToList().Count; i++)
@@ -103,7 +105,7 @@ namespace projetASP.Controllers
 
         public ActionResult DeleteAllStudents()
         {
-            if (UserValide.IsValid())
+            if (UserValide.IsValid() && UserValide.IsAdmin())
             {
                     EtudiantContext db = new EtudiantContext();
                     for (int i = 0; i < db.etudiants.ToList().Count; i++)
@@ -122,7 +124,7 @@ namespace projetASP.Controllers
 
         public ActionResult Search(string cne)
         {
-            if (UserValide.IsValid())
+            if (UserValide.IsValid() && UserValide.IsAdmin())
             {
                 EtudiantContext db = new EtudiantContext();
                 Etudiant e = db.etudiants.Find(cne);
@@ -140,7 +142,7 @@ namespace projetASP.Controllers
         //suppression des etudiants importes mais pas les redoublants
         public ActionResult DeleteImportedStudents()
         {
-            if (UserValide.IsValid())
+            if (UserValide.IsValid() && UserValide.IsAdmin())
             {
                 EtudiantContext db = new EtudiantContext();
                 for (int i=0;i<db.etudiants.ToList().Count;i++)
@@ -167,7 +169,7 @@ namespace projetASP.Controllers
         //suppression des etudiants (placer les etudiants redoublants dans la corbeille)
         public ActionResult SupprimerEtudiant(string id)
         {
-            if (UserValide.IsValid())
+            if (UserValide.IsValid() && UserValide.IsAdmin())
             {
                 if (id!=null)
                 {
@@ -186,7 +188,7 @@ namespace projetASP.Controllers
         }
         public ActionResult Corbeille()
         {
-            if (UserValide.IsValid())
+            if (UserValide.IsValid() && UserValide.IsAdmin())
             {
                 EtudiantContext db = new EtudiantContext();
 
@@ -202,7 +204,7 @@ namespace projetASP.Controllers
 
         public ActionResult Setting()
         {
-            if (UserValide.IsValid())
+            if (UserValide.IsValid() && UserValide.IsAdmin())
             {
                 EtudiantContext db = new EtudiantContext();
 
@@ -222,8 +224,7 @@ namespace projetASP.Controllers
         [HttpPost]
         public ActionResult Setting(DateTime dateNotification, DateTime dateAttribution)
         {
-            if (UserValide.IsValid())
-            {
+            if (UserValide.IsValid() && UserValide.IsAdmin()){ 
                 EtudiantContext db = new EtudiantContext();
 
                 if (dateNotification != null)
@@ -249,7 +250,7 @@ namespace projetASP.Controllers
         public ActionResult Index()
         {
             
-            if (UserValide.IsValid())
+            if (UserValide.IsValid() && UserValide.IsAdmin())
             {
                 EtudiantContext db = new EtudiantContext();
 
@@ -269,7 +270,7 @@ namespace projetASP.Controllers
         public ActionResult ImporterEtudiants()
         {
             ViewBag.Current = "importerEtudiants";
-            if (UserValide.IsValid())
+            if (UserValide.IsValid() && UserValide.IsAdmin())
             {
 
                 EtudiantContext db = new EtudiantContext();
@@ -366,7 +367,7 @@ namespace projetASP.Controllers
         public ActionResult ImporterNotes()
         {
             ViewBag.Current = "importerNotes";
-            if (UserValide.IsValid())
+            if (UserValide.IsValid() && UserValide.IsAdmin())
             {
                 EtudiantContext db = new EtudiantContext();
                 if (db.settings.FirstOrDefault().importEtudiant)
@@ -431,7 +432,7 @@ namespace projetASP.Controllers
         public ActionResult AttributionFiliere()
         {
             ViewBag.Current = "attributionFiliere";
-            if (UserValide.IsValid())
+            if (UserValide.IsValid() && UserValide.IsAdmin())
             {
                 EtudiantContext db = new EtudiantContext();
                 List<Etudiant> list = db.etudiants.OrderByDescending(e => (e.noteFstYear + e.noteSndYear) / 2).ToList();
@@ -450,7 +451,7 @@ namespace projetASP.Controllers
         public ActionResult Attribution()
         {
             ViewBag.Current = "attributionFiliere";
-            if (UserValide.IsValid())
+            if (UserValide.IsValid() && UserValide.IsAdmin())
             {
                 EtudiantContext db = new EtudiantContext();
                 //return a  list sorted in a desendent way
@@ -628,7 +629,7 @@ namespace projetASP.Controllers
         {
             ViewBag.Current = "statistiques";
 
-            if (UserValide.IsValid())
+            if (UserValide.IsValid() && UserValide.IsAdmin())
             {
                 //essayons de retourner tous les etudiants
                 EtudiantContext db = new EtudiantContext();
@@ -701,7 +702,7 @@ namespace projetASP.Controllers
         public ActionResult Visualiser()
         {
             ViewBag.Current = "visualiser";
-            if (UserValide.IsValid())
+            if (UserValide.IsValid() && UserValide.IsAdmin())
             {
                 EtudiantContext db = new EtudiantContext();
                 
