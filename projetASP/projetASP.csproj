@@ -512,7 +512,6 @@
     <Content Include="Content\vendor\bootstrap\css\bootstrap.css.map" />
     <Content Include="Content\vendor\bootstrap\css\bootstrap.min.css.map" />
     <Content Include="App_Browsers\qt.browser" />
-    <Content Include="ExcelFiles\EtudiantExemple.xlsx" />
     <Content Include="Content\fonts\font-awesome-4.7.0\fonts\fontawesome-webfont.eot" />
     <Content Include="Content\fonts\font-awesome-4.7.0\fonts\fontawesome-webfont.ttf" />
     <Content Include="Content\fonts\font-awesome-4.7.0\fonts\fontawesome-webfont.woff" />
@@ -713,6 +712,7 @@
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />
+    <Folder Include="ExcelFiles\" />
     <Folder Include="Views\Home\" />
   </ItemGroup>
   <ItemGroup>
