@@ -170,7 +170,14 @@ namespace projetASP.Controllers
         {
             Etudiant etudiants = etudiantContext.etudiants.Find(Session["userId"]);
             var q = new ViewAsPdf("RecuEtudiant", etudiants);
-            return q;
+            if (UserValide.IsValid())
+            {
+                return q;
+            }
+            else
+            {
+                return RedirectToAction("Authentification1", "User");
+            }
         }
 
 
