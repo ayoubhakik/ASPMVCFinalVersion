@@ -1,8 +1,8 @@
 ﻿<?xml version="1.0" encoding="utf-8"?>
 <Project ToolsVersion="15.0" DefaultTargets="Build" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+  <Import Project="..\packages\EntityFramework.6.4.0\build\EntityFramework.props" Condition="Exists('..\packages\EntityFramework.6.4.0\build\EntityFramework.props')" />
   <Import Project="$(MSBuildExtensionsPath32)\Microsoft\VisualStudio\v$(VisualStudioVersion)\TypeScript\Microsoft.TypeScript.Default.props" Condition="Exists('$(MSBuildExtensionsPath32)\Microsoft\VisualStudio\v$(VisualStudioVersion)\TypeScript\Microsoft.TypeScript.Default.props')" />
   <Import Project="..\packages\Microsoft.CodeDom.Providers.DotNetCompilerPlatform.2.0.1\build\net46\Microsoft.CodeDom.Providers.DotNetCompilerPlatform.props" Condition="Exists('..\packages\Microsoft.CodeDom.Providers.DotNetCompilerPlatform.2.0.1\build\net46\Microsoft.CodeDom.Providers.DotNetCompilerPlatform.props')" />
-  <Import Project="..\packages\EntityFramework.6.4.0\build\EntityFramework.props" Condition="Exists('..\packages\EntityFramework.6.4.0\build\EntityFramework.props')" />
   <Import Project="$(MSBuildExtensionsPath)\$(MSBuildToolsVersion)\Microsoft.Common.props" Condition="Exists('$(MSBuildExtensionsPath)\$(MSBuildToolsVersion)\Microsoft.Common.props')" />
   <PropertyGroup>
     <Configuration Condition=" '$(Configuration)' == '' ">Debug</Configuration>
@@ -156,9 +156,6 @@
     <Compile Include="Global.asax.cs">
       <DependentUpon>Global.asax</DependentUpon>
     </Compile>
-    <Compile Include="Migrations\202003270031345_InitialCreate.cs" />
-    <Compile Include="Migrations\202003270031345_InitialCreate.designer.cs"/>
-      <DependentUpon>202003270031345_InitialCreate.cs</DependentUpon>
     <Compile Include="Migrations\202003270253166_InitialCreate.cs" />
     <Compile Include="Migrations\202003270253166_InitialCreate.designer.cs">
       <DependentUpon>202003270253166_InitialCreate.cs</DependentUpon>
@@ -170,11 +167,14 @@
     <Compile Include="Models\Settings.cs" />
     <Compile Include="Models\UserValide.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
+    <Content Include="Content\css\importation.css" />
     <Content Include="Content\css\main3.css" />
     <Content Include="Content\css\util.css" />
     <Content Include="Content\img\books.jpg" />
+    <Content Include="Content\img\dark.jpg" />
     <Content Include="Content\img\glisser.png" />
     <Content Include="Content\img\login.png" />
+    <Content Include="Content\img\unnamed.jpg" />
     <Content Include="Content\js\main.js" />
     <Content Include="Content\js\main1.js" />
     <Content Include="Content\fonts\font-awesome-4.7.0\css\font-awesome.css" />
@@ -220,6 +220,7 @@
     <Content Include="Content\vendor\select2\select2.js" />
     <Content Include="Content\vendor\select2\select2.min.css" />
     <Content Include="Content\vendor\select2\select2.min.js" />
+    <Content Include="Image\glisser.png" />
     <Content Include="Image\kamal.jpg" />
   </ItemGroup>
   <ItemGroup>
@@ -686,6 +687,7 @@
     <Content Include="Views\Web.config" />
     <Content Include="Views\Departement\Corbeille.cshtml" />
     <Content Include="Views\Departement\Search.cshtml" />
+    <Content Include="Views\Shared\_FooterLayout.cshtml" />
     <None Include="Web.Debug.config">
       <DependentUpon>Web.config</DependentUpon>
     </None>
@@ -716,8 +718,6 @@
     <TypeScriptCompile Include="Scripts\index.d.ts" />
   </ItemGroup>
   <ItemGroup>
-    <EmbeddedResource Include="Migrations\202003270031345_InitialCreate.resx"/>
-      <DependentUpon>202003270031345_InitialCreate.cs</DependentUpon>
     <EmbeddedResource Include="Migrations\202003270253166_InitialCreate.resx">
       <DependentUpon>202003270253166_InitialCreate.cs</DependentUpon>
     </EmbeddedResource>
@@ -774,9 +774,9 @@
     <PropertyGroup>
       <ErrorText>This project references NuGet package(s) that are missing on this computer. Use NuGet Package Restore to download them.  For more information, see http://go.microsoft.com/fwlink/?LinkID=322105. The missing file is {0}.</ErrorText>
     </PropertyGroup>
+    <Error Condition="!Exists('..\packages\Microsoft.CodeDom.Providers.DotNetCompilerPlatform.2.0.1\build\net46\Microsoft.CodeDom.Providers.DotNetCompilerPlatform.props')" Text="$([System.String]::Format('$(ErrorText)', '..\packages\Microsoft.CodeDom.Providers.DotNetCompilerPlatform.2.0.1\build\net46\Microsoft.CodeDom.Providers.DotNetCompilerPlatform.props'))" />
     <Error Condition="!Exists('..\packages\EntityFramework.6.4.0\build\EntityFramework.props')" Text="$([System.String]::Format('$(ErrorText)', '..\packages\EntityFramework.6.4.0\build\EntityFramework.props'))" />
     <Error Condition="!Exists('..\packages\EntityFramework.6.4.0\build\EntityFramework.targets')" Text="$([System.String]::Format('$(ErrorText)', '..\packages\EntityFramework.6.4.0\build\EntityFramework.targets'))" />
-    <Error Condition="!Exists('..\packages\Microsoft.CodeDom.Providers.DotNetCompilerPlatform.2.0.1\build\net46\Microsoft.CodeDom.Providers.DotNetCompilerPlatform.props')" Text="$([System.String]::Format('$(ErrorText)', '..\packages\Microsoft.CodeDom.Providers.DotNetCompilerPlatform.2.0.1\build\net46\Microsoft.CodeDom.Providers.DotNetCompilerPlatform.props'))" />
   </Target>
   <Import Project="..\packages\EntityFramework.6.4.0\build\EntityFramework.targets" Condition="Exists('..\packages\EntityFramework.6.4.0\build\EntityFramework.targets')" />
   <!-- To modify your build process, add your task inside one of the targets below and uncomment it.

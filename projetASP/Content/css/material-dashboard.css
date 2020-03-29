@@ -11369,21 +11369,21 @@ fieldset[disabled][disabled] .btn-group-raised .btn,
   line-height: 56px;
 }
 
-.btn-group-lg .btn.btn-fab .material-icons,
-.btn-group-lg .btn.btn-fab .fa,
-.btn.btn-fab.btn-lg .material-icons,
-.btn-group-lg>.btn.btn-fab .material-icons,
-.btn.btn-fab.btn-lg .fa,
-.btn-group-lg>.btn.btn-fab .fa,
-.btn-group-lg .btn.btn-just-icon .material-icons,
-.btn-group-lg .btn.btn-just-icon .fa,
-.btn.btn-just-icon.btn-lg .material-icons,
-.btn-group-lg>.btn.btn-just-icon .material-icons,
-.btn.btn-just-icon.btn-lg .fa,
-.btn-group-lg>.btn.btn-just-icon .fa {
-  font-size: 32px;
-  line-height: 56px;
-}
+    .btn-group-lg .btn.btn-fab .material-icons,
+    .btn-group-lg .btn.btn-fab .fa,
+    .btn.btn-fab.btn-lg .material-icons,
+    .btn-group-lg > .btn.btn-fab .material-icons,
+    .btn.btn-fab.btn-lg .fa,
+    .btn-group-lg > .btn.btn-fab .fa,
+    .btn-group-lg .btn.btn-just-icon .material-icons,
+    .btn-group-lg .btn.btn-just-icon .fa,
+    .btn.btn-just-icon.btn-lg .material-icons,
+    .btn-group-lg > .btn.btn-just-icon .material-icons,
+    .btn.btn-just-icon.btn-lg .fa,
+    .btn-group-lg > .btn.btn-just-icon .fa {
+        font-size: 32px;
+        line-height: 56px;
+      }
 
 .btn.btn-fab .material-icons,
 .btn.btn-fab .fa,
@@ -11421,6 +11421,7 @@ fieldset[disabled][disabled] .btn-group-raised .btn,
   margin-bottom: -1em;
   font-size: 1.1rem;
   vertical-align: middle;
+
 }
 
 .bg-inverse fieldset[disabled][disabled] .btn,
