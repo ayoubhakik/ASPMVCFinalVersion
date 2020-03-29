@@ -17,5 +17,25 @@ namespace projetASP.Models
             else
                 return false;
         }
+        public static bool IsAdmin()
+        {
+            HttpContext context = HttpContext.Current;
+            if (context.Session["role"].Equals("Departement") )
+            {
+                return true;
+            }
+            else
+                return false;
+        }
+        public static bool IsStudent()
+        {
+            HttpContext context = HttpContext.Current;
+            if (context.Session["role"].Equals("Etudiant"))
+            {
+                return true;
+            }
+            else
+                return false;
+        }
     }
 }
