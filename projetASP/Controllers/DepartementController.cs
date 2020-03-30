@@ -235,7 +235,7 @@ namespace projetASP.Controllers
                 {
                     db.settings.FirstOrDefault().Delai = dateNotification;
                 }
-
+                
                 db.SaveChanges();
                 ViewBag.Current = "Setting";
 
@@ -351,6 +351,12 @@ namespace projetASP.Controllers
                         }
                         db.settings.First().importEtudiant = true;
                         db.SaveChanges();
+                        for (int i = 0; i < db.etudiants.ToList().Count; i++)
+                        {
+                            db.etudiants.ToList()[i].Choix = "FDT";
+                        }
+                        db.SaveChanges();
+
                     }
                 }
                 else
@@ -473,7 +479,7 @@ namespace projetASP.Controllers
                     //sinon on va traiter les choix comme ca
                     else
                     {
-                        char[] chiffr = (list[i].choix).ToCharArray();
+                        char[] chiffr = (list[i].Choix).ToCharArray();
 
                         if (chiffr[0] == 'F')
                         {
@@ -542,10 +548,10 @@ namespace projetASP.Controllers
                 {
                     //verification de l'etudiant si deja a choisi une filiere sinon on va lui attribuer la derniere filiere (gpmc->indus->gtr->info)
 
-                    if (list[i].choix != null && !list[i].Redoubler )
+                    if (list[i].Choix != null && !list[i].Redoubler )
                     {
                         //parse to a table of chars
-                        char[] choice = list[i].choix.ToCharArray();
+                        char[] choice = list[i].Choix.ToCharArray();
                         //verify the frst case which is if we have F=info
                         Boolean choosen = false;
 
@@ -655,7 +661,7 @@ namespace projetASP.Controllers
                         else
                         {
 
-                            char[] chiffr = (list[i].choix).ToCharArray();
+                            char[] chiffr = (list[i].Choix).ToCharArray();
 
                             if (chiffr[0] == 'F')
                             {
@@ -724,7 +730,7 @@ namespace projetASP.Controllers
 
             for (int i = 0; i < nbrTotal; i++)
             {
-                if (list[i].choix == null)
+                if (list[i].Choix == null)
                 {
                     //un etudiant avec null dans choix alors on va l'es ajouter dans le reste
                     nbrReste++;
@@ -734,7 +740,7 @@ namespace projetASP.Controllers
                 {
                     if (list[i].Validated)
                     {
-                        char[] chiffr = (list[i].choix).ToCharArray();
+                        char[] chiffr = (list[i].Choix).ToCharArray();
 
                         if (chiffr[0] == 'F')
                         {

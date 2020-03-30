@@ -117,7 +117,7 @@ namespace projetASP.Controllers
 
                 //si clicke sur les valider les modification 
                 etudiants.Modified = true;
-                etudiants.choix = choix1 + choix2 + choix3;
+                etudiants.Choix = choix1 + choix2 + choix3;
                 etudiants.nationalite = etudiant.nationalite;
                 etudiants.email = etudiant.email;
                 etudiants.phone = etudiant.phone;
@@ -264,7 +264,7 @@ namespace projetASP.Controllers
                     e.mentionBac = student.mentionBac;
                     e.dateNaiss = student.dateNaiss;
                     e.lieuNaiss = student.lieuNaiss;
-                    e.choix = choix1 + choix2 + choix3;
+                    e.Choix = choix1 + choix2 + choix3;
                     etudiantContext.SaveChanges();
                     return RedirectToAction("Authentification1", "User");
                 }
