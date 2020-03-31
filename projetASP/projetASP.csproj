@@ -156,9 +156,9 @@
     <Compile Include="Global.asax.cs">
       <DependentUpon>Global.asax</DependentUpon>
     </Compile>
-    <Compile Include="Migrations\202003291528344_InitialCreate.cs" />
-    <Compile Include="Migrations\202003291528344_InitialCreate.designer.cs">
-      <DependentUpon>202003291528344_InitialCreate.cs</DependentUpon>
+    <Compile Include="Migrations\202003302117129_InitialCreate.cs" />
+    <Compile Include="Migrations\202003302117129_InitialCreate.designer.cs">
+      <DependentUpon>202003302117129_InitialCreate.cs</DependentUpon>
     </Compile>
     <Compile Include="Migrations\Configuration.cs" />
     <Compile Include="Models\Departement.cs" />
@@ -512,7 +512,6 @@
     <Content Include="Content\vendor\bootstrap\css\bootstrap.css.map" />
     <Content Include="Content\vendor\bootstrap\css\bootstrap.min.css.map" />
     <Content Include="App_Browsers\qt.browser" />
-    <Content Include="ExcelFiles\EtudiantExemple.xlsx" />
     <Content Include="Content\fonts\font-awesome-4.7.0\fonts\fontawesome-webfont.eot" />
     <Content Include="Content\fonts\font-awesome-4.7.0\fonts\fontawesome-webfont.ttf" />
     <Content Include="Content\fonts\font-awesome-4.7.0\fonts\fontawesome-webfont.woff" />
@@ -712,6 +711,7 @@
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />
+    <Folder Include="ExcelFiles\" />
     <Folder Include="Views\Home\" />
   </ItemGroup>
   <ItemGroup>
@@ -732,8 +732,8 @@
     <TypeScriptCompile Include="Scripts\index.d.ts" />
   </ItemGroup>
   <ItemGroup>
-    <EmbeddedResource Include="Migrations\202003291528344_InitialCreate.resx">
-      <DependentUpon>202003291528344_InitialCreate.cs</DependentUpon>
+    <EmbeddedResource Include="Migrations\202003302117129_InitialCreate.resx">
+      <DependentUpon>202003302117129_InitialCreate.cs</DependentUpon>
     </EmbeddedResource>
   </ItemGroup>
   <PropertyGroup>

@@ -16,7 +16,10 @@
         {
             context.settings.Add(new Models.Settings
             {
-                Attributted = false, importEtudiant = false, importNote = false, Delai = Convert.ToDateTime("10/10/2040"),
+                Attributted = false,
+                importEtudiant = false,
+                importNote = false,
+                Delai = Convert.ToDateTime("10/10/2040"),
                 DatedeRappel = Convert.ToDateTime("10/10/2040")
             });
             context.Filieres.Add(new Models.Filiere

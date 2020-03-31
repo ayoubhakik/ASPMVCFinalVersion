@@ -30,7 +30,7 @@ namespace projetASP.Controllers
         {
             ViewBag.Current = "Home";
 
-            if (UserValide.IsValid())
+            if (UserValide.IsValid() && UserValide.IsStudent())
             {
 
                 return View();
@@ -57,7 +57,7 @@ namespace projetASP.Controllers
 
 
            
-            if (UserValide.IsValid())
+            if (UserValide.IsValid() && UserValide.IsStudent())
             {
                 Etudiant etudiants = etudiantContext.etudiants.Find(Session["userId"]);
 
@@ -117,7 +117,7 @@ namespace projetASP.Controllers
 
                 //si clicke sur les valider les modification 
                 etudiants.Modified = true;
-                etudiants.choix = choix1 + choix2 + choix3;
+                etudiants.Choix = choix1 + choix2 + choix3;
                 etudiants.nationalite = etudiant.nationalite;
                 etudiants.email = etudiant.email;
                 etudiants.phone = etudiant.phone;
@@ -140,7 +140,7 @@ namespace projetASP.Controllers
         public ActionResult Consulter()
         {
             ViewBag.Current = "Consulter";
-            if (UserValide.IsValid())
+            if (UserValide.IsValid() && UserValide.IsStudent())
             {
                 Etudiant etudiants = etudiantContext.etudiants.Find(Session["userId"]);
 
@@ -170,7 +170,7 @@ namespace projetASP.Controllers
         {
             Etudiant etudiants = etudiantContext.etudiants.Find(Session["userId"]);
             var q = new ViewAsPdf("RecuEtudiant", etudiants);
-            if (UserValide.IsValid())
+            if (UserValide.IsValid() && UserValide.IsStudent())
             {
                 return q;
             }
@@ -264,7 +264,7 @@ namespace projetASP.Controllers
                     e.mentionBac = student.mentionBac;
                     e.dateNaiss = student.dateNaiss;
                     e.lieuNaiss = student.lieuNaiss;
-                    e.choix = choix1 + choix2 + choix3;
+                    e.Choix = choix1 + choix2 + choix3;
                     etudiantContext.SaveChanges();
                     return RedirectToAction("Authentification1", "User");
                 }
