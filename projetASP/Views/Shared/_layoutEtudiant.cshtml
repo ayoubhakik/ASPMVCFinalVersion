@@ -29,7 +29,7 @@
 
 
     <!-- CSS Files -->
-    <link href="../../Content/css/material-dashboard.css?v=2.1.0" rel="stylesheet" />
+    <link href="../../Content/css/material.css" rel="stylesheet" />
     <!-- CSS Just for demo purpose, don't include it in your project -->
     <link href="../../Content/demo/demo.css" rel="stylesheet" />
     <!--<link href="~/Content/css/StyleSheet1.css" rel="stylesheet" />-->
@@ -41,9 +41,8 @@
                 Tip 1: You can change the color of the sidebar using: data-color="purple | azure | green | orange | danger"
                 Tip 2: you can also add an image using data-image tag
             -->
-
+           
             <div class="sidebar-wrapper">
-
                 <ul class="nav">
                     <li>
                         <a href='@Url.Action("Index","Etudiant")' class="nav-link">
@@ -83,30 +82,7 @@
             </div>
         </div>
         <div class="main-panel">
-            <!-- Navbar -->
-            <nav class="navbar navbar-expand-lg navbar-transparent navbar-absolute fixed-top " id="navigation-example">
-                <div class="container-fluid">
-
-                    <button class="navbar-toggler" type="button" data-toggle="collapse" aria-controls="navigation-index" aria-expanded="false" aria-label="Toggle navigation" data-target="#navigation-example">
-                        <span class="sr-only">Toggle navigation</span>
-                        <span class="navbar-toggler-icon icon-bar"></span>
-                        <span class="navbar-toggler-icon icon-bar"></span>
-                        <span class="navbar-toggler-icon icon-bar"></span>
-                    </button>
-                    <div class="collapse navbar-collapse justify-content-end">
-                        <form class="navbar-form">
-                            <div class="input-group no-border">
-                                <input type="text" value="" class="form-control" placeholder="Search...">
-                                <button type="submit" class="btn btn-default btn-round btn-just-icon">
-                                    <i class="material-icons">search</i>
-                                    <div class="ripple-container"></div>
-                                </button>
-                            </div>
-                        </form>
-
-                    </div>
-                </div>
-            </nav>
+   
             <!-- End Navbar -->
             @RenderBody()
 
@@ -129,7 +105,7 @@
     <!--  Notifications Plugin    -->
     <script src="../../Content/js/plugins/bootstrap-notify.js"></script>
     <!-- Control Center for Material Dashboard: parallax effects, scripts for the example pages etc -->
-    <script src="../../Content/js/material-dashboard.js?v=2.1.0"></script>
+    <!--<script src="../../Content/js/material-dashboard.js?v=2.1.0"></script>-->
     <!-- Material Dashboard DEMO methods, don't include it in your project! -->
     <script src="../../Content/demo/demo.js"></script>
     <script>

@@ -37,14 +37,15 @@
     <link rel="stylesheet" href="css/libs.min.css">
     <link href="https://fonts.googleapis.com/css?family=Jura" rel="stylesheet">
     <!--===============================================================================================-->
+
 </head>
 <body style="background-color: #ffffff;">
-    <div class="hero">
+    <div class="hero ">
         <div class="page">
-            <div class="wrapper">
+            <div class="wrapper col-lg-12 col-md-8 col-sm-6">
                 <div class="container">
                     <div class="day"><span id="day"></span> <span id="month"></span> <span id="year"></span></div>
-                    <div class="svg-container">
+                    <div class="svg-container col-lg-12 col-md-8 col-sm-6">
                         <svg id='clock' class="digital" width='350' height='350' viewBox='0 0 350 350'>
                             <title>Clock</title>
                             <g id='minutes' style="fill: grey" transform='translate(175,175)'>
@@ -83,7 +84,7 @@
                 </div>
             </div>
         </div>
-        <div class="button">
+        <div class="button" style="visibility:visible !important">
             <a href="#2" data-js-hook="link">
                 <i id="icon" class="fa fa-chevron-down"></i>
             </a>
@@ -184,5 +185,10 @@
     <script src="~/Content/js/main1.js"></script>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
     <script src="js/libs.min.js"></script>
+    <script>
+        $(".button").click(function () {
+            $(".button").hide()
+        });
+    </script>
 </body>
 </html>

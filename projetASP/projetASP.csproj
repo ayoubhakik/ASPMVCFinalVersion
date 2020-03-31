@@ -205,6 +205,7 @@
     <Content Include="Content\img\info.jpg" />
     <Content Include="Content\js\main.js" />
     <Content Include="Content\js\main1.js" />
+    <Content Include="Content\css\material.css" />
     <Content Include="Content\vendor\animate\animate.css" />
     <Content Include="Content\vendor\animsition\css\animsition.css" />
     <Content Include="Content\vendor\animsition\css\animsition.min.css" />
@@ -248,7 +249,6 @@
     <Content Include="Content\bootstrap.css" />
     <Content Include="Content\bootstrap.min.css" />
     <Content Include="Content\css\Inscription.css" />
-    <Content Include="Content\css\material-dashboard.css" />
     <Content Include="Content\css\material-dashboard.min.css" />
     <Content Include="Content\css\partials\dashboard\core\bootstrap\scss\bootstrap-grid.css" />
     <Content Include="Content\css\partials\dashboard\core\bootstrap\scss\bootstrap-reboot.css" />
@@ -702,7 +702,6 @@
     <Content Include="Views\Web.config" />
     <Content Include="Views\Departement\Corbeille.cshtml" />
     <Content Include="Views\Departement\Search.cshtml" />
-    <Content Include="Views\Shared\_FooterLayout.cshtml" />
     <None Include="Web.Debug.config">
       <DependentUpon>Web.config</DependentUpon>
     </None>
