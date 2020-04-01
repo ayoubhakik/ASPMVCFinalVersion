@@ -76,7 +76,10 @@ namespace projetASP.Controllers
     [HttpGet]
     public ActionResult Authentification1()
     {
-        if (UserValide.IsValid())
+            EtudiantContext db = new EtudiantContext();
+            ViewBag.Delai = db.settings.FirstOrDefault().Delai;
+            ViewBag.DatedeRappel = db.settings.FirstOrDefault().DatedeRappel;
+            if (UserValide.IsValid())
         {
 
             return RedirectToAction("Index", "Etudiant");
