@@ -75,10 +75,12 @@
             <div class="popup-inner  col-lg-8 col-md-10 col-sm-12 col-xs-12">
                 <div class="popup__import">
 
-                    @using (Html.BeginForm("ImporterEtudiantExcel", "Departement", FormMethod.Post, new { @class = "form-style-7", enctype = "multipart/form-data" }))
-                    {
-                        <h3 style="text-align:center">
 
+
+                @using (Html.BeginForm("ImporterEtudiantExcel", "Departement", FormMethod.Post, new { @class = "form-style-7", enctype = "multipart/form-data" }))
+                {
+                    <h3 style="text-align:center">
+                        
                             <i class="material-icons">view_module</i>
                             Importer les Etudiants
 
@@ -131,7 +133,7 @@
                     }
                 </div>
             </div>
-            </div>
+    </div>
 </body>
 </html>
 

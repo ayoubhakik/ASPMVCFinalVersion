@@ -97,7 +97,7 @@
         </ul>
         <br />
         <a class="button" href="#popup">Modifier</a>
-        <div class="popup" id="popup" >
+        <div class="popup" id="popup">
             <div class="popup-inner" style="background-color:rgba(255,255,255,0.6)!important">
                 <div class="popup__import  ">
                     <div class="popppup">
@@ -139,11 +139,21 @@
                 Pour supprimer les etudiants non redoublants :
             </span>
             <button value="Supprimer les Etudiants" class="button-vider"><i class="material-icons" style="color:#061323;">delete</i></button>
-            
+
         </div>
-            }
-       
-            </div>
+    }
+    @using (Html.BeginForm("ExtraireNonValide", "Departement", FormMethod.Post, new { enctype = "multipart/form-data" }))
+    {
+        <div>
+            <span id="text-description" style="margin-left:30px;  font-size:15px;">
+                Extraire les etudiants nonValideCompte :
+            </span>
+            <button value="Extraire" class="button-vider"><i class="material-icons" style="color:#061323;">list</i></button>
+
+        </div>
+    }
+
+</div>
 <div class="container-fluid" style="text-align:center;background-color:rgba(0,0,0,1);">Copyright © 2020 ENSA. All Rights Reserved.</div>
 <script type="text/javascript">
     //auto expand textarea
