@@ -66,20 +66,8 @@
                     <th>Date de fin</th>
                 </tr>
                 <tr>
-                    <th>Date de fin d'inscription</th>
-                    @if (@ViewBag.Delai != null)
-                    {
-                        <td>@ViewBag.Delai</td>
-                    }
-                    else
-                    {
-                        <td>pas encore réclamé</td>
-                    }
+                    <th>Date de rappel</th>
 
-
-                </tr>
-                <tr>
-                    <th>Date d'attribution du filière</th>
                     @if (@ViewBag.DatedeRappel != null)
                     {
                         <td>@ViewBag.DatedeRappel</td>
@@ -89,6 +77,18 @@
                         <td>pas encore réclamé</td>
                     }
 
+                </tr>
+                <tr>
+                    <th>Date d'attribution de filière</th>
+             
+                    @if (@ViewBag.Delai != null)
+                    {
+                        <td>@ViewBag.Delai</td>
+                    }
+                    else
+                    {
+                        <td>pas encore réclamé</td>
+                    }
                 </tr>
             </table>
             <div class="wrap-login100 " style="position:relative;bottom:170px;">
