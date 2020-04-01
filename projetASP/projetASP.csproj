@@ -156,9 +156,9 @@
     <Compile Include="Global.asax.cs">
       <DependentUpon>Global.asax</DependentUpon>
     </Compile>
-    <Compile Include="Migrations\202003302117129_InitialCreate.cs" />
-    <Compile Include="Migrations\202003302117129_InitialCreate.designer.cs">
-      <DependentUpon>202003302117129_InitialCreate.cs</DependentUpon>
+    <Compile Include="Migrations\202003311641293_InitialCreate.cs" />
+    <Compile Include="Migrations\202003311641293_InitialCreate.designer.cs">
+      <DependentUpon>202003311641293_InitialCreate.cs</DependentUpon>
     </Compile>
     <Compile Include="Migrations\Configuration.cs" />
     <Compile Include="Models\Departement.cs" />
@@ -701,6 +701,8 @@
     <Content Include="Views\Web.config" />
     <Content Include="Views\Departement\Corbeille.cshtml" />
     <Content Include="Views\Departement\Search.cshtml" />
+    <Content Include="Views\Departement\ImprimerEtudiant.cshtml" />
+    <Content Include="Views\User\Resultat.cshtml" />
     <None Include="Web.Debug.config">
       <DependentUpon>Web.config</DependentUpon>
     </None>
@@ -732,8 +734,8 @@
     <TypeScriptCompile Include="Scripts\index.d.ts" />
   </ItemGroup>
   <ItemGroup>
-    <EmbeddedResource Include="Migrations\202003302117129_InitialCreate.resx">
-      <DependentUpon>202003302117129_InitialCreate.cs</DependentUpon>
+    <EmbeddedResource Include="Migrations\202003311641293_InitialCreate.resx">
+      <DependentUpon>202003311641293_InitialCreate.cs</DependentUpon>
     </EmbeddedResource>
   </ItemGroup>
   <PropertyGroup>

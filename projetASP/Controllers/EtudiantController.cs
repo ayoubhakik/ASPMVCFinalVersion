@@ -134,7 +134,7 @@ namespace projetASP.Controllers
         }
         //****************************************************************************************************************************
 
-
+       
 
 
         public ActionResult Consulter()
@@ -188,7 +188,9 @@ namespace projetASP.Controllers
 
         public ActionResult Inscription()
         {
-
+            EtudiantContext db = new EtudiantContext();
+            ViewBag.Delai = db.settings.FirstOrDefault().Delai;
+            ViewBag.DatedeRappel = db.settings.FirstOrDefault().DatedeRappel;
             ViewBag.prenom = new SelectList(etudiantContext.etudiants, "cne", "prenom");
             ViewBag.nom = new SelectList(etudiantContext.etudiants, "cne", "nom");
 
@@ -266,7 +268,8 @@ namespace projetASP.Controllers
                     e.lieuNaiss = student.lieuNaiss;
                     e.Choix = choix1 + choix2 + choix3;
                     etudiantContext.SaveChanges();
-                    return RedirectToAction("Authentification1", "User");
+
+                    return RedirectToAction("SendEmailToUser1",new {email=e.email.ToString(),nom=e.nom.ToString(), prenom=e.prenom.ToString() });
                 }
             }
             /*else
@@ -325,6 +328,48 @@ namespace projetASP.Controllers
                 client.DeliveryMethod = SmtpDeliveryMethod.Network;
                 client.UseDefaultCredentials = false;
                 client.Credentials = new NetworkCredential(senderEmail,senderPassword);
+                MailMessage Message = new MailMessage(senderEmail, toEmail, subject, EmailBody);
+                Message.IsBodyHtml = true;
+                Message.BodyEncoding = UTF8Encoding.UTF8;
+                client.Send(Message);
+                return true;
+            }
+            catch (Exception ex)
+            {
+                return false;
+            }
+        }
+        public ActionResult SendEmailToUser1(String email,String nom ,String prenom)
+        {
+            bool Result = false;        
+            string subject = "Inscription";
+            Result = SendEmail(email, subject, "<p> Hello" + " " + nom + " " + prenom + ",<br/>Vous avez inscrit sur la plateforme d'ensas <br />Veuillez verifier votre compte </p>" +
+                "<button color='blue'><a href='localhost:localhost:52252/User/Authentification1'>Cliquer ici!</a></button>");
+            if (Result == true)
+            {
+                Json(Result, JsonRequestBehavior.AllowGet);
+                return RedirectToAction("Authentification1","User");
+            }
+            return View();
+        }
+        public bool SendEmail1(String toEmail, string subject, string EmailBody)
+        {
+            try
+            {
+                String senderEmail = WebConfigurationManager.AppSettings["senderEmail"];
+                String senderPassword = WebConfigurationManager.AppSettings["senderPassword"];
+                /* WebMail.SmtpServer = "smtp.gmail.com";
+                 WebMail.SmtpPort = 587;
+                 WebMail.SmtpUseDefaultCredentials = true;
+                 WebMail.UserName = sendereEmail;
+                 WebMail.Password = senderPassword;
+                 WebMail.Send(to: toEmail, subject: subject, body: EmailBody, isBodyHtml: true);*/
+                SmtpClient client = new SmtpClient("smtp.gmail.com", 587);
+                client.EnableSsl = true;
+                client.Timeout = 100000;
+                client.DeliveryMethod = SmtpDeliveryMethod.Network;
+                client.UseDefaultCredentials = false;
+                client.Credentials = new NetworkCredential(senderEmail, senderPassword);
                 MailMessage Message = new MailMessage(senderEmail, toEmail, subject, EmailBody);
                 Message.IsBodyHtml = true;
                 Message.BodyEncoding = UTF8Encoding.UTF8;
