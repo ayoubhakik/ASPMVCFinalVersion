@@ -1009,8 +1009,11 @@ namespace projetASP.Controllers
         [HttpGet]
         public void ExportExcel()
         {
+            string[] choixTab = new string[3];
+            string choixAffecte;
+
             //Données à exporter
-            EtudiantContext students = new EtudiantContext();
+            EtudiantContext students = new EtudiantContext();            
 
             //Création de la page excel
             ExcelPackage excel = new ExcelPackage();
@@ -1038,14 +1041,43 @@ namespace projetASP.Controllers
             worksheet.Cells[1, 15].Value = "Note de bac";
             worksheet.Cells[1, 16].Value = "Note de premiere annee";
             worksheet.Cells[1, 17].Value = "Note de deuxieme annee";
-            worksheet.Cells[1, 18].Value = "Choix";
-            worksheet.Cells[1, 19].Value = "Filiere affectee";
-            worksheet.Cells[1, 20].Value = "Redoublant";
+            worksheet.Cells[1, 18].Value = "Premier Choix";
+            worksheet.Cells[1, 19].Value = "Deuxieme Choix";
+            worksheet.Cells[1, 20].Value = "Troisieme Choix";
+            worksheet.Cells[1, 21].Value = "Filiere affectee";
+            worksheet.Cells[1, 22].Value = "Redoublant";
 
             //Remplissage des cellules
             int rowIndex = 2;
             foreach (var student in students.etudiants.ToList())
             {
+                //Separation des choix
+                for(int i = 0; i < 3; i++)
+                {
+                    switch (student.Choix.ToCharArray()[i])
+                    {
+                        case 'F':
+                            choixTab[i] = "Informatique";
+                            break;
+                        case 'D':
+                            choixTab[i] = "Industriel";
+                            break;
+                        case 'T':
+                            choixTab[i] = "Reseau et telecom";
+                            break;
+                        case 'P':
+                            choixTab[i] = "Procedes";
+                            break;
+                    }
+                }
+                if (student.idFil != null)
+                {
+                    choixAffecte = students.Filieres.Find(student.idFil).nomFil;
+                    worksheet.Cells[rowIndex, 21].Value = choixAffecte;
+                }
+                else 
+                    worksheet.Cells[rowIndex, 21].Value = null;
+
                 worksheet.Cells[rowIndex, 1].Value = student.nom;
                 worksheet.Cells[rowIndex, 2].Value = student.prenom;
                 worksheet.Cells[rowIndex, 3].Value = student.cin;
@@ -1063,9 +1095,10 @@ namespace projetASP.Controllers
                 worksheet.Cells[rowIndex, 15].Value = student.noteBac;
                 worksheet.Cells[rowIndex, 16].Value = student.noteFstYear;
                 worksheet.Cells[rowIndex, 17].Value = student.noteSndYear;
-                worksheet.Cells[rowIndex, 18].Value = student.choix;
-                worksheet.Cells[rowIndex, 19].Value = student.idFil;
-                worksheet.Cells[rowIndex, 20].Value = student.redoubler;
+                worksheet.Cells[rowIndex, 18].Value = choixTab[0];
+                worksheet.Cells[rowIndex, 19].Value = choixTab[1];
+                worksheet.Cells[rowIndex, 20].Value = choixTab[2];
+                worksheet.Cells[rowIndex, 22].Value = student.redoubler;
                 rowIndex++;
                
 
