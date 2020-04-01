@@ -78,6 +78,7 @@ namespace projetASP.Controllers
     {
             EtudiantContext db = new EtudiantContext();
             ViewBag.Delai = db.settings.FirstOrDefault().Delai;
+            ViewBag.Attributted = db.settings.FirstOrDefault().Attributted;
             ViewBag.DatedeRappel = db.settings.FirstOrDefault().DatedeRappel;
             if (UserValide.IsValid())
         {
