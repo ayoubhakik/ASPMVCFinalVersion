@@ -246,11 +246,12 @@ namespace projetASP.Controllers
 
         public ActionResult Setting()
         {
+            
             if (UserValide.IsValid() && UserValide.IsAdmin())
             {
                 EtudiantContext db = new EtudiantContext();
-
-
+                ViewBag.Delai = db.settings.FirstOrDefault().Delai;
+                ViewBag.DatedeRappel = db.settings.FirstOrDefault().DatedeRappel;
                 db.SaveChanges();
                 ViewBag.Current = "Setting";
 
@@ -258,7 +259,7 @@ namespace projetASP.Controllers
             }
             else
                 return RedirectToAction("Authentification", "User");
-
+          
         }
 
         // GET: Departement
@@ -269,6 +270,8 @@ namespace projetASP.Controllers
             if (UserValide.IsValid() && UserValide.IsAdmin())
             {
                 EtudiantContext db = new EtudiantContext();
+                ViewBag.Delai = db.settings.FirstOrDefault().Delai;
+                ViewBag.DatedeRappel = db.settings.FirstOrDefault().DatedeRappel;
 
                 if (dateNotification != null)
                 {

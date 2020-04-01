@@ -65,7 +65,114 @@
             border-radius: 10px;
             margin-top:20px;
            
-        } 
+        }
+    .alert-white.rounded .icon {
+        border-radius: 3px 0 0 3px;
+        -webkit-border-radius: 3px 0 0 3px;
+    }
+
+    .alert-white .icon {
+        text-align: center;
+        width: 45px;
+        height: 100%;
+        position: absolute;
+        top: 0;
+        left: 0;
+        border: 1px solid #bdbdbd;
+        padding-top: 15px;
+    }
+
+
+        .alert-white .icon:after {
+            -webkit-transform: rotate(45deg);
+            -moz-transform: rotate(45deg);
+            -ms-transform: rotate(45deg);
+            -o-transform: rotate(45deg);
+            transform: rotate(45deg);
+            display: block;
+            content: '';
+            width: 10px;
+            height: 10px;
+            border: 1px solid #bdbdbd;
+            position: absolute;
+            border-left: 0;
+            border-bottom: 0;
+            top: 50%;
+            right: -6px;
+            margin-top: -3px;
+            background: #fff;
+        }
+    .alert {
+        border-radius: 0;
+        -webkit-border-radius: 0;
+        box-shadow: 0 1px 2px rgba(0,0,0,0.11);
+        display: table;
+        width: 100%;
+    }
+
+    .alert-white {
+        background-image: linear-gradient(to bottom, #fff, #f9f9f9);
+        border-top-color: #d8d8d8;
+        border-bottom-color: #bdbdbd;
+        border-left-color: #cacaca;
+        border-right-color: #cacaca;
+        color: #404040;
+        padding-left: 61px;
+        position: relative;
+    }
+
+        .alert-white.rounded {
+            border-radius: 3px;
+            -webkit-border-radius: 3px;
+        }
+
+        .alert-white .icon i {
+            font-size: 20px;
+            color: #fff;
+            left: 12px;
+            margin-top: -10px;
+            position: absolute;
+            top: 50%;
+        }
+        .alert-white .icon:after {
+            -webkit-transform: rotate(45deg);
+            -moz-transform: rotate(45deg);
+            -ms-transform: rotate(45deg);
+            -o-transform: rotate(45deg);
+            transform: rotate(45deg);
+            display: block;
+            content: '';
+            width: 10px;
+            height: 10px;
+            border: 1px solid #bdbdbd;
+            position: absolute;
+            border-left: 0;
+            border-bottom: 0;
+            top: 50%;
+            right: -6px;
+            margin-top: -3px;
+            background: #fff;
+        }
+
+        .alert-white .icon i {
+            font-size: 20px;
+            color: #fff;
+            left: 12px;
+            margin-top: -10px;
+            position: absolute;
+            top: 50%;
+        }
+        .alert-white.alert-warning .icon,
+        .alert-white.alert-warning .icon:after {
+            border-color: #d68000;
+            background: #fc9700;
+        }
+
+    .alert-warning {
+        background-color: #fcf8e3;
+        border-color: #f1daab;
+        color: #c09853;
+    }
 </style>
 <br />
 <br />
@@ -102,9 +209,9 @@
                 <div class="popup__import  ">
                     <div class="popppup">
                         <div>
-                            <label for="name">Date Notification : </label>
+                            <label for="name">Date de fin d'inscription : </label>
                             <input type="date" name="dateNotification" maxlength="100" placeholder="Entrer la date" />
-                            <span>par ex (07/10/2020 apres cette date chaque etudiant va recevoir un email pour valider son compte) </span>
+                            <span>par ex (07/10/2020 apres cette date l'inscription ne sera pas disponible) </span>
                         </div>
                         <div>
                             <label for="email">Date d'attribution des filieres :</label>
@@ -150,6 +257,14 @@
             </span>
             <button value="Extraire" class="button-vider"><i class="material-icons" style="color:#061323;">list</i></button>
 
+        </div>
+        <br />
+        <div class="alert alert-warning alert-white rounded" style="margin-left:20px">
+            <div class="icon">
+                <i class="fa fa-warning"></i>
+            </div>
+            <span id="text-description" style="margin-left:30px;  font-size:15px; color:black !important">La date de fin d'inscription :@ViewBag.DatedeRappel</span><br />
+            <span id="text-description" style="margin-left:30px;  font-size:15px; color:black !important"> La date d'attribution des filières :@ViewBag.Delai</span>
         </div>
     }
 
