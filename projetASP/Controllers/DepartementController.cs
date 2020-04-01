@@ -1,9 +1,11 @@
 ﻿//using OfficeOpenXml;
 using OfficeOpenXml;
+using OfficeOpenXml.Style;
 using projetASP.DAL;
 using projetASP.Models;
 using System;
 using System.Collections.Generic;
+using System.IO;
 using System.Linq;
 using System.Net;
 using System.Net.Mail;
@@ -783,6 +785,89 @@ namespace projetASP.Controllers
             chart.Write("png");
             return null;
         }
+
+        [HttpGet]
+        public void ExportExcel()
+        {
+            //Données à exporter
+            EtudiantContext students = new EtudiantContext();
+
+            //Création de la page excel
+            ExcelPackage excel = new ExcelPackage();
+            ExcelWorksheet worksheet = excel.Workbook.Worksheets.Add("Sheet1");
+
+            //Style des noms de colonnes
+            worksheet.Row(1).Style.Font.Bold = true;
+            worksheet.Row(1).Style.HorizontalAlignment = ExcelHorizontalAlignment.Center;
+
+            //Noms des colonnes
+            worksheet.Cells[1, 1].Value = "Nom";
+            worksheet.Cells[1, 2].Value = "Prenom";
+            worksheet.Cells[1, 3].Value = "CIN";
+            worksheet.Cells[1, 4].Value = "CNE";
+            worksheet.Cells[1, 5].Value = "Email"; 
+            worksheet.Cells[1, 6].Value = "Date de naissance";
+            worksheet.Cells[1, 7].Value = "Lieu de naissance";
+            worksheet.Cells[1, 8].Value = "Nationalite";
+            worksheet.Cells[1, 9].Value = "GSM";
+            worksheet.Cells[1, 10].Value = "Tel fixe";
+            worksheet.Cells[1, 11].Value = "Adresse";
+            worksheet.Cells[1, 12].Value = "Ville";
+            worksheet.Cells[1, 13].Value = "Type de bac";
+            worksheet.Cells[1, 14].Value = "Annee de bac";
+            worksheet.Cells[1, 15].Value = "Note de bac";
+            worksheet.Cells[1, 16].Value = "Note de premiere annee";
+            worksheet.Cells[1, 17].Value = "Note de deuxieme annee";
+            worksheet.Cells[1, 18].Value = "Choix";
+            worksheet.Cells[1, 19].Value = "Filiere affectee";
+            worksheet.Cells[1, 20].Value = "Redoublant";
+
+            //Remplissage des cellules
+            int rowIndex = 2;
+            foreach (var student in students.etudiants.ToList())
+            {
+                worksheet.Cells[rowIndex, 1].Value = student.nom;
+                worksheet.Cells[rowIndex, 2].Value = student.prenom;
+                worksheet.Cells[rowIndex, 3].Value = student.cin;
+                worksheet.Cells[rowIndex, 4].Value = student.cne;
+                worksheet.Cells[rowIndex, 5].Value = student.email;
+                worksheet.Cells[rowIndex, 6].Value = student.dateNaiss;
+                worksheet.Cells[rowIndex, 7].Value = student.lieuNaiss;
+                worksheet.Cells[rowIndex, 8].Value = student.nationalite;
+                worksheet.Cells[rowIndex, 9].Value = student.gsm;
+                worksheet.Cells[rowIndex, 10].Value = student.phone;
+                worksheet.Cells[rowIndex, 11].Value = student.address;
+                worksheet.Cells[rowIndex, 12].Value = student.ville;
+                worksheet.Cells[rowIndex, 13].Value = student.typeBac;
+                worksheet.Cells[rowIndex, 14].Value = student.anneeBac;
+                worksheet.Cells[rowIndex, 15].Value = student.noteBac;
+                worksheet.Cells[rowIndex, 16].Value = student.noteFstYear;
+                worksheet.Cells[rowIndex, 17].Value = student.noteSndYear;
+                worksheet.Cells[rowIndex, 18].Value = student.choix;
+                worksheet.Cells[rowIndex, 19].Value = student.idFil;
+                worksheet.Cells[rowIndex, 20].Value = student.redoubler;
+                rowIndex++;
+               
+
+            }
+
+            //Envoi du fichier dans par http
+            using (var memoryStream = new MemoryStream())
+            {
+                Response.Clear();
+                Response.ClearContent();
+                Response.ContentType ="application/vnd.openxmlformats-officedocument.spreadsheetml.sheet";
+                Response.AddHeader("content-disposition", "attachment; filename=testing.xlsx");
+                excel.SaveAs(memoryStream);
+                memoryStream.WriteTo(Response.OutputStream);
+                Response.Flush();
+                Response.Clear();
+                Response.End();
+            }
+            
+
+
+            }
     }
 
     
