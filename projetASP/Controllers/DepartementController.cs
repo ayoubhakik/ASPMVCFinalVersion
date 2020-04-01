@@ -441,6 +441,15 @@ namespace projetASP.Controllers
             if (UserValide.IsValid() && UserValide.IsAdmin())
             {
                 EtudiantContext db = new EtudiantContext();
+                int total=0;
+                for (int i=0;i<db.etudiants.ToList().Count;i++)
+                {
+                    if (!db.etudiants.ToList()[i].Redoubler)
+                    {
+                        total++;
+                    }
+                }
+                ViewBag.total = total;
                 List<Etudiant> list = db.etudiants.OrderByDescending(e => (e.noteFstYear + e.noteSndYear) / 2).ToList();
                 //list =list.OrderBy(e => (e.noteFstYear+e.noteSndYear)/2);
                 if (db.settings.FirstOrDefault().importNote)
@@ -453,9 +462,10 @@ namespace projetASP.Controllers
             else
                 return RedirectToAction("Authentification", "User");
         }
-
-        public ActionResult Attribution()
+        [HttpPost]
+        public ActionResult AttributionFiliere(string infoMax,string indusMax,string gtrMax,string gpmcMax)
         {
+           
             ViewBag.Current = "attributionFiliere";
             if (UserValide.IsValid() && UserValide.IsAdmin())
             {
@@ -512,36 +522,85 @@ namespace projetASP.Controllers
                 int indexIndus = 0;
                 int indexGpmc = 0;
 
-                //the max numbers]
-                int maxInfo = (list.Count-nbrRedoublant) / 4;
+                //initialisation des Maxs
+                int maxInfo = (list.Count - nbrRedoublant) / 4;
                 int maxGtr = (list.Count - nbrRedoublant) / 4;
                 int maxIndus = (list.Count - nbrRedoublant) / 4;
                 int maxGpmc = (list.Count - nbrRedoublant) / 4;
 
-                if (info>=indus && info >= gtr && info >= gpmc)
+                //changer les maxs si la departement a saisi des valeurs
+                if (infoMax!=null && indusMax != null && gpmcMax != null && gtrMax != null)
                 {
-                    maxInfo+= +((list.Count - nbrRedoublant) % 4);
+                    try
+                    {
+
+                        maxInfo = Convert.ToInt32(infoMax);
+                        maxIndus = Convert.ToInt32(indusMax);
+                        maxGtr = Convert.ToInt32(gtrMax);
+                        maxGpmc = Convert.ToInt32(gpmcMax);
+                        
+                    }
+                    catch (Exception e)
+                    {
+
+                    }
+
                 }
-                if (indus >= info && indus >= gtr && indus >= gpmc)
-                {
-                     maxIndus += ((list.Count - nbrRedoublant) % 4);
-                }
-                if (gpmc >= indus && gpmc >= gtr && gpmc >= indus)
-                {
-                     maxGpmc  += ((list.Count - nbrRedoublant) % 4); 
-                }
-                else
-                {
-                     maxGtr += ((list.Count - nbrRedoublant) % 4); 
-                }
+                 //si ladministration n'a pas entre le nbr alors on va diviser les nombres automatiquement
+                
+                    int diff = (list.Count - nbrRedoublant) - (maxGtr + maxIndus + maxInfo + maxGpmc);
+                    Boolean symbol1 = false;
+                    Boolean symbol2 = false;
+                    Boolean symbol3 = false;
+                    Boolean symbol4 = false;
+                    for (int i = 0; i < diff; i++)
+                    {
+                        if (info >= indus && info >= gtr && info >= gpmc && !symbol1)
+                        {
+                            symbol1 = true;
+                            symbol2 = false;
+                            symbol3 = true;
+                            symbol4 = true;
+                            maxInfo += 1;
+                        }
+                        if (indus >= info && indus >= gtr && indus >= gpmc && !symbol2)
+                        {
+                            symbol1 = true;
+                            symbol2 = true;
+                            symbol3 = false;
+                            symbol4 = true;
+                            maxIndus += 1;
+                        }
+                        if (gpmc >= indus && gpmc >= gtr && gpmc >= indus && !symbol3)
+                        {
+                            symbol1 = true;
+                            symbol2 = true;
+                            symbol3 = true;
+                            symbol4 = false;
+                            maxGpmc += 1;
+                        }
+                        if (gtr >= indus && gtr >= gpmc && gtr >= info && !symbol4)
+                        {
+                            symbol1 = false;
+                            symbol2 = true;
+                            symbol3 = true;
+                            symbol4 = true;
+                            maxGtr += 1;
+                        }
+                    }
 
 
-                /*the max numbers
-                int maxInfo = list.Count / 4;
-                int maxGtr= list.Count / 4;
-                int maxIndus = list.Count / 4;
-                int maxGpmc = list.Count/4 + (list.Count%4);
-                */
+                    /*the max numbers
+                    int maxInfo = list.Count / 4;
+                    int maxGtr= list.Count / 4;
+                    int maxIndus = list.Count / 4;
+                    int maxGpmc = list.Count/4 + (list.Count%4);
+                    */
+
+                
+
+
+
 
 
                 for (int i=0;i<list.Count;i++)

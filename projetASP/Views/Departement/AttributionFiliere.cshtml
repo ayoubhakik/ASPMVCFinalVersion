@@ -8,6 +8,23 @@
     .card-header {
         text-align: center;
     }
+
+    .lefter {
+        float: left;
+    }
+
+    .righter {
+        float: right;
+        margin-left: 30px;
+    }
+
+    .clearer {
+        clear: both;
+    }
+
+    .lefter > table > tr > td > span {
+        color: black;
+    }
 </style>
 
 
@@ -25,20 +42,58 @@
     <br />
 </h2>
 
-<center>
-    <p style="color: #061323;">
-        Une fois la departement clique sur cette button, chaque etudiant va avoir la filiere qui il merite.<br />
-        Notons bien que apres avoir attribuer les filieres aucun etudiant peut s'authentifier
-    </p><br />
-    @if (ViewBag.err != null)
-    {
-        <div class="btn" style="background:linear-gradient(to bottom, #11273F, #061323, #204773);"><a style="text-decoration:none;color:white" href='#'>Attribuer</a></div>
-    }
-    else
-    {
-        <div class="btn" style="background:linear-gradient(to bottom, #11273F, #061323, #204773);"><a style="text-decoration:none;color:white" href='@Url.Action("Attribution", "Departement")'>Attribuer</a></div>
-    }
-</center>
+@using (Html.BeginForm("AttributionFiliere", "Departement", FormMethod.Post, new { enctype = "multipart/form-data" }))
+{
+<div class="lefter">
+    <h4 style="color:black !important">l'ensemble des nombres ne doit pas deppaser : @ViewBag.total</h4>
+
+    <table style="color:black !important">
+        <tr>
+            <td><span>Genie info</span></td>
+            <td>:</td>
+            <td><input type="text" name="infoMax" placeholder="ex:max= @(ViewBag.total/4)" /></td>
+        </tr>
+        <tr>
+            <td><span>Genie Indus</span></td>
+            <td>:</td>
+            <td><input type="text" name="indusMax" placeholder="ex:max= @(ViewBag.total/4)" /></td>
+        </tr>
+        <tr>
+            <td><span>Genie Telecomme </span></td>
+            <td>:</td>
+            <td><input type="text" name="gtrMax" placeholder="ex:max= @(ViewBag.total/4)" /></td>
+        </tr>
+        <tr>
+            <td><span>Genie Proc</span></td>
+            <td>:</td>
+            <td><input type="text" name="gpmcMax" placeholder="ex:max= @(ViewBag.total/4)" /></td>
+        </tr>
+    </table>
+</div>
+    <div class="righter">
+        <center>
+            <p style="color: #061323;">
+                Une fois la departement clique sur cette button, chaque etudiant va avoir la filiere qui il merite.<br />
+                Notons bien que apres avoir attribuer les filieres aucun etudiant peut s'authentifier
+            </p><br />
+            @if (ViewBag.err != null)
+            {
+                <div class="btn" style="background:linear-gradient(to bottom, #11273F, #061323, #204773);"><a style="text-decoration:none;color:white" href='#'>Attribuer</a></div>
+            }
+            else
+            {
+                <input class="btn" value="Attribuer" type="submit" style="background:linear-gradient(to bottom, #11273F, #061323, #204773);" />
+            }
+        </center>
+    </div>
+    <div class="clearer"></div>
+
+
+
+
+}
+
+
 
 
 <div class="content">
@@ -308,9 +363,6 @@
                     </div>
                 </div>
             </div>
-
-
-
         </div>
     </div>
 </div>
