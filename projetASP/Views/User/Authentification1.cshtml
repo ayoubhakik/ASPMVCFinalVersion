@@ -31,6 +31,7 @@
     <link rel="stylesheet" type="text/css" href="~/Content/vendor/animsition/css/animsition.min.css">
     <!--===============================================================================================-->
     <link rel="stylesheet" type="text/css" href="~/Content/vendor/select2/select2.min.css">
+    <link rel="stylesheet" type="text/css" href="~/Content/bootstrap.css">
     <!--===============================================================================================-->
     <link rel="stylesheet" type="text/css" href="~/Content/vendor/daterangepicker/daterangepicker.css">
     <!--===============================================================================================-->
@@ -47,7 +48,7 @@ background: linear-gradient(to top,#B49082 0%, #4682B4 100%);
 background-attachment: fixed;
   background-repeat: no-repeat;
   ">
-            <div class="wrap-login100">
+            <div class="wrap-login100 ">
 
                 @using (Html.BeginForm("Authentification1", "User", FormMethod.Post, new { @class = "login100-form validate-form" }))
                 {
@@ -107,12 +108,12 @@ background-attachment: fixed;
                     </div>
 
                 }
-                <section id="slideshow">
-                    <div class="entire-content">
+                <section id="slideshow" class=" d-none d-lg-block d-xl-block   ">
+                    <div class="entire-content d-none d-lg-block d-xl-block">
                         <div class="content-carrousel">
-                            <figure class="shadow"><img src="~/Content/img/gpmc.jpg" /></figure>
-                            <figure class="shadow"><img src="~/Content/img/gtr.jpg" /></figure>
-                            <figure class="shadow"><img src="~/Content/img/indus.jpg" /></figure>
+                            <figure class="shadow  "><img src="~/Content/img/gpmc.jpg" /></figure>
+                            <figure class="shadow  "><img src="~/Content/img/gtr.jpg"/></figure>
+                            <figure class="shadow "><img src="~/Content/img/indus.jpg" /></figure>
 
                             <figure class="shadow"><img src="~/Content/img/info.jpg" /></figure>
 

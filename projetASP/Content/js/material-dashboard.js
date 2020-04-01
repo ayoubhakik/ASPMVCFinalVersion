@@ -167,7 +167,7 @@ md = {
   },
 
   initSidebarsCheck: function() {
-    if ($(window).width() <= 991) {
+    if ($(window).width() <=100) {
       if ($sidebar.length != 0) {
         md.initRightMenu();
       }
@@ -340,7 +340,7 @@ md = {
 
       mobile_menu_initialized = true;
     } else {
-      if ($(window).width() > 991) {
+      if ($(window).width() > 100) {
         // reset all the additions that we made for the sidebar wrapper only if the screen is bigger than 991px
         $sidebar_wrapper.find('.navbar-form').remove();
         $sidebar_wrapper.find('.nav-mobile-menu').remove();

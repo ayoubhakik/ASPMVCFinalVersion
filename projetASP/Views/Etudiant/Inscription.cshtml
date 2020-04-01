@@ -95,7 +95,7 @@
 
 
 
-        <fieldset class="field">
+        <fieldset class="field col-md-12">
             <h2 class="fs-title" style="color:white">Mot de Pass</h2>
             <br />
             @Html.PasswordFor(x => x.password, new { placeholder = "Mot de pass" })
@@ -108,7 +108,7 @@
 
 
 
-        <fieldset class="field">
+        <fieldset class="field col-md-12">
             <h2 class="fs-title" style="color:white">Baccalauréat</h2>
             <br />
             @Html.DropDownListFor(x => x.typeBac, ViewBag.typebac as SelectList, "Type de BAC", new { @class = "btn btn-dark btn-lg dropdown-toggle m-1" })
