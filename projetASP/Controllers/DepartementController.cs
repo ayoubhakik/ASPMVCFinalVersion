@@ -12,22 +12,22 @@ using System.Web;
 using System.Web.Configuration;
 using System.Web.Helpers;
 using System.Web.Mvc;
-
+using Rotativa;
 namespace projetASP.Controllers
 {
-    
+
     public class DepartementController : Controller
     {
-        
+
         public void EnvoyerLesFilieres()
         {
-            
+
             if (UserValide.IsValid() && UserValide.IsAdmin())
             {
                 EtudiantContext db = new EtudiantContext();
                 for (int i = 0; i < db.etudiants.ToList().Count; i++)
                 {
-                    if (db.etudiants.ToList()[i].email!=null)
+                    if (db.etudiants.ToList()[i].email != null)
                     {
                         string body = "<div border='2px black solid'><h1 color='red'>Bonjour Mr/Mme " + db.etudiants.ToList()[i].nom + " " + db.etudiants.ToList()[i].prenom + "</h1>" +
                                                     "<p>Apres avoir faire l'attribution des filieres, on vient de vous informer que votre filiere est : " + db.Filieres.Find(db.etudiants.ToList()[i].idFil).nomFil + "</p><br/>" +
@@ -39,12 +39,12 @@ namespace projetASP.Controllers
                             Json(Result, JsonRequestBehavior.AllowGet);
                         }
                     }
-                        
 
-                    
+
+
                 }
             }
-            
+
 
         }
         /*
@@ -107,16 +107,16 @@ namespace projetASP.Controllers
         {
             if (UserValide.IsValid() && UserValide.IsAdmin())
             {
-                    EtudiantContext db = new EtudiantContext();
-                    for (int i = 0; i < db.etudiants.ToList().Count; i++)
-                    {
-                            db.etudiants.Remove(db.etudiants.ToList()[i]);
-                    }
-                    db.settings.First().Attributted = false;
-                    db.settings.First().importEtudiant = false;
-                    db.settings.First().importNote = false;
-                    db.SaveChanges();
-                    return RedirectToAction("Index");
+                EtudiantContext db = new EtudiantContext();
+                for (int i = 0; i < db.etudiants.ToList().Count; i++)
+                {
+                    db.etudiants.Remove(db.etudiants.ToList()[i]);
+                }
+                db.settings.First().Attributted = false;
+                db.settings.First().importEtudiant = false;
+                db.settings.First().importNote = false;
+                db.SaveChanges();
+                return RedirectToAction("Index");
             }
             else
                 return RedirectToAction("Authentification", "User");
@@ -127,14 +127,54 @@ namespace projetASP.Controllers
             if (UserValide.IsValid() && UserValide.IsAdmin())
             {
                 EtudiantContext db = new EtudiantContext();
-                Etudiant e = db.etudiants.Find(cne);
-                ViewBag.error = false;
-                if (e==null)
+                List<Etudiant> etudiant=new List<Etudiant>();
+                int count = 0;
+              
+                    foreach (var item in db.etudiants.Distinct().ToArray())
                 {
-                    ViewBag.error =true;
+                    
+                        if (item.cne == cne)
+                        {
+                            var etudiants = ( from s in db.etudiants
+                                           where s.cne == cne
+                                           select s).SingleOrDefault();
+                            count++;
+                            etudiant.Add(etudiants);
+                          
+                        
+
+                        }
+                        if (item.nom == cne)
+                        {
+                        var etudiants = (from s in db.etudiants
+                                         where s.nom == cne
+                                         select s).ToList();
+
+                        etudiant = etudiants;
+                        count++;
+                    }
+                        else if (item.cin == cne)
+                        {
+
+                            var etudiants =( from s in db.etudiants
+                                            where s.cin == cne
+                                            select s).SingleOrDefault();
+                            count++;
+                            etudiant.Add(etudiants);
+                            
+
+                        }
+                    }
+
+                
+                if (count == 0)
+                {
+                    ViewBag.error = true;
                     return View();
                 }
-                return View(e);
+                ViewBag.error = false;
+                return View(etudiant);
+                
             }
             else
                 return RedirectToAction("Authentification", "User");
@@ -145,7 +185,7 @@ namespace projetASP.Controllers
             if (UserValide.IsValid() && UserValide.IsAdmin())
             {
                 EtudiantContext db = new EtudiantContext();
-                for (int i=0;i<db.etudiants.ToList().Count;i++)
+                for (int i = 0; i < db.etudiants.ToList().Count; i++)
                 {
                     if (db.etudiants.ToList()[i].Redoubler == false)
                     {
@@ -158,7 +198,7 @@ namespace projetASP.Controllers
                 db.settings.First().importNote = false;
 
                 db.SaveChanges();
-                
+
                 return RedirectToAction("Index");
             }
             else
@@ -171,7 +211,7 @@ namespace projetASP.Controllers
         {
             if (UserValide.IsValid() && UserValide.IsAdmin())
             {
-                if (id!=null)
+                if (id != null)
                 {
                     EtudiantContext db = new EtudiantContext();
                     db.etudiants.Find(id).Redoubler = true;
@@ -208,7 +248,7 @@ namespace projetASP.Controllers
             {
                 EtudiantContext db = new EtudiantContext();
 
-                
+
                 db.SaveChanges();
                 ViewBag.Current = "Setting";
 
@@ -224,7 +264,8 @@ namespace projetASP.Controllers
         [HttpPost]
         public ActionResult Setting(DateTime dateNotification, DateTime dateAttribution)
         {
-            if (UserValide.IsValid() && UserValide.IsAdmin()){ 
+            if (UserValide.IsValid() && UserValide.IsAdmin())
+            {
                 EtudiantContext db = new EtudiantContext();
 
                 if (dateNotification != null)
@@ -233,12 +274,11 @@ namespace projetASP.Controllers
                 }
                 if (dateAttribution != null)
                 {
-                    db.settings.FirstOrDefault().Delai = dateNotification;
+                    db.settings.FirstOrDefault().Delai = dateAttribution;
                 }
-                
+
                 db.SaveChanges();
                 ViewBag.Current = "Setting";
-
                 return View("Setting");
             }
             else
@@ -249,12 +289,12 @@ namespace projetASP.Controllers
         }
         public ActionResult Index()
         {
-            
+
             if (UserValide.IsValid() && UserValide.IsAdmin())
             {
                 EtudiantContext db = new EtudiantContext();
 
-                
+
                 ViewBag.Current = "index";
                 List<Etudiant> list = db.etudiants.ToList();
 
@@ -262,9 +302,9 @@ namespace projetASP.Controllers
             }
             else
                 return RedirectToAction("Authentification", "User");
- 
 
-            
+
+
         }
 
         public ActionResult ImporterEtudiants()
@@ -293,7 +333,7 @@ namespace projetASP.Controllers
 
                 EtudiantContext db = new EtudiantContext();
                 HttpPostedFileBase file = Request.Files["excelfile"];
-                if ((file != null) && (file.ContentLength > 0) && !string.IsNullOrEmpty(file.FileName) && (file.FileName.EndsWith("xls")|| file.FileName.EndsWith("xlsx")) )
+                if ((file != null) && (file.ContentLength > 0) && !string.IsNullOrEmpty(file.FileName) && (file.FileName.EndsWith("xls") || file.FileName.EndsWith("xlsx")))
                 {
                     string fileName = file.FileName;
                     string fileContentType = file.ContentType;
@@ -415,15 +455,15 @@ namespace projetASP.Controllers
 
                             e.noteSndYear = Convert.ToDouble(workSheet.Cells[rowIterator, 3].Value);
 
-                           
+
 
                             //db.etudiants.Add(e);
                             Console.WriteLine(" out ......");
 
                         }
                         db.settings.First().importNote = true;
-           
-                       db.SaveChanges();
+
+                        db.SaveChanges();
                     }
                 }
                 else
@@ -513,26 +553,26 @@ namespace projetASP.Controllers
                 int indexGpmc = 0;
 
                 //the max numbers]
-                int maxInfo = (list.Count-nbrRedoublant) / 4;
+                int maxInfo = (list.Count - nbrRedoublant) / 4;
                 int maxGtr = (list.Count - nbrRedoublant) / 4;
                 int maxIndus = (list.Count - nbrRedoublant) / 4;
                 int maxGpmc = (list.Count - nbrRedoublant) / 4;
 
-                if (info>=indus && info >= gtr && info >= gpmc)
+                if (info >= indus && info >= gtr && info >= gpmc)
                 {
-                    maxInfo+= +((list.Count - nbrRedoublant) % 4);
+                    maxInfo += +((list.Count - nbrRedoublant) % 4);
                 }
                 if (indus >= info && indus >= gtr && indus >= gpmc)
                 {
-                     maxIndus += ((list.Count - nbrRedoublant) % 4);
+                    maxIndus += ((list.Count - nbrRedoublant) % 4);
                 }
                 if (gpmc >= indus && gpmc >= gtr && gpmc >= indus)
                 {
-                     maxGpmc  += ((list.Count - nbrRedoublant) % 4); 
+                    maxGpmc += ((list.Count - nbrRedoublant) % 4);
                 }
                 else
                 {
-                     maxGtr += ((list.Count - nbrRedoublant) % 4); 
+                    maxGtr += ((list.Count - nbrRedoublant) % 4);
                 }
 
 
@@ -544,27 +584,27 @@ namespace projetASP.Controllers
                 */
 
 
-                for (int i=0;i<list.Count;i++)
+                for (int i = 0; i < list.Count; i++)
                 {
                     //verification de l'etudiant si deja a choisi une filiere sinon on va lui attribuer la derniere filiere (gpmc->indus->gtr->info)
 
-                    if (list[i].Choix != null && !list[i].Redoubler )
+                    if (list[i].Choix != null && !list[i].Redoubler)
                     {
                         //parse to a table of chars
                         char[] choice = list[i].Choix.ToCharArray();
                         //verify the frst case which is if we have F=info
                         Boolean choosen = false;
 
-                        for (int j=0;j<3;j++)
+                        for (int j = 0; j < 3; j++)
                         {
 
-                            if (choice[j]=='F')
+                            if (choice[j] == 'F')
                             {
                                 if (indexInfo < maxInfo)
                                 {
                                     list[i].idFil = 1;
                                     choosen = true;
-                                    indexInfo++;break;
+                                    indexInfo++; break;
                                 }
                             }
                             if (choice[j] == 'T')
@@ -574,7 +614,7 @@ namespace projetASP.Controllers
                                     list[i].idFil = 2;
                                     choosen = true;
 
-                                    indexGtr++;  break;
+                                    indexGtr++; break;
                                 }
                             }
                             if (choice[j] == 'D')
@@ -584,7 +624,7 @@ namespace projetASP.Controllers
                                     list[i].idFil = 3;
                                     choosen = true;
 
-                                    indexIndus++;  break;
+                                    indexIndus++; break;
                                 }
 
                             }
@@ -594,28 +634,28 @@ namespace projetASP.Controllers
                                 {
                                     list[i].idFil = 4;
                                     choosen = true;
-                                    indexGpmc++;break;
+                                    indexGpmc++; break;
                                 }
                             }
                             if (choosen)
                             {
                                 j = 3;
                             }
-                            if (!choosen && j==2 )
+                            if (!choosen && j == 2)
                             {
                                 list[i].idFil = 4;
                                 choosen = true;
                                 indexGpmc++; break;
                             }
                         }
-                        
+
 
 
 
                     }
-                    
-                        
-                    
+
+
+
                 }
 
                 //list =list.OrderBy(e => (e.noteFstYear+e.noteSndYear)/2);
@@ -641,12 +681,12 @@ namespace projetASP.Controllers
                 EtudiantContext db = new EtudiantContext();
                 List<Etudiant> list = db.etudiants.ToList();
                 //initialisation des compteurs des filieres
-                int info=0, indus = 0, gtr = 0, gpmc = 0;
+                int info = 0, indus = 0, gtr = 0, gpmc = 0;
 
                 //variable pour les nombre totale et le reste qui n'a pas choisi les filieres
-                int nbrTotal=list.Count, nbrReste=0;
+                int nbrTotal = list.Count, nbrReste = 0;
 
-                for (int i=0;i<nbrTotal;i++)
+                for (int i = 0; i < nbrTotal; i++)
                 {
 
                     if (!list[i].Redoubler)
@@ -683,8 +723,8 @@ namespace projetASP.Controllers
 
                     }
 
-                    
-                   
+
+
 
                 }
                 ViewBag.nbrTotal = nbrTotal;
@@ -694,12 +734,12 @@ namespace projetASP.Controllers
                 ViewBag.gpmc = gpmc;
                 ViewBag.indus = indus;
                 //les pourcentages
-                ViewBag.nbrTotalP =  Convert.ToDouble(nbrTotal)/ Convert.ToDouble(nbrTotal) * 100;
+                ViewBag.nbrTotalP = Convert.ToDouble(nbrTotal) / Convert.ToDouble(nbrTotal) * 100;
                 ViewBag.nbrResteP = Convert.ToDouble(nbrReste) / Convert.ToDouble(nbrTotal) * 100;
-                ViewBag.infoP = Convert.ToDouble(info)/ Convert.ToDouble(nbrTotal) * 100;
-                ViewBag.gtrP = Convert.ToDouble(gtr)/ Convert.ToDouble(nbrTotal) * 100;
+                ViewBag.infoP = Convert.ToDouble(info) / Convert.ToDouble(nbrTotal) * 100;
+                ViewBag.gtrP = Convert.ToDouble(gtr) / Convert.ToDouble(nbrTotal) * 100;
                 ViewBag.gpmcP = Convert.ToDouble(gpmc) / Convert.ToDouble(nbrTotal) * 100;
-                ViewBag.indusP =Convert.ToDouble(indus) / Convert.ToDouble(nbrTotal) * 100;
+                ViewBag.indusP = Convert.ToDouble(indus) / Convert.ToDouble(nbrTotal) * 100;
                 return View();
             }
             else
@@ -711,7 +751,7 @@ namespace projetASP.Controllers
             if (UserValide.IsValid() && UserValide.IsAdmin())
             {
                 EtudiantContext db = new EtudiantContext();
-                
+
                 return View(db.etudiants.ToList());
             }
             else
@@ -759,11 +799,11 @@ namespace projetASP.Controllers
                             indus++;
                         }
                     }
-                    
+
                 }
 
             }
-            
+
             //les pourcentages
             //double nbrTotalP = Convert.ToDouble(nbrTotal) / Convert.ToDouble(nbrTotal) * 100;
             //double nbrResteP = Convert.ToDouble(nbrReste) / Convert.ToDouble(nbrTotal) * 100;
@@ -774,16 +814,32 @@ namespace projetASP.Controllers
 
 
             string[] vx = { "info", "indus", "gtr", "gpmc" };
-            double[] vy ={infoP, indusP, gtrP, gpmcP };
+            double[] vy = { infoP, indusP, gtrP, gpmcP };
 
-            System.Web.Helpers.Chart chart=new System.Web.Helpers.Chart(width:900,height:400, theme: ChartTheme.Blue);
+            System.Web.Helpers.Chart chart = new System.Web.Helpers.Chart(width: 900, height: 400, theme: ChartTheme.Blue);
 
-          
+
             chart.AddSeries(chartType: "Column", xValue: vx, yValues: vy);
             chart.Write("png");
             return null;
         }
-    }
 
-    
+        //pour Imprimer le pdf
+
+        public ActionResult PrintConsultation()
+        {
+            EtudiantContext db = new EtudiantContext();
+
+            var q = new ViewAsPdf("ImprimerEtudiant", db.etudiants.ToList());
+       
+            if (UserValide.IsValid() && UserValide.IsAdmin())
+            {
+                return q;
+            }
+            else
+            {
+                return RedirectToAction("Authentification", "User");
+            }
+        }
+    }
 }

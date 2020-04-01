@@ -1,5 +1,4 @@
-﻿@model projetASP.Models.Etudiant
-
+﻿@model projetASP.Models.Settings
 
 @{
                 /**/
@@ -12,6 +11,19 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
+    <style>
+        body{
+            overflow-y:hidden;
+        }
+        .expire {
+            background-image: url(../../Content/img/dark.jpg) !important;
+            height: 100%;
+            background-repeat: no-repeat !important;
+            background-size: cover !important;
+            background-position: center center;
+            overflow: hidden; /* Hide scrollbars */
+        }
+    </style>
     <title>Login V18</title>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1">
@@ -41,14 +53,45 @@
     <!--===============================================================================================-->
 </head>
 <body>
-
+    @if (DateTime.Now <= ViewBag.Delai)
+    {
     <div class="limiter">
         <div class="container-login100" style="background: linear-gradient(-225deg,  #4682B4 0%,#B49082  100%,transparent 0%);
-background: linear-gradient(to top,#B49082 0%, #4682B4 100%);
-background-attachment: fixed;
-  background-repeat: no-repeat;
-  ">
-            <div class="wrap-login100 ">
+       background: linear-gradient(to top,#B49082 0%, #4682B4 100%);
+       background-attachment: fixed;
+       background-repeat: no-repeat;">
+            <table class="table table-bordered table-danger" style="width:500px;height:100px;margin-left:1000px;">
+                <tr>
+                    <th>Tache</th>
+                    <th>Date de fin</th>
+                </tr>
+                <tr>
+                    <th>Date de fin d'inscription</th>
+                    @if (@ViewBag.Delai != null)
+                    {
+                        <td>@ViewBag.Delai</td>
+                    }
+                    else
+                    {
+                        <td>pas encore réclamé</td>
+                    }
+
+
+                </tr>
+                <tr>
+                    <th>Date d'attribution du filière</th>
+                    @if (@ViewBag.DatedeRappel != null)
+                    {
+                        <td>@ViewBag.DatedeRappel</td>
+                    }
+                    else
+                    {
+                        <td>pas encore réclamé</td>
+                    }
+
+                </tr>
+            </table>
+            <div class="wrap-login100 " style="position:relative;bottom:170px;">
 
                 @using (Html.BeginForm("Authentification1", "User", FormMethod.Post, new { @class = "login100-form validate-form" }))
                 {
@@ -123,11 +166,13 @@ background-attachment: fixed;
             </div>
         </div>
     </div>
+    }
+    else
+    {
+    <div class="expire">
+        <p style="color:white;text-align:center;font-weight:bold;font-size:45px;position:relative;top:45%;text-shadow:4px 4px #000;">LA DATE A EXPEREE &#128549</p>
     </div>
-
-
-
-
+    }
 
     <!--===============================================================================================-->
     <script src="~/Content/vendor/jquery/jquery-3.2.1.min.js"></script>

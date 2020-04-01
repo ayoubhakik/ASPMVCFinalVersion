@@ -1,4 +1,4 @@
-﻿
+﻿@model IEnumerable<projetASP.Models.Etudiant>
 @{
     Layout = "~/Views/Shared/_DepartementLayout.cshtml";
 }
@@ -34,51 +34,60 @@
                                 <th style="font-weight:bold">valide ?</th>
                                 </thead>
                                 <tbody>
+                                    @if (Model == null)
+                                    {
 
-                                    <tr>
-                                        <th>
-                                            @Model.cne
-                                        </th>
-                                        <th>
-                                            @Model.cin
-                                        </th>
-                                        <td>
-                                            @Model.nom
-                                        </td>
-                                        <td>
-                                            @Model.prenom
-                                        </td>
-                                        <th>
-                                            @Model.choix
-                                        </th>
-                                        <td>
-                                            @Model.noteFstYear
-                                        </td>
-                                        <th>
-                                            @Model.noteSndYear
-                                        </th>
-                                        <th>
-                                            @((Model.noteFstYear + Model.noteFstYear) / 2)
-                                        </th>
-                                        <td>
-                                            @if (@Model.Validated)
-                                            {
-                                            <span>Oui</span>
-                                            }
-                                            else
-                                            {
-                                            <span>Non</span>
-                                            }
+                                    }
+                                    else
+                                    {
 
-                                        </td>
+                                        foreach (var item in Model)
+                                        {
+                                            <tr>
+                                                <th>
+                                                    @Html.DisplayFor(modelItem => item.cne)
+                                                </th>
+                                                <th>
+                                                    @Html.DisplayFor(modelItem => item.cin)
+                                                </th>
+                                                <td>
+                                                    @Html.DisplayFor(modelItem => item.nom)
+                                                </td>
+                                                <td>
+                                                    @Html.DisplayFor(modelItem => item.prenom)
+                                                </td>
+                                                <th>
+                                                    @Html.DisplayFor(modelItem => item.choix)
+                                                </th>
+                                                <td>
+                                                    @Html.DisplayFor(modelItem => item.noteFstYear)
+                                                </td>
+                                                <th>
+                                                    @Html.DisplayFor(modelItem => item.noteSndYear)
+                                                </th>
+                                                <th>
+                                                    @(item.noteSndYear + item.noteFstYear) / 2)
+                                                </th>
+                                                <td>
+                                                    @if (item.Validated)
+                                                    {
+                                                        <span>Oui</span>
+                                                    }
+                                                    else
+                                                    {
+                                                        <span>Non</span>
+                                                    }
+
+                                                </td>
 
 
-                                    </tr>
-                                    
+                                            </tr>
 
-                                </tbody>
-                            }
-                            </table>
+                                        }
+                                    }
+                                        </tbody>
+                                    }
+                        </table>
                     </div>
                 </div>
             </div>

@@ -50,6 +50,8 @@
 </head>
 <body>
     <!-- MultiStep Form -->
+    @if (DateTime.Now <= ViewBag.Delai)
+    {
     <div class="row justify-content-center form">
         <div class="col-md-6">
             @using (Html.BeginForm("Inscription", "Etudiant", FormMethod.Post, new { id = "msform", name = "msform" }))
@@ -72,7 +74,7 @@
             @Html.ValidationMessageFor(x => x.cin)
             @Html.TextBoxFor(x => x.cne, new { placeholder = "CNE" })
             @Html.ValidationMessageFor(x => x.cne)
-            @Html.LabelFor(x => x.dateNaiss,"Date de naissance :" ,new {@class="dateN"})
+            @Html.LabelFor(x => x.dateNaiss, "Date de naissance :", new { @class = "dateN" })
             @Html.TextBoxFor(x => x.dateNaiss, new { type = "date" })
             @Html.ValidationMessageFor(x => x.dateNaiss)
             @Html.TextBoxFor(x => x.lieuNaiss, new { placeholder = "Lieu de naissance" })
@@ -207,6 +209,11 @@
             }
         </div>
     </div>
+    }
+    else
+    {
+    <p style="color:white;text-align:center;font-weight:bold;font-size:45px;position:relative;top:45%;text-shadow:4px 4px #000;">LA DATE A EXPEREE &#128549</p>
+    }
     <!-- /.MultiStep Form -->
     @Scripts.Render("~/bundles/jquery")
     @Scripts.Render("~/bundles/bootstrap")
