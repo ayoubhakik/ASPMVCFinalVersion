@@ -95,7 +95,6 @@
 
 
 
-
 }
 
 
@@ -108,7 +107,7 @@
                 <div class="card">
 
                     <div class="card-header" style="background:linear-gradient(to bottom, #11273F, #061323, #204773);">
-                        <h4 class="card-title" style="color:white;">Informatique</h4>
+                        <h4 class="card-title" style="color:white;">Resultat d'attribution</h4><span style="text-align:right"><a href='@Url.Action("ExportExcelAttributed","Departement")'>Telecharger la resultat</a></span>
                     </div>
                     <div class="card-body table-responsive">
 
@@ -120,7 +119,9 @@
                             <th style="font-weight:bold;">Cin</th>
                             <th style="font-weight:bold;">Nom</th>
                             <th style="font-weight:bold;">Prenom</th>
-                            <th style="font-weight:bold;">Note generale</th>
+                            <th style="font-weight:bold;">Chiox</th>
+                            <th style="font-weight:bold;">Filiere Attribue</th>
+
 
                             </thead>
                             <tbody>
@@ -133,15 +134,15 @@
 
                                     foreach (var item in Model)
                                     {
-                                        if (item.idFil == 1)
+                                        if (!item.Redoubler)
                                         {
                                             <tr>
-                                                <th>
+                                                <td>
                                                     @Html.DisplayFor(modelItem => item.cne)
-                                                </th>
-                                                <th>
+                                                </td>
+                                                <td>
                                                     @Html.DisplayFor(modelItem => item.cin)
-                                                </th>
+                                                </td>
                                                 <td>
                                                     @Html.DisplayFor(modelItem => item.nom)
                                                 </td>
@@ -149,10 +150,27 @@
                                                     @Html.DisplayFor(modelItem => item.prenom)
                                                 </td>
 
-                                                <th>
-                                                    @((item.noteSndYear + item.noteFstYear) / 2)
-                                                </th>
-
+                                                <td>
+                                                    @item.Choix
+                                                </td>
+                                                <td>
+                                                    @if (item.idFil == 1)
+                                                    {
+                                                        <span>Info</span>
+                                                    }
+                                                    @if (item.idFil == 2)
+                                                    {
+                                                        <span>Gtr</span>
+                                                    }
+                                                    @if (item.idFil == 3)
+                                                    {
+                                                        <span>Indus</span>
+                                                    }
+                                                    @if (item.idFil == 4)
+                                                    {
+                                                        <span>GPMC</span>
+                                                    }
+                                                </td>
 
                                             </tr>
                                         }
@@ -172,203 +190,5 @@
         </div>
     </div>
 
-    <div class="container-fluid">
-        <div class="row">
-            <div class="col-lg-12 col-md-12">
-
-                <div class="card">
-                    <div class="card-header" style="background:linear-gradient(to bottom, #B49082, #B49290, #544E61);">
-                        <h4 class="card-title" style="color:white">GTR</h4>
-                    </div>
-                    <div class="card-body table-responsive">
-
-                        <table class="table table-hover">
-
-                            <thead style="color:#061323">
-                            <th style="font-weight:bold;">Cne</th>
-                            <th style="font-weight:bold;">Cin</th>
-                            <th style="font-weight:bold;">Nom</th>
-                            <th style="font-weight:bold;">Prenom</th>
-                            <th style="font-weight:bold;">Note generale</th>
-                            </thead>
-                            <tbody>
-                                @if (Model == null)
-                                {
-
-                                }
-                                else
-                                {
-
-                                    foreach (var item in Model)
-                                    {
-                                        if (item.idFil == 2)
-                                        {
-                                            <tr>
-                                                <th>
-                                                    @Html.DisplayFor(modelItem => item.cne)
-                                                </th>
-                                                <th>
-                                                    @Html.DisplayFor(modelItem => item.cin)
-                                                </th>
-                                                <td>
-                                                    @Html.DisplayFor(modelItem => item.nom)
-                                                </td>
-                                                <td>
-                                                    @Html.DisplayFor(modelItem => item.prenom)
-                                                </td>
-
-                                                <th>
-                                                    @((item.noteSndYear + item.noteFstYear) / 2)
-                                                </th>
-
-
-                                            </tr>
-                                        }
-
-                                    }
-
-                                }
-
-                            </tbody>
-                        </table>
-                    </div>
-                </div>
-            </div>
-
-
-
-        </div>
-    </div>
-    <div class="container-fluid">
-        <div class="row">
-            <div class="col-lg-12 col-md-12">
-                <div class="card">
-
-                    <div class="card-header" style="background:linear-gradient(to bottom, #11273F, #061323, #204773);">
-                        <h4 class="card-title" style="color:white;">Indus</h4>
-                    </div>
-                    <div class="card-body table-responsive">
-                        <table class="table table-hover">
-                            <thead style="color:#B49082;">
-                            <th style="font-weight:bold;">Cne</th>
-                            <th style="font-weight:bold;">Cin</th>
-                            <th style="font-weight:bold;">Nom</th>
-                            <th style="font-weight:bold;">Prenom</th>
-                            <th style="font-weight:bold;">Note generale</th>
-                            </thead>
-                            <tbody>
-                                @if (Model == null)
-                                {
-
-                                }
-                                else
-                                {
-
-                                    foreach (var item in Model)
-                                    {
-                                        if (item.idFil == 3)
-                                        {
-                                            <tr>
-                                                <th>
-                                                    @Html.DisplayFor(modelItem => item.cne)
-                                                </th>
-                                                <th>
-                                                    @Html.DisplayFor(modelItem => item.cin)
-                                                </th>
-                                                <td>
-                                                    @Html.DisplayFor(modelItem => item.nom)
-                                                </td>
-                                                <td>
-                                                    @Html.DisplayFor(modelItem => item.prenom)
-                                                </td>
-
-                                                <th>
-                                                    @((item.noteSndYear + item.noteFstYear) / 2)
-                                                </th>
-
-
-                                            </tr>
-                                        }
-
-                                    }
-
-                                }
-
-                            </tbody>
-                        </table>
-                    </div>
-                </div>
-            </div>
-
-
-
-        </div>
-    </div>
-    <div class="container-fluid">
-        <div class="row">
-            <div class="col-lg-12 col-md-12">
-                <div class="card">
-
-                    <div class="card-header" style="background:linear-gradient(to bottom, #B49082, #B49290, #544E61);">
-                        <h4 class="card-title" style="color:white">GPMC</h4>
-
-                    </div>
-                    <div class="card-body table-responsive">
-
-
-
-                        <table class="table table-hover">
-                            <thead style="color:#061323">
-                            <th style="font-weight:bold;">Cne</th>
-                            <th style="font-weight:bold;">Cin</th>
-                            <th style="font-weight:bold;">Nom</th>
-                            <th style="font-weight:bold;">Prenom</th>
-                            <th style="font-weight:bold;">Note generale</th>
-                            </thead>
-                            <tbody>
-                                @if (Model == null)
-                                {
-
-                                }
-                                else
-                                {
-
-                                    foreach (var item in Model)
-                                    {
-                                        if (item.idFil == 4)
-                                        {
-                                            <tr>
-                                                <th>
-                                                    @Html.DisplayFor(modelItem => item.cne)
-                                                </th>
-                                                <th>
-                                                    @Html.DisplayFor(modelItem => item.cin)
-                                                </th>
-                                                <td>
-                                                    @Html.DisplayFor(modelItem => item.nom)
-                                                </td>
-                                                <td>
-                                                    @Html.DisplayFor(modelItem => item.prenom)
-                                                </td>
-
-                                                <th>
-                                                    @((item.noteSndYear + item.noteFstYear) / 2)
-                                                </th>
-
-
-                                            </tr>
-                                        }
-
-                                    }
-
-                                }
-
-                            </tbody>
-                        </table>
-                    </div>
-                </div>
-            </div>
-        </div>
-    </div>
-</div>
+    
 <div class="container-fluid" style="text-align:center;background-color:rgba(0,0,0,1);">Copyright © 2020 ENSA. All Rights Reserved.</div>

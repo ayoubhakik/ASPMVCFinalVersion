@@ -544,6 +544,7 @@ namespace projetASP.Controllers
                     return View(list);
                 }
                 ViewBag.err = true;
+                list = list.OrderByDescending(e => e.nom).ToList();
                 return View(list);
             }
             else
@@ -1088,6 +1089,83 @@ namespace projetASP.Controllers
 
 
             }
+
+        ///fonction pour les info
+        [HttpGet]
+        public void ExportExcelAttributed()
+        {
+            //Données à exporter
+            EtudiantContext students = new EtudiantContext();
+
+            //Création de la page excel
+            ExcelPackage excel = new ExcelPackage();
+            ExcelWorksheet worksheet = excel.Workbook.Worksheets.Add("Sheet1");
+
+            //Style des noms de colonnes
+            worksheet.Row(1).Style.Font.Bold = true;
+            worksheet.Row(1).Style.HorizontalAlignment = ExcelHorizontalAlignment.Center;
+
+            //Noms des colonnes
+            worksheet.Cells[1, 1].Value = "Nom";
+            worksheet.Cells[1, 2].Value = "Prenom";
+            worksheet.Cells[1, 3].Value = "CIN";
+            worksheet.Cells[1, 4].Value = "CNE";
+            worksheet.Cells[1, 5].Value = "Choix";
+            worksheet.Cells[1, 6].Value = "Filiere affectee";
+
+            //Remplissage des cellules
+            int rowIndex = 2;
+            foreach (var student in students.etudiants.ToList())
+            {
+                worksheet.Cells[rowIndex, 1].Value = student.nom;
+                worksheet.Cells[rowIndex, 2].Value = student.prenom;
+                worksheet.Cells[rowIndex, 3].Value = student.cin;
+                worksheet.Cells[rowIndex, 4].Value = student.cne;
+                
+                worksheet.Cells[rowIndex, 5].Value = student.choix;
+                if (student.idFil==1)
+                {
+                    worksheet.Cells[rowIndex, 6].Value = "Info";
+
+                }
+
+                if (student.idFil == 2)
+                {
+                    worksheet.Cells[rowIndex, 6].Value = "GTR";
+
+                }
+                if (student.idFil == 3)
+                {
+                    worksheet.Cells[rowIndex, 6].Value = "Indus";
+
+                }
+                if (student.idFil == 4)
+                {
+                    worksheet.Cells[rowIndex, 6].Value = "GPMC";
+
+                }
+                rowIndex++;
+
+
+            }
+
+            //Envoi du fichier dans par http
+            using (var memoryStream = new MemoryStream())
+            {
+                Response.Clear();
+                Response.ClearContent();
+                Response.ContentType = "application/vnd.openxmlformats-officedocument.spreadsheetml.sheet";
+                Response.AddHeader("content-disposition", "attachment; filename=listeAttribution.xlsx");
+                excel.SaveAs(memoryStream);
+                memoryStream.WriteTo(Response.OutputStream);
+                Response.Flush();
+                Response.Clear();
+                Response.End();
+            }
+
+
+
+        }
     }
 
     
