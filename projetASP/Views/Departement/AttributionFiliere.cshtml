@@ -51,24 +51,29 @@
         <tr>
             <td><span>Genie info</span></td>
             <td>:</td>
-            <td><input type="text" name="infoMax" placeholder="ex:max= @(ViewBag.total/4)" /></td>
+            <td><input type="text" name="infoMax" value="@ViewBag.info" /></td>
         </tr>
         <tr>
             <td><span>Genie Indus</span></td>
             <td>:</td>
-            <td><input type="text" name="indusMax" placeholder="ex:max= @(ViewBag.total/4)" /></td>
+            <td><input type="text" name="indusMax" value="@ViewBag.indus" /></td>
         </tr>
         <tr>
             <td><span>Genie Telecomme </span></td>
             <td>:</td>
-            <td><input type="text" name="gtrMax" placeholder="ex:max= @(ViewBag.total/4)" /></td>
+            <td><input type="text" name="gtrMax" value="@ViewBag.gtr" /></td>
         </tr>
         <tr>
             <td><span>Genie Proc</span></td>
             <td>:</td>
-            <td><input type="text" name="gpmcMax" placeholder="ex:max= @(ViewBag.total/4)" /></td>
+            <td><input type="text" name="gpmcMax" value="@ViewBag.gpmc" /></td>
         </tr>
     </table>
+    @if (ViewBag.error2 != null)
+    {
+        <h4 style="color:red !important">vous devez donner des informations corrects</h4>
+    }
+
 </div>
     <div class="righter">
         <center>
