@@ -110,6 +110,9 @@ namespace projetASP.Controllers
                 string cin = Request["cin"];
                 string mdp = Request["mdp"];
                 EtudiantContext dbset = new EtudiantContext();
+                ViewBag.Delai = dbset.settings.FirstOrDefault().Delai;
+                ViewBag.Attributted = dbset.settings.FirstOrDefault().Attributted;
+                ViewBag.DatedeRappel = dbset.settings.FirstOrDefault().DatedeRappel;
                 var userLogin = (from data in dbset.etudiants
                                  where data.cne == cne && data.password == mdp && data.cin == cin && data.Validated == true
                                  select data).FirstOrDefault();

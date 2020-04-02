@@ -1229,9 +1229,20 @@ namespace projetASP.Controllers
 
 
         }
- 
 
-    
+
+        public ActionResult Visualiser()
+        {
+            ViewBag.Current = "visualiser";
+            if (UserValide.IsValid() && UserValide.IsAdmin())
+            {
+                EtudiantContext db = new EtudiantContext();
+
+                return View(db.etudiants.ToList());
+            }
+            else
+                return RedirectToAction("Authentification", "User");
+        }
         //pour Imprimer le pdf
 
         public ActionResult PrintConsultation()

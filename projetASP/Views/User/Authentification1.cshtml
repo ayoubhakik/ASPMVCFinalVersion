@@ -1,10 +1,10 @@
 ﻿@model projetASP.Models.Settings
 
 @{
-                /**/
+    /**/
 
-                ViewBag.Title = "Authentification";
-                Layout = "~/Views/Shared/_UserLayout.cshtml";
+    ViewBag.Title = "Authentification";
+    Layout = "~/Views/Shared/_UserLayout.cshtml";
 }
 
 
@@ -12,9 +12,7 @@
 <html lang="en">
 <head>
     <style>
-        body{
-            overflow-y:hidden;
-        }
+
         .expire {
             background-image: url(../../Content/img/dark.jpg) !important;
             height: 100%;
@@ -166,20 +164,21 @@
                 </div>
             </div>
         </div>
+
     }
-    else
+    else if (DateTime.Now > ViewBag.DatedeRappel)
     {
         <div class="expire">
             <p style="color:white;text-align:center;font-weight:bold;font-size:45px;position:relative;top:45%;text-shadow:4px 4px #000;">LA DATE A EXPEREE &#128549</p>
-            @if (@ViewBag.Attributted==true)
+            @if (@ViewBag.Attributted == true)
             {
-            <p Style="color:white;position:relative;top:55%;float:right;right:20px;">
-                <span id="bl" style="visibility: visible">
-                    <text style="font-size:20px;">Les résultats d'attribution de filière sont disponibles</text>
-                    <i class="fa fa-angle-double-right" style="font-size:70px;position:relative;top:20px"></i>
-                </span>
-                <a href="" style="color:white;text-decoration:none">Voir les résultas</a>
-            </p>
+                <p Style="color:white;position:relative;top:55%;float:right;right:20px;">
+                    <span id="bl" style="visibility: visible">
+                        <text style="font-size:20px;">Les résultats d'attribution de filière sont disponibles</text>
+                        <i class="fa fa-angle-double-right" style="font-size:70px;position:relative;top:20px"></i>
+                    </span>
+                    <a href="" style="color:white;text-decoration:none">Voir les résultas</a>
+                </p>
             }
         </div>
     }
@@ -200,20 +199,17 @@
     <script src="~/Content/vendor/countdowntime/countdowntime.js"></script>
     <!--===============================================================================================-->
     <script src="~/Content/js/main.js"></script>
-        <script>
-            function blink(ob)
-{
-if (ob.style.visibility == "visible" )
-{
+    <script>
+        function blink(ob) {
+            if (ob.style.visibility == "visible") {
                 ob.style.visibility = "hidden";
             }
-            else
-{
+            else {
                 ob.style.visibility = "visible";
             }
-            }
-            setInterval("blink(bl)",700);
+        }
+        setInterval("blink(bl)", 700);
     </script>
-   
+
 </body>
 </html>

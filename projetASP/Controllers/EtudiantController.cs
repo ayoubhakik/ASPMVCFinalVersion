@@ -220,6 +220,9 @@ namespace projetASP.Controllers
 
             ViewBag.prenom = new SelectList(etudiantContext.etudiants, "cne", "prenom");
             ViewBag.nom = new SelectList(etudiantContext.etudiants, "cne", "nom");
+            EtudiantContext db = new EtudiantContext();
+            ViewBag.Delai = db.settings.FirstOrDefault().Delai;
+            ViewBag.DatedeRappel = db.settings.FirstOrDefault().DatedeRappel;
             ViewBag.typeBac = new List<SelectListItem>
             {
                 new SelectListItem {Text="Sciences Physiques et Chimiques", Value="1" },
