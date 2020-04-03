@@ -8,7 +8,7 @@
 
     <link rel="stylesheet" href="~/Content/css/importation.css" />
     <style>
-        .circle {
+       .circle {
             position: fixed;
             display: block;
         }
@@ -59,7 +59,7 @@
     </style>
 </head>
 <body id="thisone">
-
+    <div class=col-lg-12 col-md-12 ">
     <br />
     <br />
     <br />
@@ -70,9 +70,9 @@
         <div class="circle"></div>
         <div class="circle"></div>
     </div>
-    <a class="button" href="#popup" style="top:200px">Importer des notes</a>
+    <a class="button" href="#popup" style="top:200px;">Importer des notes</a>
     <div class="popup" id="popup">
-        <div class="popup-inner">
+        <div class="popup-inner col-lg-8 col-md-10 col-sm-12 ">
             <div class="popup__import">
                 @using (Html.BeginForm("ImporterNoteExcel", "Departement", FormMethod.Post, new { @class = "form-style-7", enctype = "multipart/form-data" }))
                 {
@@ -131,7 +131,7 @@
                 }
             </div>
         </div>
-
+    </div>
         <script type="text/javascript">
             //auto expand textarea
             function adjust_textarea(h) {
@@ -139,6 +139,7 @@
                 h.style.height = (h.scrollHeight) + "px";
             }
         </script>
+  
 </body>
 </html>
 

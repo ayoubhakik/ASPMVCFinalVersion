@@ -1,9 +1,11 @@
 ﻿//using OfficeOpenXml;
 using OfficeOpenXml;
+using OfficeOpenXml.Style;
 using projetASP.DAL;
 using projetASP.Models;
 using System;
 using System.Collections.Generic;
+using System.IO;
 using System.Linq;
 using System.Net;
 using System.Net.Mail;
@@ -12,22 +14,22 @@ using System.Web;
 using System.Web.Configuration;
 using System.Web.Helpers;
 using System.Web.Mvc;
-
+using Rotativa;
 namespace projetASP.Controllers
 {
-    
+
     public class DepartementController : Controller
     {
-        
+
         public void EnvoyerLesFilieres()
         {
-            
+
             if (UserValide.IsValid() && UserValide.IsAdmin())
             {
                 EtudiantContext db = new EtudiantContext();
                 for (int i = 0; i < db.etudiants.ToList().Count; i++)
                 {
-                    if (db.etudiants.ToList()[i].email!=null)
+                    if (db.etudiants.ToList()[i].email != null)
                     {
                         string body = "<div border='2px black solid'><h1 color='red'>Bonjour Mr/Mme " + db.etudiants.ToList()[i].nom + " " + db.etudiants.ToList()[i].prenom + "</h1>" +
                                                     "<p>Apres avoir faire l'attribution des filieres, on vient de vous informer que votre filiere est : " + db.Filieres.Find(db.etudiants.ToList()[i].idFil).nomFil + "</p><br/>" +
@@ -39,12 +41,12 @@ namespace projetASP.Controllers
                             Json(Result, JsonRequestBehavior.AllowGet);
                         }
                     }
-                        
 
-                    
+
+
                 }
             }
-            
+
 
         }
         /*
@@ -107,16 +109,16 @@ namespace projetASP.Controllers
         {
             if (UserValide.IsValid() && UserValide.IsAdmin())
             {
-                    EtudiantContext db = new EtudiantContext();
-                    for (int i = 0; i < db.etudiants.ToList().Count; i++)
-                    {
-                            db.etudiants.Remove(db.etudiants.ToList()[i]);
-                    }
-                    db.settings.First().Attributted = false;
-                    db.settings.First().importEtudiant = false;
-                    db.settings.First().importNote = false;
-                    db.SaveChanges();
-                    return RedirectToAction("Index");
+                EtudiantContext db = new EtudiantContext();
+                for (int i = 0; i < db.etudiants.ToList().Count; i++)
+                {
+                    db.etudiants.Remove(db.etudiants.ToList()[i]);
+                }
+                db.settings.First().Attributted = false;
+                db.settings.First().importEtudiant = false;
+                db.settings.First().importNote = false;
+                db.SaveChanges();
+                return RedirectToAction("Index");
             }
             else
                 return RedirectToAction("Authentification", "User");
@@ -127,14 +129,54 @@ namespace projetASP.Controllers
             if (UserValide.IsValid() && UserValide.IsAdmin())
             {
                 EtudiantContext db = new EtudiantContext();
-                Etudiant e = db.etudiants.Find(cne);
-                ViewBag.error = false;
-                if (e==null)
+                List<Etudiant> etudiant=new List<Etudiant>();
+                int count = 0;
+              
+                    foreach (var item in db.etudiants.Distinct().ToArray())
                 {
-                    ViewBag.error =true;
+                    
+                        if (item.cne == cne)
+                        {
+                            var etudiants = ( from s in db.etudiants
+                                           where s.cne == cne
+                                           select s).SingleOrDefault();
+                            count++;
+                            etudiant.Add(etudiants);
+                          
+                        
+
+                        }
+                        if (item.nom == cne)
+                        {
+                        var etudiants = (from s in db.etudiants
+                                         where s.nom == cne
+                                         select s).ToList();
+
+                        etudiant = etudiants;
+                        count++;
+                    }
+                        else if (item.cin == cne)
+                        {
+
+                            var etudiants =( from s in db.etudiants
+                                            where s.cin == cne
+                                            select s).SingleOrDefault();
+                            count++;
+                            etudiant.Add(etudiants);
+                            
+
+                        }
+                    }
+
+                
+                if (count == 0)
+                {
+                    ViewBag.error = true;
                     return View();
                 }
-                return View(e);
+                ViewBag.error = false;
+                return View(etudiant);
+                
             }
             else
                 return RedirectToAction("Authentification", "User");
@@ -145,7 +187,7 @@ namespace projetASP.Controllers
             if (UserValide.IsValid() && UserValide.IsAdmin())
             {
                 EtudiantContext db = new EtudiantContext();
-                for (int i=0;i<db.etudiants.ToList().Count;i++)
+                for (int i = 0; i < db.etudiants.ToList().Count; i++)
                 {
                     if (db.etudiants.ToList()[i].Redoubler == false)
                     {
@@ -158,7 +200,7 @@ namespace projetASP.Controllers
                 db.settings.First().importNote = false;
 
                 db.SaveChanges();
-                
+
                 return RedirectToAction("Index");
             }
             else
@@ -171,7 +213,7 @@ namespace projetASP.Controllers
         {
             if (UserValide.IsValid() && UserValide.IsAdmin())
             {
-                if (id!=null)
+                if (id != null)
                 {
                     EtudiantContext db = new EtudiantContext();
                     db.etudiants.Find(id).Redoubler = true;
@@ -204,11 +246,12 @@ namespace projetASP.Controllers
 
         public ActionResult Setting()
         {
+            
             if (UserValide.IsValid() && UserValide.IsAdmin())
             {
                 EtudiantContext db = new EtudiantContext();
-
-                
+                ViewBag.Delai = db.settings.FirstOrDefault().Delai;
+                ViewBag.DatedeRappel = db.settings.FirstOrDefault().DatedeRappel;
                 db.SaveChanges();
                 ViewBag.Current = "Setting";
 
@@ -216,7 +259,7 @@ namespace projetASP.Controllers
             }
             else
                 return RedirectToAction("Authentification", "User");
-
+          
         }
 
         // GET: Departement
@@ -224,8 +267,11 @@ namespace projetASP.Controllers
         [HttpPost]
         public ActionResult Setting(DateTime dateNotification, DateTime dateAttribution)
         {
-            if (UserValide.IsValid() && UserValide.IsAdmin()){ 
+            if (UserValide.IsValid() && UserValide.IsAdmin())
+            {
                 EtudiantContext db = new EtudiantContext();
+                ViewBag.Delai = db.settings.FirstOrDefault().Delai;
+                ViewBag.DatedeRappel = db.settings.FirstOrDefault().DatedeRappel;
 
                 if (dateNotification != null)
                 {
@@ -233,12 +279,11 @@ namespace projetASP.Controllers
                 }
                 if (dateAttribution != null)
                 {
-                    db.settings.FirstOrDefault().Delai = dateNotification;
+                    db.settings.FirstOrDefault().Delai = dateAttribution;
                 }
 
                 db.SaveChanges();
                 ViewBag.Current = "Setting";
-
                 return View("Setting");
             }
             else
@@ -249,12 +294,12 @@ namespace projetASP.Controllers
         }
         public ActionResult Index()
         {
-            
+
             if (UserValide.IsValid() && UserValide.IsAdmin())
             {
                 EtudiantContext db = new EtudiantContext();
 
-                
+
                 ViewBag.Current = "index";
                 List<Etudiant> list = db.etudiants.ToList();
 
@@ -262,9 +307,9 @@ namespace projetASP.Controllers
             }
             else
                 return RedirectToAction("Authentification", "User");
- 
 
-            
+
+
         }
 
         public ActionResult ImporterEtudiants()
@@ -293,7 +338,7 @@ namespace projetASP.Controllers
 
                 EtudiantContext db = new EtudiantContext();
                 HttpPostedFileBase file = Request.Files["excelfile"];
-                if ((file != null) && (file.ContentLength > 0) && !string.IsNullOrEmpty(file.FileName) && (file.FileName.EndsWith("xls")|| file.FileName.EndsWith("xlsx")) )
+                if ((file != null) && (file.ContentLength > 0) && !string.IsNullOrEmpty(file.FileName) && (file.FileName.EndsWith("xls") || file.FileName.EndsWith("xlsx")))
                 {
                     string fileName = file.FileName;
                     string fileContentType = file.ContentType;
@@ -351,6 +396,12 @@ namespace projetASP.Controllers
                         }
                         db.settings.First().importEtudiant = true;
                         db.SaveChanges();
+                        for (int i = 0; i < db.etudiants.ToList().Count; i++)
+                        {
+                            db.etudiants.ToList()[i].Choix = "FDT";
+                        }
+                        db.SaveChanges();
+
                     }
                 }
                 else
@@ -409,15 +460,15 @@ namespace projetASP.Controllers
 
                             e.noteSndYear = Convert.ToDouble(workSheet.Cells[rowIterator, 3].Value);
 
-                           
+
 
                             //db.etudiants.Add(e);
                             Console.WriteLine(" out ......");
 
                         }
                         db.settings.First().importNote = true;
-           
-                       db.SaveChanges();
+
+                        db.SaveChanges();
                     }
                 }
                 else
@@ -436,44 +487,147 @@ namespace projetASP.Controllers
             {
                 EtudiantContext db = new EtudiantContext();
                 List<Etudiant> list = db.etudiants.OrderByDescending(e => (e.noteFstYear + e.noteSndYear) / 2).ToList();
+
+                int total =0;
+                for (int i=0;i<db.etudiants.ToList().Count;i++)
+                {
+                    if (!db.etudiants.ToList()[i].Redoubler)
+                    {
+                        total++;
+                    }
+                }
+                ViewBag.total = total;
+                int info = 0, indus = 0, gpmc = 0, gtr = 0;
+                for (int i = 0; i < db.etudiants.ToList().Count; i++)
+                {
+                    if (!db.etudiants.ToList()[i].Redoubler && db.etudiants.ToList()[i].Validated)
+                    {
+                        char[] chiffr = (list[i].Choix).ToCharArray();
+
+                        if (chiffr[0] == 'F')
+                        {
+                            info++;
+                        }
+                        if (chiffr[0] == 'P')
+                        {
+                            gpmc++;
+                        }
+                        if (chiffr[0] == 'T')
+                        {
+                            gtr++;
+                        }
+                        if (chiffr[0] == 'D')
+                        {
+                            indus++;
+                        }
+                    }
+                    
+
+                }
+
+                //il faut envoyer les nbr par defaut pour les textboxes
+                //il faut classer les filieres par nbr de demande
+                ////////partie statistique
+
+                //variable pour les nombre totale et le reste qui n'a pas choisi les filieres
+                int nbrTotal =total;
+
+                
+                //initialisation des Maxs
+                int maxInfo = total / 4;
+                int maxGtr = total / 4;
+                int maxIndus = total / 4;
+                int maxGpmc = total / 4;
+
+                int diff =total%4;
+                Boolean symbol1 = false;
+                Boolean symbol2 = false;
+                Boolean symbol3 = false;
+                Boolean symbol4 = false;
+                Boolean taken = false;
+                for (int i = 0; i < diff; i++)
+                {
+                    if (info >= indus && info >= gtr && info >= gpmc && !symbol1 && !taken)
+                    {
+                        symbol1 = true;
+                        taken = true;
+                        maxInfo += 1;
+                    }
+                    if (indus >= info && indus >= gtr && indus >= gpmc && !symbol2 &&!taken)
+                    {
+                        symbol2 = true;
+                        taken = true;
+
+                        maxIndus += 1;
+                    }
+                    if (gpmc >= indus && gpmc >= gtr && gpmc >= indus && !symbol3 && !taken)
+                    {
+                        symbol3 = true;
+                        taken = true;
+
+                        maxGpmc += 1; 
+                    }
+                    if (gtr >= indus && gtr >= gpmc && gtr >= info && !symbol4 && !taken)
+                    {
+                        taken = true;
+
+                        symbol4 = true;
+                        maxGtr += 1; break;
+                    }
+                   taken = false;
+                }
+
+                ViewBag.info = maxInfo;
+                ViewBag.gtr = maxGtr;
+                ViewBag.gpmc = maxGpmc;
+                ViewBag.indus = maxIndus;
                 //list =list.OrderBy(e => (e.noteFstYear+e.noteSndYear)/2);
                 if (db.settings.FirstOrDefault().importNote)
                 {
                     return View(list);
                 }
                 ViewBag.err = true;
+                list = list.OrderByDescending(e => e.nom).ToList();
                 return View(list);
             }
             else
                 return RedirectToAction("Authentification", "User");
         }
-
-        public ActionResult Attribution()
+        [HttpPost]
+        public ActionResult AttributionFiliere(string infoMax,string indusMax,string gtrMax,string gpmcMax)
         {
+           
             ViewBag.Current = "attributionFiliere";
             if (UserValide.IsValid() && UserValide.IsAdmin())
             {
                 EtudiantContext db = new EtudiantContext();
                 //return a  list sorted in a desendent way
                 List<Etudiant> list = db.etudiants.OrderByDescending(e => (e.noteFstYear + e.noteSndYear) / 2).ToList();
-
-                ////////partie statistique
-                int info = 0, indus = 0, gtr = 0, gpmc = 0;
-
-                //variable pour les nombre totale et le reste qui n'a pas choisi les filieres
-                int nbrTotal = list.Count, nbrRedoublant = 0;
-
-                for (int i = 0; i < nbrTotal; i++)
+                int total = 0;
+                for (int i = 0; i < db.etudiants.ToList().Count; i++)
                 {
-                    if (list[i].Redoubler)
+                    if (!db.etudiants.ToList()[i].Redoubler)
                     {
-                        //un etudiant avec null dans choix alors on va l'es ajouter dans le reste
-                        nbrRedoublant++;
+                        total++;
                     }
-                    //sinon on va traiter les choix comme ca
-                    else
+                }
+                int maxInfo = total / 4;
+                int maxGtr = total / 4;
+                int maxIndus = total / 4;
+                int maxGpmc = total / 4;
+
+                int diff = total % 4;
+                Boolean symbol1 = false;
+                Boolean symbol2 = false;
+                Boolean symbol3 = false;
+                Boolean symbol4 = false;
+                Boolean taken = false;
+                int info = 0, indus = 0, gpmc = 0, gtr = 0;
+                for (int i = 0; i < db.etudiants.ToList().Count; i++)
+                {
+                    if (!db.etudiants.ToList()[i].Redoubler && db.etudiants.ToList()[i].Validated)
                     {
-                        char[] chiffr = (list[i].choix).ToCharArray();
+                        char[] chiffr = (list[i].Choix).ToCharArray();
 
                         if (chiffr[0] == 'F')
                         {
@@ -493,123 +647,188 @@ namespace projetASP.Controllers
                         }
                     }
 
+
                 }
 
-                ViewBag.info = info;
-                ViewBag.gtr = gtr;
-                ViewBag.gpmc = gpmc;
-                ViewBag.indus = indus;
+                //il faut envoyer les nbr par defaut pour les textboxes
+                //il faut classer les filieres par nbr de demande
+                ////////partie statistique
 
-                //the maximum number for each class will be the total/4
+                //variable pour les nombre totale et le reste qui n'a pas choisi les filieres
+                int nbrTotal = total;
+
+
+                //initialisation des Maxs
+
+                for (int i = 0; i < diff; i++)
+                {
+                    if (info >= indus && info >= gtr && info >= gpmc && !symbol1 && !taken)
+                    {
+                        symbol1 = true;
+                        taken = true;
+                        maxInfo += 1;
+                    }
+                    if (indus >= info && indus >= gtr && indus >= gpmc && !symbol2 && !taken)
+                    {
+                        symbol2 = true;
+                        taken = true;
+
+                        maxIndus += 1;
+                    }
+                    if (gpmc >= indus && gpmc >= gtr && gpmc >= indus && !symbol3 && !taken)
+                    {
+                        symbol3 = true;
+                        taken = true;
+
+                        maxGpmc += 1;
+                    }
+                    if (gtr >= indus && gtr >= gpmc && gtr >= info && !symbol4 && !taken)
+                    {
+                        taken = true;
+
+                        symbol4 = true;
+                        maxGtr += 1; break;
+                    }
+                    taken = false;
+                }
+
+                //changer les maxs si la departement a saisi des valeurs
+                if (infoMax!=null && indusMax != null && gpmcMax != null && gtrMax != null)
+                {
+                    try
+                    {
+
+                        maxInfo = Convert.ToInt32(infoMax);
+                        maxIndus = Convert.ToInt32(indusMax);
+                        maxGtr = Convert.ToInt32(gtrMax);
+                        maxGpmc = Convert.ToInt32(gpmcMax);
+                        if (maxInfo+maxIndus+maxGtr+maxGpmc!=total)
+                        {
+                            ViewBag.error2 = true;
+                            return View();
+                        }
+                        
+                    }
+                    catch (Exception e)
+                    {
+
+                    }
+
+                }
+                
+                
+
+
+
+
+
+
                 int indexInfo = 0;
                 int indexGtr = 0;
                 int indexIndus = 0;
                 int indexGpmc = 0;
-
-                //the max numbers]
-                int maxInfo = (list.Count-nbrRedoublant) / 4;
-                int maxGtr = (list.Count - nbrRedoublant) / 4;
-                int maxIndus = (list.Count - nbrRedoublant) / 4;
-                int maxGpmc = (list.Count - nbrRedoublant) / 4;
-
-                if (info>=indus && info >= gtr && info >= gpmc)
-                {
-                    maxInfo+= +((list.Count - nbrRedoublant) % 4);
-                }
-                if (indus >= info && indus >= gtr && indus >= gpmc)
-                {
-                     maxIndus += ((list.Count - nbrRedoublant) % 4);
-                }
-                if (gpmc >= indus && gpmc >= gtr && gpmc >= indus)
-                {
-                     maxGpmc  += ((list.Count - nbrRedoublant) % 4); 
-                }
-                else
-                {
-                     maxGtr += ((list.Count - nbrRedoublant) % 4); 
-                }
-
-
-                /*the max numbers
-                int maxInfo = list.Count / 4;
-                int maxGtr= list.Count / 4;
-                int maxIndus = list.Count / 4;
-                int maxGpmc = list.Count/4 + (list.Count%4);
-                */
-
-
                 for (int i=0;i<list.Count;i++)
                 {
                     //verification de l'etudiant si deja a choisi une filiere sinon on va lui attribuer la derniere filiere (gpmc->indus->gtr->info)
 
-                    if (list[i].choix != null && !list[i].Redoubler )
+                    if (!list[i].Redoubler )
                     {
-                        //parse to a table of chars
-                        char[] choice = list[i].choix.ToCharArray();
-                        //verify the frst case which is if we have F=info
-                        Boolean choosen = false;
-
-                        for (int j=0;j<3;j++)
+                        if (list[i].Validated)
                         {
+                            //parse to a table of chars
+                            char[] choice = list[i].Choix.ToCharArray();
+                            //verify the frst case which is if we have F=info
+                            Boolean choosen = false;
 
-                            if (choice[j]=='F')
+                            for (int j = 0; j < 3; j++)
                             {
-                                if (indexInfo < maxInfo)
+
+                                if (choice[j] == 'F')
                                 {
-                                    list[i].idFil = 1;
-                                    choosen = true;
-                                    indexInfo++;break;
+                                    if (indexInfo < maxInfo)
+                                    {
+                                        list[i].idFil = 1;
+                                        choosen = true;
+                                        indexInfo++; break;
+                                    }
                                 }
-                            }
-                            if (choice[j] == 'T')
-                            {
-                                if (indexGtr < maxGtr)
+                                if (choice[j] == 'T')
                                 {
-                                    list[i].idFil = 2;
-                                    choosen = true;
+                                    if (indexGtr < maxGtr)
+                                    {
+                                        list[i].idFil = 2;
+                                        choosen = true;
 
-                                    indexGtr++;  break;
+                                        indexGtr++; break;
+                                    }
                                 }
-                            }
-                            if (choice[j] == 'D')
-                            {
-                                if (indexIndus < maxIndus)
+                                if (choice[j] == 'D')
                                 {
-                                    list[i].idFil = 3;
-                                    choosen = true;
+                                    if (indexIndus < maxIndus)
+                                    {
+                                        list[i].idFil = 3;
+                                        choosen = true;
 
-                                    indexIndus++;  break;
+                                        indexIndus++; break;
+                                    }
+
                                 }
-
-                            }
-                            if (choice[j] == 'P')
-                            {
-                                if (indexGpmc < maxGpmc)
+                                if (choice[j] == 'P')
+                                {
+                                    if (indexGpmc < maxGpmc)
+                                    {
+                                        list[i].idFil = 4;
+                                        choosen = true;
+                                        indexGpmc++; break;
+                                    }
+                                }
+                                if (choosen)
+                                {
+                                    j = 3;
+                                }
+                                if (!choosen && j == 2)
                                 {
                                     list[i].idFil = 4;
                                     choosen = true;
-                                    indexGpmc++;break;
+                                    indexGpmc++; break;
                                 }
                             }
-                            if (choosen)
+                        }
+                        else
+                        {
+                            taken = false;
+                            if (info >= indus && info >= gtr && info >= gpmc &&  !taken && (indexInfo < maxInfo))
                             {
-                                j = 3;
+                                taken = true;
+                                list[i].idFil = 1;
+                                indexInfo += 1;
                             }
-                            if (!choosen && j==2 )
+                            if (indus >= info  && indus >= gtr && indus >= gpmc && !taken && (indexIndus < maxIndus))
                             {
+                                taken = true;
+                                list[i].idFil = 3;
+                                indexIndus += 1;
+                            }
+                            if (gtr >= indus && gtr >= info && gtr >= gpmc && !taken && (indexGtr < maxGtr))
+                            {
+                                taken = true;
+                                list[i].idFil = 2;
+                                indexGtr += 1;
+                            }
+                            if (gpmc >= indus && gpmc >= gtr && gpmc >= info && !taken && (indexGpmc < maxGpmc))
+                            {
+                                taken = true;
                                 list[i].idFil = 4;
-                                choosen = true;
-                                indexGpmc++; break;
+                                indexGpmc += 1;
                             }
                         }
-                        
 
 
 
                     }
-                    
-                        
-                    
+
+
+
                 }
 
                 //list =list.OrderBy(e => (e.noteFstYear+e.noteSndYear)/2);
@@ -635,12 +854,12 @@ namespace projetASP.Controllers
                 EtudiantContext db = new EtudiantContext();
                 List<Etudiant> list = db.etudiants.ToList();
                 //initialisation des compteurs des filieres
-                int info=0, indus = 0, gtr = 0, gpmc = 0;
+                int info = 0, indus = 0, gtr = 0, gpmc = 0;
 
                 //variable pour les nombre totale et le reste qui n'a pas choisi les filieres
-                int nbrTotal=list.Count, nbrReste=0;
+                int nbrTotal = list.Count, nbrReste = 0;
 
-                for (int i=0;i<nbrTotal;i++)
+                for (int i = 0; i < nbrTotal; i++)
                 {
 
                     if (!list[i].Redoubler)
@@ -655,7 +874,7 @@ namespace projetASP.Controllers
                         else
                         {
 
-                            char[] chiffr = (list[i].choix).ToCharArray();
+                            char[] chiffr = (list[i].Choix).ToCharArray();
 
                             if (chiffr[0] == 'F')
                             {
@@ -676,9 +895,13 @@ namespace projetASP.Controllers
                         }
 
                     }
+                    else
+                    {
+                        nbrTotal--;
+                    }
 
-                    
-                   
+
+
 
                 }
                 ViewBag.nbrTotal = nbrTotal;
@@ -688,29 +911,18 @@ namespace projetASP.Controllers
                 ViewBag.gpmc = gpmc;
                 ViewBag.indus = indus;
                 //les pourcentages
-                ViewBag.nbrTotalP =  Convert.ToDouble(nbrTotal)/ Convert.ToDouble(nbrTotal) * 100;
+                ViewBag.nbrTotalP = Convert.ToDouble(nbrTotal) / Convert.ToDouble(nbrTotal) * 100;
                 ViewBag.nbrResteP = Convert.ToDouble(nbrReste) / Convert.ToDouble(nbrTotal) * 100;
-                ViewBag.infoP = Convert.ToDouble(info)/ Convert.ToDouble(nbrTotal) * 100;
-                ViewBag.gtrP = Convert.ToDouble(gtr)/ Convert.ToDouble(nbrTotal) * 100;
+                ViewBag.infoP = Convert.ToDouble(info) / Convert.ToDouble(nbrTotal) * 100;
+                ViewBag.gtrP = Convert.ToDouble(gtr) / Convert.ToDouble(nbrTotal) * 100;
                 ViewBag.gpmcP = Convert.ToDouble(gpmc) / Convert.ToDouble(nbrTotal) * 100;
-                ViewBag.indusP =Convert.ToDouble(indus) / Convert.ToDouble(nbrTotal) * 100;
+                ViewBag.indusP = Convert.ToDouble(indus) / Convert.ToDouble(nbrTotal) * 100;
                 return View();
             }
             else
                 return RedirectToAction("Authentification", "User");
         }
-        public ActionResult Visualiser()
-        {
-            ViewBag.Current = "visualiser";
-            if (UserValide.IsValid() && UserValide.IsAdmin())
-            {
-                EtudiantContext db = new EtudiantContext();
-                
-                return View(db.etudiants.ToList());
-            }
-            else
-                return RedirectToAction("Authentification", "User");
-        }
+       
         public ActionResult Chart()
         {
             //essayons de retourner tous les etudiants
@@ -724,7 +936,7 @@ namespace projetASP.Controllers
 
             for (int i = 0; i < nbrTotal; i++)
             {
-                if (list[i].choix == null)
+                if (list[i].Choix == null)
                 {
                     //un etudiant avec null dans choix alors on va l'es ajouter dans le reste
                     nbrReste++;
@@ -734,7 +946,7 @@ namespace projetASP.Controllers
                 {
                     if (list[i].Validated)
                     {
-                        char[] chiffr = (list[i].choix).ToCharArray();
+                        char[] chiffr = (list[i].Choix).ToCharArray();
 
                         if (chiffr[0] == 'F')
                         {
@@ -753,11 +965,11 @@ namespace projetASP.Controllers
                             indus++;
                         }
                     }
-                    
+
                 }
 
             }
-            
+
             //les pourcentages
             //double nbrTotalP = Convert.ToDouble(nbrTotal) / Convert.ToDouble(nbrTotal) * 100;
             //double nbrResteP = Convert.ToDouble(nbrReste) / Convert.ToDouble(nbrTotal) * 100;
@@ -768,16 +980,286 @@ namespace projetASP.Controllers
 
 
             string[] vx = { "info", "indus", "gtr", "gpmc" };
-            double[] vy ={infoP, indusP, gtrP, gpmcP };
+            double[] vy = { infoP, indusP, gtrP, gpmcP };
 
-            System.Web.Helpers.Chart chart=new System.Web.Helpers.Chart(width:900,height:400, theme: ChartTheme.Blue);
+            System.Web.Helpers.Chart chart = new System.Web.Helpers.Chart(width: 900, height: 400, theme: ChartTheme.Blue);
 
-          
+
             chart.AddSeries(chartType: "Column", xValue: vx, yValues: vy);
             chart.Write("png");
             return null;
         }
-    }
+        [HttpPost]
+        public void ExtraireNonValide()
+        {
+            EtudiantContext students = new EtudiantContext();
 
-    
+            //Création de la page excel
+            ExcelPackage excel = new ExcelPackage();
+            ExcelWorksheet worksheet = excel.Workbook.Worksheets.Add("Sheet1");
+
+            //Style des noms de colonnes
+            worksheet.Row(1).Style.Font.Bold = true;
+            worksheet.Row(1).Style.HorizontalAlignment = ExcelHorizontalAlignment.Center;
+
+            //Noms des colonnes
+            worksheet.Cells[1, 1].Value = "Nom";
+            worksheet.Cells[1, 2].Value = "Prenom";
+            worksheet.Cells[1, 3].Value = "CIN";
+            worksheet.Cells[1, 4].Value = "CNE";
+            
+
+            //Remplissage des cellules
+            int rowIndex = 2;
+            foreach (var student in students.etudiants.ToList())
+            {
+                worksheet.Cells[rowIndex, 1].Value = student.nom;
+                worksheet.Cells[rowIndex, 2].Value = student.prenom;
+                worksheet.Cells[rowIndex, 3].Value = student.cin;
+                worksheet.Cells[rowIndex, 4].Value = student.cne;
+                
+                rowIndex++;
+
+
+            }
+
+            //Envoi du fichier dans par http
+            using (var memoryStream = new MemoryStream())
+            {
+                Response.Clear();
+                Response.ClearContent();
+                Response.ContentType = "application/vnd.openxmlformats-officedocument.spreadsheetml.sheet";
+                Response.AddHeader("content-disposition", "attachment; filename=EtudiantNonValideCompte.xlsx");
+                excel.SaveAs(memoryStream);
+                memoryStream.WriteTo(Response.OutputStream);
+                Response.Flush();
+                Response.Clear();
+                Response.End();
+            }
+        }
+        [HttpGet]
+        public void ExportExcel()
+        {
+            string[] choixTab = new string[3];
+            string choixAffecte;
+
+            //Données à exporter
+            EtudiantContext students = new EtudiantContext();            
+
+            //Création de la page excel
+            ExcelPackage excel = new ExcelPackage();
+            ExcelWorksheet worksheet = excel.Workbook.Worksheets.Add("Sheet1");
+
+            //Style des noms de colonnes
+            worksheet.Row(1).Style.Font.Bold = true;
+            worksheet.Row(1).Style.HorizontalAlignment = ExcelHorizontalAlignment.Center;
+
+            //Noms des colonnes
+            worksheet.Cells[1, 1].Value = "Nom";
+            worksheet.Cells[1, 2].Value = "Prenom";
+            worksheet.Cells[1, 3].Value = "CIN";
+            worksheet.Cells[1, 4].Value = "CNE";
+            worksheet.Cells[1, 5].Value = "Email"; 
+            worksheet.Cells[1, 6].Value = "Date de naissance";
+            worksheet.Cells[1, 7].Value = "Lieu de naissance";
+            worksheet.Cells[1, 8].Value = "Nationalite";
+            worksheet.Cells[1, 9].Value = "GSM";
+            worksheet.Cells[1, 10].Value = "Tel fixe";
+            worksheet.Cells[1, 11].Value = "Adresse";
+            worksheet.Cells[1, 12].Value = "Ville";
+            worksheet.Cells[1, 13].Value = "Type de bac";
+            worksheet.Cells[1, 14].Value = "Annee de bac";
+            worksheet.Cells[1, 15].Value = "Note de bac";
+            worksheet.Cells[1, 16].Value = "Note de premiere annee";
+            worksheet.Cells[1, 17].Value = "Note de deuxieme annee";
+            worksheet.Cells[1, 18].Value = "Premier Choix";
+            worksheet.Cells[1, 19].Value = "Deuxieme Choix";
+            worksheet.Cells[1, 20].Value = "Troisieme Choix";
+            worksheet.Cells[1, 21].Value = "Filiere affectee";
+            worksheet.Cells[1, 22].Value = "Redoublant";
+
+            //Remplissage des cellules
+            int rowIndex = 2;
+            foreach (var student in students.etudiants.ToList())
+            {
+                //Separation des choix
+                for(int i = 0; i < 3; i++)
+                {
+                    switch (student.Choix.ToCharArray()[i])
+                    {
+                        case 'F':
+                            choixTab[i] = "Informatique";
+                            break;
+                        case 'D':
+                            choixTab[i] = "Industriel";
+                            break;
+                        case 'T':
+                            choixTab[i] = "Reseau et telecom";
+                            break;
+                        case 'P':
+                            choixTab[i] = "Procedes";
+                            break;
+                    }
+                }
+                if (student.idFil != null)
+                {
+                    choixAffecte = students.Filieres.Find(student.idFil).nomFil;
+                    worksheet.Cells[rowIndex, 21].Value = choixAffecte;
+                }
+                else 
+                    worksheet.Cells[rowIndex, 21].Value = null;
+
+                worksheet.Cells[rowIndex, 1].Value = student.nom;
+                worksheet.Cells[rowIndex, 2].Value = student.prenom;
+                worksheet.Cells[rowIndex, 3].Value = student.cin;
+                worksheet.Cells[rowIndex, 4].Value = student.cne;
+                worksheet.Cells[rowIndex, 5].Value = student.email;
+                worksheet.Cells[rowIndex, 6].Value = student.dateNaiss;
+                worksheet.Cells[rowIndex, 7].Value = student.lieuNaiss;
+                worksheet.Cells[rowIndex, 8].Value = student.nationalite;
+                worksheet.Cells[rowIndex, 9].Value = student.gsm;
+                worksheet.Cells[rowIndex, 10].Value = student.phone;
+                worksheet.Cells[rowIndex, 11].Value = student.address;
+                worksheet.Cells[rowIndex, 12].Value = student.ville;
+                worksheet.Cells[rowIndex, 13].Value = student.typeBac;
+                worksheet.Cells[rowIndex, 14].Value = student.anneeBac;
+                worksheet.Cells[rowIndex, 15].Value = student.noteBac;
+                worksheet.Cells[rowIndex, 16].Value = student.noteFstYear;
+                worksheet.Cells[rowIndex, 17].Value = student.noteSndYear;
+                worksheet.Cells[rowIndex, 18].Value = choixTab[0];
+                worksheet.Cells[rowIndex, 19].Value = choixTab[1];
+                worksheet.Cells[rowIndex, 20].Value = choixTab[2];
+                worksheet.Cells[rowIndex, 22].Value = student.redoubler;
+                rowIndex++;
+               
+
+            }
+
+            //Envoi du fichier dans par http
+            using (var memoryStream = new MemoryStream())
+            {
+                Response.Clear();
+                Response.ClearContent();
+                Response.ContentType ="application/vnd.openxmlformats-officedocument.spreadsheetml.sheet";
+                Response.AddHeader("content-disposition", "attachment; filename=testing.xlsx");
+                excel.SaveAs(memoryStream);
+                memoryStream.WriteTo(Response.OutputStream);
+                Response.Flush();
+                Response.Clear();
+                Response.End();
+            }
+            
+
+
+            }
+
+        ///fonction pour les info
+        [HttpGet]
+        public void ExportExcelAttributed()
+        {
+            //Données à exporter
+            EtudiantContext students = new EtudiantContext();
+
+            //Création de la page excel
+            ExcelPackage excel = new ExcelPackage();
+            ExcelWorksheet worksheet = excel.Workbook.Worksheets.Add("Sheet1");
+
+            //Style des noms de colonnes
+            worksheet.Row(1).Style.Font.Bold = true;
+            worksheet.Row(1).Style.HorizontalAlignment = ExcelHorizontalAlignment.Center;
+
+            //Noms des colonnes
+            worksheet.Cells[1, 1].Value = "Nom";
+            worksheet.Cells[1, 2].Value = "Prenom";
+            worksheet.Cells[1, 3].Value = "CIN";
+            worksheet.Cells[1, 4].Value = "CNE";
+            worksheet.Cells[1, 5].Value = "Choix";
+            worksheet.Cells[1, 6].Value = "Filiere affectee";
+
+            //Remplissage des cellules
+            int rowIndex = 2;
+            foreach (var student in students.etudiants.ToList())
+            {
+                worksheet.Cells[rowIndex, 1].Value = student.nom;
+                worksheet.Cells[rowIndex, 2].Value = student.prenom;
+                worksheet.Cells[rowIndex, 3].Value = student.cin;
+                worksheet.Cells[rowIndex, 4].Value = student.cne;
+                
+                worksheet.Cells[rowIndex, 5].Value = student.choix;
+                if (student.idFil==1)
+                {
+                    worksheet.Cells[rowIndex, 6].Value = "Info";
+
+                }
+
+                if (student.idFil == 2)
+                {
+                    worksheet.Cells[rowIndex, 6].Value = "GTR";
+
+                }
+                if (student.idFil == 3)
+                {
+                    worksheet.Cells[rowIndex, 6].Value = "Indus";
+
+                }
+                if (student.idFil == 4)
+                {
+                    worksheet.Cells[rowIndex, 6].Value = "GPMC";
+
+                }
+                rowIndex++;
+
+
+            }
+
+            //Envoi du fichier dans par http
+            using (var memoryStream = new MemoryStream())
+            {
+                Response.Clear();
+                Response.ClearContent();
+                Response.ContentType = "application/vnd.openxmlformats-officedocument.spreadsheetml.sheet";
+                Response.AddHeader("content-disposition", "attachment; filename=listeAttribution.xlsx");
+                excel.SaveAs(memoryStream);
+                memoryStream.WriteTo(Response.OutputStream);
+                Response.Flush();
+                Response.Clear();
+                Response.End();
+            }
+
+
+
+        }
+
+
+        public ActionResult Visualiser()
+        {
+            ViewBag.Current = "visualiser";
+            if (UserValide.IsValid() && UserValide.IsAdmin())
+            {
+                EtudiantContext db = new EtudiantContext();
+
+                return View(db.etudiants.ToList());
+            }
+            else
+                return RedirectToAction("Authentification", "User");
+        }
+        //pour Imprimer le pdf
+
+        public ActionResult PrintConsultation()
+        {
+            EtudiantContext db = new EtudiantContext();
+
+            var q = new ViewAsPdf("ImprimerEtudiant", db.etudiants.ToList());
+       
+            if (UserValide.IsValid() && UserValide.IsAdmin())
+            {
+                return q;
+            }
+            else
+            {
+                return RedirectToAction("Authentification", "User");
+            }
+        }
+
+}
 }

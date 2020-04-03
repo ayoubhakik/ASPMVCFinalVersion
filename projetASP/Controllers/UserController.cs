@@ -24,7 +24,16 @@ namespace projetASP.Controllers
                 return View();
 
         }
+        public ActionResult Resultat()
+        {
+            EtudiantContext db = new EtudiantContext();
+            if (db.settings.FirstOrDefault().Attributted)
+            {
+                return View(db.etudiants.OrderBy(e => e.nom).ToList());
+            }
+            return RedirectToAction("Authentification1");
 
+        }
         [HttpPost]
         public ActionResult Authentification(Departement login, string ReturnUrl = "")
         {
@@ -76,7 +85,11 @@ namespace projetASP.Controllers
     [HttpGet]
     public ActionResult Authentification1()
     {
-        if (UserValide.IsValid())
+            EtudiantContext db = new EtudiantContext();
+            ViewBag.Delai = db.settings.FirstOrDefault().Delai;
+            ViewBag.Attributted = db.settings.FirstOrDefault().Attributted;
+            ViewBag.DatedeRappel = db.settings.FirstOrDefault().DatedeRappel;
+            if (UserValide.IsValid())
         {
 
             return RedirectToAction("Index", "Etudiant");
@@ -97,6 +110,9 @@ namespace projetASP.Controllers
                 string cin = Request["cin"];
                 string mdp = Request["mdp"];
                 EtudiantContext dbset = new EtudiantContext();
+                ViewBag.Delai = dbset.settings.FirstOrDefault().Delai;
+                ViewBag.Attributted = dbset.settings.FirstOrDefault().Attributted;
+                ViewBag.DatedeRappel = dbset.settings.FirstOrDefault().DatedeRappel;
                 var userLogin = (from data in dbset.etudiants
                                  where data.cne == cne && data.password == mdp && data.cin == cin && data.Validated == true
                                  select data).FirstOrDefault();

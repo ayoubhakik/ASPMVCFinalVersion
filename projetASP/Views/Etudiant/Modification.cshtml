@@ -17,8 +17,8 @@
 
 </head>
 <body>
-    <div class="content">
-        <div class="container-fluid">
+    <div class="content ">
+        <div class="container-fluid col-md-12 col-sm-12">
             <div class="row">
                 <div class="col-md-8 " style="margin:auto;">
 
@@ -153,7 +153,7 @@
                                         </div>
                                     </li>
                                     @{
-                                        if (Model.choix != null)
+                                        if (Model.Choix != null)
                                         {
 
 
@@ -181,14 +181,14 @@
                                                                     <label id="label_1_row_0"> G&eacutenie Informatique </label>
                                                                 </th>
                                                                 <td style="text-align:center" class="form-matrix-values">
-                                                                    <input id="F1" type="radio" name="choix1" value="F" onClick=desactivefilieres() @(Model.choix.Substring(0, 1) == "F" ? "Checked" : "") required=required />
+                                                                    <input id="F1" type="radio" name="choix1" value="F" onClick=desactivefilieres() @(Model.Choix.Substring(0, 1) == "F" ? "Checked" : "") required=required />
                                                                 </td>
                                                                 <td style="text-align:center" class="form-matrix-values">
-                                                                    <input id="F2" type="radio" name="choix2" value="F" onClick=desactivefilieres() @(Model.choix.Substring(1, 1) == "F" ? "Checked" : "") required=required />
+                                                                    <input id="F2" type="radio" name="choix2" value="F" onClick=desactivefilieres() @(Model.Choix.Substring(1, 1) == "F" ? "Checked" : "") required=required />
 
                                                                 </td>
                                                                 <td style="text-align:center" class="form-matrix-values">
-                                                                    <input id="F3" type="radio" name="choix3" value="F" onClick=desactivefilieres() @(Model.choix.Substring(2, 1) == "F" ? "Checked" : "") required=required />
+                                                                    <input id="F3" type="radio" name="choix3" value="F" onClick=desactivefilieres() @(Model.Choix.Substring(2, 1) == "F" ? "Checked" : "") required=required />
                                                                 </td>
                                                             </tr>
                                                             <tr role="group" aria-labelledby="label_1 label_1_row_1">
@@ -196,13 +196,13 @@
                                                                     <label id="label_1_row_1"> G&eacutenie T&eacutel&eacutecommunication et R&eacuteseaux </label>
                                                                 </th>
                                                                 <td style="text-align:center" class="form-matrix-values">
-                                                                    <input id="T1" type="radio" name="choix1" value="T" onClick=desactivefilieres() @(Model.choix.Substring(0, 1) == "T" ? "Checked" : "") required=required />
+                                                                    <input id="T1" type="radio" name="choix1" value="T" onClick=desactivefilieres() @(Model.Choix.Substring(0, 1) == "T" ? "Checked" : "") required=required />
                                                                 </td>
                                                                 <td style="text-align:center" class="form-matrix-values">
-                                                                    <input id="T2" type="radio" name="choix2" value="T" onClick=desactivefilieres() @(Model.choix.Substring(1, 1) == "T" ? "Checked" : "") required=required />
+                                                                    <input id="T2" type="radio" name="choix2" value="T" onClick=desactivefilieres() @(Model.Choix.Substring(1, 1) == "T" ? "Checked" : "") required=required />
                                                                 </td>
                                                                 <td style="text-align:center" class="form-matrix-values">
-                                                                    <input id="T3" type="radio" name="choix3" value="T" onClick=desactivefilieres() @(Model.choix.Substring(2, 1) == "T" ? "Checked" : "") required=required />
+                                                                    <input id="T3" type="radio" name="choix3" value="T" onClick=desactivefilieres() @(Model.Choix.Substring(2, 1) == "T" ? "Checked" : "") required=required />
                                                                 </td>
                                                             </tr>
                                                             <tr role="group" aria-labelledby="label_1 label_1_row_2">
@@ -210,13 +210,13 @@
                                                                     <label id="label_1_row_2"> G&eacutenie Indusielle </label>
                                                                 </th>
                                                                 <td style="text-align:center" class="form-matrix-values">
-                                                                    <input id="D1" type="radio" name="choix1" value="D" onClick=desactivefilieres() @(Model.choix.Substring(0, 1) == "D" ? "Checked" : "") required=required />
+                                                                    <input id="D1" type="radio" name="choix1" value="D" onClick=desactivefilieres() @(Model.Choix.Substring(0, 1) == "D" ? "Checked" : "") required=required />
                                                                 </td>
                                                                 <td style="text-align:center" class="form-matrix-values">
-                                                                    <input id="D2" type="radio" name="choix2" value="D" onClick=desactivefilieres() @(Model.choix.Substring(1, 1) == "D" ? "Checked" : "") required=required />
+                                                                    <input id="D2" type="radio" name="choix2" value="D" onClick=desactivefilieres() @(Model.Choix.Substring(1, 1) == "D" ? "Checked" : "") required=required />
                                                                 </td>
                                                                 <td style="text-align:center" class="form-matrix-values">
-                                                                    <input id="D3" type="radio" name="choix3" value="D" onClick=desactivefilieres() @(Model.choix.Substring(2, 1) == "D" ? "Checked" : "") required=required />
+                                                                    <input id="D3" type="radio" name="choix3" value="D" onClick=desactivefilieres() @(Model.Choix.Substring(2, 1) == "D" ? "Checked" : "") required=required />
                                                                 </td>
                                                             </tr>
                                                             <tr role="group" aria-labelledby="label_1 label_1_row_3">
@@ -224,13 +224,13 @@
                                                                     <label id="label_1_row_3"> G&eacutenie Proc&eacuted&eacute et M.C </label>
                                                                 </th>
                                                                 <td style="text-align:center" class="form-matrix-values">
-                                                                    <input id="P1" type="radio" name="choix1" value="P" onClick=desactivefilieres() @(Model.choix.Substring(0, 1) == "P" ? "Checked" : "") required=required />
+                                                                    <input id="P1" type="radio" name="choix1" value="P" onClick=desactivefilieres() @(Model.Choix.Substring(0, 1) == "P" ? "Checked" : "") required=required />
                                                                 </td>
                                                                 <td style="text-align:center" class="form-matrix-values">
-                                                                    <input id="P2" type="radio" name="choix2" value="P" onClick=desactivefilieres() @(Model.choix.Substring(1, 1) == "P" ? "Checked" : "") required=required />
+                                                                    <input id="P2" type="radio" name="choix2" value="P" onClick=desactivefilieres() @(Model.Choix.Substring(1, 1) == "P" ? "Checked" : "") required=required />
                                                                 </td>
                                                                 <td style="text-align:center" class="form-matrix-values">
-                                                                    <input id="P3" type="radio" name="choix3" value="P" onClick=desactivefilieres() @(Model.choix.Substring(2, 1) == "P" ? "Checked" : "") required=required />
+                                                                    <input id="P3" type="radio" name="choix3" value="P" onClick=desactivefilieres() @(Model.Choix.Substring(2, 1) == "P" ? "Checked" : "") required=required />
                                                                 </td>
                                                             </tr>
                                                         </tbody>
@@ -242,7 +242,7 @@
                                     }
                                     <li class="form-line" data-type="control_button" id="id_2">
                                         <div id="cid_2" class="form-input-wide">
-                                            <div style="margin-left:250px" data-align="auto" class="form-buttons-wrapper">
+                                            <div style="margin-left:250px" data-align="auto" class="form-buttons-wrapper ">
                                                 <button id="input_2" name="Update" type="submit" class="form-submit-button form-submit-button-simple_black" data-component="button" data-content="">
                                                     Modifier
                                                 </button>

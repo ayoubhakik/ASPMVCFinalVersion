@@ -59,21 +59,21 @@
     </style>
 </head>
 <body id="thisone">
-
-    <br />
-    <br />
-    <br />
-    <br />
-    <div id="circle1">
-    <div class="circle"></div>
-    <div class="circle"></div>
-    <div class="circle"></div>
-    <div class="circle"></div>
+    <div class="col-lg-12 col-md-12">
+        <br />
+        <br />
+        <br />
+        <br />
+        <div id="circle1">
+            <div class="circle"></div>
+            <div class="circle"></div>
+            <div class="circle"></div>
+            <div class="circle"></div>
         </div>
-    <a class="button" href="#popup" style="top:200px" >Importer des étudiants</a>
-    <div class="popup" id="popup">
-        <div class="popup-inner">
-            <div class="popup__import">
+        <a class="button" href="#popup" style="top:200px;">Importer des étudiants</a>
+        <div class="popup" id="popup">
+            <div class="popup-inner  col-lg-8 col-md-10 col-sm-12 col-xs-12">
+                <div class="popup__import">
 
                 @using (Html.BeginForm("ImporterEtudiantExcel", "Departement", FormMethod.Post, new { @class = "form-style-7", enctype = "multipart/form-data" }))
                 {
@@ -81,56 +81,57 @@
                         
                             <i class="material-icons">view_module</i>
                             Importer les Etudiants
-                        
-
-                    </h3>
-                    <br /><br />
-
-                    <ul>
-
-                        <li >
-                            <div class="text">
-                                <span id="text-description">
-                                    La departement doit charger un fichier EXCEL qui contient 4 colones (nom, prenom, cin, cne) :<br />
-                                    <br />
-
-                                    1-  Choisir le fichier.<br />
-                                    <br />
-                                    2-  Cliquer sur importer pour charger les donnees dans la Database.<br />
-                                </span>
-                            </div>
-                        </li>
-                        <li>
-                            <input class="excelfile" type="file" name="excelfile" placeholder="File.xls" />
-                            <br />
-                        </li>
-
-                        <li>
-                            @if (ViewBag.errI != null)
-                            {
-                            <script>
-                                alert('Probleme dans le fichier, verifier l\'extension')</script>
-                            }
-
-                            @if (ViewBag.err != null)
-                            {
-                                <h1 class="text-danger">Vous avez deja charge les etudiants !</h1>
-                                <input type="submit" class="btn import" value="Importer" hidden/>
-       
-                            }
-                            else
-                            {
-                                <input type="submit" class="btn import" value="Importer" />
-
-                            }
 
 
-                        </li>
-                    </ul>
-                    <a class="popup__close" href="#">X</a>
-                }
+                        </h3>
+                        <br /><br />
+
+                        <ul>
+
+                            <li>
+                                <div class="text">
+                                    <span id="text-description">
+                                        La departement doit charger un fichier EXCEL qui contient 4 colones (nom, prenom, cin, cne) :<br />
+                                        <br />
+
+                                        1-  Choisir le fichier.<br />
+                                        <br />
+                                        2-  Cliquer sur importer pour charger les donnees dans la Database.<br />
+                                    </span>
+                                </div>
+                            </li>
+                            <li>
+                                <input class="excelfile" type="file" name="excelfile" placeholder="File.xls" />
+                                <br />
+                            </li>
+
+                            <li>
+                                @if (ViewBag.errI != null)
+                                {
+                                    <script>
+                                        alert('Probleme dans le fichier, verifier l\'extension')</script>
+                                }
+
+                                @if (ViewBag.err != null)
+                                {
+                                    <h1 class="text-danger">Vous avez deja charge les etudiants !</h1>
+                                    <input type="submit" class="btn import" value="Importer" hidden />
+
+                                }
+                                else
+                                {
+                                    <input type="submit" class="btn import" value="Importer" />
+
+                                }
+
+
+                            </li>
+                        </ul>
+                        <a class="popup__close" href="#">X</a>
+                    }
+                </div>
             </div>
-        </div>
+    </div>
 </body>
 </html>
 
