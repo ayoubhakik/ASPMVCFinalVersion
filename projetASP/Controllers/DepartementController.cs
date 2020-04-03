@@ -124,8 +124,9 @@ namespace projetASP.Controllers
                 return RedirectToAction("Authentification", "User");
         }
 
-        public ActionResult Search(string cne)
+        public ActionResult Search(string searchBy,string cne)
         {
+           
             if (UserValide.IsValid() && UserValide.IsAdmin())
             {
                 EtudiantContext db = new EtudiantContext();
@@ -135,18 +136,19 @@ namespace projetASP.Controllers
                     foreach (var item in db.etudiants.Distinct().ToArray())
                 {
                     
-                        if (item.cne == cne)
+                    
+                        if (searchBy == "cne")
                         {
                             var etudiants = ( from s in db.etudiants
                                            where s.cne == cne
-                                           select s).SingleOrDefault();
+                                           select s).ToList();
                             count++;
-                            etudiant.Add(etudiants);
+                            etudiant=etudiants;
                           
                         
 
                         }
-                        if (item.nom == cne)
+                        if (searchBy == "Name")
                         {
                         var etudiants = (from s in db.etudiants
                                          where s.nom == cne
@@ -155,14 +157,14 @@ namespace projetASP.Controllers
                         etudiant = etudiants;
                         count++;
                     }
-                        else if (item.cin == cne)
+                        else if (searchBy == "cin")
                         {
 
                             var etudiants =( from s in db.etudiants
                                             where s.cin == cne
-                                            select s).SingleOrDefault();
+                                            select s).ToList();
                             count++;
-                            etudiant.Add(etudiants);
+                            etudiant=etudiants;
                             
 
                         }
