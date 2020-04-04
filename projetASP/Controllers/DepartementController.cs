@@ -350,48 +350,17 @@ namespace projetASP.Controllers
                         var workSheet = currentSheet.First();
                         var noOfCol = workSheet.Dimension.End.Column;
                         var noOfRow = workSheet.Dimension.End.Row;
-                        Console.WriteLine("before entering ......");
+
                         for (int rowIterator = 2; rowIterator <= noOfRow; rowIterator++)
                         {
-                            Console.WriteLine(" entering ......");
                             Etudiant e = new Etudiant();
                             e.nom = workSheet.Cells[rowIterator, 1].Value.ToString();
-
                             e.prenom = workSheet.Cells[rowIterator, 2].Value.ToString();
-
-                            //e.nationalite = workSheet.Cells[rowIterator, 3].Value.ToString();
-
                             e.cin = workSheet.Cells[rowIterator, 3].Value.ToString();
-
                             e.cne = workSheet.Cells[rowIterator, 4].Value.ToString();
-                            /*
-                            e.email = workSheet.Cells[rowIterator, 6].Value.ToString();
-
-                            e.phone = workSheet.Cells[rowIterator, 7].Value.ToString();
-
-
-                            e.gsm = workSheet.Cells[rowIterator, 8].Value.ToString();
-
-                            e.address = workSheet.Cells[rowIterator, 9].Value.ToString();
-
-                            e.ville = workSheet.Cells[rowIterator,10].Value.ToString();
-
-
-                            e.typeBac = workSheet.Cells[rowIterator, 11].Value.ToString();*/
-
-                            //e.anneeBac = Convert.ToDateTime(DateTime.Now);
-
-                            //e.anneeBac = Convert.ToDateTime(DateTime.Now);
-
                             e.dateNaiss = Convert.ToDateTime(DateTime.Now);
-                            /*
-                            e.noteBac = Convert.ToDouble(workSheet.Cells[rowIterator, 13].Value);
-                            e.mentionBac = workSheet.Cells[rowIterator, 14].Value.ToString();
-
-                            e.lieuNaiss = workSheet.Cells[rowIterator, 16].Value.ToString();
-                            */
+                            
                             db.etudiants.Add(e);
-                            Console.WriteLine(" out ......");
 
                         }
                         db.settings.First().importEtudiant = true;
@@ -524,63 +493,80 @@ namespace projetASP.Controllers
                     
 
                 }
-
-                //il faut envoyer les nbr par defaut pour les textboxes
-                //il faut classer les filieres par nbr de demande
-                ////////partie statistique
-
-                //variable pour les nombre totale et le reste qui n'a pas choisi les filieres
-                int nbrTotal =total;
-
-                
                 //initialisation des Maxs
                 int maxInfo = total / 4;
                 int maxGtr = total / 4;
                 int maxIndus = total / 4;
                 int maxGpmc = total / 4;
 
-                int diff =total%4;
-                Boolean symbol1 = false;
-                Boolean symbol2 = false;
-                Boolean symbol3 = false;
-                Boolean symbol4 = false;
-                Boolean taken = false;
-                for (int i = 0; i < diff; i++)
+                int diff = total % 4;
+                //diviser le diff partout
+                Dictionary<string, int> dr = new Dictionary<string, int>();
+                dr.Add("info", info);
+                dr.Add("gtr", gtr);
+                dr.Add("indus", indus);
+                dr.Add("gpmc", gpmc);
+
+
+                //creer une copie de dictionnaire
+                Dictionary<string, int> copyDr = new Dictionary<string, int>();
+                for (int i = 0; i < dr.Count; i++)
                 {
-                    if (info >= indus && info >= gtr && info >= gpmc && !symbol1 && !taken)
-                    {
-                        symbol1 = true;
-                        taken = true;
-                        maxInfo += 1;
-                    }
-                    if (indus >= info && indus >= gtr && indus >= gpmc && !symbol2 &&!taken)
-                    {
-                        symbol2 = true;
-                        taken = true;
-
-                        maxIndus += 1;
-                    }
-                    if (gpmc >= indus && gpmc >= gtr && gpmc >= indus && !symbol3 && !taken)
-                    {
-                        symbol3 = true;
-                        taken = true;
-
-                        maxGpmc += 1; 
-                    }
-                    if (gtr >= indus && gtr >= gpmc && gtr >= info && !symbol4 && !taken)
-                    {
-                        taken = true;
-
-                        symbol4 = true;
-                        maxGtr += 1; break;
-                    }
-                   taken = false;
+                    copyDr.Add(dr.ElementAt(i).Key, dr.ElementAt(i).Value);
                 }
+                int index1 = 0;
+                while (index1 < diff)
+                {
+                    switch (dr.Keys.Max())
+                    {
+                        case "info":
+                            maxInfo++;
+                            index1++;
+                            dr.Remove("info"); break;
+                        case "gtr":
+                            maxGtr++;
+                            index1++;
+                            dr.Remove("indus"); break;
+                        case "indus":
+                            maxIndus++;
+                            index1++;
+                            dr.Remove("gpmc"); break;
+                        case "gpmc":
+                            maxGpmc++;
+                            index1++;
+                            dr.Remove("gtr"); break;
+                        default: break;
+                    }
 
-                ViewBag.info = maxInfo;
-                ViewBag.gtr = maxGtr;
-                ViewBag.gpmc = maxGpmc;
-                ViewBag.indus = maxIndus;
+                }
+                if (db.settings.FirstOrDefault().Attributted)
+                {
+                    int i1 = 0, i2 = 0, i3 = 0, i4 = 0;
+                    for (int i = 0; i < db.etudiants.ToList().Count; i++)
+                    {
+                        if (!db.etudiants.ToList()[i].Redoubler)
+                        {
+                            if (db.etudiants.ToList()[i].idFil == 1) i1++;
+                            if (db.etudiants.ToList()[i].idFil == 2) i2++;
+                            if (db.etudiants.ToList()[i].idFil == 3) i3++;
+                            if (db.etudiants.ToList()[i].idFil == 4) i4++;
+                        }
+                        
+
+                    }
+                    ViewBag.info = i1;
+                    ViewBag.gtr = i2;
+                    ViewBag.indus = i3;
+                    ViewBag.gpmc = i4;
+                }
+                else
+                {
+                    ViewBag.info = maxInfo;
+                    ViewBag.gtr = maxGtr;
+                    ViewBag.indus = maxIndus;
+                    ViewBag.gpmc = maxGpmc;
+                }
+                    
                 //list =list.OrderBy(e => (e.noteFstYear+e.noteSndYear)/2);
                 if (db.settings.FirstOrDefault().importNote)
                 {
@@ -603,6 +589,8 @@ namespace projetASP.Controllers
                 EtudiantContext db = new EtudiantContext();
                 //return a  list sorted in a desendent way
                 List<Etudiant> list = db.etudiants.OrderByDescending(e => (e.noteFstYear + e.noteSndYear) / 2).ToList();
+
+                //calculer le nbr total sans les etudiants redoublants
                 int total = 0;
                 for (int i = 0; i < db.etudiants.ToList().Count; i++)
                 {
@@ -611,18 +599,14 @@ namespace projetASP.Controllers
                         total++;
                     }
                 }
+                //initialiser les max
                 int maxInfo = total / 4;
                 int maxGtr = total / 4;
                 int maxIndus = total / 4;
                 int maxGpmc = total / 4;
-
-                int diff = total % 4;
-                Boolean symbol1 = false;
-                Boolean symbol2 = false;
-                Boolean symbol3 = false;
-                Boolean symbol4 = false;
-                Boolean taken = false;
                 int info = 0, indus = 0, gpmc = 0, gtr = 0;
+                int diff = total % 4;
+            
                 for (int i = 0; i < db.etudiants.ToList().Count; i++)
                 {
                     if (!db.etudiants.ToList()[i].Redoubler && db.etudiants.ToList()[i].Validated)
@@ -646,52 +630,52 @@ namespace projetASP.Controllers
                             indus++;
                         }
                     }
-
-
                 }
 
-                //il faut envoyer les nbr par defaut pour les textboxes
-                //il faut classer les filieres par nbr de demande
-                ////////partie statistique
+                //diviser le diff partout
+                Dictionary<string, int> dr = new Dictionary<string, int>();
+                dr.Add("info",info);
+                dr.Add("gpmc",gpmc);
+                dr.Add("gtr",gtr);
+                dr.Add("indus",indus);
 
-                //variable pour les nombre totale et le reste qui n'a pas choisi les filieres
-                int nbrTotal = total;
+                //creer une copie de dictionnaire
+                Dictionary<string, int> copyDr = new Dictionary<string, int>();
 
-
-                //initialisation des Maxs
-
-                for (int i = 0; i < diff; i++)
+                for (int i=0;i<dr.Count;i++)
                 {
-                    if (info >= indus && info >= gtr && info >= gpmc && !symbol1 && !taken)
-                    {
-                        symbol1 = true;
-                        taken = true;
-                        maxInfo += 1;
-                    }
-                    if (indus >= info && indus >= gtr && indus >= gpmc && !symbol2 && !taken)
-                    {
-                        symbol2 = true;
-                        taken = true;
-
-                        maxIndus += 1;
-                    }
-                    if (gpmc >= indus && gpmc >= gtr && gpmc >= indus && !symbol3 && !taken)
-                    {
-                        symbol3 = true;
-                        taken = true;
-
-                        maxGpmc += 1;
-                    }
-                    if (gtr >= indus && gtr >= gpmc && gtr >= info && !symbol4 && !taken)
-                    {
-                        taken = true;
-
-                        symbol4 = true;
-                        maxGtr += 1; break;
-                    }
-                    taken = false;
+                    copyDr.Add(dr.ElementAt(i).Key, dr.ElementAt(i).Value);
                 }
-
+                int index1 = 0;
+                while (index1 < diff)
+                {
+                    switch (copyDr.Keys.Max())
+                    {
+                        case "info":
+                            maxInfo++;
+                            index1++;
+                            copyDr.Remove("info"); break;
+                        case "indus":
+                            maxIndus++;
+                            index1++;
+                            copyDr.Remove("indus"); break;
+                        case "gpmc":
+                            maxGtr++;
+                            index1++;
+                            copyDr.Remove("gpmc"); break;
+                        case "gtr":
+                            maxGpmc++;
+                            index1++;
+                            copyDr.Remove("gtr"); break;
+                        default:break;
+                    }
+                    
+                }
+                copyDr.Clear();
+                for (int i = 0; i < dr.Count; i++)
+                {
+                    copyDr.Add(dr.ElementAt(i).Key, dr.ElementAt(i).Value);
+                }
                 //changer les maxs si la departement a saisi des valeurs
                 if (infoMax!=null && indusMax != null && gpmcMax != null && gtrMax != null)
                 {
@@ -715,13 +699,6 @@ namespace projetASP.Controllers
                     }
 
                 }
-                
-                
-
-
-
-
-
 
                 int indexInfo = 0;
                 int indexGtr = 0;
@@ -782,62 +759,99 @@ namespace projetASP.Controllers
                                         indexGpmc++; break;
                                     }
                                 }
+                                //si l'etudiant est plac'e dans une filiere en va sortir de la boucle
                                 if (choosen)
                                 {
                                     j = 3;
                                 }
+                                //si l'etudiant n'est pas place dans une filiere alors (trois filiere qu il a choisi sont pleins), il va prendre une place dans la filiere disponible
                                 if (!choosen && j == 2)
                                 {
-                                    list[i].idFil = 4;
-                                    choosen = true;
-                                    indexGpmc++; break;
+                                    if (indexInfo<maxInfo)
+                                    {
+                                        list[i].idFil = 1;
+                                        choosen = true;
+                                        indexGpmc++; break;
+                                    }
+                                    if (indexGtr<maxGtr)
+                                    {
+                                        list[i].idFil = 2;
+                                        choosen = true;
+                                        indexGtr++; break;
+                                    }
+                                    if (indexIndus <maxIndus)
+                                    {
+                                        list[i].idFil = 3;
+                                        choosen = true;
+                                        indexIndus++; break;
+                                    }
+                                    if (indexGpmc <maxGpmc)
+                                    {
+                                        list[i].idFil = 4;
+                                        choosen = true;
+                                        indexGpmc++; break;
+                                    }
                                 }
                             }
                         }
                         else
                         {
-                            taken = false;
-                            if (info >= indus && info >= gtr && info >= gpmc &&  !taken && (indexInfo < maxInfo))
+                            Boolean choosen=false;
+                            while (!choosen)
                             {
-                                taken = true;
-                                list[i].idFil = 1;
-                                indexInfo += 1;
+                                switch (copyDr.Keys.Max())
+                                {
+                                    case "info":
+                                        if (indexInfo<maxInfo)
+                                        {
+                                            list[i].idFil = 1;
+                                            choosen = true;
+                                            indexInfo++; break;
+                                        }
+                                        copyDr.Remove("info");
+                                        break;
+                                    case "gtr":
+                                        if (indexGtr < maxGtr)
+                                        {
+                                            list[i].idFil = 2;
+                                            choosen = true;
+                                            indexGtr++; break;
+                                        }
+                                        copyDr.Remove("gtr");
+                                        break;
+                                    case "indus":
+                                        if (indexIndus < maxIndus)
+                                        {
+                                            list[i].idFil = 3;
+                                            choosen = true;
+                                            indexIndus++; break;
+                                        }
+                                        copyDr.Remove("indus");
+                                        break;
+                                    case "gpmc":
+                                        if (indexGpmc < maxGpmc)
+                                        {
+                                            list[i].idFil = 4;
+                                            choosen = true;
+                                            indexGpmc++; break;
+                                        }
+                                        copyDr.Remove("gpmc");
+                                        break;
+                                }
                             }
-                            if (indus >= info  && indus >= gtr && indus >= gpmc && !taken && (indexIndus < maxIndus))
+                            copyDr.Clear();
+                            for (int j = 0; j < dr.Count; j++)
                             {
-                                taken = true;
-                                list[i].idFil = 3;
-                                indexIndus += 1;
-                            }
-                            if (gtr >= indus && gtr >= info && gtr >= gpmc && !taken && (indexGtr < maxGtr))
-                            {
-                                taken = true;
-                                list[i].idFil = 2;
-                                indexGtr += 1;
-                            }
-                            if (gpmc >= indus && gpmc >= gtr && gpmc >= info && !taken && (indexGpmc < maxGpmc))
-                            {
-                                taken = true;
-                                list[i].idFil = 4;
-                                indexGpmc += 1;
+                                copyDr.Add(dr.ElementAt(j).Key, dr.ElementAt(j).Value);
                             }
                         }
-
-
-
                     }
-
-
-
                 }
 
-                //list =list.OrderBy(e => (e.noteFstYear+e.noteSndYear)/2);
-
                 db.settings.First().Attributted = true;
-                //envoi d'un msg qui contient la filiere attribuer pour tous chaque etudiants 
+                //envoi d'un msg qui contient la filiere attribuer pour  chaque etudiant
                 db.SaveChanges();
                 EnvoyerLesFilieres();
-
                 return RedirectToAction("AttributionFiliere");
             }
             else
@@ -853,70 +867,61 @@ namespace projetASP.Controllers
                 //essayons de retourner tous les etudiants
                 EtudiantContext db = new EtudiantContext();
                 List<Etudiant> list = db.etudiants.ToList();
-                //initialisation des compteurs des filieres
-                int info = 0, indus = 0, gtr = 0, gpmc = 0;
+                int total = 0;
+                int reste = 0;
 
-                //variable pour les nombre totale et le reste qui n'a pas choisi les filieres
-                int nbrTotal = list.Count, nbrReste = 0;
-
-                for (int i = 0; i < nbrTotal; i++)
+                for (int i = 0; i < db.etudiants.ToList().Count; i++)
                 {
-
-                    if (!list[i].Redoubler)
+                    if (!db.etudiants.ToList()[i].Redoubler)
                     {
-                        if (!list[i].Validated)
-                        {
-
-                            //un etudiant avec null dans choix alors on va l'es ajouter dans le reste
-                            nbrReste++;
-                        }
-                        //sinon on va traiter les choix comme ca
-                        else
-                        {
-
-                            char[] chiffr = (list[i].Choix).ToCharArray();
-
-                            if (chiffr[0] == 'F')
-                            {
-                                info++;
-                            }
-                            if (chiffr[0] == 'P')
-                            {
-                                gpmc++;
-                            }
-                            if (chiffr[0] == 'T')
-                            {
-                                gtr++;
-                            }
-                            if (chiffr[0] == 'D')
-                            {
-                                indus++;
-                            }
-                        }
-
+                        total++;
                     }
-                    else
+                    if (!db.etudiants.ToList()[i].Validated && !db.etudiants.ToList()[i].Redoubler)
                     {
-                        nbrTotal--;
+                        reste++;
                     }
-
-
-
-
                 }
-                ViewBag.nbrTotal = nbrTotal;
-                ViewBag.nbrReste = nbrReste;
+                //initialiser les max
+                int maxInfo = total / 4;
+                int maxGtr = total / 4;
+                int maxIndus = total / 4;
+                int maxGpmc = total / 4;
+                int info = 0, indus = 0, gpmc = 0, gtr = 0;
+                int diff = total % 4;
+
+                for (int i = 0; i < db.etudiants.ToList().Count; i++)
+                {
+                    if (!db.etudiants.ToList()[i].Redoubler && db.etudiants.ToList()[i].Validated)
+                    {
+                        char[] chiffr = (list[i].Choix).ToCharArray();
+
+                        if (chiffr[0] == 'F')
+                        {
+                            info++;
+                        }
+                        if (chiffr[0] == 'P')
+                        {
+                            gpmc++;
+                        }
+                        if (chiffr[0] == 'T')
+                        {
+                            gtr++;
+                        }
+                        if (chiffr[0] == 'D')
+                        {
+                            indus++;
+                        }
+                    }
+                }
+                ViewBag.nbrTotal = total;
+
+                ViewBag.nbrReste = reste;
                 ViewBag.info = info;
                 ViewBag.gtr = gtr;
                 ViewBag.gpmc = gpmc;
                 ViewBag.indus = indus;
                 //les pourcentages
-                ViewBag.nbrTotalP = Convert.ToDouble(nbrTotal) / Convert.ToDouble(nbrTotal) * 100;
-                ViewBag.nbrResteP = Convert.ToDouble(nbrReste) / Convert.ToDouble(nbrTotal) * 100;
-                ViewBag.infoP = Convert.ToDouble(info) / Convert.ToDouble(nbrTotal) * 100;
-                ViewBag.gtrP = Convert.ToDouble(gtr) / Convert.ToDouble(nbrTotal) * 100;
-                ViewBag.gpmcP = Convert.ToDouble(gpmc) / Convert.ToDouble(nbrTotal) * 100;
-                ViewBag.indusP = Convert.ToDouble(indus) / Convert.ToDouble(nbrTotal) * 100;
+                
                 return View();
             }
             else
@@ -1013,10 +1018,14 @@ namespace projetASP.Controllers
             int rowIndex = 2;
             foreach (var student in students.etudiants.ToList())
             {
-                worksheet.Cells[rowIndex, 1].Value = student.nom;
-                worksheet.Cells[rowIndex, 2].Value = student.prenom;
-                worksheet.Cells[rowIndex, 3].Value = student.cin;
-                worksheet.Cells[rowIndex, 4].Value = student.cne;
+                if (!student.Validated)
+                {
+                    worksheet.Cells[rowIndex, 1].Value = student.nom;
+                    worksheet.Cells[rowIndex, 2].Value = student.prenom;
+                    worksheet.Cells[rowIndex, 3].Value = student.cin;
+                    worksheet.Cells[rowIndex, 4].Value = student.cne;
+                }
+                
                 
                 rowIndex++;
 
@@ -1082,23 +1091,27 @@ namespace projetASP.Controllers
             int rowIndex = 2;
             foreach (var student in students.etudiants.ToList())
             {
+
                 //Separation des choix
-                for(int i = 0; i < 3; i++)
+                if (student.Validated)
                 {
-                    switch (student.Choix.ToCharArray()[i])
+                    for (int i = 0; i < 3; i++)
                     {
-                        case 'F':
-                            choixTab[i] = "Informatique";
-                            break;
-                        case 'D':
-                            choixTab[i] = "Industriel";
-                            break;
-                        case 'T':
-                            choixTab[i] = "Reseau et telecom";
-                            break;
-                        case 'P':
-                            choixTab[i] = "Procedes";
-                            break;
+                        switch (student.Choix.ToCharArray()[i])
+                        {
+                            case 'F':
+                                choixTab[i] = "Informatique";
+                                break;
+                            case 'D':
+                                choixTab[i] = "Industriel";
+                                break;
+                            case 'T':
+                                choixTab[i] = "Reseau et telecom";
+                                break;
+                            case 'P':
+                                choixTab[i] = "Procedes";
+                                break;
+                        }
                     }
                 }
                 if (student.idFil != null)
@@ -1129,7 +1142,11 @@ namespace projetASP.Controllers
                 worksheet.Cells[rowIndex, 18].Value = choixTab[0];
                 worksheet.Cells[rowIndex, 19].Value = choixTab[1];
                 worksheet.Cells[rowIndex, 20].Value = choixTab[2];
-                worksheet.Cells[rowIndex, 22].Value = student.redoubler;
+                if (student.Redoubler)
+                    worksheet.Cells[rowIndex, 22].Value = "Oui";
+                worksheet.Cells[rowIndex, 22].Value = "";
+
+
                 rowIndex++;
                
 
