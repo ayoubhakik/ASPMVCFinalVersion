@@ -51,7 +51,7 @@
 </head>
 <body>
     <!-- MultiStep Form -->
-    @if (DateTime.Now <= ViewBag.Delai)
+    @if (DateTime.Now <= ViewBag.DatedeRappel)
     {
         <div class="row justify-content-center form">
             <div class="col-md-6">
@@ -211,7 +211,7 @@
             </div>
         </div>
     }
-    else if (DateTime.Now > ViewBag.Delai)
+    else if (DateTime.Now > ViewBag.DatedeRappel)
     {
         <p style="color:white;text-align:center;font-weight:bold;font-size:45px;position:relative;top:45%;text-shadow:4px 4px #000;">LA DATE A EXPEREE &#128549</p>
     }

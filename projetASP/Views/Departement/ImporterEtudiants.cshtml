@@ -5,9 +5,9 @@
 
 <html>
 <head>
-    <link rel="stylesheet" href="~/Content/css/importation.css"/>
+    <link rel="stylesheet" href="~/Content/css/importation.css" />
     <style>
-       .circle {
+        .circle {
             position: fixed;
             display: block;
         }
@@ -54,8 +54,6 @@
                 top: 50px;
                 background: white;
             }
-  
-  
     </style>
 </head>
 <body id="thisone">
@@ -75,10 +73,10 @@
             <div class="popup-inner  col-lg-8 col-md-10 col-sm-12 col-xs-12">
                 <div class="popup__import">
 
-                @using (Html.BeginForm("ImporterEtudiantExcel", "Departement", FormMethod.Post, new { @class = "form-style-7", enctype = "multipart/form-data" }))
-                {
-                    <h3 style="text-align:center">
-                        
+                    @using (Html.BeginForm("ImporterEtudiantExcel", "Departement", FormMethod.Post, new { @class = "form-style-7", enctype = "multipart/form-data" }))
+                    {
+                        <h3 style="text-align:center">
+
                             <i class="material-icons">view_module</i>
                             Importer les Etudiants
 
@@ -131,16 +129,22 @@
                     }
                 </div>
             </div>
-    </div>
+        </div>
+
+
+        <script type="text/javascript">
+            //auto expand textarea
+            function adjust_textarea(h) {
+                h.style.height = "20px";
+                h.style.height = (h.scrollHeight) + "px";
+            }
+        </script>
+       @if(null != TempData["alertMessage"])
+        {
+        <script type="text/javascript">
+       alert("@TempData["alertMessage"]");
+        </script>
+        }
 </body>
 </html>
-
-    <script type="text/javascript">
-        //auto expand textarea
-        function adjust_textarea(h) {
-            h.style.height = "20px";
-            h.style.height = (h.scrollHeight) + "px";
-        }
-    </script>
-
 

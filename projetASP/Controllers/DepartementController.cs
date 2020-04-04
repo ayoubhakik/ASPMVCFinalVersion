@@ -124,32 +124,32 @@ namespace projetASP.Controllers
                 return RedirectToAction("Authentification", "User");
         }
 
-        public ActionResult Search(string searchBy,string cne)
+        public ActionResult Search(string searchBy, string cne)
         {
-           
+
             if (UserValide.IsValid() && UserValide.IsAdmin())
             {
                 EtudiantContext db = new EtudiantContext();
-                List<Etudiant> etudiant=new List<Etudiant>();
+                List<Etudiant> etudiant = new List<Etudiant>();
                 int count = 0;
-              
-                    foreach (var item in db.etudiants.Distinct().ToArray())
-                {
-                    
-                    
-                        if (searchBy == "cne")
-                        {
-                            var etudiants = ( from s in db.etudiants
-                                           where s.cne == cne
-                                           select s).ToList();
-                            count++;
-                            etudiant=etudiants;
-                          
-                        
 
-                        }
-                        if (searchBy == "Name")
-                        {
+                foreach (var item in db.etudiants.Distinct().ToArray())
+                {
+
+
+                    if (searchBy == "cne")
+                    {
+                        var etudiants = (from s in db.etudiants
+                                         where s.cne == cne
+                                         select s).ToList();
+                        count++;
+                        etudiant = etudiants;
+
+
+
+                    }
+                    if (searchBy == "Name")
+                    {
                         var etudiants = (from s in db.etudiants
                                          where s.nom == cne
                                          select s).ToList();
@@ -157,20 +157,20 @@ namespace projetASP.Controllers
                         etudiant = etudiants;
                         count++;
                     }
-                        else if (searchBy == "cin")
-                        {
+                    else if (searchBy == "cin")
+                    {
 
-                            var etudiants =( from s in db.etudiants
-                                            where s.cin == cne
-                                            select s).ToList();
-                            count++;
-                            etudiant=etudiants;
-                            
+                        var etudiants = (from s in db.etudiants
+                                         where s.cin == cne
+                                         select s).ToList();
+                        count++;
+                        etudiant = etudiants;
 
-                        }
+
                     }
+                }
 
-                
+
                 if (count == 0)
                 {
                     ViewBag.error = true;
@@ -178,7 +178,7 @@ namespace projetASP.Controllers
                 }
                 ViewBag.error = false;
                 return View(etudiant);
-                
+
             }
             else
                 return RedirectToAction("Authentification", "User");
@@ -248,7 +248,7 @@ namespace projetASP.Controllers
 
         public ActionResult Setting()
         {
-            
+
             if (UserValide.IsValid() && UserValide.IsAdmin())
             {
                 EtudiantContext db = new EtudiantContext();
@@ -261,7 +261,7 @@ namespace projetASP.Controllers
             }
             else
                 return RedirectToAction("Authentification", "User");
-          
+
         }
 
         // GET: Departement
@@ -272,8 +272,7 @@ namespace projetASP.Controllers
             if (UserValide.IsValid() && UserValide.IsAdmin())
             {
                 EtudiantContext db = new EtudiantContext();
-                ViewBag.Delai = db.settings.FirstOrDefault().Delai;
-                ViewBag.DatedeRappel = db.settings.FirstOrDefault().DatedeRappel;
+                
 
                 if (dateNotification != null)
                 {
@@ -285,6 +284,8 @@ namespace projetASP.Controllers
                 }
 
                 db.SaveChanges();
+                ViewBag.Delai = db.settings.FirstOrDefault().Delai;
+                ViewBag.DatedeRappel = db.settings.FirstOrDefault().DatedeRappel;
                 ViewBag.Current = "Setting";
                 return View("Setting");
             }
@@ -332,10 +333,13 @@ namespace projetASP.Controllers
                 return RedirectToAction("Authentification", "User");
         }
 
+       
         [HttpPost]
         public ActionResult ImporterEtudiantExcel(HttpPostedFileBase excelFile)
         {
-            if (Request != null)
+            try
+            {
+                if (Request != null)
             {
 
                 EtudiantContext db = new EtudiantContext();
@@ -361,7 +365,7 @@ namespace projetASP.Controllers
                             e.cin = workSheet.Cells[rowIterator, 3].Value.ToString();
                             e.cne = workSheet.Cells[rowIterator, 4].Value.ToString();
                             e.dateNaiss = Convert.ToDateTime(DateTime.Now);
-                            
+
                             db.etudiants.Add(e);
 
                         }
@@ -372,8 +376,9 @@ namespace projetASP.Controllers
                             db.etudiants.ToList()[i].Choix = "FDT";
                         }
                         db.SaveChanges();
+                            return RedirectToAction("Index");
 
-                    }
+                        }
                 }
                 else
                 {
@@ -381,7 +386,14 @@ namespace projetASP.Controllers
                     return View("ImporterEtudiants");
                 }
             }
-            return RedirectToAction("Index");
+        }
+        catch(Exception ex){
+                TempData["alertMessage"] = ex;
+                ViewBag.errI = true;
+                return View("ImporterEtudiants");
+            }
+
+            return View();
             //return View("Index");
         }
 
@@ -406,49 +418,59 @@ namespace projetASP.Controllers
         [HttpPost]
         public ActionResult ImporterNoteExcel(HttpPostedFileBase excelFile)
         {
-            if (Request != null)
+            try
             {
-                EtudiantContext db = new EtudiantContext();
-                HttpPostedFileBase file = Request.Files["excelfile"];
-                if ((file != null) && (file.ContentLength > 0) && !string.IsNullOrEmpty(file.FileName) && (file.FileName.EndsWith("xls") || file.FileName.EndsWith("xlsx")))
+                if (Request != null)
                 {
-                    string fileName = file.FileName;
-                    string fileContentType = file.ContentType;
-                    byte[] fileBytes = new byte[file.ContentLength];
-                    var data = file.InputStream.Read(fileBytes, 0, Convert.ToInt32(file.ContentLength));
-                    using (var package = new ExcelPackage(file.InputStream))
+                    EtudiantContext db = new EtudiantContext();
+                    HttpPostedFileBase file = Request.Files["excelfile"];
+                    if ((file != null) && (file.ContentLength > 0) && !string.IsNullOrEmpty(file.FileName) && (file.FileName.EndsWith("xls") || file.FileName.EndsWith("xlsx")))
                     {
-                        var currentSheet = package.Workbook.Worksheets;
-                        var workSheet = currentSheet.First();
-                        var noOfCol = workSheet.Dimension.End.Column;
-                        var noOfRow = workSheet.Dimension.End.Row;
-                        Console.WriteLine("before entering ......");
-                        for (int rowIterator = 2; rowIterator <= noOfRow; rowIterator++)
+                        string fileName = file.FileName;
+                        string fileContentType = file.ContentType;
+                        byte[] fileBytes = new byte[file.ContentLength];
+                        var data = file.InputStream.Read(fileBytes, 0, Convert.ToInt32(file.ContentLength));
+                        using (var package = new ExcelPackage(file.InputStream))
                         {
-                            Console.WriteLine(" entering ......");
-                            Etudiant e = db.etudiants.Find(workSheet.Cells[rowIterator, 1].Value.ToString());
-                            e.noteFstYear = Convert.ToDouble(workSheet.Cells[rowIterator, 2].Value);
+                            var currentSheet = package.Workbook.Worksheets;
+                            var workSheet = currentSheet.First();
+                            var noOfCol = workSheet.Dimension.End.Column;
+                            var noOfRow = workSheet.Dimension.End.Row;
+                            Console.WriteLine("before entering ......");
+                            for (int rowIterator = 2; rowIterator <= noOfRow; rowIterator++)
+                            {
+                                Console.WriteLine(" entering ......");
+                                Etudiant e = db.etudiants.Find(workSheet.Cells[rowIterator, 1].Value.ToString());
+                                e.noteFstYear = Convert.ToDouble(workSheet.Cells[rowIterator, 2].Value);
 
-                            e.noteSndYear = Convert.ToDouble(workSheet.Cells[rowIterator, 3].Value);
+                                e.noteSndYear = Convert.ToDouble(workSheet.Cells[rowIterator, 3].Value);
 
 
 
-                            //db.etudiants.Add(e);
-                            Console.WriteLine(" out ......");
+                                //db.etudiants.Add(e);
+                                Console.WriteLine(" out ......");
 
+                            }
+                            db.settings.First().importNote = true;
+
+                            db.SaveChanges();
+                            return RedirectToAction("Index");
                         }
-                        db.settings.First().importNote = true;
-
-                        db.SaveChanges();
+                    }
+                    else
+                    {
+                        ViewBag.errI = true;
+                        return View("ImporterNotes");
                     }
                 }
-                else
-                {
-                    ViewBag.errI = true;
-                    return View("ImporterNotes");
-                }
             }
-            return RedirectToAction("Index");
+            catch (Exception ex)
+            {
+                TempData["alertMessage1"] = ex;
+                ViewBag.errI = true;
+                return View("ImporterNotes");
+            }
+            return View();
         }
 
         public ActionResult AttributionFiliere()
