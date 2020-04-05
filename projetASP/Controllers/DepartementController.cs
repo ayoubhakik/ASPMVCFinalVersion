@@ -479,121 +479,125 @@ namespace projetASP.Controllers
             if (UserValide.IsValid() && UserValide.IsAdmin())
             {
                 EtudiantContext db = new EtudiantContext();
-                List<Etudiant> list = db.etudiants.OrderByDescending(e => (e.noteFstYear + e.noteSndYear) / 2).ToList();
+                List<Etudiant> list = db.etudiants.ToList();
 
-                int total =0;
-                for (int i=0;i<db.etudiants.ToList().Count;i++)
+                if (db.settings.FirstOrDefault().importNote)
                 {
-                    if (!db.etudiants.ToList()[i].Redoubler)
-                    {
-                        total++;
-                    }
-                }
-                ViewBag.total = total;
-                int info = 0, indus = 0, gpmc = 0, gtr = 0;
-                for (int i = 0; i < db.etudiants.ToList().Count; i++)
-                {
-                    if (!db.etudiants.ToList()[i].Redoubler && db.etudiants.ToList()[i].Validated)
-                    {
-                        char[] chiffr = (list[i].Choix).ToCharArray();
-
-                        if (chiffr[0] == 'F')
-                        {
-                            info++;
-                        }
-                        if (chiffr[0] == 'P')
-                        {
-                            gpmc++;
-                        }
-                        if (chiffr[0] == 'T')
-                        {
-                            gtr++;
-                        }
-                        if (chiffr[0] == 'D')
-                        {
-                            indus++;
-                        }
-                    }
                     
 
-                }
-                //initialisation des Maxs
-                int maxInfo = total / 4;
-                int maxGtr = total / 4;
-                int maxIndus = total / 4;
-                int maxGpmc = total / 4;
-
-                int diff = total % 4;
-                //diviser le diff partout
-                Dictionary<string, int> dr = new Dictionary<string, int>();
-                dr.Add("info", info);
-                dr.Add("gtr", gtr);
-                dr.Add("indus", indus);
-                dr.Add("gpmc", gpmc);
-
-
-                //creer une copie de dictionnaire
-                Dictionary<string, int> copyDr = new Dictionary<string, int>();
-                for (int i = 0; i < dr.Count; i++)
-                {
-                    copyDr.Add(dr.ElementAt(i).Key, dr.ElementAt(i).Value);
-                }
-                int index1 = 0;
-                while (index1 < diff)
-                {
-                    switch (dr.Keys.Max())
-                    {
-                        case "info":
-                            maxInfo++;
-                            index1++;
-                            dr.Remove("info"); break;
-                        case "gtr":
-                            maxGtr++;
-                            index1++;
-                            dr.Remove("indus"); break;
-                        case "indus":
-                            maxIndus++;
-                            index1++;
-                            dr.Remove("gpmc"); break;
-                        case "gpmc":
-                            maxGpmc++;
-                            index1++;
-                            dr.Remove("gtr"); break;
-                        default: break;
-                    }
-
-                }
-                if (db.settings.FirstOrDefault().Attributted)
-                {
-                    int i1 = 0, i2 = 0, i3 = 0, i4 = 0;
-                    for (int i = 0; i < db.etudiants.ToList().Count; i++)
+                    int total =0;
+                    for (int i=0;i<db.etudiants.ToList().Count;i++)
                     {
                         if (!db.etudiants.ToList()[i].Redoubler)
                         {
-                            if (db.etudiants.ToList()[i].idFil == 1) i1++;
-                            if (db.etudiants.ToList()[i].idFil == 2) i2++;
-                            if (db.etudiants.ToList()[i].idFil == 3) i3++;
-                            if (db.etudiants.ToList()[i].idFil == 4) i4++;
+                            total++;
                         }
-                        
+                    }
+                    ViewBag.total = total;
+                    int info = 0, indus = 0, gpmc = 0, gtr = 0;
+                    for (int i = 0; i < db.etudiants.ToList().Count; i++)
+                    {
+                        if (!db.etudiants.ToList()[i].Redoubler && db.etudiants.ToList()[i].Validated)
+                        {
+                            char[] chiffr = (list[i].Choix).ToCharArray();
+
+                            if (chiffr[0] == 'F')
+                            {
+                                info++;
+                            }
+                            if (chiffr[0] == 'P')
+                            {
+                                gpmc++;
+                            }
+                            if (chiffr[0] == 'T')
+                            {
+                                gtr++;
+                            }
+                            if (chiffr[0] == 'D')
+                            {
+                                indus++;
+                            }
+                        }
+                    
 
                     }
-                    ViewBag.info = i1;
-                    ViewBag.gtr = i2;
-                    ViewBag.indus = i3;
-                    ViewBag.gpmc = i4;
-                }
-                else
-                {
-                    ViewBag.info = maxInfo;
-                    ViewBag.gtr = maxGtr;
-                    ViewBag.indus = maxIndus;
-                    ViewBag.gpmc = maxGpmc;
-                }
+                    //initialisation des Maxs
+                    int maxInfo = total / 4;
+                    int maxGtr = total / 4;
+                    int maxIndus = total / 4;
+                    int maxGpmc = total / 4;
+
+                    int diff = total % 4;
+                    //diviser le diff partout
+                    Dictionary<string, int> dr = new Dictionary<string, int>();
                     
-                //list =list.OrderBy(e => (e.noteFstYear+e.noteSndYear)/2);
-                if (db.settings.FirstOrDefault().importNote)
-                {
+                    dr.Add("indus", indus);
+                    dr.Add("gpmc", gpmc);
+                    dr.Add("gtr", gtr);
+                    dr.Add("info", info);
+
+                    //creer une copie de dictionnaire
+                    Dictionary<string, int> copyDr = new Dictionary<string, int>();
+                    for (int i = 0; i < dr.Count; i++)
+                    {
+                        copyDr.Add(dr.ElementAt(i).Key, dr.ElementAt(i).Value);
+                    }
+                    int index1 = 0;
+                    //ViewBag.test = "indus "+indus+" gtr "+gtr+" info "+info+" gpmc "+gpmc;
+                    while (index1 < diff && diff != 0)
+                    {
+                        switch (dr.FirstOrDefault(x => x.Value == dr.Values.Max()).Key)
+                        {
+                            case "info":
+                                maxInfo++;
+                                index1++;
+                                dr.Remove("info"); break;
+                            case "gpmc":
+                                maxGpmc++;
+                                index1++;
+                                dr.Remove("gpmc"); break;
+                            case "gtr":
+                                maxGtr++;
+                                index1++;
+                                dr.Remove("gtr"); break;
+                            case "indus":
+                                maxIndus++;
+                                index1++;
+                                dr.Remove("indus"); break;
+                        
+                        }
+
+                    }
+                    if (db.settings.FirstOrDefault().Attributted)
+                    {
+                        int i1 = 0, i2 = 0, i3 = 0, i4 = 0;
+                        for (int i = 0; i < db.etudiants.ToList().Count; i++)
+                        {
+                            if (!db.etudiants.ToList()[i].Redoubler)
+                            {
+                                if (db.etudiants.ToList()[i].idFil == 1) i1++;
+                                if (db.etudiants.ToList()[i].idFil == 2) i2++;
+                                if (db.etudiants.ToList()[i].idFil == 3) i3++;
+                                if (db.etudiants.ToList()[i].idFil == 4) i4++;
+                            }
+                        
+
+                        }
+                        ViewBag.info = i1;
+                        ViewBag.gtr = i2;
+                        ViewBag.indus = i3;
+                        ViewBag.gpmc = i4;
+                    }
+                    else
+                    {
+                        ViewBag.info = maxInfo;
+                        ViewBag.indus = maxIndus;
+                        ViewBag.gtr = maxGtr;
+                        ViewBag.gpmc = maxGpmc;
+                    }
+                    
+                    //list =list.OrderBy(e => (e.noteFstYear+e.noteSndYear)/2);
+                
                     return View(list);
                 }
                 ViewBag.err = true;
@@ -612,7 +616,7 @@ namespace projetASP.Controllers
             {
                 EtudiantContext db = new EtudiantContext();
                 //return a  list sorted in a desendent way
-                List<Etudiant> list = db.etudiants.OrderByDescending(e => (e.noteFstYear + e.noteSndYear) / 2).ToList();
+                List<Etudiant> list = db.etudiants.ToList();
 
                 //calculer le nbr total sans les etudiants redoublants
                 int total = 0;
@@ -671,9 +675,9 @@ namespace projetASP.Controllers
                     copyDr.Add(dr.ElementAt(i).Key, dr.ElementAt(i).Value);
                 }
                 int index1 = 0;
-                while (index1 < diff)
+                while (index1 < diff && diff != 0)
                 {
-                    switch (copyDr.Keys.Max())
+                    switch (copyDr.FirstOrDefault(x => x.Value == copyDr.Values.Max()).Key)
                     {
                         case "info":
                             maxInfo++;
@@ -691,7 +695,6 @@ namespace projetASP.Controllers
                             maxGpmc++;
                             index1++;
                             copyDr.Remove("gtr"); break;
-                        default:break;
                     }
                     
                 }
@@ -730,8 +733,8 @@ namespace projetASP.Controllers
                 int indexGpmc = 0;
                 for (int i=0;i<list.Count;i++)
                 {
+                   
                     //verification de l'etudiant si deja a choisi une filiere sinon on va lui attribuer la derniere filiere (gpmc->indus->gtr->info)
-
                     if (!list[i].Redoubler )
                     {
                         if (list[i].Validated)
@@ -795,7 +798,7 @@ namespace projetASP.Controllers
                                     {
                                         list[i].idFil = 1;
                                         choosen = true;
-                                        indexGpmc++; break;
+                                        indexInfo++; break;
                                     }
                                     if (indexGtr<maxGtr)
                                     {
@@ -820,17 +823,22 @@ namespace projetASP.Controllers
                         }
                         else
                         {
+                            copyDr.Clear();
+                            for (int j = 0; j < dr.Count; j++)
+                            {
+                                copyDr.Add(dr.ElementAt(j).Key, dr.ElementAt(j).Value);
+                            }
                             Boolean choosen=false;
                             while (!choosen)
                             {
-                                switch (copyDr.Keys.Max())
+                                switch (copyDr.FirstOrDefault(x => x.Value == copyDr.Values.Max()).Key)
                                 {
                                     case "info":
                                         if (indexInfo<maxInfo)
                                         {
                                             list[i].idFil = 1;
                                             choosen = true;
-                                            indexInfo++; break;
+                                            indexInfo++;
                                         }
                                         copyDr.Remove("info");
                                         break;
@@ -839,7 +847,7 @@ namespace projetASP.Controllers
                                         {
                                             list[i].idFil = 2;
                                             choosen = true;
-                                            indexGtr++; break;
+                                            indexGtr++;
                                         }
                                         copyDr.Remove("gtr");
                                         break;
@@ -848,7 +856,7 @@ namespace projetASP.Controllers
                                         {
                                             list[i].idFil = 3;
                                             choosen = true;
-                                            indexIndus++; break;
+                                            indexIndus++;
                                         }
                                         copyDr.Remove("indus");
                                         break;
@@ -857,17 +865,13 @@ namespace projetASP.Controllers
                                         {
                                             list[i].idFil = 4;
                                             choosen = true;
-                                            indexGpmc++; break;
+                                            indexGpmc++;
                                         }
                                         copyDr.Remove("gpmc");
                                         break;
                                 }
                             }
-                            copyDr.Clear();
-                            for (int j = 0; j < dr.Count; j++)
-                            {
-                                copyDr.Add(dr.ElementAt(j).Key, dr.ElementAt(j).Value);
-                            }
+                            
                         }
                     }
                 }

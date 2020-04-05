@@ -78,37 +78,37 @@
 
 @using (Html.BeginForm("AttributionFiliere", "Departement", FormMethod.Post, new { enctype = "multipart/form-data" }))
 {
-    <div class="lefter" style="margin-left:20px;padding:10px;">
-        <h4 style="color:black !important">l'ensemble des nombres ne doit pas deppaser : @ViewBag.total</h4>
+<div class="lefter" style="margin-left:20px;padding:10px;">
+    <h4 style="color:black !important">l'ensemble des nombres ne doit pas deppaser : @ViewBag.total</h4>
+    <!-- @//ViewBag.test-->!>
+    <table style="color:black !important;" class="table table-curved">
+        <tr>
+            <td><span>Genie info  </span></td>
+            <td>:</td>
+            <td><input type="text" name="infoMax" value="@ViewBag.info" /></td>
+        </tr>
+        <tr>
+            <td><span>Genie Indus</span></td>
+            <td>:</td>
+            <td><input type="text" name="indusMax" value="@ViewBag.indus" /></td>
+        </tr>
+        <tr>
+            <td><span>Genie Telecomme </span></td>
+            <td>:</td>
+            <td><input type="text" name="gtrMax" value="@ViewBag.gtr" /></td>
+        </tr>
+        <tr>
+            <td><span>Genie Proc</span></td>
+            <td>:</td>
+            <td><input type="text" name="gpmcMax" value="@ViewBag.gpmc" /></td>
+        </tr>
+    </table>
+    @if (ViewBag.error2 != null)
+    {
+        <h4 style="color:red !important">vous devez donner des informations corrects</h4>
+    }
 
-        <table style="color:black !important;" class="table table-curved">
-            <tr>
-                <td><span>Genie info</span></td>
-                <td>:</td>
-                <td><input type="text" name="infoMax" value="@ViewBag.info" /></td>
-            </tr>
-            <tr>
-                <td><span>Genie Indus</span></td>
-                <td>:</td>
-                <td><input type="text" name="indusMax" value="@ViewBag.indus" /></td>
-            </tr>
-            <tr>
-                <td><span>Genie Telecomme </span></td>
-                <td>:</td>
-                <td><input type="text" name="gtrMax" value="@ViewBag.gtr" /></td>
-            </tr>
-            <tr>
-                <td><span>Genie Proc</span></td>
-                <td>:</td>
-                <td><input type="text" name="gpmcMax" value="@ViewBag.gpmc" /></td>
-            </tr>
-        </table>
-        @if (ViewBag.error2 != null)
-        {
-            <h4 style="color:red !important">vous devez donner des informations corrects</h4>
-        }
-
-    </div>
+</div>
     <div class="righter" style="position:relative;top:100px;right:20px;">
         <center>
             <p style="color: #061323;">
@@ -189,7 +189,11 @@
                                                 </td>
 
                                                 <td>
-                                                    @item.Choix
+                                                    @if (item.Validated)
+                                                    {
+                                                        <span>@item.Choix</span>
+                                                    }
+
                                                 </td>
                                                 <td>
                                                     @if (item.idFil == 1)
